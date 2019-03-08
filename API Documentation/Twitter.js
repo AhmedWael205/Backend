@@ -738,3 +738,56 @@ function getFriendshipsShow() {
 }
 
 // ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /users/lookup Lookups
+ * @apiVersion 0.1.0
+ * @apiName GetUsersLookup
+ * @apiGroup User
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/users/lookup.json
+ *
+ * @apiDescription eturns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
+ * This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids.
+ * GET users / show is used to retrieve a single user object.
+ * There are a few things to note when using this method.
+ *      You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed.
+ *      The order of user IDs or screen names may not match the order of users in the returned array.
+ *      If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list.
+ *      If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
+ *      You are strongly encouraged to use a POST for larger requests.
+ *
+ * @apiParam {Number[]} user_ID [Required] The ID of the user for whom to return results.
+ * @apiParam {String[]} screen_name [Optional] The screen name of the user for whom to return results.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID": [
+ *                      783214,
+ *                      6253282
+ *                  ],
+ *       "screen_name":[
+ *                      "noradio"
+ *                     ]
+ *     }
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/users/lookup.json?user_id=783214,6253282
+ *
+ * @apiSuccess {Object[]} users The User Followers object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "users":[
+ *                      {user-object},
+ *                      {user-object}
+ *                  ]
+ *     }
+ */
+function getUsersLookup() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
