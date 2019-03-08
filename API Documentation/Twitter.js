@@ -517,7 +517,7 @@ function getFollowingsList() {
  * @apiExample Example usage:
  * GET localhost:3000/friendships/incoming.json
  *
- * @apiSuccess {Number[]} friendshipsRequetsIDs The User Followings IDs.
+ * @apiSuccess {Number[]} friendshipsRequetsIDs The User friendships Requests IDs.
  * @apiSuccess {Number} next_cursor To allow paging back and forth.
  * @apiSuccess {Number} previous_cursor To allow paging back and forth.
  *
@@ -566,6 +566,51 @@ function getFriendshipsIncoming() {
  *
  */
 function getFriendshipsNoRetweetsIDs() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /friendships/Outgoing Friendship Pending Follow Requests' IDs
+ * @apiVersion 0.1.0
+ * @apiName GetFriendshipsOutgoing
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/outgoing.json
+ *
+ * @apiDescription Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
+ *
+ * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/friendships/outgoing.json
+ *
+ * @apiSuccess {Number[]} friendshipsPendingIDs The Users' IDs with a pending follow request.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "friendshipsPendingIDs": [
+ *                  657693,
+ *                  183709371,
+ *                  7588892,
+ *                  1523501,
+ *                  22548447,
+ *                  15062340,
+ *                  133031077,
+ *                  17874544,
+ *                  777925,
+ *                  4265731,
+ *                  783214
+ *              ],
+ *      "next_cursor": 0,
+ *      "previous_cursor": 0
+ *  }
+ *
+ */
+function getFriendshipsOutgoing() {
   return;
 }
 

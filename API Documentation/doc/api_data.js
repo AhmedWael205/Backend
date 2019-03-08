@@ -918,7 +918,7 @@ define({ "api": [
             "type": "Number[]",
             "optional": false,
             "field": "friendshipsRequetsIDs",
-            "description": "<p>The User Followings IDs.</p>"
+            "description": "<p>The User friendships Requests IDs.</p>"
           },
           {
             "group": "Success 200",
@@ -990,6 +990,83 @@ define({ "api": [
         {
           "title": "{",
           "content": "{\n    \"usersIDs\": [\n                657693,\n                783214\n            ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "friendships"
+  },
+  {
+    "type": "get",
+    "url": "/friendships/Outgoing",
+    "title": "Friendship Pending Follow Requests' IDs",
+    "version": "0.1.0",
+    "name": "GetFriendshipsOutgoing",
+    "group": "friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/outgoing.json"
+      }
+    ],
+    "description": "<p>Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/outgoing.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "friendshipsPendingIDs",
+            "description": "<p>The Users' IDs with a pending follow request.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"friendshipsPendingIDs\": [\n                657693,\n                183709371,\n                7588892,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
           "type": "json"
         }
       ]
