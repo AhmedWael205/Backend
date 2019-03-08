@@ -346,7 +346,7 @@ function postDeleteSearchesAll() {
  *              "previous_cursor": 0
  *      }
  */
-function GetFollowersIDs() {
+function getFollowersIDs() {
   return;
 }
 
@@ -400,7 +400,7 @@ function getFollowersList() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/followings/ids.json
  *
- * @apiDescription eturns a cursored collection of user IDs for every user the specified user is following (otherwise known as their "friends").
+ * @apiDescription Returns a cursored collection of user IDs for every user the specified user is following (otherwise known as their "friends").
  * At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests.
  * This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.
  *
@@ -455,6 +455,87 @@ function getFollowersList() {
  *  }
  *
  */
-function GetFollowingsIDs() {
+function getFollowingsIDs() {
   return;
 }
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /followings/list Followings List
+ * @apiVersion 0.1.0
+ * @apiName GetFollowingsList
+ * @apiGroup followings
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/followings/list.json
+ *
+ * @apiDescription Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their "friends").
+ * At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests.
+ *
+ * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
+ * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
+ * @apiParam {Number} cursor [Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first "page". The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/followings/list.json?cursor=-1&screen_name=twitterdev
+ *
+ * @apiSuccess {Object[]} users The User Followings object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "users":[
+ *                      {user-object},
+ *                      {user-object}
+ *                  ],
+ *          "next_cursor": 1489467234237774933,
+ *          "previous_cursor": 0
+ *     }
+ */
+function getFollowingsList() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /friendships/incoming Friendship Requests' IDs
+ * @apiVersion 0.1.0
+ * @apiName GetFriendshipsIncoming
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/incoming.json
+ *
+ * @apiDescription Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.
+ *
+ * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/friendships/incoming.json
+ *
+ * @apiSuccess {Number[]} friendshipsRequetsIDs The User Followings IDs.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "friendshipsRequetsIDs": [
+ *                  657693,
+ *                  183709371,
+ *                  7588892,
+ *                  783214
+ *              ],
+ *      "next_cursor": 0,
+ *      "previous_cursor": 0
+ *  }
+ *
+ */
+function getFriendshipsIncoming() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
