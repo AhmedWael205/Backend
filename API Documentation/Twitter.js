@@ -162,3 +162,122 @@ function postAccountSettings() {
 function postUpdateProfileImage() {
   return;
 }
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * @api {get} /saved_searches/list Saved Searches.
+ * @apiVersion 0.1.0
+ * @apiName GetSavedSearches
+ * @apiGroup saved_searches
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/saved_searches/list.json
+ *
+ * @apiDescription Returns the authenticated user's saved search queries.
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/saved_searches/list.json
+ *
+ * @apiSuccess {Object[]} Search The search result info (created_at ,ID ,name ,query).
+ * @apiSuccess {Date} Search.created_at Datetime of the user's search.
+ * @apiSuccess {Number} Search.ID The search ID.
+ * @apiSuccess {String} Search.name The search name.
+ * @apiSuccess {String} Search.query The search query.
+ *
+ * @apiSuccessExample
+ * [
+ *      {
+ *          "created_at": "2018-12-04T14:51:06.157Z",
+ *          "ID": 9569704,
+ *          "name": "@twitterapi",
+ *          "query": "@twitterapi"
+ *      },
+ *       {
+ *          "created_at": "2018-11-04T14:51:06.157Z",
+ *          "id": 9569730,
+ *          "name": "@twitter OR twitterapi OR "twitter api" OR "@anywhere"",
+ *          "query": "@twitter OR twitterapi OR "twitter api" OR "@anywhere""
+ *       }
+ * ]
+ */
+function getSavedSearches() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * @api {post} /saved_searches/destroy/:id Delete search using ID.
+ * @apiVersion 0.1.0
+ * @apiName PostDeleteSearchByID
+ * @apiGroup saved_searches
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/saved_searches/destroy/:id.json
+ *
+ * @apiDescription Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+ *
+ * @apiParam {Number} ID [Required] The ID of the saved search.
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/saved_searches/destroy/9569704.json
+ *
+ * @apiSuccess {Object} Search The search result info (created_at ,ID ,name ,query).
+ * @apiSuccess {Date}   Search.created_at Datetime of the user's search.
+ * @apiSuccess {Number} Search.ID The search ID.
+ * @apiSuccess {String} Search.name The search name.
+ * @apiSuccess {String} Search.query The search query.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "created_at": "2018-12-04T14:51:06.157Z",
+ *          "ID": 9569704,
+ *          "name": "@twitterapi",
+ *          "query": "@twitterapi"
+ *      }
+ */
+function postDeleteSearchByID() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------
+
+/**
+ * @api {post} /saved_searches/delete_all Delete all Searches.
+ * @apiVersion 0.1.0
+ * @apiName PostDeleteSearchesAll
+ * @apiGroup saved_searches
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/saved_searches/delete_all.json
+ *
+ * @apiDescription Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+ *
+ * @apiParam {Number} ID [Required] The ID of the saved search.
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/saved_searches/delete_all.json
+ *
+ * @apiSuccess {Object[]} Search The search result info (created_at ,ID ,name ,query).
+ * @apiSuccess {Date} Search.created_at Datetime of the user's search.
+ * @apiSuccess {Number} Search.ID The search ID.
+ * @apiSuccess {String} Search.name The search name.
+ * @apiSuccess {String} Search.query The search query.
+ *
+ * @apiSuccessExample
+ * [
+ *      {
+ *          "created_at": "2018-12-04T14:51:06.157Z",
+ *          "ID": 9569704,
+ *          "name": "@twitterapi",
+ *          "query": "@twitterapi"
+ *      },
+ *       {
+ *          "created_at": "2018-11-04T14:51:06.157Z",
+ *          "id": 9569730,
+ *          "name": "@twitter OR twitterapi OR "twitter api" OR "@anywhere"",
+ *          "query": "@twitter OR twitterapi OR "twitter api" OR "@anywhere""
+ *       }
+ * ]
+ */
+function postDeleteSearchesAll() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------

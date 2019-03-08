@@ -467,7 +467,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/saved_searches/list",
-    "title": "Saved Searches",
+    "title": "Saved Searches.",
     "version": "0.1.0",
     "name": "GetSavedSearches",
     "group": "saved_searches",
@@ -545,9 +545,9 @@ define({ "api": [
   {
     "type": "post",
     "url": "/saved_searches/destroy/:id",
-    "title": "Delete search using ID",
+    "title": "Delete search using ID.",
     "version": "0.1.0",
-    "name": "PostDeleteSearchesByID",
+    "name": "PostDeleteSearchByID",
     "group": "saved_searches",
     "permission": [
       {
@@ -578,7 +578,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "GET localhost:3000/saved_searches/destroy/9569704.json",
+        "content": "POST localhost:3000/saved_searches/destroy/9569704.json",
         "type": "json"
       }
     ],
@@ -626,6 +626,97 @@ define({ "api": [
         {
           "title": "{",
           "content": "{\n    \"created_at\": \"2018-12-04T14:51:06.157Z\",\n    \"ID\": 9569704,\n    \"name\": \"@twitterapi\",\n    \"query\": \"@twitterapi\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "saved_searches"
+  },
+  {
+    "type": "post",
+    "url": "/saved_searches/delete_all",
+    "title": "Delete all Searches.",
+    "version": "0.1.0",
+    "name": "PostDeleteSearchesAll",
+    "group": "saved_searches",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/saved_searches/delete_all.json"
+      }
+    ],
+    "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>[Required] The ID of the saved search.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/saved_searches/delete_all.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "Search",
+            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "Search.created_at",
+            "description": "<p>Datetime of the user's search.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Search.ID",
+            "description": "<p>The search ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.name",
+            "description": "<p>The search name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.query",
+            "description": "<p>The search query.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@twitterapi\",\n         \"query\": \"@twitterapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@twitter OR twitterapi OR \"twitter api\" OR \"@anywhere\"\",\n         \"query\": \"@twitter OR twitterapi OR \"twitter api\" OR \"@anywhere\"\"\n      }\n]",
           "type": "json"
         }
       ]
