@@ -1,19 +1,15 @@
 // ------------------------------------------------------------------------------------------
 //1- Accounts and users
 // ------------------------------------------------------------------------------------------
-/**
- * @apiDefine AccountGroup Account endpoints
- *
- * Here is the description for the "AccountGroup".
- */
+
 // ------------------------------------------------------------------------------------------
-//2- Manage account settings and profile
+//      A- Manage account settings and profile
 // ------------------------------------------------------------------------------------------
 /**
- * @api {get} /account/settings The user account settings.
+ * @api {get} /account/settings Account Settings.
  * @apiVersion 0.1.0
  * @apiName GetSettings
- * @apiGroup AccountGroup
+ * @apiGroup Account
  * @apiPermission private
  *
  * @apiDescription Returns settings for the authenticating user.
@@ -39,7 +35,7 @@ function getUserSettings() {
 //---------------------------------------------------------------------------------------------------
 
 /**
- * @api {get} /users/profile_banner The user's profile banner.
+ * @api {get} /users/profile_banner Profile Banner.
  * @apiVersion 0.1.0
  * @apiName GetProfileBanner
  * @apiPermission private
@@ -74,6 +70,25 @@ function getUserSettings() {
  */
 
 function getProfileBanner() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------
+/**
+ * @api {post} /account/remove_profile_banner Remove Profile Banner .
+ * @apiVersion 0.1.0
+ * @apiName PostRemoveProfileBanner
+ * @apiGroup Account
+ * @apiPermission private
+ *
+ * @apiDescription Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
+ *
+ *
+ * @apiSuccessExample  Success-Response:
+ *     HTTP/1.1 200 OK
+ *
+ */
+function postRemoveProfileBanner() {
   return;
 }
 

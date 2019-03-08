@@ -2,10 +2,10 @@ define({ "api": [
   {
     "type": "get",
     "url": "/account/settings",
-    "title": "The user account settings.",
+    "title": "Account Settings.",
     "version": "0.1.0",
     "name": "GetSettings",
-    "group": "AccountGroup",
+    "group": "Account",
     "permission": [
       {
         "name": "private"
@@ -54,8 +54,32 @@ define({ "api": [
       ]
     },
     "filename": "./Twitter.js",
-    "groupTitle": "Account endpoints",
-    "groupDescription": "<p>Here is the description for the &quot;AccountGroup&quot;.</p>"
+    "groupTitle": "Account"
+  },
+  {
+    "type": "post",
+    "url": "/account/remove_profile_banner",
+    "title": "Remove Profile Banner .",
+    "version": "0.1.0",
+    "name": "PostRemoveProfileBanner",
+    "group": "Account",
+    "permission": [
+      {
+        "name": "private"
+      }
+    ],
+    "description": "<p>Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "Account"
   },
   {
     "version": "0.1.0",
@@ -67,9 +91,37 @@ define({ "api": [
     "name": ""
   },
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
+    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
+    "name": ""
+  },
+  {
     "type": "get",
     "url": "/users/profile_banner",
-    "title": "The user's profile banner.",
+    "title": "Profile Banner.",
     "version": "0.1.0",
     "name": "GetProfileBanner",
     "permission": [
