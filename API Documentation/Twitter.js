@@ -746,7 +746,7 @@ function getFriendshipsShow() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/users/lookup.json
  *
- * @apiDescription eturns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
+ * @apiDescription Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.
  * This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids.
  * GET users / show is used to retrieve a single user object.
  * There are a few things to note when using this method.
@@ -787,6 +787,45 @@ function getFriendshipsShow() {
  *     }
  */
 function getUsersLookup() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /users/search Search
+ * @apiVersion 0.1.0
+ * @apiName GetUsersSearch
+ * @apiGroup User
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/users/search.json
+ *
+ * @apiDescription Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
+ * Only the first 1,000 matching results are available.
+ *
+ * @apiParam {String} q [Required] The search query to run against people search.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "q":"Twitter%20API"
+ *     }
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/users/search.json?q=soccer
+ *
+ * @apiSuccess {Object[]} users The User Followers object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "users":[
+ *                      {user-object},
+ *                      {user-object}
+ *                  ]
+ *     }
+ */
+function getUsersSearch() {
   return;
 }
 

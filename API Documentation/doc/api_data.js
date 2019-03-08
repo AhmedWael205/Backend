@@ -504,7 +504,7 @@ define({ "api": [
         "url": "localhost:3000/users/lookup.json"
       }
     ],
-    "description": "<p>eturns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters. This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids. GET users / show is used to retrieve a single user object. There are a few things to note when using this method. You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed. The order of user IDs or screen names may not match the order of users in the returned array. If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list. If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown. You are strongly encouraged to use a POST for larger requests.</p>",
+    "description": "<p>Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters. This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids. GET users / show is used to retrieve a single user object. There are a few things to note when using this method. You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed. The order of user IDs or screen names may not match the order of users in the returned array. If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list. If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown. You are strongly encouraged to use a POST for larger requests.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -536,6 +536,97 @@ define({ "api": [
       {
         "title": "Example usage:",
         "content": "GET localhost:3000/users/lookup.json?user_id=783214,6253282",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Followers object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/users/search",
+    "title": "Search",
+    "version": "0.1.0",
+    "name": "GetUsersSearch",
+    "group": "User",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/users/search.json"
+      }
+    ],
+    "description": "<p>Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported. Only the first 1,000 matching results are available.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "q",
+            "description": "<p>[Required] The search query to run against people search.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"q\":\"Twitter%20API\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/users/search.json?q=soccer",
         "type": "json"
       }
     ],
