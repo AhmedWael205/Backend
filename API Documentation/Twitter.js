@@ -812,7 +812,7 @@ function getUsersLookup() {
  * @apiExample Example usage:
  * GET localhost:3000/users/search.json?q=soccer
  *
- * @apiSuccess {Object[]} users The User Followers object.
+ * @apiSuccess {Object[]} users The Users matching objects.
  * @apiSuccess {Number} users.ID The user's ID.
  * @apiSuccess {String} users.email The user's email.
  * @apiSuccess {String} users.screen_name The user's screen name.
@@ -826,6 +826,43 @@ function getUsersLookup() {
  *     }
  */
 function getUsersSearch() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /users/show Show
+ * @apiVersion 0.1.0
+ * @apiName GetUsersShow
+ * @apiGroup User
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/users/show.json
+ *
+ * @apiDescription Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible.
+ * GET users / lookup is used to retrieve a bulk collection of user objects.
+ * You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the user's Tweet will be removed. A Tweet will not always be returned in the current_status field.
+ *
+ * @apiParam {Number} user_ID [Required] The ID of the user for whom to return results.
+ * @apiParam {String} screen_name [Required] The screen name of the user for whom to return results.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID":783214,
+ *       "screen_name":"noradio"
+ *     }
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/users/show.json?screen_name=twitterdev
+ *
+ * @apiSuccess {Object} users The User Required object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ *
+ * @apiSuccessExample
+ *         {user-object}
+ */
+function getUsersShow() {
   return;
 }
 

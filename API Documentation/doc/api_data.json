@@ -638,7 +638,7 @@
             "type": "Object[]",
             "optional": false,
             "field": "users",
-            "description": "<p>The User Followers object.</p>"
+            "description": "<p>The Users matching objects.</p>"
           },
           {
             "group": "Success 200",
@@ -668,6 +668,103 @@
           "title": "{",
           "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ]\n}",
           "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/users/show",
+    "title": "Show",
+    "version": "0.1.0",
+    "name": "GetUsersShow",
+    "group": "User",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/users/show.json"
+      }
+    ],
+    "description": "<p>Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users / lookup is used to retrieve a bulk collection of user objects. You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the user's Tweet will be removed. A Tweet will not always be returned in the current_status field.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Required] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Required] The screen name of the user for whom to return results.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/users/show.json?screen_name=twitterdev",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Required object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "content": "{user-object}",
+          "type": "user-object"
         }
       ]
     },
