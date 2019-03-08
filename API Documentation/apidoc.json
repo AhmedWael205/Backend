@@ -1,0 +1,10 @@
+{
+  "name": "Twitter",
+  "version": "0.1.0",
+  "description": "Twitter Documentation",
+  "title": "Twitter",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}
