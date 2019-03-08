@@ -842,8 +842,8 @@ function getUsersSearch() {
  * GET users / lookup is used to retrieve a bulk collection of user objects.
  * You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the user's Tweet will be removed. A Tweet will not always be returned in the current_status field.
  *
- * @apiParam {Number} user_ID [Required] The ID of the user for whom to return results.
- * @apiParam {String} screen_name [Required] The screen name of the user for whom to return results.
+ * @apiParam {Number} user_ID [Required] The ID of the specified user.
+ * @apiParam {String} screen_name [Required] The screen name of the specified user.
  *
  * @apiParamExample {json} Request-Example:
  *     {
