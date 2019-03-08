@@ -11,6 +11,18 @@
         "name": "private"
       }
     ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/account/settings.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/account/settings.json",
+        "type": "json"
+      }
+    ],
     "description": "<p>Returns settings for the authenticating user.</p>",
     "success": {
       "fields": {
@@ -68,7 +80,19 @@
         "name": "private"
       }
     ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/account/remove_profile_banner.json"
+      }
+    ],
     "description": "<p>Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/account/remove_profile_banner.json",
+        "type": "json"
+      }
+    ],
     "success": {
       "examples": [
         {
@@ -91,34 +115,6 @@
     "name": ""
   },
   {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/main.js",
-    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
-    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
-    "name": ""
-  },
-  {
     "type": "get",
     "url": "/users/profile_banner",
     "title": "Profile Banner.",
@@ -130,6 +126,18 @@
       }
     ],
     "group": "User",
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/users/profile_banner.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/users/profile_banner.json?screen_name=twitterapi",
+        "type": "json"
+      }
+    ],
     "description": "<p>Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in Profile Images and Banners. The profile banner data available at each size variant's URL is in PNG format.</p>",
     "parameter": {
       "fields": {

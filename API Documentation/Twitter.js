@@ -12,6 +12,12 @@
  * @apiGroup Account
  * @apiPermission private
  *
+ * @apiSampleRequest localhost:3000/account/settings.json
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/account/settings.json
+ *
+ *
  * @apiDescription Returns settings for the authenticating user.
  *
  * @apiSuccess {Boolean}   discoverable_by_email           Is the user discoverable by email.
@@ -24,8 +30,8 @@
  *     {
  *       "discoverable_by_email ": "true",
  *       "language": "en",
- *      "protected":"false",
- *      "screen_name":"theSeanCook"
+ *       "protected":"false",
+ *       "screen_name":"theSeanCook"
  *     }
  */
 function getUserSettings() {
@@ -40,6 +46,10 @@ function getUserSettings() {
  * @apiName GetProfileBanner
  * @apiPermission private
  * @apiGroup User
+ * @apiSampleRequest localhost:3000/users/profile_banner.json
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/users/profile_banner.json?screen_name=twitterapi
  *
  * @apiDescription Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in Profile Images and Banners.
  *  The profile banner data available at each size variant's URL is in PNG format.
@@ -80,9 +90,12 @@ function getProfileBanner() {
  * @apiName PostRemoveProfileBanner
  * @apiGroup Account
  * @apiPermission private
+ * @apiSampleRequest localhost:3000/account/remove_profile_banner.json
  *
  * @apiDescription Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
  *
+ * @apiExample Example usage:
+ * POST localhost:3000/account/remove_profile_banner.json
  *
  * @apiSuccessExample  Success-Response:
  *     HTTP/1.1 200 OK
