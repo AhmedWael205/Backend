@@ -2,7 +2,7 @@
   {
     "type": "get",
     "url": "/account/settings",
-    "title": "Account Settings.",
+    "title": "Account Settings",
     "version": "0.1.0",
     "name": "GetSettings",
     "group": "Account",
@@ -73,7 +73,7 @@
   {
     "type": "post",
     "url": "/account/settings",
-    "title": "Edit Account Settings.",
+    "title": "Edit Account Settings",
     "version": "0.1.0",
     "name": "PostAccountSettings",
     "group": "Account",
@@ -157,7 +157,7 @@
   {
     "type": "post",
     "url": "/account/remove_profile_banner",
-    "title": "Remove Profile Banner.",
+    "title": "Remove Profile Banner",
     "version": "0.1.0",
     "name": "PostRemoveProfileBanner",
     "group": "Account",
@@ -196,7 +196,7 @@
   {
     "type": "post",
     "url": "/account/update_profile_image",
-    "title": "Update Profile Image.",
+    "title": "Update Profile Image",
     "version": "0.1.0",
     "name": "PostUpdateProfileImage",
     "group": "Account",
@@ -371,7 +371,7 @@
   {
     "type": "get",
     "url": "/users/profile_banner",
-    "title": "Profile Banner.",
+    "title": "Profile Banner",
     "version": "0.1.0",
     "name": "GetProfileBanner",
     "permission": [
@@ -557,8 +557,120 @@
   },
   {
     "type": "get",
+    "url": "/followers/list",
+    "title": "Followers List",
+    "version": "0.1.0",
+    "name": "GetFollowersList",
+    "group": "followers",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followers/list.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user objects for users following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests.roys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followers/list.json?cursor=-1&screen_name=twitterdev",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Followers object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ],\n     \"next_cursor\": 1489467234237774933,\n     \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "followers"
+  },
+  {
+    "type": "get",
     "url": "/saved_searches/list",
-    "title": "Saved Searches.",
+    "title": "Saved Searches",
     "version": "0.1.0",
     "name": "GetSavedSearches",
     "group": "saved_searches",
@@ -636,7 +748,7 @@
   {
     "type": "post",
     "url": "/saved_searches/destroy/:id",
-    "title": "Delete search using ID.",
+    "title": "Delete search using ID",
     "version": "0.1.0",
     "name": "PostDeleteSearchByID",
     "group": "saved_searches",
@@ -727,7 +839,7 @@
   {
     "type": "post",
     "url": "/saved_searches/delete_all",
-    "title": "Delete all Searches.",
+    "title": "Delete all Searches",
     "version": "0.1.0",
     "name": "PostDeleteSearchesAll",
     "group": "saved_searches",

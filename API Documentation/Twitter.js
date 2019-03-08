@@ -6,7 +6,7 @@
 //      A- Manage account settings and profile
 // ------------------------------------------------------------------------------------------
 /**
- * @api {get} /account/settings Account Settings.
+ * @api {get} /account/settings Account Settings
  * @apiVersion 0.1.0
  * @apiName GetSettings
  * @apiGroup Account
@@ -41,7 +41,7 @@ function getUserSettings() {
 //---------------------------------------------------------------------------------------------------
 
 /**
- * @api {get} /users/profile_banner Profile Banner.
+ * @api {get} /users/profile_banner Profile Banner
  * @apiVersion 0.1.0
  * @apiName GetProfileBanner
  * @apiPermission private
@@ -85,7 +85,7 @@ function getProfileBanner() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/remove_profile_banner Remove Profile Banner.
+ * @api {post} /account/remove_profile_banner Remove Profile Banner
  * @apiVersion 0.1.0
  * @apiName PostRemoveProfileBanner
  * @apiGroup Account
@@ -108,7 +108,7 @@ function postRemoveProfileBanner() {
 //---------------------------------------------------------------------------------------------------
 
 /**
- * @api {post} /account/settings Edit Account Settings.
+ * @api {post} /account/settings Edit Account Settings
  * @apiVersion 0.1.0
  * @apiName PostAccountSettings
  * @apiGroup Account
@@ -142,7 +142,7 @@ function postAccountSettings() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/update_profile_image Update Profile Image.
+ * @api {post} /account/update_profile_image Update Profile Image
  * @apiVersion 0.1.0
  * @apiName PostUpdateProfileImage
  * @apiGroup Account
@@ -165,7 +165,7 @@ function postUpdateProfileImage() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {get} /saved_searches/list Saved Searches.
+ * @api {get} /saved_searches/list Saved Searches
  * @apiVersion 0.1.0
  * @apiName GetSavedSearches
  * @apiGroup saved_searches
@@ -205,7 +205,7 @@ function getSavedSearches() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {post} /saved_searches/destroy/:id Delete search using ID.
+ * @api {post} /saved_searches/destroy/:id Delete search using ID
  * @apiVersion 0.1.0
  * @apiName PostDeleteSearchByID
  * @apiGroup saved_searches
@@ -240,7 +240,7 @@ function postDeleteSearchByID() {
 //---------------------------------------------------------------------------------------------------
 
 /**
- * @api {post} /saved_searches/delete_all Delete all Searches.
+ * @api {post} /saved_searches/delete_all Delete all Searches
  * @apiVersion 0.1.0
  * @apiName PostDeleteSearchesAll
  * @apiGroup saved_searches
@@ -347,6 +347,47 @@ function postDeleteSearchesAll() {
  *      }
  */
 function GetFollowersIDs() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /followers/list Followers List
+ * @apiVersion 0.1.0
+ * @apiName GetFollowersList
+ * @apiGroup followers
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/followers/list.json
+ *
+ * @apiDescription Returns a cursored collection of user objects for users following the specified user.
+ * At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests.roys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
+ *
+ * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
+ * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
+ * @apiParam {Number} cursor [Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first "page". The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/followers/list.json?cursor=-1&screen_name=twitterdev
+ *
+ * @apiSuccess {Object[]} users The User Followers object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "users":[
+ *                      {user-object},
+ *                      {user-object}
+ *                  ],
+ *          "next_cursor": 1489467234237774933,
+ *          "previous_cursor": 0
+ *     }
+ */
+function getFollowersList() {
   return;
 }
 
