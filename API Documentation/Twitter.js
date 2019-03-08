@@ -57,6 +57,12 @@ function getUserSettings() {
  * @apiParam {Number} user_id [Optional] The ID of the user for whom to return results.
  * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
  *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "user_id": 12345,
+ *      "screen_name":"noradio"
+ *    }
+ *
  * @apiSuccess {Object} sizes   The Image sizes (height,width).
  * @apiSuccess {String}  url   The Image URL.
  *
@@ -119,6 +125,11 @@ function postRemoveProfileBanner() {
  *
  * @apiParam {String} lang [Optional] The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .
  *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "lang": "en"
+ *    }
+ *
  * @apiExample Example usage:
  * POST localhost:3000/account/settings.json?lang=en
  *
@@ -154,8 +165,13 @@ function postAccountSettings() {
  *
  * @apiParam {String} imageURL [Required] The URL of the image the user want to upload.
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "imageURL": "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+ *     }
+ *
  * @apiExample Example usage:
- * POST localhost:3000/account/update_profile_image.json?image="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+ * POST localhost:3000/account/update_profile_image.json?imageURL="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
  *
  * @apiUse UserSuccess
  */
@@ -216,6 +232,11 @@ function getSavedSearches() {
  *
  * @apiParam {Number} ID [Required] The ID of the saved search.
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "ID": 313006
+ *     }
+ *
  * @apiExample Example usage:
  * POST localhost:3000/saved_searches/destroy/9569704.json
  *
@@ -248,8 +269,6 @@ function postDeleteSearchByID() {
  * @apiSampleRequest localhost:3000/saved_searches/delete_all.json
  *
  * @apiDescription Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.
- *
- * @apiParam {Number} ID [Required] The ID of the saved search.
  *
  * @apiExample Example usage:
  * POST localhost:3000/saved_searches/delete_all.json
@@ -299,6 +318,13 @@ function postDeleteSearchesAll() {
  * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
  * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
  * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID": 12345,
+ *       "screen_name":"noradio",
+ *       "cursor": 12893764510938
+ *     }
  *
  * @apiExample Example usage:
  * GET localhost:3000/followers/ids.json?cursor=-1&screen_name=andypiper
@@ -367,6 +393,13 @@ function getFollowersIDs() {
  * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
  * @apiParam {Number} cursor [Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first "page". The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID": 12345,
+ *       "screen_name":"noradio",
+ *       "cursor": 12893764510938
+ *     }
+ *
  * @apiExample Example usage:
  * GET localhost:3000/followers/list.json?cursor=-1&screen_name=twitterdev
  *
@@ -407,6 +440,13 @@ function getFollowersList() {
  * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
  * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
  * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID": 12345,
+ *       "screen_name":"noradio",
+ *       "cursor": 12893764510938
+ *     }
  *
  * @apiExample Example usage:
  * GET localhost:3000/followings/ids.json?cursor=-1&screen_name=andypiper
@@ -476,6 +516,13 @@ function getFollowingsIDs() {
  * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
  * @apiParam {Number} cursor [Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first "page". The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID": 12345,
+ *       "screen_name":"noradio",
+ *       "cursor": 12893764510938
+ *     }
+ *
  * @apiExample Example usage:
  * GET localhost:3000/followings/list.json?cursor=-1&screen_name=twitterdev
  *
@@ -514,6 +561,10 @@ function getFollowingsList() {
  *
  * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "cursor": 12893764510938
+ *     }
  * @apiExample Example usage:
  * GET localhost:3000/friendships/incoming.json
  *
@@ -583,6 +634,11 @@ function getFriendshipsNoRetweetsIDs() {
  *
  * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "cursor": 12893764510938
+ *     }
+ *
  * @apiExample Example usage:
  * GET localhost:3000/friendships/outgoing.json
  *
@@ -611,6 +667,73 @@ function getFriendshipsNoRetweetsIDs() {
  *
  */
 function getFriendshipsOutgoing() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /friendships/show Friendship Relations
+ * @apiVersion 0.1.0
+ * @apiName GetFriendshipsShow
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/friendships/show.json
+ *
+ * @apiDescription Returns detailed information about the relationship between two arbitrary users.
+ *
+ * @apiParam {Number} source_id [Required] The user_id of the subject user.
+ * @apiParam {String} source_screen_name [Optional] The screen_name of the subject user.
+ * @apiParam {Number} target_id [Required] The user_id of the target user.
+ * @apiParam {String} target_screen_name [Optional] The screen_name of the target user.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "source_id": 3191321,
+ *      "source_screen_name":"raffi",
+ *      "target_id":20,
+ *      "target_screen_name":"noradio"
+ *    }
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/friendships/show.json?source_screen_name=bert&target_screen_name=ernie
+ *
+ * @apiSuccess {Object} relationship It shows the current relation between the source and the target.
+ * @apiSuccess {Object} relationship.target The Target Info (id,screen_name,following,followed_by)
+ * @apiSuccess {Number} relationship.target.ID The target's ID.
+ * @apiSuccess {String} relationship.target.screen_name The target's screen_name.
+ * @apiSuccess {Boolean} relationship.target.following Is The target followed by the source.
+ * @apiSuccess {Boolean} relationship.target.followed_by Is The target following the source.
+ * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)
+ * @apiSuccess {Number} relationship.source.ID The source's ID.
+ * @apiSuccess {String} relationship.source.screen_name The source's screen_name.
+ * @apiSuccess {Boolean} relationship.source.following Is The source followed by the target.
+ * @apiSuccess {Boolean} relationship.source.followed_by Is The source following the target.
+ * @apiSuccess {Boolean} relationship.source.want_retweets Is The source want to be retweeted by the target.
+ * @apiSuccess {Boolean} relationship.source.notifications_enabled Is The source wants to get notifications from the target.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "relationship": {
+ *                          "target":  {
+ *                                      "id": 12148,
+ *                                      "screen_name": "ernie",
+ *                                      "following": false,
+ *                                      "followed_by": false
+ *                                     },
+ *                          "source":  {
+ *                                      "id": 8649302,
+ *                                      "screen_name": "bert",
+ *                                      "following": false,
+ *                                      "followed_by": false,
+ *                                      "want_retweets": null,
+ *                                      "notifications_enabled": null
+ *                                      }
+ *                      }
+ *  }
+ *
+ */
+function getFriendshipsShow() {
   return;
 }
 

@@ -101,7 +101,14 @@ define({ "api": [
             "description": "<p>[Optional] The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"lang\": \"en\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -224,12 +231,19 @@ define({ "api": [
             "description": "<p>[Required] The URL of the image the user want to upload.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"imageURL\": \"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/update_profile_image.json?image=\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\"",
+        "content": "POST localhost:3000/account/update_profile_image.json?imageURL=\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\"",
         "type": "json"
       }
     ],
@@ -413,7 +427,14 @@ define({ "api": [
             "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_id\": 12345,\n  \"screen_name\":\"noradio\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
@@ -509,7 +530,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -600,7 +628,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -712,7 +747,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -803,7 +845,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -901,7 +950,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -1028,7 +1084,14 @@ define({ "api": [
             "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -1067,6 +1130,181 @@ define({ "api": [
         {
           "title": "{",
           "content": "{\n    \"friendshipsPendingIDs\": [\n                657693,\n                183709371,\n                7588892,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "friendships"
+  },
+  {
+    "type": "get",
+    "url": "/friendships/show",
+    "title": "Friendship Relations",
+    "version": "0.1.0",
+    "name": "GetFriendshipsShow",
+    "group": "friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/friendships/show.json"
+      }
+    ],
+    "description": "<p>Returns detailed information about the relationship between two arbitrary users.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>[Required] The user_id of the subject user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "source_screen_name",
+            "description": "<p>[Optional] The screen_name of the subject user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "target_id",
+            "description": "<p>[Required] The user_id of the target user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "target_screen_name",
+            "description": "<p>[Optional] The screen_name of the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"source_id\": 3191321,\n  \"source_screen_name\":\"raffi\",\n  \"target_id\":20,\n  \"target_screen_name\":\"noradio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/show.json?source_screen_name=bert&target_screen_name=ernie",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship",
+            "description": "<p>It shows the current relation between the source and the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.target",
+            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.target.ID",
+            "description": "<p>The target's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.target.screen_name",
+            "description": "<p>The target's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.following",
+            "description": "<p>Is The target followed by the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.followed_by",
+            "description": "<p>Is The target following the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.source",
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.source.ID",
+            "description": "<p>The source's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.source.screen_name",
+            "description": "<p>The source's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.following",
+            "description": "<p>Is The source followed by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.followed_by",
+            "description": "<p>Is The source following the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.want_retweets",
+            "description": "<p>Is The source want to be retweeted by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.notifications_enabled",
+            "description": "<p>Is The source wants to get notifications from the target.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"want_retweets\": null,\n                                    \"notifications_enabled\": null\n                                    }\n                    }\n}",
           "type": "json"
         }
       ]
@@ -1183,7 +1421,14 @@ define({ "api": [
             "description": "<p>[Required] The ID of the saved search.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"ID\": 313006\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
@@ -1263,19 +1508,6 @@ define({ "api": [
       }
     ],
     "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>[Required] The ID of the saved search.</p>"
-          }
-        ]
-      }
-    },
     "examples": [
       {
         "title": "Example usage:",
