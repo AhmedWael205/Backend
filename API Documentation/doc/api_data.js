@@ -463,5 +463,83 @@ define({ "api": [
     },
     "filename": "./Twitter.js",
     "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/saved_searches/list",
+    "title": "Saved Searches",
+    "version": "0.1.0",
+    "name": "GetSavedSearches",
+    "group": "saved_searches",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/saved_searches/list.json"
+      }
+    ],
+    "description": "<p>Returns the authenticated user's saved search queries.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/saved_searches/list.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "Search",
+            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "Search.created_at",
+            "description": "<p>Datetime of the user's search.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Search.ID",
+            "description": "<p>The search ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.name",
+            "description": "<p>The search name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.query",
+            "description": "<p>The search query.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@twitterapi\",\n         \"query\": \"@twitterapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@twitter OR twitterapi OR \"twitter api\" OR \"@anywhere\"\",\n         \"query\": \"@twitter OR twitterapi OR \"twitter api\" OR \"@anywhere\"\"\n      }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "saved_searches"
   }
 ] });
