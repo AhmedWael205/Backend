@@ -466,6 +466,97 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/followers/ids",
+    "title": "Followers IDs",
+    "version": "0.1.0",
+    "name": "GetFollowersIDs",
+    "group": "followers",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followers/ids.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user IDs for every user following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followers/ids.json?cursor=-1&screen_name=andypiper",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "followers_IDs",
+            "description": "<p>The User Followers IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n   \"followers_IDs\":[\n                        455974794,\n                        947576438684872705,\n                        850839346009780224,\n                        958850376630910976,\n                        889483959943536640,\n                        966094285119606784,\n                        1020583045,\n                        948604640811212801,\n                        967155179614240768,\n                        554514802,\n                        14873932,\n                        963916668731904000,\n                        970763391181746178,\n                        966091392631140358,\n                        .\n                        .\n                        .\n                        5000 ids later,\n                        .\n                        .\n                        .\n                        813143846,\n                        958604886735716353,\n                        402873729,\n                        958603486551330817,\n                        913076424897994753,\n                        820967329068707840,\n                        958593574932762624,\n                        958589381102665728,\n                        958573223737724929,\n                        889474485694410752\n                ],\n        \"next_cursor\": 1591087837626119954,\n        \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "followers"
+  },
+  {
+    "type": "get",
     "url": "/saved_searches/list",
     "title": "Saved Searches.",
     "version": "0.1.0",

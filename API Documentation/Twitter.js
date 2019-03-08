@@ -280,4 +280,74 @@ function postDeleteSearchesAll() {
   return;
 }
 
-//---------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+//      B- Follow, search, and get users
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /followers/ids Followers IDs
+ * @apiVersion 0.1.0
+ * @apiName GetFollowersIDs
+ * @apiGroup followers
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/followers/ids.json
+ *
+ * @apiDescription Returns a cursored collection of user IDs for every user following the specified user.
+ * At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests.
+ * This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.
+ *
+ * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
+ * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
+ * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/followers/ids.json?cursor=-1&screen_name=andypiper
+ *
+ * @apiSuccess {Number[]} followers_IDs The User Followers IDs.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *      {
+ *         "followers_IDs":[
+ *                              455974794,
+ *                              947576438684872705,
+ *                              850839346009780224,
+ *                              958850376630910976,
+ *                              889483959943536640,
+ *                              966094285119606784,
+ *                              1020583045,
+ *                              948604640811212801,
+ *                              967155179614240768,
+ *                              554514802,
+ *                              14873932,
+ *                              963916668731904000,
+ *                              970763391181746178,
+ *                              966091392631140358,
+ *                              .
+ *                              .
+ *                              .
+ *                              5000 ids later,
+ *                              .
+ *                              .
+ *                              .
+ *                              813143846,
+ *                              958604886735716353,
+ *                              402873729,
+ *                              958603486551330817,
+ *                              913076424897994753,
+ *                              820967329068707840,
+ *                              958593574932762624,
+ *                              958589381102665728,
+ *                              958573223737724929,
+ *                              889474485694410752
+ *                      ],
+ *              "next_cursor": 1591087837626119954,
+ *              "previous_cursor": 0
+ *      }
+ */
+function GetFollowersIDs() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
