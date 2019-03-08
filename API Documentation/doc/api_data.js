@@ -669,6 +669,97 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/followings/ids",
+    "title": "Followings IDs",
+    "version": "0.1.0",
+    "name": "GetFollowingsIDs",
+    "group": "followings",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followings/ids.json"
+      }
+    ],
+    "description": "<p>eturns a cursored collection of user IDs for every user the specified user is following (otherwise known as their &quot;friends&quot;). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followings/ids.json?cursor=-1&screen_name=andypiper",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "followings_IDs",
+            "description": "<p>The User Followings IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"followings_IDs\": [\n                657693,\n                183709371,\n                7588892,\n                38895958,\n                22891211,\n                9019482,\n                14488353,\n                11750202,\n                12249,\n                22915745,\n                1249881,\n                14927800,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                27674040,\n                26123649,\n                9576402,\n                821958,\n                7852612,\n                819797,\n                1401881,\n                8285392,\n                9160152,\n                795649,\n                3191321,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "followings"
+  },
+  {
+    "type": "get",
     "url": "/saved_searches/list",
     "title": "Saved Searches",
     "version": "0.1.0",

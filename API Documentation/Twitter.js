@@ -392,3 +392,69 @@ function getFollowersList() {
 }
 
 // ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /followings/ids Followings IDs
+ * @apiVersion 0.1.0
+ * @apiName GetFollowingsIDs
+ * @apiGroup followings
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/followings/ids.json
+ *
+ * @apiDescription eturns a cursored collection of user IDs for every user the specified user is following (otherwise known as their "friends").
+ * At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple "pages" of results can be navigated through using the next_cursor value in subsequent requests.
+ * This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.
+ *
+ * @apiParam {Number} user_ID [Optional] The ID of the user for whom to return results.
+ * @apiParam {String} screen_name [Optional] The screen name of the user for whom to return results.
+ * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/followings/ids.json?cursor=-1&screen_name=andypiper
+ *
+ * @apiSuccess {Number[]} followings_IDs The User Followings IDs.
+ * @apiSuccess {Number} next_cursor To allow paging back and forth.
+ * @apiSuccess {Number} previous_cursor To allow paging back and forth.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "followings_IDs": [
+ *                  657693,
+ *                  183709371,
+ *                  7588892,
+ *                  38895958,
+ *                  22891211,
+ *                  9019482,
+ *                  14488353,
+ *                  11750202,
+ *                  12249,
+ *                  22915745,
+ *                  1249881,
+ *                  14927800,
+ *                  1523501,
+ *                  22548447,
+ *                  15062340,
+ *                  133031077,
+ *                  17874544,
+ *                  777925,
+ *                  4265731,
+ *                  27674040,
+ *                  26123649,
+ *                  9576402,
+ *                  821958,
+ *                  7852612,
+ *                  819797,
+ *                  1401881,
+ *                  8285392,
+ *                  9160152,
+ *                  795649,
+ *                  3191321,
+ *                  783214
+ *              ],
+ *      "next_cursor": 0,
+ *      "previous_cursor": 0
+ *  }
+ *
+ */
+function GetFollowingsIDs() {
+  return;
+}
