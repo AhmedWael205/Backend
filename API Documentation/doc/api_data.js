@@ -949,6 +949,56 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/friendships/no_retweets/ids",
+    "title": "Friendship No-Retweets",
+    "version": "0.1.0",
+    "name": "GetFriendshipsNoRetweetsIDs",
+    "group": "friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/no_retweets/ids.json"
+      }
+    ],
+    "description": "<p>Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships / update to set the &quot;no retweets&quot; status for a given user account on behalf of the current user.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/no_retweets/ids.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "usersIDs",
+            "description": "<p>The Users' IDs you don't wont to retweets from.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"usersIDs\": [\n                657693,\n                783214\n            ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "friendships"
+  },
+  {
+    "type": "get",
     "url": "/saved_searches/list",
     "title": "Saved Searches",
     "version": "0.1.0",

@@ -539,3 +539,34 @@ function getFriendshipsIncoming() {
 }
 
 // ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /friendships/no_retweets/ids Friendship No-Retweets
+ * @apiVersion 0.1.0
+ * @apiName GetFriendshipsNoRetweetsIDs
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/no_retweets/ids.json
+ *
+ * @apiDescription Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from.
+ * Use POST friendships / update to set the "no retweets" status for a given user account on behalf of the current user.
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/friendships/no_retweets/ids.json
+ *
+ * @apiSuccess {Number[]} usersIDs The Users' IDs you don't wont to retweets from.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "usersIDs": [
+ *                  657693,
+ *                  783214
+ *              ]
+ *  }
+ *
+ */
+function getFriendshipsNoRetweetsIDs() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
