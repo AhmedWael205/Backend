@@ -106,3 +106,33 @@ function postRemoveProfileBanner() {
 }
 
 //---------------------------------------------------------------------------------------------------
+
+/**
+ * @api {post} /account/settings Edit Account Settings.
+ * @apiVersion 0.1.0
+ * @apiName PostAccountSettings
+ * @apiGroup Account
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/account/settings.json
+ *
+ * @apiDescription Updates the authenticating user's settings.
+ *
+ * @apiParam {String} lang Optional The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/account/settings.json?lang=en
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "discoverable_by_email ": "true",
+ *       "language": "en",
+ *       "protected":"false",
+ *       "screen_name":"theSeanCook"
+ *     }
+ */
+function postAccountSettings() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------

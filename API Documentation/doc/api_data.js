@@ -60,7 +60,57 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"discoverable_by_email \": \"true\",\n  \"language\": \"en\",\n \"protected\":\"false\",\n \"screen_name\":\"theSeanCook\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"discoverable_by_email \": \"true\",\n  \"language\": \"en\",\n  \"protected\":\"false\",\n  \"screen_name\":\"theSeanCook\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "Account"
+  },
+  {
+    "type": "post",
+    "url": "/account/settings",
+    "title": "Edit Account Settings.",
+    "version": "0.1.0",
+    "name": "PostAccountSettings",
+    "group": "Account",
+    "permission": [
+      {
+        "name": "private"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/account/settings.json"
+      }
+    ],
+    "description": "<p>Updates the authenticating user's settings.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lang",
+            "description": "<p>Optional The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/account/settings.json?lang=en",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"discoverable_by_email \": \"true\",\n  \"language\": \"en\",\n  \"protected\":\"false\",\n  \"screen_name\":\"theSeanCook\"\n}",
           "type": "json"
         }
       ]
