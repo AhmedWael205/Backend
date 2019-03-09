@@ -58,6 +58,7 @@
  * @apiSuccess {String} name The user name as they have defined it , Not necessairly a person name.
  * @apiSuccess {String} password The Hashed password of the user.
  * @apiSuccess {String} email The User's email.
+ * @apiSuccess {Date} created_at Datetime that the user account was created on Twitter.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -66,7 +67,8 @@
  *      "screen_name": "Messi_98",
  *      "name":"Ali Hamdy",
  *      "password":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe",
- *      "email":"ali_hamdy98@outlook.com"
+ *      "email":"ali_hamdy98@outlook.com",
+ *      "created_at":"2012-11-04T14:51:06.157Z"
  *     }
  */
 

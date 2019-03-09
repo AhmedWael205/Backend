@@ -6,6 +6,49 @@
 //      A- Manage account settings and profile
 // ------------------------------------------------------------------------------------------
 /**
+ * @api {post} /users/signup SignUp (Register)
+ * @apiVersion 0.1.0
+ * @apiName PostSignUp
+ * @apiGroup User
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/users/signup.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/account/signup.json
+ *
+ *
+ * @apiDescription SigningUp a new twitter account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.
+ *
+ * @apiParam {String} name [Required] The user name as they have defined it , Not necessairly a person name.
+ * @apiParam {String} screen_name [Required] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
+ * @apiParam {String} email [Required] The user email , it must be never used to any other user.
+ * @apiParam {String} password [Required] The user's password.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "name": "Ali Hany",
+ *      "screen_name":"Messi_98",
+ *      "email":"ali_hamdy98@outlook.com",
+ *      "password":"User_Password"
+ *    }
+ *
+ * @apiError EmailAlreadyExists If the user email is already used by another user.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "EmailAlreadyExists"
+ *     }
+ *
+ * @apiUse miniUserObject
+ *
+ */
+function postSignUp() {
+  return;
+}
+// ------------------------------------------------------------------------------------------
+
+/**
  * @api {get} /account/settings Account Settings
  * @apiVersion 0.1.0
  * @apiName GetSettings
