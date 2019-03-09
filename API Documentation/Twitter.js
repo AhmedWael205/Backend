@@ -920,3 +920,46 @@ function postFriendshipsCreate() {
 }
 
 // ------------------------------------------------------------------------------------------
+/**
+ * @api {post} /friendships/Destroy Destroy Friendship (Unfollow)
+ * @apiVersion 0.1.0
+ * @apiName PostFriendshipsDestroy
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/destroy.json
+ *
+ * @apiDescription AAllows the authenticating user to unfollow the user specified in the ID parameter.
+ * Returns the unfollowed user when successful. Returns a string describing the failure condition when unsuccessful.
+ * Actions taken in this method are asynchronous. Changes will be eventually consistent.
+
+ * @apiParam {Number} user_ID [Required] The ID of the user to unfollow.
+ * @apiParam {String} screen_name [Optional] The screen name of the user to unfollow.	
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID":783214,
+ *       "screen_name":"noradio"
+ *     }
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/friendships/destroy.json?user_id=2244994945
+ *
+ * @apiSuccess {Object} users The Unfollowed user object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ * @apiSuccess {Object} status Array of Tweets Objects.
+ * @apiSuccess {Object} status.tweet Tweet Object.
+ *
+ * @apiSuccessExample
+ *      HTTP/1.1 200 OK
+ *         {
+ *              user-object,
+ *              "status":{tweet-object}
+ *         }    
+ */
+function postFriendshipsDestroy() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
