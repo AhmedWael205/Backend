@@ -505,6 +505,25 @@
       }
     ],
     "description": "<p>Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters. This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids. GET users / show is used to retrieve a single user object. There are a few things to note when using this method. You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed. The order of user IDs or screen names may not match the order of users in the returned array. If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list. If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown. You are strongly encouraged to use a POST for larger requests.</p>",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoUsersFound",
+            "description": "<p>If the user has not uploaded a profile banner</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"NoUsersFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -702,14 +721,14 @@
             "type": "Number",
             "optional": false,
             "field": "user_ID",
-            "description": "<p>[Required] The ID of the user for whom to return results.</p>"
+            "description": "<p>[Required] The ID of the specified user.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "screen_name",
-            "description": "<p>[Required] The screen name of the user for whom to return results.</p>"
+            "description": "<p>[Required] The screen name of the specified user.</p>"
           }
         ]
       },
@@ -1591,6 +1610,125 @@
         {
           "title": "{",
           "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"want_retweets\": null,\n                                    \"notifications_enabled\": null\n                                    }\n                    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "friendships"
+  },
+  {
+    "type": "post",
+    "url": "/friendships/create",
+    "title": "Create Friendship (Follow)",
+    "version": "0.1.0",
+    "name": "PostFriendshipsCreate",
+    "group": "friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/create.json"
+      }
+    ],
+    "description": "<p>Allows the authenticating user to follow (friend) the user specified in the ID parameter. Returns the followed user when successful. Returns a string describing the failure condition when unsuccessful. If the user is already friends with the user a HTTP 403 may be returned, though for performance reasons this method may also return a HTTP 200 OK message even if the follow relationship already exists. Actions taken in this method are asynchronous. Changes will be eventually consistent.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Required] The ID of the user to follow.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user to follow.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "follow",
+            "description": "<p>[Optional] Enable notifications for the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\",\n  \"follow\":true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Required object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Array of Tweets Objects.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status.tweet",
+            "description": "<p>Tweet Object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{tweet-object}\n   }",
           "type": "json"
         }
       ]

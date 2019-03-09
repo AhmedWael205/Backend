@@ -756,6 +756,13 @@ function getFriendshipsShow() {
  *      If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
  *      You are strongly encouraged to use a POST for larger requests.
  *
+ * @apiError NoUsersFound If the user has not uploaded a profile banner
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "NoUsersFound"
+ *     }
+ *
  * @apiParam {Number[]} user_ID [Required] The ID of the user for whom to return results.
  * @apiParam {String[]} screen_name [Optional] The screen name of the user for whom to return results.
  *
@@ -863,6 +870,52 @@ function getUsersSearch() {
  *         {user-object}
  */
 function getUsersShow() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {post} /friendships/create Create Friendship (Follow)
+ * @apiVersion 0.1.0
+ * @apiName PostFriendshipsCreate
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/create.json
+ *
+ * @apiDescription Allows the authenticating user to follow (friend) the user specified in the ID parameter.
+ * Returns the followed user when successful. Returns a string describing the failure condition when unsuccessful. If the user is already friends with the user a HTTP 403 may be returned, though for performance reasons this method may also return a HTTP 200 OK message even if the follow relationship already exists.
+ * Actions taken in this method are asynchronous. Changes will be eventually consistent.
+
+ * @apiParam {Number} user_ID [Required] The ID of the user to follow.
+ * @apiParam {String} screen_name [Optional] The screen name of the user to follow.
+ * @apiParam {Boolean} follow [Optional] Enable notifications for the target user.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "user_ID":783214,
+ *       "screen_name":"noradio",
+ *       "follow":true
+ *     }
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true
+ *
+ * @apiSuccess {Object} users The User Required object.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ * @apiSuccess {Object} status Array of Tweets Objects.
+ * @apiSuccess {Object} status.tweet Tweet Object.
+ *
+ * @apiSuccessExample
+ *      HTTP/1.1 200 OK
+ *         {
+ *              user-object,
+ *              "status":{tweet-object}
+ *         }    
+ */
+function postFriendshipsCreate() {
   return;
 }
 
