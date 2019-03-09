@@ -1609,7 +1609,7 @@ define({ "api": [
       "examples": [
         {
           "title": "{",
-          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"want_retweets\": null,\n                                    \"notifications_enabled\": null\n                                    }\n                    }\n}",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"want_retweets\": true,\n                                    \"notifications_enabled\": false\n                                    }\n                    }\n}",
           "type": "json"
         }
       ]
@@ -1841,6 +1841,181 @@ define({ "api": [
         {
           "title": "HTTP/1.1 200 OK",
           "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{tweet-object}\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "friendships"
+  },
+  {
+    "type": "post",
+    "url": "/friendships/update",
+    "title": "Friendship Update",
+    "version": "0.1.0",
+    "name": "PostFriendshipsUpdate",
+    "group": "friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/friendships/update.json"
+      }
+    ],
+    "description": "<p>Enable or disable Retweets and device notifications from the specified user.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>[Required] The ID of the user being followed.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "source_screen_name",
+            "description": "<p>[Optional] The screen name of the user being followed.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "device",
+            "description": "<p>[Optional] Enable/disable device notifications from the target user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "retweets",
+            "description": "<p>[Optional] Enable/disable Retweets from the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"source_id\": 12345,\n  \"source_screen_name\":\"twitterdev\",\n  \"device\":true,\n  \"retweets\":false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/friendships/update.json?user_id=2244994945&device=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship",
+            "description": "<p>It shows the current relation between the source and the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.target",
+            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.target.ID",
+            "description": "<p>The target's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.target.screen_name",
+            "description": "<p>The target's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.following",
+            "description": "<p>Is The target followed by the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.followed_by",
+            "description": "<p>Is The target following the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.source",
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.source.ID",
+            "description": "<p>The source's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.source.screen_name",
+            "description": "<p>The source's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.following",
+            "description": "<p>Is The source followed by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.followed_by",
+            "description": "<p>Is The source following the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.want_retweets",
+            "description": "<p>Is The source want to be retweeted by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.notifications_enabled",
+            "description": "<p>Is The source wants to get notifications from the target.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 2244994945,\n                                    \"screen_name\": \"twitterdev\",\n                                    \"following\": true,\n                                    \"followed_by\": true\n                                   },\n                        \"source\":  {\n                                    \"id\": 819797,\n                                    \"screen_name\": \"episod\",\n                                    \"following\": true,\n                                    \"followed_by\": true,\n                                    \"want_retweets\": false,\n                                    \"notifications_enabled\": true\n                                    }\n                    }\n}",
           "type": "json"
         }
       ]

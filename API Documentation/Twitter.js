@@ -726,8 +726,8 @@ function getFriendshipsOutgoing() {
  *                                      "screen_name": "bert",
  *                                      "following": false,
  *                                      "followed_by": false,
- *                                      "want_retweets": null,
- *                                      "notifications_enabled": null
+ *                                      "want_retweets": true,
+ *                                      "notifications_enabled": false
  *                                      }
  *                      }
  *  }
@@ -959,6 +959,73 @@ function postFriendshipsCreate() {
  *         }    
  */
 function postFriendshipsDestroy() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {post} /friendships/update Friendship Update
+ * @apiVersion 0.1.0
+ * @apiName PostFriendshipsUpdate
+ * @apiGroup friendships
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/friendships/friendships/update.json
+ *
+ * @apiDescription Enable or disable Retweets and device notifications from the specified user.
+ *
+ * @apiParam {Number} source_id [Required] The ID of the user being followed.
+ * @apiParam {String} source_screen_name [Optional] The screen name of the user being followed.
+ * @apiParam {Boolean} device [Optional] Enable/disable device notifications from the target user.
+ * @apiParam {Boolean} retweets [Optional] Enable/disable Retweets from the target user.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "source_id": 12345,
+ *      "source_screen_name":"twitterdev",
+ *      "device":true,
+ *      "retweets":false
+ *    }
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/friendships/update.json?user_id=2244994945&device=true
+ *
+ * @apiSuccess {Object} relationship It shows the current relation between the source and the target.
+ * @apiSuccess {Object} relationship.target The Target Info (id,screen_name,following,followed_by)
+ * @apiSuccess {Number} relationship.target.ID The target's ID.
+ * @apiSuccess {String} relationship.target.screen_name The target's screen_name.
+ * @apiSuccess {Boolean} relationship.target.following Is The target followed by the source.
+ * @apiSuccess {Boolean} relationship.target.followed_by Is The target following the source.
+ * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)
+ * @apiSuccess {Number} relationship.source.ID The source's ID.
+ * @apiSuccess {String} relationship.source.screen_name The source's screen_name.
+ * @apiSuccess {Boolean} relationship.source.following Is The source followed by the target.
+ * @apiSuccess {Boolean} relationship.source.followed_by Is The source following the target.
+ * @apiSuccess {Boolean} relationship.source.want_retweets Is The source want to be retweeted by the target.
+ * @apiSuccess {Boolean} relationship.source.notifications_enabled Is The source wants to get notifications from the target.
+ *
+ * @apiSuccessExample
+ *  {
+ *      "relationship": {
+ *                          "target":  {
+ *                                      "id": 2244994945,
+ *                                      "screen_name": "twitterdev",
+ *                                      "following": true,
+ *                                      "followed_by": true
+ *                                     },
+ *                          "source":  {
+ *                                      "id": 819797,
+ *                                      "screen_name": "episod",
+ *                                      "following": true,
+ *                                      "followed_by": true,
+ *                                      "want_retweets": false,
+ *                                      "notifications_enabled": true
+ *                                      }
+ *                      }
+ *  }
+ *
+ */
+function postFriendshipsUpdate() {
   return;
 }
 
