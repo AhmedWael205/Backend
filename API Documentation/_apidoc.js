@@ -15,8 +15,6 @@
  * @apiSuccess {Date} created_at Datetime that the user account was created on Twitter.
  * @apiSuccess {String} location [Nullable] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
  * @apiSuccess {String} bio [Nullable] The user's biographical.
- * @apiSuccess {Boolean} protected Is the user protected.
- * @apiSuccess {Boolean} verified Is the user account verfied.
  * @apiSuccess {Number} followers_count The number of followers this account currently has.
  * @apiSuccess {Number} friends_count The number of users this account is following (AKA their “followings”).
  * @apiSuccess {Number} favourites_count The number of Tweets this user has liked in the account’s lifetime.
@@ -36,8 +34,6 @@
  *       "created_at":"2012-11-04T14:51:06.157Z",
  *       "location": "San Francisco, CA",
  *       "bio": "The Real Twitter API.",
- *       "protected":true,
- *       "verifed":false,
  *       "followers_count": 21,
  *       "friends_count": 32,
  *       "favourites_count":13,

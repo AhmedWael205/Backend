@@ -20,18 +20,20 @@
  *
  * @apiDescription Returns settings for the authenticating user.
  *
- * @apiSuccess {Boolean} discoverable_by_email  Is the user discoverable by email.
- * @apiSuccess {String} language  User language.
- * @apiSuccess {Boolean} protected   Is the user protected.
- * @apiSuccess {String}screen_name   The user's screen name.
+ * @apiSuccess {Number} ID The user ID Number.
+ * @apiSuccess {String} screen_name The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
+ * @apiSuccess {String} name The user name as they have defined it , Not necessairly a person name.
+ * @apiSuccess {String} location The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
+ * @apiSuccess {String} bio The user's biographical.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "discoverable_by_email ": "true",
- *       "language": "en",
- *       "protected":"false",
- *       "screen_name":"theSeanCook"
+ *      "ID":12345
+ *      "screen_name": "Messi_98",
+ *      "name":"Ali Hamdy",
+ *      "location":null,
+ *      "bio":null
  *     }
  */
 function getUserSettings() {
@@ -123,28 +125,36 @@ function postRemoveProfileBanner() {
  *
  * @apiDescription Updates the authenticating user's settings.
  *
- * @apiParam {String} lang [Optional] The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .
+ * @apiParam {String} screen_name [Optional] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
+ * @apiParam {String} name [Optional] The user name as they have defined it , Not necessairly a person name.
+ * @apiParam {String} location [Nullable] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
+ * @apiParam {String} bio [Nullable] The user's biographical.
  *
  * @apiParamExample {json} Request-Example:
  *    {
- *      "lang": "en"
+ *      "screen_name": "Messi_98",
+ *      "name":"Ali Hamdy",
+ *      "location":null,
+ *      "bio":null
  *    }
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/settings.json?lang=en
+ * POST localhost:3000/account/settings.json?screen_name=Messi_98
  *
- * @apiSuccess {Boolean} discoverable_by_email  Is the user discoverable by email.
- * @apiSuccess {String} language  User language.
- * @apiSuccess {Boolean} protected   Is the user protected.
- * @apiSuccess {String}screen_name   The user's screen name.
+ * @apiSuccess {Number} ID The user ID Number.
+ * @apiSuccess {String} screen_name The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
+ * @apiSuccess {String} name The user name as they have defined it , Not necessairly a person name.
+ * @apiSuccess {String} location The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
+ * @apiSuccess {String} bio The user's biographical.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "discoverable_by_email ": "true",
- *       "language": "en",
- *       "protected":"false",
- *       "screen_name":"theSeanCook"
+ *      "ID":12345
+ *      "screen_name": "Messi_98",
+ *      "name":"Ali Hamdy",
+ *      "location":null,
+ *      "bio":null
  *     }
  */
 function postAccountSettings() {
@@ -590,38 +600,6 @@ function getFriendshipsIncoming() {
 }
 
 // ------------------------------------------------------------------------------------------
-
-/**
- * @api {get} /friendships/no_retweets/ids Friendship No-Retweets
- * @apiVersion 0.1.0
- * @apiName GetFriendshipsNoRetweetsIDs
- * @apiGroup friendships
- * @apiPermission private
- * @apiSampleRequest localhost:3000/friendships/no_retweets/ids.json
- *
- * @apiDescription Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from.
- * Use POST friendships / update to set the "no retweets" status for a given user account on behalf of the current user.
- *
- * @apiExample Example usage:
- * GET localhost:3000/friendships/no_retweets/ids.json
- *
- * @apiSuccess {Number[]} usersIDs The Users' IDs you don't wont to retweets from.
- *
- * @apiSuccessExample
- *  {
- *      "usersIDs": [
- *                  657693,
- *                  783214
- *              ]
- *  }
- *
- */
-function getFriendshipsNoRetweetsIDs() {
-  return;
-}
-
-// ------------------------------------------------------------------------------------------
-
 /**
  * @api {get} /friendships/Outgoing Friendship Pending Follow Requests' IDs
  * @apiVersion 0.1.0
@@ -630,7 +608,7 @@ function getFriendshipsNoRetweetsIDs() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/outgoing.json
  *
- * @apiDescription Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
+ * @apiDescription Returns a collection of numeric IDs for every user for whom the authenticating user has a pending follow request.
  *
  * @apiParam {Number} cursor [Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first "page."
  *
@@ -704,12 +682,11 @@ function getFriendshipsOutgoing() {
  * @apiSuccess {String} relationship.target.screen_name The target's screen_name.
  * @apiSuccess {Boolean} relationship.target.following Is The target followed by the source.
  * @apiSuccess {Boolean} relationship.target.followed_by Is The target following the source.
- * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)
+ * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,notifications_enabled)
  * @apiSuccess {Number} relationship.source.ID The source's ID.
  * @apiSuccess {String} relationship.source.screen_name The source's screen_name.
  * @apiSuccess {Boolean} relationship.source.following Is The source followed by the target.
  * @apiSuccess {Boolean} relationship.source.followed_by Is The source following the target.
- * @apiSuccess {Boolean} relationship.source.want_retweets Is The source want to be retweeted by the target.
  * @apiSuccess {Boolean} relationship.source.notifications_enabled Is The source wants to get notifications from the target.
  *
  * @apiSuccessExample
@@ -726,7 +703,6 @@ function getFriendshipsOutgoing() {
  *                                      "screen_name": "bert",
  *                                      "following": false,
  *                                      "followed_by": false,
- *                                      "want_retweets": true,
  *                                      "notifications_enabled": false
  *                                      }
  *                      }
@@ -750,7 +726,6 @@ function getFriendshipsShow() {
  * This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids.
  * GET users / show is used to retrieve a single user object.
  * There are a few things to note when using this method.
- *      You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed.
  *      The order of user IDs or screen names may not match the order of users in the returned array.
  *      If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list.
  *      If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown.
@@ -847,7 +822,6 @@ function getUsersSearch() {
  *
  * @apiDescription Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible.
  * GET users / lookup is used to retrieve a bulk collection of user objects.
- * You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the user's Tweet will be removed. A Tweet will not always be returned in the current_status field.
  *
  * @apiParam {Number} user_ID [Required] The ID of the specified user.
  * @apiParam {String} screen_name [Required] The screen name of the specified user.
@@ -972,19 +946,17 @@ function postFriendshipsDestroy() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/friendships/update.json
  *
- * @apiDescription Enable or disable Retweets and device notifications from the specified user.
+ * @apiDescription Enable or disable device notifications from the specified user.
  *
  * @apiParam {Number} source_id [Required] The ID of the user being followed.
  * @apiParam {String} source_screen_name [Optional] The screen name of the user being followed.
  * @apiParam {Boolean} device [Optional] Enable/disable device notifications from the target user.
- * @apiParam {Boolean} retweets [Optional] Enable/disable Retweets from the target user.
  *
  * @apiParamExample {json} Request-Example:
  *    {
  *      "source_id": 12345,
  *      "source_screen_name":"twitterdev",
  *      "device":true,
- *      "retweets":false
  *    }
  *
  * @apiExample Example usage:
@@ -996,12 +968,11 @@ function postFriendshipsDestroy() {
  * @apiSuccess {String} relationship.target.screen_name The target's screen_name.
  * @apiSuccess {Boolean} relationship.target.following Is The target followed by the source.
  * @apiSuccess {Boolean} relationship.target.followed_by Is The target following the source.
- * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)
+ * @apiSuccess {Object} relationship.source The Source Info (id,screen_name,following,followed_by,notifications_enabled)
  * @apiSuccess {Number} relationship.source.ID The source's ID.
  * @apiSuccess {String} relationship.source.screen_name The source's screen_name.
  * @apiSuccess {Boolean} relationship.source.following Is The source followed by the target.
  * @apiSuccess {Boolean} relationship.source.followed_by Is The source following the target.
- * @apiSuccess {Boolean} relationship.source.want_retweets Is The source want to be retweeted by the target.
  * @apiSuccess {Boolean} relationship.source.notifications_enabled Is The source wants to get notifications from the target.
  *
  * @apiSuccessExample
@@ -1018,7 +989,6 @@ function postFriendshipsDestroy() {
  *                                      "screen_name": "episod",
  *                                      "following": true,
  *                                      "followed_by": true,
- *                                      "want_retweets": false,
  *                                      "notifications_enabled": true
  *                                      }
  *                      }

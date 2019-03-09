@@ -31,38 +31,45 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Number",
             "optional": false,
-            "field": "discoverable_by_email",
-            "description": "<p>Is the user discoverable by email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "language",
-            "description": "<p>User language.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "protected",
-            "description": "<p>Is the user protected.</p>"
+            "field": "ID",
+            "description": "<p>The user ID Number.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "screen_name",
-            "description": "<p>The user's screen name.</p>"
+            "description": "<p>The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name as they have defined it , Not necessairly a person name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "bio",
+            "description": "<p>The user's biographical.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"discoverable_by_email \": \"true\",\n  \"language\": \"en\",\n  \"protected\":\"false\",\n  \"screen_name\":\"theSeanCook\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n \"ID\":12345\n \"screen_name\": \"Messi_98\",\n \"name\":\"Ali Hamdy\",\n \"location\":null,\n \"bio\":null\n}",
           "type": "json"
         }
       ]
@@ -97,15 +104,36 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "lang",
-            "description": "<p>[Optional] The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by this endpoint .</p>"
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>[Optional] The user name as they have defined it , Not necessairly a person name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>[Nullable] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "bio",
+            "description": "<p>[Nullable] The user's biographical.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"lang\": \"en\"\n}",
+          "content": "{\n  \"screen_name\": \"Messi_98\",\n  \"name\":\"Ali Hamdy\",\n  \"location\":null,\n  \"bio\":null\n}",
           "type": "json"
         }
       ]
@@ -113,7 +141,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/settings.json?lang=en",
+        "content": "POST localhost:3000/account/settings.json?screen_name=Messi_98",
         "type": "json"
       }
     ],
@@ -122,38 +150,45 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Number",
             "optional": false,
-            "field": "discoverable_by_email",
-            "description": "<p>Is the user discoverable by email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "language",
-            "description": "<p>User language.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "protected",
-            "description": "<p>Is the user protected.</p>"
+            "field": "ID",
+            "description": "<p>The user ID Number.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "screen_name",
-            "description": "<p>The user's screen name.</p>"
+            "description": "<p>The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name as they have defined it , Not necessairly a person name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "bio",
+            "description": "<p>The user's biographical.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"discoverable_by_email \": \"true\",\n  \"language\": \"en\",\n  \"protected\":\"false\",\n  \"screen_name\":\"theSeanCook\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n \"ID\":12345\n \"screen_name\": \"Messi_98\",\n \"name\":\"Ali Hamdy\",\n \"location\":null,\n \"bio\":null\n}",
           "type": "json"
         }
       ]
@@ -296,20 +331,6 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "protected",
-            "description": "<p>Is the user protected.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "verified",
-            "description": "<p>Is the user account verfied.</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "followers_count",
@@ -376,7 +397,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"ID\": 6253282,\n  \"name\": \"Twitter API\",\n  \"screen_name\": \"twitterapi\",\n  \"created_at\":\"2012-11-04T14:51:06.157Z\",\n  \"location\": \"San Francisco, CA\",\n  \"bio\": \"The Real Twitter API.\",\n  \"protected\":true,\n  \"verifed\":false,\n  \"followers_count\": 21,\n  \"friends_count\": 32,\n  \"favourites_count\":13,\n  \"tweets_count\":42,\n  \"profile_background_color\": \"e8f2f7\",\n  \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n  \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n  \"default_profile\": fasle,\n  \"default_profile_image\": false\n}",
+          "content": "{\n  \"ID\": 6253282,\n  \"name\": \"Twitter API\",\n  \"screen_name\": \"twitterapi\",\n  \"created_at\":\"2012-11-04T14:51:06.157Z\",\n  \"location\": \"San Francisco, CA\",\n  \"bio\": \"The Real Twitter API.\",\n  \"followers_count\": 21,\n  \"friends_count\": 32,\n  \"favourites_count\":13,\n  \"tweets_count\":42,\n  \"profile_background_color\": \"e8f2f7\",\n  \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n  \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n  \"default_profile\": fasle,\n  \"default_profile_image\": false\n}",
           "type": "json"
         }
       ]
@@ -504,7 +525,7 @@ define({ "api": [
         "url": "localhost:3000/users/lookup.json"
       }
     ],
-    "description": "<p>Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters. This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids. GET users / show is used to retrieve a single user object. There are a few things to note when using this method. You must be following a protected user to be able to see their most recent status update. If you don't follow a protected user their status will be removed. The order of user IDs or screen names may not match the order of users in the returned array. If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list. If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown. You are strongly encouraged to use a POST for larger requests.</p>",
+    "description": "<p>Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters. This method is especially useful when used in conjunction with collections of user IDs returned from GET friends / ids and GET followers / ids. GET users / show is used to retrieve a single user object. There are a few things to note when using this method. The order of user IDs or screen names may not match the order of users in the returned array. If a requested user is unknown, suspended, or deleted, then that user will not be returned in the results list. If none of your lookup criteria can be satisfied by returning a user object, a HTTP 404 will be thrown. You are strongly encouraged to use a POST for larger requests.</p>",
     "error": {
       "fields": {
         "Error 4xx": [
@@ -712,7 +733,7 @@ define({ "api": [
         "url": "localhost:3000/users/show.json"
       }
     ],
-    "description": "<p>Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users / lookup is used to retrieve a bulk collection of user objects. You must be following a protected user to be able to see their most recent Tweet. If you don't follow a protected user, the user's Tweet will be removed. A Tweet will not always be returned in the current_status field.</p>",
+    "description": "<p>Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible. GET users / lookup is used to retrieve a bulk collection of user objects.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1310,56 +1331,6 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/friendships/no_retweets/ids",
-    "title": "Friendship No-Retweets",
-    "version": "0.1.0",
-    "name": "GetFriendshipsNoRetweetsIDs",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/no_retweets/ids.json"
-      }
-    ],
-    "description": "<p>Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships / update to set the &quot;no retweets&quot; status for a given user account on behalf of the current user.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/friendships/no_retweets/ids.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "usersIDs",
-            "description": "<p>The Users' IDs you don't wont to retweets from.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"usersIDs\": [\n                657693,\n                783214\n            ]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "get",
     "url": "/friendships/Outgoing",
     "title": "Friendship Pending Follow Requests' IDs",
     "version": "0.1.0",
@@ -1377,7 +1348,7 @@ define({ "api": [
         "url": "localhost:3000/friendships/outgoing.json"
       }
     ],
-    "description": "<p>Returns a collection of numeric IDs for every protected user for whom the authenticating user has a pending follow request.</p>",
+    "description": "<p>Returns a collection of numeric IDs for every user for whom the authenticating user has a pending follow request.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1560,7 +1531,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "relationship.source",
-            "description": "<p>The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)</p>"
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
           },
           {
             "group": "Success 200",
@@ -1594,13 +1565,6 @@ define({ "api": [
             "group": "Success 200",
             "type": "Boolean",
             "optional": false,
-            "field": "relationship.source.want_retweets",
-            "description": "<p>Is The source want to be retweeted by the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
             "field": "relationship.source.notifications_enabled",
             "description": "<p>Is The source wants to get notifications from the target.</p>"
           }
@@ -1609,7 +1573,7 @@ define({ "api": [
       "examples": [
         {
           "title": "{",
-          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"want_retweets\": true,\n                                    \"notifications_enabled\": false\n                                    }\n                    }\n}",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"notifications_enabled\": false\n                                    }\n                    }\n}",
           "type": "json"
         }
       ]
@@ -1867,7 +1831,7 @@ define({ "api": [
         "url": "localhost:3000/friendships/friendships/update.json"
       }
     ],
-    "description": "<p>Enable or disable Retweets and device notifications from the specified user.</p>",
+    "description": "<p>Enable or disable device notifications from the specified user.</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1891,20 +1855,13 @@ define({ "api": [
             "optional": false,
             "field": "device",
             "description": "<p>[Optional] Enable/disable device notifications from the target user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "retweets",
-            "description": "<p>[Optional] Enable/disable Retweets from the target user.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"source_id\": 12345,\n  \"source_screen_name\":\"twitterdev\",\n  \"device\":true,\n  \"retweets\":false\n}",
+          "content": "{\n  \"source_id\": 12345,\n  \"source_screen_name\":\"twitterdev\",\n  \"device\":true,\n}",
           "type": "json"
         }
       ]
@@ -1966,7 +1923,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "relationship.source",
-            "description": "<p>The Source Info (id,screen_name,following,followed_by,want_retweets,notifications_enabled)</p>"
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
           },
           {
             "group": "Success 200",
@@ -2000,13 +1957,6 @@ define({ "api": [
             "group": "Success 200",
             "type": "Boolean",
             "optional": false,
-            "field": "relationship.source.want_retweets",
-            "description": "<p>Is The source want to be retweeted by the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
             "field": "relationship.source.notifications_enabled",
             "description": "<p>Is The source wants to get notifications from the target.</p>"
           }
@@ -2015,7 +1965,7 @@ define({ "api": [
       "examples": [
         {
           "title": "{",
-          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 2244994945,\n                                    \"screen_name\": \"twitterdev\",\n                                    \"following\": true,\n                                    \"followed_by\": true\n                                   },\n                        \"source\":  {\n                                    \"id\": 819797,\n                                    \"screen_name\": \"episod\",\n                                    \"following\": true,\n                                    \"followed_by\": true,\n                                    \"want_retweets\": false,\n                                    \"notifications_enabled\": true\n                                    }\n                    }\n}",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 2244994945,\n                                    \"screen_name\": \"twitterdev\",\n                                    \"following\": true,\n                                    \"followed_by\": true\n                                   },\n                        \"source\":  {\n                                    \"id\": 819797,\n                                    \"screen_name\": \"episod\",\n                                    \"following\": true,\n                                    \"followed_by\": true,\n                                    \"notifications_enabled\": true\n                                    }\n                    }\n}",
           "type": "json"
         }
       ]
