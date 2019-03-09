@@ -98,7 +98,7 @@
  * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
  * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
  * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} replied_by_IDs Array of Users' IDs whom replied to this tweet.
+ * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
  *
  * @apiSuccessExample
  *  {
@@ -138,7 +138,7 @@
  *          "retweeted":false,
  *          "favorited_by_IDs":[12345 , 76454],
  *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_by_IDs":[217361273 , 732456254 , 83217437]
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
  *  }
  */
 
