@@ -183,7 +183,7 @@ function postAccountSettings() {
  * @apiExample Example usage:
  * POST localhost:3000/account/update_profile_image.json?imageURL="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
  *
- * @apiUse UserSuccess
+ * @apiUse UserObject
  */
 function postUpdateProfileImage() {
   return;
