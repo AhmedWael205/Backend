@@ -19,6 +19,7 @@
  * @apiSuccess {Number} friends_count The number of users this account is following (AKA their “followings”).
  * @apiSuccess {Number} favourites_count The number of Tweets this user has liked in the account’s lifetime.
  * @apiSuccess {Number} tweets_count The number of Tweets (including retweets) issued by the user.
+ * @apiSuccess {Number[]} tweets_IDs The IDs of User's Tweets.
  * @apiSuccess {String} profile_background_color The hexadecimal color chosen by the user for their background.
  * @apiSuccess {String} profile_background_image_url A HTTP-based URL pointing to the background image the user has uploaded for their profile.
  * @apiSuccess {String} profile_image_url A HTTP-based URL pointing to the user’s profile image.
@@ -38,6 +39,7 @@
  *       "friends_count": 32,
  *       "favourites_count":13,
  *       "tweets_count":42,
+ *       "tweets_ID":[256321242121 , 3343726443],
  *       "profile_background_color": "e8f2f7",
  *       "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
  *       "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
@@ -54,8 +56,8 @@
  * @apiSuccess {Number} ID The user ID Number.
  * @apiSuccess {String} screen_name The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
  * @apiSuccess {String} name The user name as they have defined it , Not necessairly a person name.
- * @apiSuccess {String} location The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
- * @apiSuccess {String} bio The user's biographical.
+ * @apiSuccess {String} password The Hashed password of the user.
+ * @apiSuccess {String} email The User's email.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
@@ -63,8 +65,8 @@
  *      "ID":12345
  *      "screen_name": "Messi_98",
  *      "name":"Ali Hamdy",
- *      "location":null,
- *      "bio":null
+ *      "password":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe",
+ *      "email":"ali_hamdy98@outlook.com"
  *     }
  */
 
