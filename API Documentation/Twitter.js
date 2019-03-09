@@ -47,6 +47,60 @@ function postSignUp() {
   return;
 }
 // ------------------------------------------------------------------------------------------
+/**
+ * @api {post} /users/signin SignIn (Log In)
+ * @apiVersion 0.1.0
+ * @apiName PostSignIn
+ * @apiGroup User
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/users/signin.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/account/signin.json
+ *
+ *
+ * @apiDescription SignIn to twitter using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.
+ *
+ * @apiParam {String} email [Required] The user email , it must be never used to any other user.
+ * @apiParam {String} password [Required] The user's password.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "email":"ali_hamdy98@outlook.com",
+ *      "password":"User_Password"
+ *    }
+ *
+ * @apiError UserNotFound If the user email is not used or incorrect.
+ * @apiError IncorrectPassword If the user entered a wrong password.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "UserNotFound"
+ *     }
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "IncorrectPassword"
+ *     }
+ *
+ * @apiSuccess {Boolean} success Did the user signIn successfully.
+ * @apiSuccess {String} token User Hashed Password and it's Type.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "success":true,
+ *      "token":"Bearer "+"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
+ *     }
+ *
+ */
+function postSignIn() {
+  return;
+}
+// ------------------------------------------------------------------------------------------
 
 /**
  * @api {get} /account/settings Account Settings

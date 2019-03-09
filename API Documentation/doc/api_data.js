@@ -820,6 +820,120 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/users/signin",
+    "title": "SignIn (Log In)",
+    "version": "0.1.0",
+    "name": "PostSignIn",
+    "group": "User",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/users/signin.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/account/signin.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>SignIn to twitter using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>[Required] The user email , it must be never used to any other user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>[Required] The user's password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"email\":\"ali_hamdy98@outlook.com\",\n  \"password\":\"User_Password\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>If the user email is not used or incorrect.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "IncorrectPassword",
+            "description": "<p>If the user entered a wrong password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"IncorrectPassword\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Did the user signIn successfully.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>User Hashed Password and it's Type.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"success\":true,\n \"token\":\"Bearer \"+\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
     "url": "/users/signup",
     "title": "SignUp (Register)",
     "version": "0.1.0",
