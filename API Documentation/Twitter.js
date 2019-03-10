@@ -1097,3 +1097,591 @@ function postFriendshipsUpdate() {
 }
 
 // ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+//2- Novas
+// ------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------
+//      A- Get Nova timelines
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /statuses/home_timeline Home Timeline
+ * @apiVersion 0.1.0
+ * @apiName gethome_timeline
+ * @apiGroup statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/home_timeline.json
+ *
+ *
+ *@apidescription Returns a collection of the most recent Novas and ReNovas posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Nova service.
+ *
+ *@apiParam {Number} count	[optional]	Specifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.
+ *
+ * @apiParam {Boolean} exclude_replies	[optional]	This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.
+ * 
+ * @apiParam {Boolean} include_entities	[optional] The entities node will not be included when set to false.
+ * 
+ *@apiParamExample {json} Request-Example:
+ *    {
+ *      "Count": 5,
+ *      "exclude_replies":false,
+ *      "include_entities":false
+ *    }
+ * 
+ *   @apiExample Example usage:
+ * POST localhost:3000/statuses/home_timeline.json
+ * 
+ * 
+ * @apiSuccess {String} created_at UTC time when this Tweet was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
+ * @apiSuccess {Object} user The user who posted this Tweet.
+ * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
+ * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {String} entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
+ * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
+ * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
+ * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ *
+ * 
+@apiSuccessExample
+ * [
+ *   {
+ *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
+ *      "ID":114749583439036416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":114749583439036416,
+ *      "in_reply_to_user_id":819797,
+ *      "in_reply_to_screen_name":"twitterapi",
+ *       "user": {
+ *                  "ID": 6253282,
+ *                  "name": "Twitter API",
+ *                  "screen_name": "twitterapi",
+ *                  "created_at":"2012-11-04T14:51:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "The Real Twitter API.",
+ *                  "followers_count": 21,
+ *                  "friends_count": 32,
+ *                  "favourites_count":13,
+ *                  "tweets_count":42,
+ *                  "profile_background_color": "e8f2f7",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":1585,
+ *          "retweet_count":1585,
+ *          "favorite_count":1138,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 8437836 ],
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *  },
+ * 
+ * {
+ *  "created_at":"Wed Aug 27 13:09:00 +0000 2008",
+ *      "ID":114749583439038416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":114749583439038416,
+ *      "in_reply_to_user_id":819897,
+ *      "in_reply_to_screen_name":"HarryWilliams",
+ *       "user": {
+ *                  "ID": 6896009,
+ *                  "name": "Harry Williams",
+ *                  "screen_name": "HarryWilliams",
+ *                  "created_at":"2012-11-04T14:58:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "Just a test",
+ *                  "followers_count": 95,
+ *                  "friends_count": 82,
+ *                  "favourites_count":7,
+ *                  "tweets_count":48,
+ *                  "profile_background_color": "C0DEED",
+ *                  "profile_background_image_url":"https://si0.twimg.com/images/themes/theme1/bg.png",
+ *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":155,
+ *          "retweet_count":158,
+ *          "favorite_count":118,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 84376945 ],
+ *          "replied_tweets_IDs":[683484 , 7349867 , 398694876]
+ *
+ * },
+ * 
+ * {
+ *  "created_at":"Wed Aug 27 15:00:00 +0000 2008",
+ *      "ID":819897,
+ *      "text":"Another Test",
+ *      "in_reply_to_status_id":819897,
+ *      "in_reply_to_user_id":114749593439038416,
+ *      "in_reply_to_screen_name":"willSmith",
+ *       "user": {
+ *                  "ID": 7540760,
+ *                  "name": "Will Smith",
+ *                  "screen_name": "WillSmith",
+ *                  "created_at":"2012-11-04T14:49:09.157Z",
+ *                  "location": "New York, CA",
+ *                  "bio": "TEST",
+ *                  "followers_count": 13214,
+ *                  "friends_count": 549,
+ *                  "favourites_count":79,
+ *                  "tweets_count":486,
+ *                  "profile_background_color": "C0DEED",
+ *                  "profile_background_image_url":"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
+ *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":5437,
+ *          "retweet_count":6467,
+ *          "favorite_count":364,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[34745 , 57548],
+ *          "retweeted_by_IDs":[ 6548659],
+ *          "replied_tweets_IDs":[69796 , 7349867 , 398694876]
+ * 
+ * }
+ * ]
+ **/
+function getHomeTimeline() {
+  return;
+}
+
+/**
+ * @api {get} /statuses/User_timeline User Timeline
+ * @apiVersion 0.1.0
+ * @apiName getuser_timeline
+ * @apiGroup statuses
+ * @apiPermission private
+ * 
+ * @apiSampleRequest localhost:3000/statuses/User_timeline.json
+ *
+ *
+ *@apidescription Returns a collection of the most recent Novas posted by the user indicated by the screen_name or user_id parameters
+ The timeline returned is the equivalent of the one seen as a user's profile on  Nova.
+ *
+ *
+ * @apiParam {Number}  user_id	 [optional]	The ID of the user for whom to    return results.	
+ *@apiparam {string} screen_name	[optional]	The screen name of the user for whom to return results.		
+ *@apiParam {Number} count	[optional]	Specifies the number of Novas  to try and retrieve. The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.
+ * @apiParam {Boolean} exclude_replies	[optional]	This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.
+ * 
+ *@apiParamExample {json} Request-Example:
+ *    { 
+ *      "User_id":12345,
+ *      "Screen_name":nordia,        
+ *      "Count": 5,
+ *      "exclude_replies":true
+ *    }
+ * 
+ *   @apiExample Example usage:
+ * POST localhost:3000/statuses/User_timeline.json
+ * 
+ * 
+ * @apiSuccess {String} created_at UTC time when this Tweet was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
+ * @apiSuccess {Object} user The user who posted this Tweet.
+ * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
+ * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {String} entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
+ * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
+ * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
+ * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ * @apiSuccess {string}  retweeted_status Tweet that has been retweeted by the authenticating user.
+ * 
+ * @apiSuccessExample
+ * [
+ *   {
+ *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
+ *      "ID":114749583439036416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":null,
+ *      "in_reply_to_user_id":null,
+ *      "in_reply_to_screen_name":"twitterapi",
+ *       "user": {
+ *                  "ID": 6253282,
+ *                  "name": "Twitter API",
+ *                  "screen_name": "twitterapi",
+ *                  "created_at":"2012-11-04T14:51:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "The Real Twitter API.",
+ *                  "followers_count": 21,
+ *                  "friends_count": 32,
+ *                  "favourites_count":13,
+ *                  "tweets_count":42,
+ *                  "profile_background_color": "e8f2f7",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":1585,
+ *          "retweet_count":1585,
+ *          "favorite_count":1138,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 8437836 ],
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *  },
+ *  {
+ *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
+ *      "ID":114749583439036416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":null,
+ *      "in_reply_to_user_id":null,
+ *      "in_reply_to_screen_name":"twitterapi",
+ *       "user": {
+ *                  "ID": 6253282,
+ *                  "name": "Twitter API",
+ *                  "screen_name": "twitterapi",
+ *                  "created_at":"2012-11-04T14:51:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "The Real Twitter API.",
+ *                  "followers_count": 21,
+ *                  "friends_count": 32,
+ *                  "favourites_count":13,
+ *                  "tweets_count":42,
+ *                  "profile_background_color": "e8f2f7",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":1585,
+ *          "retweet_count":1585,
+ *          "favorite_count":1138,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 8437836 ],
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *  },
+ *  {
+ *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
+ *      "ID":114749583439036416,
+ *      "text":"Another Nova",
+ *      "in_reply_to_status_id":114749583439036416,
+ *      "in_reply_to_user_id":3683925,
+ *      "in_reply_to_screen_name":"twitterapi",
+ *       "user": {
+ *                  "ID": 6253282,
+ *                  "name": "Twitter API",
+ *                  "screen_name": "twitterapi",
+ *                  "created_at":"2012-11-04T14:51:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "The Real Twitter API.",
+ *                  "followers_count": 21,
+ *                  "friends_count": 32,
+ *                  "favourites_count":13,
+ *                  "tweets_count":42,
+ *                  "profile_background_color": "e8f2f7",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":1585,
+ *          "retweet_count":1585,
+ *          "favorite_count":1138,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":[],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 8437836 ],
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *  }
+ * ]
+ * 
+ * 
+ * 
+ * 
+ **/
+function getUserTimeline() {
+  return;
+}
+
+/**
+ * @api {get} /statuses/mentions_timeline Mentions Timeline
+ * @apiVersion 0.1.0
+ * @apiName getmentions_timeline
+ * @apiGroup statuses
+ * @apiPermission private
+ * 
+ * @apiSampleRequest localhost:3000/statuses/mentions_timeline.json
+ *
+ *
+ *@apidescription Returns the 20 most recent mentions (Novas containing a users's @screen_name) for the authenticating user.
+ The timeline returned is the equivalent of the one seen when you view your mentions on Nova.com.
+ *
+ *@apiParam {Number} count	[optional]	Specifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.
+ *
+ * @apiParam {Boolean} exclude_replies	[optional]	This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.
+ * 
+ * @apiParam {Boolean} include_entities	[optional] The entities node will not be included when set to false.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    { 
+ *            
+ *      "Count": 5,
+ *      "exclude_replies":true,
+ *      "include_entities":false
+ *    }
+ * 
+ * @apiSuccess {String} created_at UTC time when this Tweet was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
+ * @apiSuccess {Object} user The user who posted this Tweet.
+ * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
+ * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {String} entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
+ * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
+ * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
+ * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ *
+ * 
+@apiSuccessExample
+ * [
+ *   {
+ *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
+ *      "ID":114749583439036416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":114749583439036416,
+ *      "in_reply_to_user_id":819797,
+ *      "in_reply_to_screen_name":"twitterapi",
+ *       "user": {
+ *                  "ID": 6253282,
+ *                  "name": "Twitter API",
+ *                  "screen_name": "twitterapi",
+ *                  "created_at":"2012-11-04T14:51:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "The Real Twitter API.",
+ *                  "followers_count": 21,
+ *                  "friends_count": 32,
+ *                  "favourites_count":13,
+ *                  "tweets_count":42,
+ *                  "profile_background_color": "e8f2f7",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":1585,
+ *          "retweet_count":1585,
+ *          "favorite_count":1138,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":
+ *                      [
+ *                       {
+ *                            "name": "Jason Costa",
+ *                            "id": 14927800,
+ *                            "screen_name": "jasoncosta"
+ *                        }
+ *                      ],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 8437836 ],
+ *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *  },
+ * 
+ * {
+ *  "created_at":"Wed Aug 27 13:09:00 +0000 2008",
+ *      "ID":114749583439038416,
+ *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "in_reply_to_status_id":114749583439038416,
+ *      "in_reply_to_user_id":819897,
+ *      "in_reply_to_screen_name":"HarryWilliams",
+ *       "user": {
+ *                  "ID": 6896009,
+ *                  "name": "Harry Williams",
+ *                  "screen_name": "HarryWilliams",
+ *                  "created_at":"2012-11-04T14:58:06.157Z",
+ *                  "location": "San Francisco, CA",
+ *                  "bio": "Just a test",
+ *                  "followers_count": 95,
+ *                  "friends_count": 82,
+ *                  "favourites_count":7,
+ *                  "tweets_count":48,
+ *                  "profile_background_color": "C0DEED",
+ *                  "profile_background_image_url":"https://si0.twimg.com/images/themes/theme1/bg.png",
+ *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":155,
+ *          "retweet_count":158,
+ *          "favorite_count":118,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":
+ *                          [
+ *                           {
+ *                            "name": "Jason Costa",
+ *                            "id": 14927800,
+ *                            "screen_name": "jasoncosta"
+ *                           },  
+ *                           {
+ *                            "name": "Matt Harris",
+ *                            "id": 777925,
+ *                            "screen_name": "themattharris"
+ *                           },
+ *                           {
+ *                            "name": "ThinkWall",        
+ *                            "id": 117426578,
+ *                            "screen_name": "thinkwall"
+ *                            }
+ *                           ],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[12345 , 76454],
+ *          "retweeted_by_IDs":[ 84376945 ],
+ *          "replied_tweets_IDs":[683484 , 7349867 , 398694876]
+ *
+ * },
+ * 
+ * {
+ *  "created_at":"Wed Aug 27 15:00:00 +0000 2008",
+ *      "ID":819897,
+ *      "text":"Another Test",
+ *      "in_reply_to_status_id":819897,
+ *      "in_reply_to_user_id":114749593439038416,
+ *      "in_reply_to_screen_name":"willSmith",
+ *       "user": {
+ *                  "ID": 7540760,
+ *                  "name": "Will Smith",
+ *                  "screen_name": "WillSmith",
+ *                  "created_at":"2012-11-04T14:49:09.157Z",
+ *                  "location": "New York, CA",
+ *                  "bio": "TEST",
+ *                  "followers_count": 13214,
+ *                  "friends_count": 549,
+ *                  "favourites_count":79,
+ *                  "tweets_count":486,
+ *                  "profile_background_color": "C0DEED",
+ *                  "profile_background_image_url":"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
+ *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
+ *                  "default_profile": fasle,
+ *                  "default_profile_image": false
+ *               },
+ *          "reply_count":5437,
+ *          "retweet_count":6467,
+ *          "favorite_count":364,
+ *          "entities": {
+ *                          "hashtags":[],
+ *                          "urls":[],
+ *                          "user_mentions":
+ *                          [ 
+ *                           {                           
+ *                           "name": "Jason Costa",
+ *                            "id": 14927800,
+ *                            "screen_name": "jasoncosta"
+ *                           }
+ *                          ],
+ *                          "media":[]
+ *                      },
+ *          "favorited":true,
+ *          "retweeted":false,
+ *          "favorited_by_IDs":[34745 , 57548],
+ *          "retweeted_by_IDs":[ 6548659],
+ *          "replied_tweets_IDs":[69796 , 7349867 , 398694876]
+ * 
+ * }
+ * ]
+ * 
+ * 
+ **/
+function getUserTimeline() {
+  return;
+}

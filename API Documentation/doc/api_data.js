@@ -418,6 +418,34 @@ define({ "api": [
     }
   },
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "C__Users_pc_Desktop_W_Backend_Team_API_Documentation_doc_main_js",
+    "groupTitle": "C__Users_pc_Desktop_W_Backend_Team_API_Documentation_doc_main_js",
+    "name": ""
+  },
+  {
     "type": "get",
     "url": "/users/profile_banner",
     "title": "Profile Banner",
@@ -2499,5 +2527,726 @@ define({ "api": [
     },
     "filename": "./Twitter.js",
     "groupTitle": "saved_searches"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/home_timeline",
+    "title": "Home Timeline",
+    "version": "0.1.0",
+    "name": "gethome_timeline",
+    "group": "statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/home_timeline.json"
+      }
+    ],
+    "description": "<p>Returns a collection of the most recent Novas and ReNovas posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Nova service.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "include_entities",
+            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"Count\": 5,\n  \"exclude_replies\":false,\n  \"include_entities\":false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/home_timeline.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this Tweet was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this Tweet has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "retweet_count",
+            "description": "<p>Number of times this Tweet has been retweeted.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this Tweet has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "retweeted",
+            "description": "<p>Indicates whether this Tweet has been Retweeted by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "retweeted_by_IDs",
+            "description": "<p>Array of Users' IDs whom retweeted this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_tweets_IDs",
+            "description": "<p>Array of tweets' IDs whom replied to this tweet.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"twitterapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Twitter API\",\n                 \"screen_name\": \"twitterapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Twitter API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"tweets_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"retweet_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 8437836 ],\n         \"replied_tweets_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"tweets_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"retweet_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 84376945 ],\n         \"replied_tweets_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"tweets_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"retweet_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"retweeted_by_IDs\":[ 6548659],\n         \"replied_tweets_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "statuses"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/mentions_timeline",
+    "title": "Mentions Timeline",
+    "version": "0.1.0",
+    "name": "getmentions_timeline",
+    "group": "statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/mentions_timeline.json"
+      }
+    ],
+    "description": "<p>Returns the 20 most recent mentions (Novas containing a users's @screen_name) for the authenticating user. The timeline returned is the equivalent of the one seen when you view your mentions on Nova.com.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "include_entities",
+            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \n        \n  \"Count\": 5,\n  \"exclude_replies\":true,\n  \"include_entities\":false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this Tweet was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this Tweet has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "retweet_count",
+            "description": "<p>Number of times this Tweet has been retweeted.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this Tweet has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "retweeted",
+            "description": "<p>Indicates whether this Tweet has been Retweeted by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "retweeted_by_IDs",
+            "description": "<p>Array of Users' IDs whom retweeted this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_tweets_IDs",
+            "description": "<p>Array of tweets' IDs whom replied to this tweet.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"twitterapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Twitter API\",\n                 \"screen_name\": \"twitterapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Twitter API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"tweets_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"retweet_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                     [\n                      {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                       }\n                     ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 8437836 ],\n         \"replied_tweets_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"tweets_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"retweet_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [\n                          {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          },  \n                          {\n                           \"name\": \"Matt Harris\",\n                           \"id\": 777925,\n                           \"screen_name\": \"themattharris\"\n                          },\n                          {\n                           \"name\": \"ThinkWall\",        \n                           \"id\": 117426578,\n                           \"screen_name\": \"thinkwall\"\n                           }\n                          ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 84376945 ],\n         \"replied_tweets_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"tweets_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"retweet_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [ \n                          {                           \n                          \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          }\n                         ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"retweeted_by_IDs\":[ 6548659],\n         \"replied_tweets_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "statuses"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/User_timeline",
+    "title": "User Timeline",
+    "version": "0.1.0",
+    "name": "getuser_timeline",
+    "group": "statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/User_timeline.json"
+      }
+    ],
+    "description": "<p>Returns a collection of the most recent Novas posted by the user indicated by the screen_name or user_id parameters The timeline returned is the equivalent of the one seen as a user's profile on  Nova.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>[optional]\tThe ID of the user for whom to    return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[optional]\tThe screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of Novas  to try and retrieve. The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \n  \"User_id\":12345,\n  \"Screen_name\":nordia,        \n  \"Count\": 5,\n  \"exclude_replies\":true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/User_timeline.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this Tweet was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this Tweet has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "retweet_count",
+            "description": "<p>Number of times this Tweet has been retweeted.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the Tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this Tweet has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "retweeted",
+            "description": "<p>Indicates whether this Tweet has been Retweeted by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "retweeted_by_IDs",
+            "description": "<p>Array of Users' IDs whom retweeted this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_tweets_IDs",
+            "description": "<p>Array of tweets' IDs whom replied to this tweet.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "retweeted_status",
+            "description": "<p>Tweet that has been retweeted by the authenticating user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"twitterapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Twitter API\",\n                 \"screen_name\": \"twitterapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Twitter API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"tweets_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"retweet_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 8437836 ],\n         \"replied_tweets_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Tweet Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"twitterapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Twitter API\",\n                 \"screen_name\": \"twitterapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Twitter API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"tweets_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"retweet_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 8437836 ],\n         \"replied_tweets_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Another Nova\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":3683925,\n     \"in_reply_to_screen_name\":\"twitterapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Twitter API\",\n                 \"screen_name\": \"twitterapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Twitter API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"tweets_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"retweet_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"retweeted\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"retweeted_by_IDs\":[ 8437836 ],\n         \"replied_tweets_IDs\":[217361273 , 732456254 , 83217437]\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Twitter.js",
+    "groupTitle": "statuses"
   }
 ] });
