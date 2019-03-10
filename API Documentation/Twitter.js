@@ -18,7 +18,7 @@
  * POST localhost:3000/account/signup.json
  *
  *
- * @apiDescription SigningUp a new twitter account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.
+ * @apiDescription SigningUp a new Ennovate account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.
  *
  * @apiParam {String} name [Required] The user name as they have defined it , Not necessairly a person name.
  * @apiParam {String} screen_name [Required] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
@@ -60,7 +60,7 @@ function postSignUp() {
  * POST localhost:3000/account/signin.json
  *
  *
- * @apiDescription SignIn to twitter using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.
+ * @apiDescription SignIn to Ennovate using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.
  *
  * @apiParam {String} email [Required] The user email , it must be never used to any other user.
  * @apiParam {String} password [Required] The user's password.
@@ -148,7 +148,7 @@ function getUserSettings() {
  * @apiSampleRequest localhost:3000/users/profile_banner.json
  *
  * @apiExample Example usage:
- * GET localhost:3000/users/profile_banner.json?screen_name=twitterapi
+ * GET localhost:3000/users/profile_banner.json?screen_name=Ennovateapi
  *
  * @apiDescription Returns a map of the available size variations of the specified user's profile banner. If the user has not uploaded a profile banner, a HTTP 404 will be served instead. This method can be used instead of string manipulation on the profile_banner_url returned in user objects as described in Profile Images and Banners.
  *  The profile banner data available at each size variant's URL is in PNG format.
@@ -311,14 +311,14 @@ function postUpdateProfileImage() {
  *      {
  *          "created_at": "2018-12-04T14:51:06.157Z",
  *          "ID": 9569704,
- *          "name": "@twitterapi",
- *          "query": "@twitterapi"
+ *          "name": "@Ennovateapi",
+ *          "query": "@Ennovateapi"
  *      },
  *       {
  *          "created_at": "2018-11-04T14:51:06.157Z",
  *          "id": 9569730,
- *          "name": "@twitter OR twitterapi OR "twitter api" OR "@anywhere"",
- *          "query": "@twitter OR twitterapi OR "twitter api" OR "@anywhere""
+ *          "name": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere"",
+ *          "query": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere""
  *       }
  * ]
  */
@@ -357,8 +357,8 @@ function getSavedSearches() {
  *      {
  *          "created_at": "2018-12-04T14:51:06.157Z",
  *          "ID": 9569704,
- *          "name": "@twitterapi",
- *          "query": "@twitterapi"
+ *          "name": "@Ennovateapi",
+ *          "query": "@Ennovateapi"
  *      }
  */
 function postDeleteSearchByID() {
@@ -391,14 +391,14 @@ function postDeleteSearchByID() {
  *      {
  *          "created_at": "2018-12-04T14:51:06.157Z",
  *          "ID": 9569704,
- *          "name": "@twitterapi",
- *          "query": "@twitterapi"
+ *          "name": "@Ennovateapi",
+ *          "query": "@Ennovateapi"
  *      },
  *       {
  *          "created_at": "2018-11-04T14:51:06.157Z",
  *          "id": 9569730,
- *          "name": "@twitter OR twitterapi OR "twitter api" OR "@anywhere"",
- *          "query": "@twitter OR twitterapi OR "twitter api" OR "@anywhere""
+ *          "name": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere"",
+ *          "query": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere""
  *       }
  * ]
  */
@@ -508,7 +508,7 @@ function getFollowersIDs() {
  *     }
  *
  * @apiExample Example usage:
- * GET localhost:3000/followers/list.json?cursor=-1&screen_name=twitterdev
+ * GET localhost:3000/followers/list.json?cursor=-1&screen_name=Ennovatedev
  *
  * @apiSuccess {Object[]} users The User Followers object.
  * @apiSuccess {Number} users.ID The user's ID.
@@ -631,7 +631,7 @@ function getFollowingsIDs() {
  *     }
  *
  * @apiExample Example usage:
- * GET localhost:3000/followings/list.json?cursor=-1&screen_name=twitterdev
+ * GET localhost:3000/followings/list.json?cursor=-1&screen_name=Ennovatedev
  *
  * @apiSuccess {Object[]} users The User Followings object.
  * @apiSuccess {Number} users.ID The user's ID.
@@ -878,14 +878,14 @@ function getUsersLookup() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/users/search.json
  *
- * @apiDescription Provides a simple, relevance-based search interface to public user accounts on Twitter. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
+ * @apiDescription Provides a simple, relevance-based search interface to public user accounts on Ennovate. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
  * Only the first 1,000 matching results are available.
  *
  * @apiParam {String} q [Required] The search query to run against people search.
  *
  * @apiParamExample {json} Request-Example:
  *     {
- *       "q":"Twitter%20API"
+ *       "q":"Ennovate%20API"
  *     }
  *
  * @apiExample Example usage:
@@ -917,7 +917,7 @@ function getUsersSearch() {
  * @apiPermission private
  * @apiSampleRequest localhost:3000/users/show.json
  *
- * @apiDescription Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent Tweet will be returned inline when possible.
+ * @apiDescription Returns a variety of information about the user specified by the required user_id or screen_name parameter. The author's most recent nova will be returned inline when possible.
  * GET users / lookup is used to retrieve a bulk collection of user objects.
  *
  * @apiParam {Number} user_ID [Required] The ID of the specified user.
@@ -930,7 +930,7 @@ function getUsersSearch() {
  *     }
  *
  * @apiExample Example usage:
- * GET localhost:3000/users/show.json?screen_name=twitterdev
+ * GET localhost:3000/users/show.json?screen_name=Ennovatedev
  *
  * @apiSuccess {Object} users The User Required object.
  * @apiSuccess {Number} users.ID The user's ID.
@@ -976,14 +976,14 @@ function getUsersShow() {
  * @apiSuccess {Number} users.ID The user's ID.
  * @apiSuccess {String} users.email The user's email.
  * @apiSuccess {String} users.screen_name The user's screen name.
- * @apiSuccess {Object} status Array of Tweets Objects.
- * @apiSuccess {Object} status.tweet Tweet Object.
+ * @apiSuccess {Object} status Array of novas Objects.
+ * @apiSuccess {Object} status.nova nova Object.
  *
  * @apiSuccessExample
  *      HTTP/1.1 200 OK
  *         {
  *              user-object,
- *              "status":{tweet-object}
+ *              "status":{nova-object}
  *         }    
  */
 function postFriendshipsCreate() {
@@ -1019,14 +1019,14 @@ function postFriendshipsCreate() {
  * @apiSuccess {Number} users.ID The user's ID.
  * @apiSuccess {String} users.email The user's email.
  * @apiSuccess {String} users.screen_name The user's screen name.
- * @apiSuccess {Object} status Array of Tweets Objects.
- * @apiSuccess {Object} status.tweet Tweet Object.
+ * @apiSuccess {Object} status Array of novas Objects.
+ * @apiSuccess {Object} status.nova nova Object.
  *
  * @apiSuccessExample
  *      HTTP/1.1 200 OK
  *         {
  *              user-object,
- *              "status":{tweet-object}
+ *              "status":{nova-object}
  *         }    
  */
 function postFriendshipsDestroy() {
@@ -1052,7 +1052,7 @@ function postFriendshipsDestroy() {
  * @apiParamExample {json} Request-Example:
  *    {
  *      "source_id": 12345,
- *      "source_screen_name":"twitterdev",
+ *      "source_screen_name":"Ennovatedev",
  *      "device":true,
  *    }
  *
@@ -1077,7 +1077,7 @@ function postFriendshipsDestroy() {
  *      "relationship": {
  *                          "target":  {
  *                                      "id": 2244994945,
- *                                      "screen_name": "twitterdev",
+ *                                      "screen_name": "Ennovatedev",
  *                                      "following": true,
  *                                      "followed_by": true
  *                                     },
@@ -1133,29 +1133,29 @@ function postFriendshipsUpdate() {
  * POST localhost:3000/statuses/home_timeline.json
  * 
  * 
- * @apiSuccess {String} created_at UTC time when this Tweet was created
- * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} created_at UTC time when this nova was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this nova.
  * @apiSuccess {String} text The actual UTF-8 text of the status update.
- * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
- * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
- * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
- * @apiSuccess {Object} user The user who posted this Tweet.
- * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
- * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
- * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
- * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
- * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
- * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
- * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
- * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} user The user who posted this nova.
+ * @apiSuccess {Number} reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the nova.
  * @apiSuccess {String} entitiesObject.media.type The media type or format.
  * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
  * @apiSuccess {String} entitiesObject.media.url The Media's URL.
- * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
- * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
- * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
- * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
  * 
 @apiSuccessExample
@@ -1163,29 +1163,29 @@ function postFriendshipsUpdate() {
  *   {
  *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
  *      "ID":114749583439036416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":114749583439036416,
  *      "in_reply_to_user_id":819797,
- *      "in_reply_to_screen_name":"twitterapi",
+ *      "in_reply_to_screen_name":"Ennovateapi",
  *       "user": {
  *                  "ID": 6253282,
- *                  "name": "Twitter API",
- *                  "screen_name": "twitterapi",
+ *                  "name": "Ennovate API",
+ *                  "screen_name": "Ennovateapi",
  *                  "created_at":"2012-11-04T14:51:06.157Z",
  *                  "location": "San Francisco, CA",
- *                  "bio": "The Real Twitter API.",
+ *                  "bio": "The Real Ennovate API.",
  *                  "followers_count": 21,
  *                  "friends_count": 32,
  *                  "favourites_count":13,
- *                  "tweets_count":42,
+ *                  "novas_count":42,
  *                  "profile_background_color": "e8f2f7",
- *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png",
  *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
  *                  "default_profile": fasle,
  *                  "default_profile_image": false
  *               },
  *          "reply_count":1585,
- *          "retweet_count":1585,
+ *          "renova_count":1585,
  *          "favorite_count":1138,
  *          "entities": {
  *                          "hashtags":[],
@@ -1194,16 +1194,16 @@ function postFriendshipsUpdate() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *          "renovaed_by_IDs":[ 8437836 ],
+ *          "replied_novas_IDs":[217361273 , 732456254 , 83217437]
  *  },
  * 
  * {
  *  "created_at":"Wed Aug 27 13:09:00 +0000 2008",
  *      "ID":114749583439038416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":114749583439038416,
  *      "in_reply_to_user_id":819897,
  *      "in_reply_to_screen_name":"HarryWilliams",
@@ -1217,7 +1217,7 @@ function postFriendshipsUpdate() {
  *                  "followers_count": 95,
  *                  "friends_count": 82,
  *                  "favourites_count":7,
- *                  "tweets_count":48,
+ *                  "novas_count":48,
  *                  "profile_background_color": "C0DEED",
  *                  "profile_background_image_url":"https://si0.twimg.com/images/themes/theme1/bg.png",
  *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
@@ -1225,7 +1225,7 @@ function postFriendshipsUpdate() {
  *                  "default_profile_image": false
  *               },
  *          "reply_count":155,
- *          "retweet_count":158,
+ *          "renova_count":158,
  *          "favorite_count":118,
  *          "entities": {
  *                          "hashtags":[],
@@ -1234,10 +1234,10 @@ function postFriendshipsUpdate() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 84376945 ],
- *          "replied_tweets_IDs":[683484 , 7349867 , 398694876]
+ *          "renovaed_by_IDs":[ 84376945 ],
+ *          "replied_novas_IDs":[683484 , 7349867 , 398694876]
  *
  * },
  * 
@@ -1258,7 +1258,7 @@ function postFriendshipsUpdate() {
  *                  "followers_count": 13214,
  *                  "friends_count": 549,
  *                  "favourites_count":79,
- *                  "tweets_count":486,
+ *                  "novas_count":486,
  *                  "profile_background_color": "C0DEED",
  *                  "profile_background_image_url":"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
  *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
@@ -1266,7 +1266,7 @@ function postFriendshipsUpdate() {
  *                  "default_profile_image": false
  *               },
  *          "reply_count":5437,
- *          "retweet_count":6467,
+ *          "renova_count":6467,
  *          "favorite_count":364,
  *          "entities": {
  *                          "hashtags":[],
@@ -1275,10 +1275,10 @@ function postFriendshipsUpdate() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[34745 , 57548],
- *          "retweeted_by_IDs":[ 6548659],
- *          "replied_tweets_IDs":[69796 , 7349867 , 398694876]
+ *          "renovaed_by_IDs":[ 6548659],
+ *          "replied_novas_IDs":[69796 , 7349867 , 398694876]
  * 
  * }
  * ]
@@ -1318,59 +1318,59 @@ function getHomeTimeline() {
  * POST localhost:3000/statuses/User_timeline.json
  * 
  * 
- * @apiSuccess {String} created_at UTC time when this Tweet was created
- * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} created_at UTC time when this nova was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this nova.
  * @apiSuccess {String} text The actual UTF-8 text of the status update.
- * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
- * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
- * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
- * @apiSuccess {Object} user The user who posted this Tweet.
- * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
- * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
- * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
- * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
- * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
- * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
- * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
- * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} user The user who posted this nova.
+ * @apiSuccess {Number} reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the nova.
  * @apiSuccess {String} entitiesObject.media.type The media type or format.
  * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
  * @apiSuccess {String} entitiesObject.media.url The Media's URL.
- * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
- * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
- * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
- * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
- * @apiSuccess {string}  retweeted_status Tweet that has been retweeted by the authenticating user.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} replied_novas_IDs Array of novas' IDs whom replied to this nova.
+ * @apiSuccess {string}  renovaed_status nova that has been renovaed by the authenticating user.
  * 
  * @apiSuccessExample
  * [
  *   {
  *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
  *      "ID":114749583439036416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":null,
  *      "in_reply_to_user_id":null,
- *      "in_reply_to_screen_name":"twitterapi",
+ *      "in_reply_to_screen_name":"Ennovateapi",
  *       "user": {
  *                  "ID": 6253282,
- *                  "name": "Twitter API",
- *                  "screen_name": "twitterapi",
+ *                  "name": "Ennovate API",
+ *                  "screen_name": "Ennovateapi",
  *                  "created_at":"2012-11-04T14:51:06.157Z",
  *                  "location": "San Francisco, CA",
- *                  "bio": "The Real Twitter API.",
+ *                  "bio": "The Real Ennovate API.",
  *                  "followers_count": 21,
  *                  "friends_count": 32,
  *                  "favourites_count":13,
- *                  "tweets_count":42,
+ *                  "novas_count":42,
  *                  "profile_background_color": "e8f2f7",
- *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png",
  *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
  *                  "default_profile": fasle,
  *                  "default_profile_image": false
  *               },
  *          "reply_count":1585,
- *          "retweet_count":1585,
+ *          "renova_count":1585,
  *          "favorite_count":1138,
  *          "entities": {
  *                          "hashtags":[],
@@ -1379,37 +1379,37 @@ function getHomeTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *          "renovaed_by_IDs":[ 8437836 ],
+ *          "replied_novas_IDs":[217361273 , 732456254 , 83217437]
  *  },
  *  {
  *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
  *      "ID":114749583439036416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":null,
  *      "in_reply_to_user_id":null,
- *      "in_reply_to_screen_name":"twitterapi",
+ *      "in_reply_to_screen_name":"Ennovateapi",
  *       "user": {
  *                  "ID": 6253282,
- *                  "name": "Twitter API",
- *                  "screen_name": "twitterapi",
+ *                  "name": "Ennovate API",
+ *                  "screen_name": "Ennovateapi",
  *                  "created_at":"2012-11-04T14:51:06.157Z",
  *                  "location": "San Francisco, CA",
- *                  "bio": "The Real Twitter API.",
+ *                  "bio": "The Real Ennovate API.",
  *                  "followers_count": 21,
  *                  "friends_count": 32,
  *                  "favourites_count":13,
- *                  "tweets_count":42,
+ *                  "novas_count":42,
  *                  "profile_background_color": "e8f2f7",
- *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png",
  *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
  *                  "default_profile": fasle,
  *                  "default_profile_image": false
  *               },
  *          "reply_count":1585,
- *          "retweet_count":1585,
+ *          "renova_count":1585,
  *          "favorite_count":1138,
  *          "entities": {
  *                          "hashtags":[],
@@ -1418,10 +1418,10 @@ function getHomeTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *          "renovaed_by_IDs":[ 8437836 ],
+ *          "replied_novas_IDs":[217361273 , 732456254 , 83217437]
  *  },
  *  {
  *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
@@ -1429,26 +1429,26 @@ function getHomeTimeline() {
  *      "text":"Another Nova",
  *      "in_reply_to_status_id":114749583439036416,
  *      "in_reply_to_user_id":3683925,
- *      "in_reply_to_screen_name":"twitterapi",
+ *      "in_reply_to_screen_name":"Ennovateapi",
  *       "user": {
  *                  "ID": 6253282,
- *                  "name": "Twitter API",
- *                  "screen_name": "twitterapi",
+ *                  "name": "Ennovate API",
+ *                  "screen_name": "Ennovateapi",
  *                  "created_at":"2012-11-04T14:51:06.157Z",
  *                  "location": "San Francisco, CA",
- *                  "bio": "The Real Twitter API.",
+ *                  "bio": "The Real Ennovate API.",
  *                  "followers_count": 21,
  *                  "friends_count": 32,
  *                  "favourites_count":13,
- *                  "tweets_count":42,
+ *                  "novas_count":42,
  *                  "profile_background_color": "e8f2f7",
- *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png",
  *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
  *                  "default_profile": fasle,
  *                  "default_profile_image": false
  *               },
  *          "reply_count":1585,
- *          "retweet_count":1585,
+ *          "renova_count":1585,
  *          "favorite_count":1138,
  *          "entities": {
  *                          "hashtags":[],
@@ -1457,10 +1457,10 @@ function getHomeTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *          "renovaed_by_IDs":[ 8437836 ],
+ *          "replied_novas_IDs":[217361273 , 732456254 , 83217437]
  *  }
  * ]
  * 
@@ -1499,29 +1499,29 @@ function getUserTimeline() {
  *      "include_entities":false
  *    }
  * 
- * @apiSuccess {String} created_at UTC time when this Tweet was created
- * @apiSuccess {Number} ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} created_at UTC time when this nova was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this nova.
  * @apiSuccess {String} text The actual UTF-8 text of the status update.
- * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
- * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
- * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
- * @apiSuccess {Object} user The user who posted this Tweet.
- * @apiSuccess {Number} reply_count Number of times this Tweet has been replied to.
- * @apiSuccess {Number} retweet_count Number of times this Tweet has been retweeted.
- * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
- * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the Tweet.
- * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
- * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the tweet.
- * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
- * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} user The user who posted this nova.
+ * @apiSuccess {Number} reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the nova.
  * @apiSuccess {String} entitiesObject.media.type The media type or format.
  * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
  * @apiSuccess {String} entitiesObject.media.url The Media's URL.
- * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
- * @apiSuccess {Boolean} retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
- * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this tweet.
- * @apiSuccess {Number[]} retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
  * 
 @apiSuccessExample
@@ -1529,29 +1529,29 @@ function getUserTimeline() {
  *   {
  *      "created_at":"Wed Aug 27 13:08:45 +0000 2008",
  *      "ID":114749583439036416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":114749583439036416,
  *      "in_reply_to_user_id":819797,
- *      "in_reply_to_screen_name":"twitterapi",
+ *      "in_reply_to_screen_name":"Ennovateapi",
  *       "user": {
  *                  "ID": 6253282,
- *                  "name": "Twitter API",
- *                  "screen_name": "twitterapi",
+ *                  "name": "Ennovate API",
+ *                  "screen_name": "Ennovateapi",
  *                  "created_at":"2012-11-04T14:51:06.157Z",
  *                  "location": "San Francisco, CA",
- *                  "bio": "The Real Twitter API.",
+ *                  "bio": "The Real Ennovate API.",
  *                  "followers_count": 21,
  *                  "friends_count": 32,
  *                  "favourites_count":13,
- *                  "tweets_count":42,
+ *                  "novas_count":42,
  *                  "profile_background_color": "e8f2f7",
- *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/twitterapi-bg.png",
+ *                  "profile_background_image_url":"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png",
  *                  "profile_image_url":"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
  *                  "default_profile": fasle,
  *                  "default_profile_image": false
  *               },
  *          "reply_count":1585,
- *          "retweet_count":1585,
+ *          "renova_count":1585,
  *          "favorite_count":1138,
  *          "entities": {
  *                          "hashtags":[],
@@ -1567,16 +1567,16 @@ function getUserTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 8437836 ],
- *          "replied_tweets_IDs":[217361273 , 732456254 , 83217437]
+ *          "renovaed_by_IDs":[ 8437836 ],
+ *          "replied_novas_IDs":[217361273 , 732456254 , 83217437]
  *  },
  * 
  * {
  *  "created_at":"Wed Aug 27 13:09:00 +0000 2008",
  *      "ID":114749583439038416,
- *      "text":"Tweet Button, Follow Button, and Web Intents",
+ *      "text":"nova Button, Follow Button, and Web Intents",
  *      "in_reply_to_status_id":114749583439038416,
  *      "in_reply_to_user_id":819897,
  *      "in_reply_to_screen_name":"HarryWilliams",
@@ -1590,7 +1590,7 @@ function getUserTimeline() {
  *                  "followers_count": 95,
  *                  "friends_count": 82,
  *                  "favourites_count":7,
- *                  "tweets_count":48,
+ *                  "novas_count":48,
  *                  "profile_background_color": "C0DEED",
  *                  "profile_background_image_url":"https://si0.twimg.com/images/themes/theme1/bg.png",
  *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
@@ -1598,7 +1598,7 @@ function getUserTimeline() {
  *                  "default_profile_image": false
  *               },
  *          "reply_count":155,
- *          "retweet_count":158,
+ *          "renova_count":158,
  *          "favorite_count":118,
  *          "entities": {
  *                          "hashtags":[],
@@ -1624,10 +1624,10 @@ function getUserTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[12345 , 76454],
- *          "retweeted_by_IDs":[ 84376945 ],
- *          "replied_tweets_IDs":[683484 , 7349867 , 398694876]
+ *          "renovaed_by_IDs":[ 84376945 ],
+ *          "replied_novas_IDs":[683484 , 7349867 , 398694876]
  *
  * },
  * 
@@ -1648,7 +1648,7 @@ function getUserTimeline() {
  *                  "followers_count": 13214,
  *                  "friends_count": 549,
  *                  "favourites_count":79,
- *                  "tweets_count":486,
+ *                  "novas_count":486,
  *                  "profile_background_color": "C0DEED",
  *                  "profile_background_image_url":"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
  *                  "profile_image_url":"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png",
@@ -1656,7 +1656,7 @@ function getUserTimeline() {
  *                  "default_profile_image": false
  *               },
  *          "reply_count":5437,
- *          "retweet_count":6467,
+ *          "renova_count":6467,
  *          "favorite_count":364,
  *          "entities": {
  *                          "hashtags":[],
@@ -1672,28 +1672,31 @@ function getUserTimeline() {
  *                          "media":[]
  *                      },
  *          "favorited":true,
- *          "retweeted":false,
+ *          "renovaed":false,
  *          "favorited_by_IDs":[34745 , 57548],
- *          "retweeted_by_IDs":[ 6548659],
- *          "replied_tweets_IDs":[69796 , 7349867 , 398694876]
+ *          "renovaed_by_IDs":[ 6548659],
+ *          "replied_novas_IDs":[69796 , 7349867 , 398694876]
  * 
  * }
  * ]
  * 
  * 
  **/
-
+function getMentionTimeline() {
+  return;
+}
 //--------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
 //      A- Post, retrieve and engage with Novas
 // ------------------------------------------------------------------------------------------
 /**
- *  @api {get} /statuses/renovas/:id Renova (aka retweet)
+ *  @api {get} /statuses/renovas/:id Renova (aka renova)
  *  @apiVersion 0.1.0
  *  @apiName GetRenovas
  *  @apiGroup statuses
  *  @apiPermission private
- *  @apiExample Example usage: GET localhost:3000/statuses/renovas/256321242121.json
+ *  @apiExample Example usage:
+ *  GET localhost:3000/statuses/renovas/256321242121.json
  *
  *  @apiDescription Returns a collection of the 100 most recent renovas of the Nova specified by the id parameter.
  *
@@ -1708,34 +1711,34 @@ function getUserTimeline() {
  *      "count":"50"
  *    }
  *
- * @apiSuccess {Object[]} TweetObject The Tweet Object.
- * @apiSuccess {String} Tweet.created_at UTC time when this Tweet was created
- * @apiSuccess {Number} Tweet.ID The integer representation of the unique identifier for this Tweet.
- * @apiSuccess {String} Tweet.text The actual UTF-8 text of the status update.
- * @apiSuccess {Number} Tweet.in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
- * @apiSuccess {Number} Tweet.in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
- * @apiSuccess {String} Tweet.in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
- * @apiSuccess {Object} Tweet.user The user who posted this Tweet.
- * @apiSuccess {Number} Tweet.reply_count Number of times this Tweet has been replied to.
- * @apiSuccess {Number} Tweet.retweet_count Number of times this Tweet has been retweeted.
- * @apiSuccess {Number} Tweet.favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
- * @apiSuccess {Object} Tweet.entitiesObject Entities which have been parsed out of the text of the Tweet.
- * @apiSuccess {String[]} Tweet.entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
- * @apiSuccess {String[]} Tweet.entitiesObject.urls [Nullable] Array of URLs in the tweet.
- * @apiSuccess {Number[]} Tweet.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
- * @apiSuccess {Object} Tweet.entitiesObject.media [Nullable] The Media Included in the tweet.
- * @apiSuccess {String} Tweet.entitiesObject.media.type The media type or format.
- * @apiSuccess {Number} Tweet.entitiesObject.media.size The size of this file in KBs.
- * @apiSuccess {String} Tweet.entitiesObject.media.url The Media's URL.
- * @apiSuccess {Boolean} Tweet.favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
- * @apiSuccess {Boolean} Tweet.retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
- * @apiSuccess {Number[]} Tweet.favorited_by_IDs Array of Users' IDs whom favorite this tweet.
- * @apiSuccess {Number[]} Tweet.retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} Tweet.replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ * @apiSuccess {Object[]} novaObject The nova Object.
+ * @apiSuccess {String} nova.created_at UTC time when this nova was created
+ * @apiSuccess {Number} nova.ID The integer representation of the unique identifier for this nova.
+ * @apiSuccess {String} nova.text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} nova.in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} nova.in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} nova.in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} nova.user The user who posted this nova.
+ * @apiSuccess {Number} nova.reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} nova.renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} nova.favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} nova.entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} nova.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} nova.entitiesObject.media [Nullable] The Media Included in the nova.
+ * @apiSuccess {String} nova.entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} nova.entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} nova.entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} nova.favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} nova.renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} nova.favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} nova.renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} nova.replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
  * @apiSuccessExample
  * [
- *      {Tweet-Object},{Tweet-Object}
+ *      {nova-Object},{nova-Object}
  * ]
  *
  */
@@ -1749,12 +1752,13 @@ function GetRenovas() {
  *  @apiName GetMyRenovas
  *  @apiGroup statuses
  *  @apiPermission private
- *  @apiExample Example usage: GET localhost:3000/statuses/renovas_of_me.json
+ *  @apiExample Example usage:
+ *  GET localhost:3000/statuses/renovas_of_me.json
  *
  *  @apiDescription Returns the most recent Novas authored by the authenticating user that have been renovad by others. This timeline is a subset of the user's GET statuses / user_timeline.
  *
  *  @apiParam {number} count [optional] Specifies the number of records to retrieve. Must be less than or equal to 100. If omitted, 20 will be assumed.
- *  @apiParam {boolean} include_entities [optional] The tweet entities node will not be included when set to false .
+ *  @apiParam {boolean} include_entities [optional] The nova entities node will not be included when set to false .
  *  @apiParam {boolean} include_user_entities [optional] The user entities node will not be included when set to false .
  *
  *  @apiParamExample {json} Request-Example:
@@ -1766,34 +1770,34 @@ function GetRenovas() {
  *    }
  *
  *
- * @apiSuccess {Object[]} TweetObject The Tweet Object.
- * @apiSuccess {String} Tweet.created_at UTC time when this Tweet was created
- * @apiSuccess {Number} Tweet.ID The integer representation of the unique identifier for this Tweet.
- * @apiSuccess {String} Tweet.text The actual UTF-8 text of the status update.
- * @apiSuccess {Number} Tweet.in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
- * @apiSuccess {Number} Tweet.in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
- * @apiSuccess {String} Tweet.in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
- * @apiSuccess {Object} Tweet.user The user who posted this Tweet.
- * @apiSuccess {Number} Tweet.reply_count Number of times this Tweet has been replied to.
- * @apiSuccess {Number} Tweet.retweet_count Number of times this Tweet has been retweeted.
- * @apiSuccess {Number} Tweet.favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
- * @apiSuccess {Object} Tweet.entitiesObject Entities which have been parsed out of the text of the Tweet.
- * @apiSuccess {String[]} Tweet.entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
- * @apiSuccess {String[]} Tweet.entitiesObject.urls [Nullable] Array of URLs in the tweet.
- * @apiSuccess {Number[]} Tweet.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
- * @apiSuccess {Object} Tweet.entitiesObject.media [Nullable] The Media Included in the tweet.
- * @apiSuccess {String} Tweet.entitiesObject.media.type The media type or format.
- * @apiSuccess {Number} Tweet.entitiesObject.media.size The size of this file in KBs.
- * @apiSuccess {String} Tweet.entitiesObject.media.url The Media's URL.
- * @apiSuccess {Boolean} Tweet.favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
- * @apiSuccess {Boolean} Tweet.retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
- * @apiSuccess {Number[]} Tweet.favorited_by_IDs Array of Users' IDs whom favorite this tweet.
- * @apiSuccess {Number[]} Tweet.retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
- * @apiSuccess {Number[]} Tweet.replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ * @apiSuccess {Object[]} novaObject The nova Object.
+ * @apiSuccess {String} nova.created_at UTC time when this nova was created
+ * @apiSuccess {Number} nova.ID The integer representation of the unique identifier for this nova.
+ * @apiSuccess {String} nova.text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} nova.in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} nova.in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} nova.in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} nova.user The user who posted this nova.
+ * @apiSuccess {Number} nova.reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} nova.renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} nova.favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} nova.entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} nova.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} nova.entitiesObject.media [Nullable] The Media Included in the nova.
+ * @apiSuccess {String} nova.entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} nova.entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} nova.entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} nova.favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} nova.renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} nova.favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} nova.renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} nova.replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
  * @apiSuccessExample
  * [
- *      {Tweet-Object},{Tweet-Object}
+ *      {nova-Object},{nova-Object}
  * ]
  *
  */
@@ -1828,7 +1832,7 @@ function GetMyRenovas() {
  * POST localhost:3000/statuses/unrenova.json
  *
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  *
  **/
 
@@ -1867,7 +1871,7 @@ function postUnrenova() {
  *      "display_coordinates": "false"
  *    }
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  *
  *
  **/
@@ -1897,7 +1901,7 @@ function postUpdateNovas() {
  *      "id": "45354345"
  *    }
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  **/
 
 function postDestroyid() {
@@ -1929,7 +1933,7 @@ function postDestroyid() {
  *      "include_entities ":"false"
  *    }
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  **/
 
 function getShowNova() {
@@ -1959,7 +1963,7 @@ function getShowNova() {
  *      "include_entities": "false"
  *    }
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  **/
 
 function getLookupNova() {
@@ -1970,7 +1974,7 @@ function getLookupNova() {
 /**
  * @api {post} /statuses/reNova reNova
  * @apiVersion 0.1.0
- * @apiName GetreNova
+ * @apiName PostreNova
  * @apiGroup Statuses
  * @apiPermission private
  *
@@ -1986,10 +1990,10 @@ function getLookupNova() {
  *      "id": "34930345",
  *    }
  *
- * @apiUse TweetObject
+ * @apiUse novaObject
  **/
 
-function getreNova() {
+function postreNova() {
   return;
 }
 
@@ -2061,335 +2065,167 @@ function getreNovars() {
 
 //------------------------------------------------------------------------
 /**
- *@api {post} /Twitter/:Create Favorite(Like)
- *@apiVersion 0.1.0
- *@apiName Like
- *@apiGroup Tweets
+ * @api {post} /favorites/create Create Favorite(Like)
+ * @apiVersion 0.1.0
+ * @apiName PostFavoiteCreate
+ * @apiGroup favorites
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/favorites/create.json
  *
+ * @apiDescription favorites are now known as likes.
+ * Favorites (likes) the nova specified in the ID parameter as the authenticating user. Returns the favorite nova when successful.
+ * The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.
  *
- *@apiParam {Number} ID The numerical ID of the tweet to like
+ * @apiExample Example usage:
+ * POST localhost:3000/favorites/create.json
  *
- *@apiSuccess {Boolean} success The user did like
+ * @apiParam {Number} ID The numerical ID of the nova to like
  *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "ID": 313006
+ *     }
+ *
+ * @apiSuccess {String} created_at UTC time when this nova was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this nova.
+ * @apiSuccess {String} text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} user The user who posted this nova.
+ * @apiSuccess {Number} reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the nova.
+ * @apiSuccess {String} entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
  *
  *@apiSuccessExample {json} Success-Response:
  *   HTTP/1.1 200 OK
- *   {
- *     tweet-object,
- *    "user": {user-object}
- *   }
+ *   {nova-object}
  */
+function postFavoiteCreate() {
+  return;
+}
 // ----------------------------------------------------------------------------
 /**
- *@api {post} /Twitter/:Remove Favorite(Like)
- *@apiVersion 0.1.0
- *@apiName UnLike
- *@apiGroup Tweets
+ * @api {post} /favorites/destroy Destroy Favorite(UnLike)
+ * @apiVersion 0.1.0
+ * @apiName PostFavoriteDestroy
+ * @apiGroup favorites
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/favorites/destroy.json
+ *
+ * @apiDescription Note: favorites are now known as likes.
+ * Unfavorites (un-likes) the nova specified in the ID parameter as the authenticating user. Returns the un-liked nova when successful.
+ * The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/favorites/destroy.json?id=243138128959913986
  *
  *
- *@apiParam {Number} ID The numerical ID of the tweet to like
+ * @apiParam {Number} ID The numerical ID of the nova to like
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "ID": 313006
+ *     }
  *
- *@apiSuccess {Boolean} success The user did unlike
+ * @apiSuccess {String} created_at UTC time when this nova was created
+ * @apiSuccess {Number} ID The integer representation of the unique identifier for this nova.
+ * @apiSuccess {String} text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} user The user who posted this nova.
+ * @apiSuccess {Number} reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} entitiesObject.media [Nullable] The Media Included in the nova.
+ * @apiSuccess {String} entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} replied_novas_IDs Array of novas' IDs whom replied to this nova.
  *
- *
- *
- *@apiSuccessExample {json} Success-Response:
+ * @apiSuccessExample {json} Success-Response:
  *   HTTP/1.1 200 OK
- *   {
- *     "contributors": null,
- *     "coordinates": null,
- *     "created_at": "Wed Sep 05 00:07:01 +0000 2012",
- *     "entities": {
- *        "hashtags": [],
- *        "urls": [],
- *        "user_mentions": []
- *      },
- *      "favorited": false,
- *      "geo": null,
- *      "id": 243138128959913986,
- *      "id_str": "243138128959913986",
- *      "in_reply_to_screen_name": null,
- *      "in_reply_to_status_id": null,
- *      "in_reply_to_status_id_str": null,
- *      "in_reply_to_user_id": null,
- *      "in_reply_to_user_id_str": null,
- *      "place": null,
- *      "retweet_count": 0,
- *      "retweeted": false,
- *      "source": "Twitter for Mac",
- *      "text": "That feel when you accidentally type Bash commands into Campfire, and you also make a typo in them.",
- *      "truncated": false,
- *      "user": {
- *        "contributors_enabled": false,
- *        "created_at": "Wed Apr 23 20:32:35 +0000 2008",
- *        "default_profile": false,
- *        "default_profile_image": false,
- *        "description": "Developer at GitHub in San Francisco, CA.rnrnChicken nuggets is like my family.",
- *        "entities": {
- *          "description": {
- *            "urls": []
- *          },
- *          "url": {
- *            "urls": [
- *              {
- *                "display_url": null,
- *                "expanded_url": null,
- *                "indices": [
- *                  0,
- *                  21
- *                ],
- *                "url": "http://jakeboxer.com/"
- *              }
- *            ]
- *          }
- *        },
- *        "favourites_count": 187,
- *        "follow_request_sent": false,
- *        "followers_count": 714,
- *        "following": false,
- *        "friends_count": 327,
- *        "geo_enabled": true,
- *        "id": 14500363,
- *        "id_str": "14500363",
- *        "is_translator": false,
- *        "lang": "en",
- *        "listed_count": 39,
- *        "location": "San Francisco, CA",
- *        "name": "Jake Boxer",
- *        "notifications": false,
- *        "profile_background_color": "352726",
- *        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme5/bg.gif",
- *        "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme5/bg.gif",
- *        "profile_background_tile": false,
- *        "profile_image_url": "http://a0.twimg.com/profile_images/1621757700/twitter_normal.png",
- *        "profile_image_url_https": "https://si0.twimg.com/profile_images/1621757700/twitter_normal.png",
- *        "profile_link_color": "D02B55",
- *        "profile_sidebar_border_color": "829D5E",
- *        "profile_sidebar_fill_color": "99CC33",
- *        "profile_text_color": "3E4415",
- *        "profile_use_background_image": true,
- *        "protected": false,
- *        "screen_name": "jake_boxer",
- *        "show_all_inline_media": false,
- *        "statuses_count": 5398,
- *        "time_zone": "Eastern Time (US & Canada)",
- *       "url": "http://jakeboxer.com/",
- *        "utc_offset": -18000,
- *        "verified": false
- *      }
- *   }
+ *   {nova-Object}
  */
+function postFavoriteDestroy() {
+  return;
+}
 // -----------------------------------------------------------------------------
 /**
- *@api {get} /Twitter/: Recent Favorites(Likes)
- *@apiVersion 0.1.0
- *@apiName LikesList
- *@apiGroup Tweets
+ * @api {get} /favorites/list Recent Favorites(Likes)
+ * @apiVersion 0.1.0
+ * @apiName GetFavoriteLike
+ * @apiGroup favorites
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/favorites/list.json
  *
+ * @apiDescription Note: favorites are now known as likes.
+ * Returns the 20 most recent novas liked by the authenticating or specified user.
  *
- *@apiParam {Number} user_id OPTIONAL ID of user to show results.
- *@apiParam {Number} screen_name OPTIONAL The screen name of the user for whom to return results.
- *@apiParam  {Number} count OPTIONAL Specifies the number of records to retrieve.
+ * @apiExample Example usage:
+ * GET localhost:3000/favorites/list.json?count=2&screen_name=episod
  *
- *@apiSuccess {Boolean} success
+ * @apiParam {Number} user_id [OPTIONAL] ID of user to show results.
+ * @apiParam {Number} screen_name [OPTIONAL] The screen name of the user for whom to return results.
+ * @apiParam {Number} count [OPTIONAL] Specifies the number of records to retrieve.
+ *
+ * @apiSuccess {Object[]} novaObject The nova Object.
+ * @apiSuccess {String} nova.created_at UTC time when this nova was created
+ * @apiSuccess {Number} nova.ID The integer representation of the unique identifier for this nova.
+ * @apiSuccess {String} nova.text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} nova.in_reply_to_status_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.
+ * @apiSuccess {Number} nova.in_reply_to_user_id [Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.
+ * @apiSuccess {String} nova.in_reply_to_screen_name [Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.
+ * @apiSuccess {Object} nova.user The user who posted this nova.
+ * @apiSuccess {Number} nova.reply_count Number of times this nova has been replied to.
+ * @apiSuccess {Number} nova.renova_count Number of times this nova has been renovaed.
+ * @apiSuccess {Number} nova.favorite_count [Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.
+ * @apiSuccess {Object} nova.entitiesObject Entities which have been parsed out of the text of the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.hashtags [Nullable] Array of Hastags in the nova.
+ * @apiSuccess {String[]} nova.entitiesObject.urls [Nullable] Array of URLs in the nova.
+ * @apiSuccess {Number[]} nova.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the nova.
+ * @apiSuccess {Object} nova.entitiesObject.media [Nullable] The Media Included in the nova.
+ * @apiSuccess {String} nova.entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} nova.entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} nova.entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} nova.favorited [Nullable] Indicates whether this nova has been liked by the authenticating user.
+ * @apiSuccess {Boolean} nova.renovaed Indicates whether this nova has been Renovaed by the authenticating user.
+ * @apiSuccess {Number[]} nova.favorited_by_IDs Array of Users' IDs whom favorite this nova.
+ * @apiSuccess {Number[]} nova.renovaed_by_IDs Array of Users' IDs whom renovaed this nova.
+ * @apiSuccess {Number[]} nova.replied_novas_IDs Array of novas' IDs whom replied to this nova.
+
  *
  *@apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *       [
- *        {
- *          "coordinates": null,
- *          "truncated": false,
- *          "favorited": true,
- *          "created_at": "Tue Sep 04 15:55:52 +0000 2012",
- *          "id_str": "243014525132091393",
- *          "in_reply_to_user_id_str": null,
- *          "entities": {
- *            "urls": [
- *
- *            ],
- *            "hashtags": [
- *
- *            ],
- *            "user_mentions": [
- *
- *            ]
- *          },
- *          "text": "Note to self:  don't die during off-peak hours on a holiday weekend.",
- *          "contributors": null,
- *          "id": 243014525132091393,
- *          "retweet_count": 0,
- *          "in_reply_to_status_id_str": null,
- *          "geo": null,
- *          "retweeted": false,
- *          "in_reply_to_user_id": null,
- *          "in_reply_to_screen_name": null,
- *          "source": "web",
- *          "user": {
- *            "profile_sidebar_fill_color": "252429",
- *            "profile_background_tile": true,
- *            "profile_sidebar_border_color": "181A1E",
- *            "name": "Sean Cook",
- *            "profile_image_url": "http://a0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
- *            "location": "San Francisco",
- *            "created_at": "Sat May 09 17:58:22 +0000 2009",
- *            "follow_request_sent": false,
- *            "is_translator": false,
- *            "id_str": "38895958",
- *            "profile_link_color": "2FC2EF",
- *            "entities": {
- *              "description": {
- *                "urls": [
- *
- *                ]
- *              }
- *            },
- *            "favourites_count": 594,
- *            "url": null,
- *            "default_profile": false,
- *            "contributors_enabled": true,
- *            "profile_image_url_https": "https://si0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
- *            "utc_offset": -28800,
- *            "id": 38895958,
- *            "listed_count": 191,
- *            "profile_use_background_image": true,
- *            "followers_count": 10659,
- *            "protected": false,
- *            "profile_text_color": "666666",
- *            "lang": "en",
- *            "profile_background_color": "1A1B1F",
- *            "time_zone": "Pacific Time (US & Canada)",
- *            "verified": false,
- *            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/495742332/purty_wood.png",
- *            "description": "I taught your phone that thing you like.  The Mobile Partner Engineer @Twitter. ",
- *            "geo_enabled": true,
- *            "notifications": false,
- *            "default_profile_image": false,
- *            "friends_count": 1186,
- *            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/495742332/purty_wood.png",
- *            "statuses_count": 2629,
- *            "following": true,
- *            "screen_name": "theSeanCook",
- *            "show_all_inline_media": true
- *          },
- *          "place": {
- *            "name": "San Francisco",
- *            "country_code": "US",
- *            "country": "United States",
- *            "attributes": {
- *            },
- *            "url": "http://api.twitter.com/1/geo/id/5a110d312052166f.json",
- *            "id": "5a110d312052166f",
- *            "bounding_box": {
- *              "coordinates": [
- *                [
- *                  [
- *                    -122.51368188,
- *                    37.70813196
- *                  ],
- *                  [
- *                    -122.35845384,
- *                    37.70813196
- *                  ],
- *                  [
- *                    -122.35845384,
- *                    37.83245301
- *                  ],
- *                  [
- *                    -122.51368188,
- *                    37.83245301
- *                  ]
- *                ]
- *              ],
- *              "type": "Polygon"
- *            },
- *            "full_name": "San Francisco, CA",
- *            "place_type": "city"
- *          },
- *          "in_reply_to_status_id": null
- *        },
- *        {
- *          "coordinates": null,
- *          "truncated": false,
- *          "favorited": true,
- *          "created_at": "Tue Sep 04 00:17:11 +0000 2012",
- *          "id_str": "242778296117514240",
- *          "in_reply_to_user_id_str": null,
- *          "entities": {
- *            "urls": [
- *
- *            ],
- *            "hashtags": [
- *
- *            ],
- *            "user_mentions": [
- *
- *            ]
- *          },
- *          "text": "TWIT NPC. TWIT DUNGEONMASTER.",
- *          "contributors": null,
- *          "id": 242778296117514240,
- *          "retweet_count": 1,
- *          "in_reply_to_status_id_str": null,
- *          "geo": null,
- *          "retweeted": false,
- *          "in_reply_to_user_id": null,
- *          "in_reply_to_screen_name": null,
- *          "source": "Twitter for Android",
- *          "user": {
- *            "profile_sidebar_fill_color": "DDEEF6",
- *            "profile_background_tile": false,
- *            "profile_sidebar_border_color": "C0DEED",
- *            "name": "REGIS",
- *            "profile_image_url": "http://a0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
- *            "location": "",
- *            "created_at": "Wed May 07 19:27:16 +0000 2008",
- *            "follow_request_sent": false,
- *            "is_translator": false,
- *            "id_str": "14690653",
- *            "profile_link_color": "009999",
- *            "entities": {
- *              "description": {
- *                "urls": [
- *
- *                ]
- *              }
- *            },
- *            "favourites_count": 46407,
- *            "url": null,
- *            "default_profile": false,
- *            "contributors_enabled": false,
- *            "profile_image_url_https": "https://si0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
- *            "utc_offset": -25200,
- *            "id": 14690653,
- *            "listed_count": 194,
- *            "profile_use_background_image": true,
- *            "followers_count": 4198,
- *            "protected": false,
- *            "profile_text_color": "333333",
- *            "lang": "en",
- *            "profile_background_color": "131516",
- *            "time_zone": "Mountain Time (US & Canada)",
- *            "verified": false,
- *            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/530267284/11111.JPG",
- *            "description": "Everything I tweet is or shall be.",
- *            "geo_enabled": true,
- *            "notifications": false,
- *            "default_profile_image": false,
- *            "friends_count": 200,
- *            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/530267284/11111.JPG",
- *            "statuses_count": 43345,
- *            "following": true,
- *            "screen_name": "regisl",
- *            "show_all_inline_media": false
- *          },
- *          "place": null,
- *          "in_reply_to_status_id": null
- *        }
- *      ]
+ *          nova-Object,
+ *          nova-Object
+ *       ]
  *     }
  */
-function getUserTimeline() {
+function getFavoriteLike() {
   return;
 }

@@ -1,8 +1,8 @@
 {
-  "name": "Twitter",
+  "name": "Ennovate",
   "version": "0.1.0",
-  "description": "Twitter Documentation",
-  "title": "Twitter",
+  "description": "Ennovate Documentation",
+  "title": "Ennovate",
   "template": {
     "withCompare": true,
     "withGenerator": true
@@ -12,7 +12,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-03-10T04:40:53.828Z",
+    "time": "2019-03-10T12:58:39.292Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }
