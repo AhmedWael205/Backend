@@ -1682,337 +1682,714 @@ function getUserTimeline() {
  * 
  * 
  **/
+
+//--------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+//      A- Post, retrieve and engage with Novas
+// ------------------------------------------------------------------------------------------
+/**
+ *  @api {get} /statuses/renovas/:id Renova (aka retweet)
+ *  @apiVersion 0.1.0
+ *  @apiName GetRenovas
+ *  @apiGroup statuses
+ *  @apiPermission private
+ *  @apiExample Example usage: GET localhost:3000/statuses/renovas/256321242121.json
+ *
+ *  @apiDescription Returns a collection of the 100 most recent renovas of the Nova specified by the id parameter.
+ *
+ *  @apiParam {Number} Id [Required] The numerical Id of the desired status.
+ *  @apiParam {Number} count [Optional] Specifies the number of records to retrieve. Must be less than or equal to 100. default value is 100.
+ *
+ *
+ *  @apiParamExample {json} Request-Example:
+ *
+ *    {
+ *      "Id": "256321242121",
+ *      "count":"50"
+ *    }
+ *
+ * @apiSuccess {Object[]} TweetObject The Tweet Object.
+ * @apiSuccess {String} Tweet.created_at UTC time when this Tweet was created
+ * @apiSuccess {Number} Tweet.ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} Tweet.text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} Tweet.in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
+ * @apiSuccess {Number} Tweet.in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
+ * @apiSuccess {String} Tweet.in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
+ * @apiSuccess {Object} Tweet.user The user who posted this Tweet.
+ * @apiSuccess {Number} Tweet.reply_count Number of times this Tweet has been replied to.
+ * @apiSuccess {Number} Tweet.retweet_count Number of times this Tweet has been retweeted.
+ * @apiSuccess {Number} Tweet.favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
+ * @apiSuccess {Object} Tweet.entitiesObject Entities which have been parsed out of the text of the Tweet.
+ * @apiSuccess {String[]} Tweet.entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
+ * @apiSuccess {String[]} Tweet.entitiesObject.urls [Nullable] Array of URLs in the tweet.
+ * @apiSuccess {Number[]} Tweet.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
+ * @apiSuccess {Object} Tweet.entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {String} Tweet.entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} Tweet.entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} Tweet.entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} Tweet.favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
+ * @apiSuccess {Boolean} Tweet.retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
+ * @apiSuccess {Number[]} Tweet.favorited_by_IDs Array of Users' IDs whom favorite this tweet.
+ * @apiSuccess {Number[]} Tweet.retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
+ * @apiSuccess {Number[]} Tweet.replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ *
+ * @apiSuccessExample
+ * [
+ *      {Tweet-Object},{Tweet-Object}
+ * ]
+ *
+ */
+function GetRenovas() {
+  return;
+}
+/**
+ *  @api {get} statuses/renovas_of_me My Renovas (gets renovas of the user)
+ *
+ *  @apiVersion 0.1.0
+ *  @apiName GetMyRenovas
+ *  @apiGroup statuses
+ *  @apiPermission private
+ *  @apiExample Example usage: GET localhost:3000/statuses/renovas_of_me.json
+ *
+ *  @apiDescription Returns the most recent Novas authored by the authenticating user that have been renovad by others. This timeline is a subset of the user's GET statuses / user_timeline.
+ *
+ *  @apiParam {number} count [optional] Specifies the number of records to retrieve. Must be less than or equal to 100. If omitted, 20 will be assumed.
+ *  @apiParam {boolean} include_entities [optional] The tweet entities node will not be included when set to false .
+ *  @apiParam {boolean} include_user_entities [optional] The user entities node will not be included when set to false .
+ *
+ *  @apiParamExample {json} Request-Example:
+ *
+ *    {
+ *      "count": "50",
+ *      "include_entities":"false",
+ *      "include_user_entities":"true"
+ *    }
+ *
+ *
+ * @apiSuccess {Object[]} TweetObject The Tweet Object.
+ * @apiSuccess {String} Tweet.created_at UTC time when this Tweet was created
+ * @apiSuccess {Number} Tweet.ID The integer representation of the unique identifier for this Tweet.
+ * @apiSuccess {String} Tweet.text The actual UTF-8 text of the status update.
+ * @apiSuccess {Number} Tweet.in_reply_to_status_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s ID.
+ * @apiSuccess {Number} Tweet.in_reply_to_user_id [Nullable] If the represented Tweet is a reply, this field will contain the integer representation of the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
+ * @apiSuccess {String} Tweet.in_reply_to_screen_name [Nullable] If the represented Tweet is a reply, this field will contain the screen name of the original Tweet’s author.
+ * @apiSuccess {Object} Tweet.user The user who posted this Tweet.
+ * @apiSuccess {Number} Tweet.reply_count Number of times this Tweet has been replied to.
+ * @apiSuccess {Number} Tweet.retweet_count Number of times this Tweet has been retweeted.
+ * @apiSuccess {Number} Tweet.favorite_count [Nullable] Indicates approximately how many times this Tweet has been liked by Twitter users.
+ * @apiSuccess {Object} Tweet.entitiesObject Entities which have been parsed out of the text of the Tweet.
+ * @apiSuccess {String[]} Tweet.entitiesObject.hashtags [Nullable] Array of Hastags in the tweet.
+ * @apiSuccess {String[]} Tweet.entitiesObject.urls [Nullable] Array of URLs in the tweet.
+ * @apiSuccess {Number[]} Tweet.entitiesObject.users_mentions_ID [Nullabe] Array of Users' IDs whom are mentioned in the tweet.
+ * @apiSuccess {Object} Tweet.entitiesObject.media [Nullable] The Media Included in the tweet.
+ * @apiSuccess {String} Tweet.entitiesObject.media.type The media type or format.
+ * @apiSuccess {Number} Tweet.entitiesObject.media.size The size of this file in KBs.
+ * @apiSuccess {String} Tweet.entitiesObject.media.url The Media's URL.
+ * @apiSuccess {Boolean} Tweet.favorited [Nullable] Indicates whether this Tweet has been liked by the authenticating user.
+ * @apiSuccess {Boolean} Tweet.retweeted Indicates whether this Tweet has been Retweeted by the authenticating user.
+ * @apiSuccess {Number[]} Tweet.favorited_by_IDs Array of Users' IDs whom favorite this tweet.
+ * @apiSuccess {Number[]} Tweet.retweeted_by_IDs Array of Users' IDs whom retweeted this tweet.
+ * @apiSuccess {Number[]} Tweet.replied_tweets_IDs Array of tweets' IDs whom replied to this tweet.
+ *
+ * @apiSuccessExample
+ * [
+ *      {Tweet-Object},{Tweet-Object}
+ * ]
+ *
+ */
+function GetMyRenovas() {
+  return;
+}
+/**
+ *
+ *
+ *
+ *
+ *
+ * @api {post} /statuses/unrenova/:id UnReNova
+ * @apiVersion 0.1.0
+ * @apiName postUnrenova
+ * @apiGroup statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/unrenova/:id.json
+ *
+ * *@apidescription unNovas a novad status. returns the original nova with renova details embedded
+ *
+ *
+ * @apiParam {Number} id [required]  the numerical ID of the desired status
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id":12345
+ *    }
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/unrenova.json
+ *
+ *
+ * @apiUse TweetObject
+ *
+ **/
+
+function postUnrenova() {
+  return;
+}
+
+/**
+ * @api {post} /statuses/update Update Novas
+ * @apiVersion 0.1.0
+ * @apiName PostUpdate
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ *
+ * @apiSampleRequest localhost:3000/statuses/update.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/update.json
+ *
+ * @apiDescription Updates the authenticating user's current status, also known as Novating. If the number of updates posted by the user reaches the current allowed limit this method will return an HTTP 403 error.
+ *
+ *
+ * @apiParam {String} status [Required] The text of the status update.
+ * @apiParam {Number} in_reply_to_status_id [Nullable] The ID of an existing status that the update is in reply to.
+ * @apiParam {Number} media_ids [Optional] A media_id to associate with the Nova. You may include 1 photo or 1 animated GIF or 1 video in a Nova.
+ * @apiParam {Number} place_id [Optional] A place in the world.
+ * @apiParam {boolean} display_coordinates [Optional] Whether or not to put a pin on the exact coordinates a Nova has been sent from.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "status": "This is my first Nova",
+ *      "in_reply_to_status_id":"455974794",
+ *      "media_ids":"14873932",
+ *      "place_id":"273468723",
+ *      "display_coordinates": "false"
+ *    }
+ *
+ * @apiUse TweetObject
+ *
+ *
+ **/
+function postUpdateNovas() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {post} /statuses/destroy Destroy id
+ * @apiVersion 0.1.0
+ * @apiName PostDestroy
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/Destroy.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/destroy.json
+ *
+ * @apiDescription Destroys the status specified by the required ID parameter. The authenticating user must be the author of the specified status. Returns the destroyed status if successful.
+ *
+ *
+ * @apiParam {Number} id [Required] The numerical ID of the desired status.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id": "45354345"
+ *    }
+ *
+ * @apiUse TweetObject
+ **/
+
+function postDestroyid() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /statuses/show Show Nova
+ * @apiVersion 0.1.0
+ * @apiName GetNova
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/show.json
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/statuses/show.json
+ *
+ * @apiDescription Returns a single Nova, specified by the id parameter.
+ *
+ * @apiParam {Number} id [Required] The numerical ID of the desired Nova.
+ * @apiParam {boolean} include_my_reNova [Optional] When set to either true , t or 1 , any Novas returned that have been reNovad by the authenticating user will include an additional current_user_reNova node, containing the ID of the source status for the reNova.
+ * @apiParam {boolean} include_entities [Optional] The entities node will not be included when set to false.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id": "45354345",
+ *      "include_my_reNova":"t",
+ *      "include_entities ":"false"
+ *    }
+ *
+ * @apiUse TweetObject
+ **/
+
+function getShowNova() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /statuses/lookup Lookup Nova
+ * @apiVersion 0.1.0
+ * @apiName GetLookup
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/lookup.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/lookup.json
+ *
+ * @apiDescription Returns fully-hydrated Nova objects for up to 100 Novas per request, as specified by comma-separated values passed to the id parameter.
+ *
+ * @apiParam {Number} id [Required] A comma separated list of Nova IDs, up to 100 are allowed in a single request.
+ * @apiParam {boolean} include_entities [Optional] The entities node that may appear within embedded statuses will not be included when set to false.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id": "45354345",
+ *      "include_entities": "false"
+ *    }
+ *
+ * @apiUse TweetObject
+ **/
+
+function getLookupNova() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {post} /statuses/reNova reNova
+ * @apiVersion 0.1.0
+ * @apiName GetreNova
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/reNova.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/reNova.json
+ *
+ * @apiDescription ReNovas a Nova.
+ * @apiParam {Number} id [Required] The numerical ID of the desired status.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id": "34930345",
+ *    }
+ *
+ * @apiUse TweetObject
+ **/
+
+function getreNova() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /statuses/reNovars reNovars
+ * @apiVersion 0.1.0
+ * @apiName GetreNovars
+ * @apiGroup Statuses
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/statuses/reNovars.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/statuses/reNovars.json
+ *
+ * @apiDescription Returns a collection of user IDs belonging to users who have reNovad the Nova specified by the id parameter.
+ * @apiParam {Number} id [Required] The numerical ID of the desired status.
+ * @apiParam {Number} count [Optional] Specifies the number of records to retrieve.
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "id": "34930345",
+ *      "count":"1"
+ *    }
+ *
+ * @apiSuccess {Number[]} ids of reNovars.
+ *
+ * @apiSuccessExample
+ *      {
+ *         "ids":[
+ *                              455974794,
+ *                              947576438684872705,
+ *                              850839346009780224,
+ *                              958850376630910976,
+ *                              889483959943536640,
+ *                              966094285119606784,
+ *                              1020583045,
+ *                              948604640811212801,
+ *                              967155179614240768,
+ *                              554514802,
+ *                              14873932,
+ *                              963916668731904000,
+ *                              970763391181746178,
+ *                              966091392631140358,
+ *                              .
+ *                              .
+ *                              .
+ *                              5000 ids later,
+ *                              .
+ *                              .
+ *                              .
+ *                              813143846,
+ *                              958604886735716353,
+ *                              402873729,
+ *                              958603486551330817,
+ *                              913076424897994753,
+ *                              820967329068707840,
+ *                              958593574932762624,
+ *                              958589381102665728,
+ *                              958573223737724929,
+ *                              889474485694410752
+ *                      ]
+ *      }
+ **/
+
+function getreNovars() {
+  return;
+}
+
 //------------------------------------------------------------------------
 /**
-*@api {post} /Twitter/:Create Favorite(Like)
-*@apiVersion 0.1.0
-*@apiName Like
-*@apiGroup Tweets
-*
-*
-*@apiParam {Number} ID The numerical ID of the tweet to like
-*
-*@apiSuccess {Boolean} success The user did like
-*
-*
-*
-*@apiSuccessExample {json} Success-Response:
-*   HTTP/1.1 200 OK
-*   {
-*     tweet-object,
-*    "user": {user-object}
-*   }
-*/
+ *@api {post} /Twitter/:Create Favorite(Like)
+ *@apiVersion 0.1.0
+ *@apiName Like
+ *@apiGroup Tweets
+ *
+ *
+ *@apiParam {Number} ID The numerical ID of the tweet to like
+ *
+ *@apiSuccess {Boolean} success The user did like
+ *
+ *
+ *
+ *@apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     tweet-object,
+ *    "user": {user-object}
+ *   }
+ */
 // ----------------------------------------------------------------------------
 /**
-*@api {post} /Twitter/:Remove Favorite(Like)
-*@apiVersion 0.1.0
-*@apiName UnLike
-*@apiGroup Tweets
-*
-*
-*@apiParam {Number} ID The numerical ID of the tweet to like
-*
-*@apiSuccess {Boolean} success The user did unlike
-*
-*
-*
-*@apiSuccessExample {json} Success-Response:
-*   HTTP/1.1 200 OK
-*   {
-*     "contributors": null,
-*     "coordinates": null,
-*     "created_at": "Wed Sep 05 00:07:01 +0000 2012",
-*     "entities": {
-*        "hashtags": [],
-*        "urls": [],
-*        "user_mentions": []
-*      },
-*      "favorited": false,
-*      "geo": null,
-*      "id": 243138128959913986,
-*      "id_str": "243138128959913986",
-*      "in_reply_to_screen_name": null,
-*      "in_reply_to_status_id": null,
-*      "in_reply_to_status_id_str": null,
-*      "in_reply_to_user_id": null,
-*      "in_reply_to_user_id_str": null,
-*      "place": null,
-*      "retweet_count": 0,
-*      "retweeted": false,
-*      "source": "Twitter for Mac",
-*      "text": "That feel when you accidentally type Bash commands into Campfire, and you also make a typo in them.",
-*      "truncated": false,
-*      "user": {
-*        "contributors_enabled": false,
-*        "created_at": "Wed Apr 23 20:32:35 +0000 2008",
-*        "default_profile": false,
-*        "default_profile_image": false,
-*        "description": "Developer at GitHub in San Francisco, CA.rnrnChicken nuggets is like my family.",
-*        "entities": {
-*          "description": {
-*            "urls": []
-*          },
-*          "url": {
-*            "urls": [
-*              {
-*                "display_url": null,
-*                "expanded_url": null,
-*                "indices": [
-*                  0,
-*                  21
-*                ],
-*                "url": "http://jakeboxer.com/"
-*              }
-*            ]
-*          }
-*        },
-*        "favourites_count": 187,
-*        "follow_request_sent": false,
-*        "followers_count": 714,
-*        "following": false,
-*        "friends_count": 327,
-*        "geo_enabled": true,
-*        "id": 14500363,
-*        "id_str": "14500363",
-*        "is_translator": false,
-*        "lang": "en",
-*        "listed_count": 39,
-*        "location": "San Francisco, CA",
-*        "name": "Jake Boxer",
-*        "notifications": false,
-*        "profile_background_color": "352726",
-*        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme5/bg.gif",
-*        "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme5/bg.gif",
-*        "profile_background_tile": false,
-*        "profile_image_url": "http://a0.twimg.com/profile_images/1621757700/twitter_normal.png",
-*        "profile_image_url_https": "https://si0.twimg.com/profile_images/1621757700/twitter_normal.png",
-*        "profile_link_color": "D02B55",
-*        "profile_sidebar_border_color": "829D5E",
-*        "profile_sidebar_fill_color": "99CC33",
-*        "profile_text_color": "3E4415",
-*        "profile_use_background_image": true,
-*        "protected": false,
-*        "screen_name": "jake_boxer",
-*        "show_all_inline_media": false,
-*        "statuses_count": 5398,
-*        "time_zone": "Eastern Time (US & Canada)",
-*       "url": "http://jakeboxer.com/",
-*        "utc_offset": -18000,
-*        "verified": false
-*      }
-*   }
-*/
+ *@api {post} /Twitter/:Remove Favorite(Like)
+ *@apiVersion 0.1.0
+ *@apiName UnLike
+ *@apiGroup Tweets
+ *
+ *
+ *@apiParam {Number} ID The numerical ID of the tweet to like
+ *
+ *@apiSuccess {Boolean} success The user did unlike
+ *
+ *
+ *
+ *@apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *     "contributors": null,
+ *     "coordinates": null,
+ *     "created_at": "Wed Sep 05 00:07:01 +0000 2012",
+ *     "entities": {
+ *        "hashtags": [],
+ *        "urls": [],
+ *        "user_mentions": []
+ *      },
+ *      "favorited": false,
+ *      "geo": null,
+ *      "id": 243138128959913986,
+ *      "id_str": "243138128959913986",
+ *      "in_reply_to_screen_name": null,
+ *      "in_reply_to_status_id": null,
+ *      "in_reply_to_status_id_str": null,
+ *      "in_reply_to_user_id": null,
+ *      "in_reply_to_user_id_str": null,
+ *      "place": null,
+ *      "retweet_count": 0,
+ *      "retweeted": false,
+ *      "source": "Twitter for Mac",
+ *      "text": "That feel when you accidentally type Bash commands into Campfire, and you also make a typo in them.",
+ *      "truncated": false,
+ *      "user": {
+ *        "contributors_enabled": false,
+ *        "created_at": "Wed Apr 23 20:32:35 +0000 2008",
+ *        "default_profile": false,
+ *        "default_profile_image": false,
+ *        "description": "Developer at GitHub in San Francisco, CA.rnrnChicken nuggets is like my family.",
+ *        "entities": {
+ *          "description": {
+ *            "urls": []
+ *          },
+ *          "url": {
+ *            "urls": [
+ *              {
+ *                "display_url": null,
+ *                "expanded_url": null,
+ *                "indices": [
+ *                  0,
+ *                  21
+ *                ],
+ *                "url": "http://jakeboxer.com/"
+ *              }
+ *            ]
+ *          }
+ *        },
+ *        "favourites_count": 187,
+ *        "follow_request_sent": false,
+ *        "followers_count": 714,
+ *        "following": false,
+ *        "friends_count": 327,
+ *        "geo_enabled": true,
+ *        "id": 14500363,
+ *        "id_str": "14500363",
+ *        "is_translator": false,
+ *        "lang": "en",
+ *        "listed_count": 39,
+ *        "location": "San Francisco, CA",
+ *        "name": "Jake Boxer",
+ *        "notifications": false,
+ *        "profile_background_color": "352726",
+ *        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme5/bg.gif",
+ *        "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme5/bg.gif",
+ *        "profile_background_tile": false,
+ *        "profile_image_url": "http://a0.twimg.com/profile_images/1621757700/twitter_normal.png",
+ *        "profile_image_url_https": "https://si0.twimg.com/profile_images/1621757700/twitter_normal.png",
+ *        "profile_link_color": "D02B55",
+ *        "profile_sidebar_border_color": "829D5E",
+ *        "profile_sidebar_fill_color": "99CC33",
+ *        "profile_text_color": "3E4415",
+ *        "profile_use_background_image": true,
+ *        "protected": false,
+ *        "screen_name": "jake_boxer",
+ *        "show_all_inline_media": false,
+ *        "statuses_count": 5398,
+ *        "time_zone": "Eastern Time (US & Canada)",
+ *       "url": "http://jakeboxer.com/",
+ *        "utc_offset": -18000,
+ *        "verified": false
+ *      }
+ *   }
+ */
 // -----------------------------------------------------------------------------
 /**
-*@api {get} /Twitter/: Recent Favorites(Likes)
-*@apiVersion 0.1.0
-*@apiName LikesList
-*@apiGroup Tweets
-*
-*
-*@apiParam {Number} user_id OPTIONAL ID of user to show results.
-*@apiParam {Number} screen_name OPTIONAL The screen name of the user for whom to return results.
-*@apiParam  {Number} count OPTIONAL Specifies the number of records to retrieve.
-*
-*@apiSuccess {Boolean} success
-*
-*@apiSuccessExample {json} Success-Response:
-*     HTTP/1.1 200 OK
-*     {
-*       [
-*        {
-*          "coordinates": null,
-*          "truncated": false,
-*          "favorited": true,
-*          "created_at": "Tue Sep 04 15:55:52 +0000 2012",
-*          "id_str": "243014525132091393",
-*          "in_reply_to_user_id_str": null,
-*          "entities": {
-*            "urls": [
-*
-*            ],
-*            "hashtags": [
-*
-*            ],
-*            "user_mentions": [
-*
-*            ]
-*          },
-*          "text": "Note to self:  don't die during off-peak hours on a holiday weekend.",
-*          "contributors": null,
-*          "id": 243014525132091393,
-*          "retweet_count": 0,
-*          "in_reply_to_status_id_str": null,
-*          "geo": null,
-*          "retweeted": false,
-*          "in_reply_to_user_id": null,
-*          "in_reply_to_screen_name": null,
-*          "source": "web",
-*          "user": {
-*            "profile_sidebar_fill_color": "252429",
-*            "profile_background_tile": true,
-*            "profile_sidebar_border_color": "181A1E",
-*            "name": "Sean Cook",
-*            "profile_image_url": "http://a0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
-*            "location": "San Francisco",
-*            "created_at": "Sat May 09 17:58:22 +0000 2009",
-*            "follow_request_sent": false,
-*            "is_translator": false,
-*            "id_str": "38895958",
-*            "profile_link_color": "2FC2EF",
-*            "entities": {
-*              "description": {
-*                "urls": [
-*
-*                ]
-*              }
-*            },
-*            "favourites_count": 594,
-*            "url": null,
-*            "default_profile": false,
-*            "contributors_enabled": true,
-*            "profile_image_url_https": "https://si0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
-*            "utc_offset": -28800,
-*            "id": 38895958,
-*            "listed_count": 191,
-*            "profile_use_background_image": true,
-*            "followers_count": 10659,
-*            "protected": false,
-*            "profile_text_color": "666666",
-*            "lang": "en",
-*            "profile_background_color": "1A1B1F",
-*            "time_zone": "Pacific Time (US & Canada)",
-*            "verified": false,
-*            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/495742332/purty_wood.png",
-*            "description": "I taught your phone that thing you like.  The Mobile Partner Engineer @Twitter. ",
-*            "geo_enabled": true,
-*            "notifications": false,
-*            "default_profile_image": false,
-*            "friends_count": 1186,
-*            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/495742332/purty_wood.png",
-*            "statuses_count": 2629,
-*            "following": true,
-*            "screen_name": "theSeanCook",
-*            "show_all_inline_media": true
-*          },
-*          "place": {
-*            "name": "San Francisco",
-*            "country_code": "US",
-*            "country": "United States",
-*            "attributes": {
-*            },
-*            "url": "http://api.twitter.com/1/geo/id/5a110d312052166f.json",
-*            "id": "5a110d312052166f",
-*            "bounding_box": {
-*              "coordinates": [
-*                [
-*                  [
-*                    -122.51368188,
-*                    37.70813196
-*                  ],
-*                  [
-*                    -122.35845384,
-*                    37.70813196
-*                  ],
-*                  [
-*                    -122.35845384,
-*                    37.83245301
-*                  ],
-*                  [
-*                    -122.51368188,
-*                    37.83245301
-*                  ]
-*                ]
-*              ],
-*              "type": "Polygon"
-*            },
-*            "full_name": "San Francisco, CA",
-*            "place_type": "city"
-*          },
-*          "in_reply_to_status_id": null
-*        },
-*        {
-*          "coordinates": null,
-*          "truncated": false,
-*          "favorited": true,
-*          "created_at": "Tue Sep 04 00:17:11 +0000 2012",
-*          "id_str": "242778296117514240",
-*          "in_reply_to_user_id_str": null,
-*          "entities": {
-*            "urls": [
-*
-*            ],
-*            "hashtags": [
-*
-*            ],
-*            "user_mentions": [
-*
-*            ]
-*          },
-*          "text": "TWIT NPC. TWIT DUNGEONMASTER.",
-*          "contributors": null,
-*          "id": 242778296117514240,
-*          "retweet_count": 1,
-*          "in_reply_to_status_id_str": null,
-*          "geo": null,
-*          "retweeted": false,
-*          "in_reply_to_user_id": null,
-*          "in_reply_to_screen_name": null,
-*          "source": "Twitter for Android",
-*          "user": {
-*            "profile_sidebar_fill_color": "DDEEF6",
-*            "profile_background_tile": false,
-*            "profile_sidebar_border_color": "C0DEED",
-*            "name": "REGIS",
-*            "profile_image_url": "http://a0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
-*            "location": "",
-*            "created_at": "Wed May 07 19:27:16 +0000 2008",
-*            "follow_request_sent": false,
-*            "is_translator": false,
-*            "id_str": "14690653",
-*            "profile_link_color": "009999",
-*            "entities": {
-*              "description": {
-*                "urls": [
-*
-*                ]
-*              }
-*            },
-*            "favourites_count": 46407,
-*            "url": null,
-*            "default_profile": false,
-*            "contributors_enabled": false,
-*            "profile_image_url_https": "https://si0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
-*            "utc_offset": -25200,
-*            "id": 14690653,
-*            "listed_count": 194,
-*            "profile_use_background_image": true,
-*            "followers_count": 4198,
-*            "protected": false,
-*            "profile_text_color": "333333",
-*            "lang": "en",
-*            "profile_background_color": "131516",
-*            "time_zone": "Mountain Time (US & Canada)",
-*            "verified": false,
-*            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/530267284/11111.JPG",
-*            "description": "Everything I tweet is or shall be.",
-*            "geo_enabled": true,
-*            "notifications": false,
-*            "default_profile_image": false,
-*            "friends_count": 200,
-*            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/530267284/11111.JPG",
-*            "statuses_count": 43345,
-*            "following": true,
-*            "screen_name": "regisl",
-*            "show_all_inline_media": false
-*          },
-*          "place": null,
-*          "in_reply_to_status_id": null
-*        }
-*      ]
-*     }
-*/
+ *@api {get} /Twitter/: Recent Favorites(Likes)
+ *@apiVersion 0.1.0
+ *@apiName LikesList
+ *@apiGroup Tweets
+ *
+ *
+ *@apiParam {Number} user_id OPTIONAL ID of user to show results.
+ *@apiParam {Number} screen_name OPTIONAL The screen name of the user for whom to return results.
+ *@apiParam  {Number} count OPTIONAL Specifies the number of records to retrieve.
+ *
+ *@apiSuccess {Boolean} success
+ *
+ *@apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       [
+ *        {
+ *          "coordinates": null,
+ *          "truncated": false,
+ *          "favorited": true,
+ *          "created_at": "Tue Sep 04 15:55:52 +0000 2012",
+ *          "id_str": "243014525132091393",
+ *          "in_reply_to_user_id_str": null,
+ *          "entities": {
+ *            "urls": [
+ *
+ *            ],
+ *            "hashtags": [
+ *
+ *            ],
+ *            "user_mentions": [
+ *
+ *            ]
+ *          },
+ *          "text": "Note to self:  don't die during off-peak hours on a holiday weekend.",
+ *          "contributors": null,
+ *          "id": 243014525132091393,
+ *          "retweet_count": 0,
+ *          "in_reply_to_status_id_str": null,
+ *          "geo": null,
+ *          "retweeted": false,
+ *          "in_reply_to_user_id": null,
+ *          "in_reply_to_screen_name": null,
+ *          "source": "web",
+ *          "user": {
+ *            "profile_sidebar_fill_color": "252429",
+ *            "profile_background_tile": true,
+ *            "profile_sidebar_border_color": "181A1E",
+ *            "name": "Sean Cook",
+ *            "profile_image_url": "http://a0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
+ *            "location": "San Francisco",
+ *            "created_at": "Sat May 09 17:58:22 +0000 2009",
+ *            "follow_request_sent": false,
+ *            "is_translator": false,
+ *            "id_str": "38895958",
+ *            "profile_link_color": "2FC2EF",
+ *            "entities": {
+ *              "description": {
+ *                "urls": [
+ *
+ *                ]
+ *              }
+ *            },
+ *            "favourites_count": 594,
+ *            "url": null,
+ *            "default_profile": false,
+ *            "contributors_enabled": true,
+ *            "profile_image_url_https": "https://si0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
+ *            "utc_offset": -28800,
+ *            "id": 38895958,
+ *            "listed_count": 191,
+ *            "profile_use_background_image": true,
+ *            "followers_count": 10659,
+ *            "protected": false,
+ *            "profile_text_color": "666666",
+ *            "lang": "en",
+ *            "profile_background_color": "1A1B1F",
+ *            "time_zone": "Pacific Time (US & Canada)",
+ *            "verified": false,
+ *            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/495742332/purty_wood.png",
+ *            "description": "I taught your phone that thing you like.  The Mobile Partner Engineer @Twitter. ",
+ *            "geo_enabled": true,
+ *            "notifications": false,
+ *            "default_profile_image": false,
+ *            "friends_count": 1186,
+ *            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/495742332/purty_wood.png",
+ *            "statuses_count": 2629,
+ *            "following": true,
+ *            "screen_name": "theSeanCook",
+ *            "show_all_inline_media": true
+ *          },
+ *          "place": {
+ *            "name": "San Francisco",
+ *            "country_code": "US",
+ *            "country": "United States",
+ *            "attributes": {
+ *            },
+ *            "url": "http://api.twitter.com/1/geo/id/5a110d312052166f.json",
+ *            "id": "5a110d312052166f",
+ *            "bounding_box": {
+ *              "coordinates": [
+ *                [
+ *                  [
+ *                    -122.51368188,
+ *                    37.70813196
+ *                  ],
+ *                  [
+ *                    -122.35845384,
+ *                    37.70813196
+ *                  ],
+ *                  [
+ *                    -122.35845384,
+ *                    37.83245301
+ *                  ],
+ *                  [
+ *                    -122.51368188,
+ *                    37.83245301
+ *                  ]
+ *                ]
+ *              ],
+ *              "type": "Polygon"
+ *            },
+ *            "full_name": "San Francisco, CA",
+ *            "place_type": "city"
+ *          },
+ *          "in_reply_to_status_id": null
+ *        },
+ *        {
+ *          "coordinates": null,
+ *          "truncated": false,
+ *          "favorited": true,
+ *          "created_at": "Tue Sep 04 00:17:11 +0000 2012",
+ *          "id_str": "242778296117514240",
+ *          "in_reply_to_user_id_str": null,
+ *          "entities": {
+ *            "urls": [
+ *
+ *            ],
+ *            "hashtags": [
+ *
+ *            ],
+ *            "user_mentions": [
+ *
+ *            ]
+ *          },
+ *          "text": "TWIT NPC. TWIT DUNGEONMASTER.",
+ *          "contributors": null,
+ *          "id": 242778296117514240,
+ *          "retweet_count": 1,
+ *          "in_reply_to_status_id_str": null,
+ *          "geo": null,
+ *          "retweeted": false,
+ *          "in_reply_to_user_id": null,
+ *          "in_reply_to_screen_name": null,
+ *          "source": "Twitter for Android",
+ *          "user": {
+ *            "profile_sidebar_fill_color": "DDEEF6",
+ *            "profile_background_tile": false,
+ *            "profile_sidebar_border_color": "C0DEED",
+ *            "name": "REGIS",
+ *            "profile_image_url": "http://a0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
+ *            "location": "",
+ *            "created_at": "Wed May 07 19:27:16 +0000 2008",
+ *            "follow_request_sent": false,
+ *            "is_translator": false,
+ *            "id_str": "14690653",
+ *            "profile_link_color": "009999",
+ *            "entities": {
+ *              "description": {
+ *                "urls": [
+ *
+ *                ]
+ *              }
+ *            },
+ *            "favourites_count": 46407,
+ *            "url": null,
+ *            "default_profile": false,
+ *            "contributors_enabled": false,
+ *            "profile_image_url_https": "https://si0.twimg.com/profile_images/1812284389/allseeingeye_normal.jpg",
+ *            "utc_offset": -25200,
+ *            "id": 14690653,
+ *            "listed_count": 194,
+ *            "profile_use_background_image": true,
+ *            "followers_count": 4198,
+ *            "protected": false,
+ *            "profile_text_color": "333333",
+ *            "lang": "en",
+ *            "profile_background_color": "131516",
+ *            "time_zone": "Mountain Time (US & Canada)",
+ *            "verified": false,
+ *            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/530267284/11111.JPG",
+ *            "description": "Everything I tweet is or shall be.",
+ *            "geo_enabled": true,
+ *            "notifications": false,
+ *            "default_profile_image": false,
+ *            "friends_count": 200,
+ *            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/530267284/11111.JPG",
+ *            "statuses_count": 43345,
+ *            "following": true,
+ *            "screen_name": "regisl",
+ *            "show_all_inline_media": false
+ *          },
+ *          "place": null,
+ *          "in_reply_to_status_id": null
+ *        }
+ *      ]
+ *     }
+ */
 function getUserTimeline() {
   return;
 }
