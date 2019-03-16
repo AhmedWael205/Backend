@@ -6,13 +6,13 @@
 //      A- Manage account settings and profile
 // ------------------------------------------------------------------------------------------
 /**
- * @api {post} /users/signup SignUp (Register)
+ * @api {post} /account/signup SignUp (Register)
  * @apiVersion 0.1.0
  * @apiName PostSignUp
- * @apiGroup User
+ * @apiGroup Account
  * @apiPermission private
  *
- * @apiSampleRequest localhost:3000/users/signup.json
+ * @apiSampleRequest localhost:3000/account/signup.json
  *
  * @apiExample Example usage:
  * POST localhost:3000/account/signup.json
@@ -48,13 +48,13 @@ function postSignUp() {
 }
 // ------------------------------------------------------------------------------------------
 /**
- * @api {post} /users/signin SignIn (Log In)
+ * @api {post} /account/signin SignIn (Log In)
  * @apiVersion 0.1.0
  * @apiName PostSignIn
- * @apiGroup User
+ * @apiGroup Account
  * @apiPermission private
  *
- * @apiSampleRequest localhost:3000/users/signin.json
+ * @apiSampleRequest localhost:3000/account/signin.json
  *
  * @apiExample Example usage:
  * POST localhost:3000/account/signin.json
@@ -85,14 +85,12 @@ function postSignUp() {
  *     {
  *       "error": "IncorrectPassword"
  *     }
- *
- * @apiSuccess {Boolean} success Did the user signIn successfully.
+ *.
  * @apiSuccess {String} token User Hashed Password and it's Type.
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *      "success":true,
  *      "token":"Bearer "+"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
  *     }
  *
@@ -291,7 +289,7 @@ function postUpdateProfileImage() {
  * @api {get} /saved_searches/list Saved Searches
  * @apiVersion 0.1.0
  * @apiName GetSavedSearches
- * @apiGroup saved_searches
+ * @apiGroup Saved_searches
  * @apiPermission private
  * @apiSampleRequest localhost:3000/saved_searches/list.json
  *
@@ -331,7 +329,7 @@ function getSavedSearches() {
  * @api {post} /saved_searches/destroy/:id Delete search using ID
  * @apiVersion 0.1.0
  * @apiName PostDeleteSearchByID
- * @apiGroup saved_searches
+ * @apiGroup Saved_searches
  * @apiPermission private
  * @apiSampleRequest localhost:3000/saved_searches/destroy/:id.json
  *
@@ -371,7 +369,7 @@ function postDeleteSearchByID() {
  * @api {post} /saved_searches/delete_all Delete all Searches
  * @apiVersion 0.1.0
  * @apiName PostDeleteSearchesAll
- * @apiGroup saved_searches
+ * @apiGroup Saved_searches
  * @apiPermission private
  * @apiSampleRequest localhost:3000/saved_searches/delete_all.json
  *
@@ -414,7 +412,7 @@ function postDeleteSearchesAll() {
  * @api {get} /followers/ids Followers IDs
  * @apiVersion 0.1.0
  * @apiName GetFollowersIDs
- * @apiGroup followers
+ * @apiGroup Followers
  * @apiPermission private
  * @apiSampleRequest localhost:3000/followers/ids.json
  *
@@ -489,7 +487,7 @@ function getFollowersIDs() {
  * @api {get} /followers/list Followers List
  * @apiVersion 0.1.0
  * @apiName GetFollowersList
- * @apiGroup followers
+ * @apiGroup Followers
  * @apiPermission private
  * @apiSampleRequest localhost:3000/followers/list.json
  *
@@ -536,7 +534,7 @@ function getFollowersList() {
  * @api {get} /followings/ids Followings IDs
  * @apiVersion 0.1.0
  * @apiName GetFollowingsIDs
- * @apiGroup followings
+ * @apiGroup Followings
  * @apiPermission private
  * @apiSampleRequest localhost:3000/followings/ids.json
  *
@@ -612,7 +610,7 @@ function getFollowingsIDs() {
  * @api {get} /followings/list Followings List
  * @apiVersion 0.1.0
  * @apiName GetFollowingsList
- * @apiGroup followings
+ * @apiGroup Followings
  * @apiPermission private
  * @apiSampleRequest localhost:3000/followings/list.json
  *
@@ -660,7 +658,7 @@ function getFollowingsList() {
  * @api {get} /friendships/incoming Friendship Requests' IDs
  * @apiVersion 0.1.0
  * @apiName GetFriendshipsIncoming
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/incoming.json
  *
@@ -701,7 +699,7 @@ function getFriendshipsIncoming() {
  * @api {get} /friendships/Outgoing Friendship Pending Follow Requests' IDs
  * @apiVersion 0.1.0
  * @apiName GetFriendshipsOutgoing
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/outgoing.json
  *
@@ -751,7 +749,7 @@ function getFriendshipsOutgoing() {
  * @api {get} /friendships/show Friendship Relations
  * @apiVersion 0.1.0
  * @apiName GetFriendshipsShow
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/friendships/show.json
  *
@@ -950,7 +948,7 @@ function getUsersShow() {
  * @api {post} /friendships/create Create Friendship (Follow)
  * @apiVersion 0.1.0
  * @apiName PostFriendshipsCreate
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/create.json
  *
@@ -995,7 +993,7 @@ function postFriendshipsCreate() {
  * @api {post} /friendships/Destroy Destroy Friendship (Unfollow)
  * @apiVersion 0.1.0
  * @apiName PostFriendshipsDestroy
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/destroy.json
  *
@@ -1039,7 +1037,7 @@ function postFriendshipsDestroy() {
  * @api {post} /friendships/update Friendship Update
  * @apiVersion 0.1.0
  * @apiName PostFriendshipsUpdate
- * @apiGroup friendships
+ * @apiGroup Friendships
  * @apiPermission private
  * @apiSampleRequest localhost:3000/friendships/friendships/update.json
  *
@@ -1107,8 +1105,8 @@ function postFriendshipsUpdate() {
 /**
  * @api {get} /statuses/home_timeline Home Timeline
  * @apiVersion 0.1.0
- * @apiName gethome_timeline
- * @apiGroup statuses
+ * @apiName GetHomeTimeline
+ * @apiGroup Statuses
  * @apiPermission private
  *
  * @apiSampleRequest localhost:3000/statuses/home_timeline.json
@@ -1290,8 +1288,8 @@ function getHomeTimeline() {
 /**
  * @api {get} /statuses/User_timeline User Timeline
  * @apiVersion 0.1.0
- * @apiName getuser_timeline
- * @apiGroup statuses
+ * @apiName GetUserTimeline
+ * @apiGroup Statuses
  * @apiPermission private
  * 
  * @apiSampleRequest localhost:3000/statuses/User_timeline.json
@@ -1475,8 +1473,8 @@ function getUserTimeline() {
 /**
  * @api {get} /statuses/mentions_timeline Mentions Timeline
  * @apiVersion 0.1.0
- * @apiName getmentions_timeline
- * @apiGroup statuses
+ * @apiName GetMentionsTimeline
+ * @apiGroup Statuses
  * @apiPermission private
  * 
  * @apiSampleRequest localhost:3000/statuses/mentions_timeline.json
@@ -1690,10 +1688,10 @@ function getMentionTimeline() {
 //      A- Post, retrieve and engage with Novas
 // ------------------------------------------------------------------------------------------
 /**
- *  @api {get} /statuses/renovas/:id Renova (aka renova)
+ *  @api {get} /statuses/renovas/:id Renova
  *  @apiVersion 0.1.0
  *  @apiName GetRenovas
- *  @apiGroup statuses
+ *  @apiGroup Statuses
  *  @apiPermission private
  *  @apiExample Example usage:
  *  GET localhost:3000/statuses/renovas/256321242121.json
@@ -1746,11 +1744,11 @@ function GetRenovas() {
   return;
 }
 /**
- *  @api {get} statuses/renovas_of_me My Renovas (gets renovas of the user)
+ *  @api {get} statuses/renovas_of_me My Renovas
  *
  *  @apiVersion 0.1.0
  *  @apiName GetMyRenovas
- *  @apiGroup statuses
+ *  @apiGroup Statuses
  *  @apiPermission private
  *  @apiExample Example usage:
  *  GET localhost:3000/statuses/renovas_of_me.json
@@ -1812,8 +1810,8 @@ function GetMyRenovas() {
  *
  * @api {post} /statuses/unrenova/:id UnReNova
  * @apiVersion 0.1.0
- * @apiName postUnrenova
- * @apiGroup statuses
+ * @apiName PostUnrenova
+ * @apiGroup Statuses
  * @apiPermission private
  *
  * @apiSampleRequest localhost:3000/statuses/unrenova/:id.json
@@ -1972,9 +1970,9 @@ function getLookupNova() {
 
 // ------------------------------------------------------------------------------------------
 /**
- * @api {post} /statuses/reNova reNova
+ * @api {post} /statuses/reNova Renova
  * @apiVersion 0.1.0
- * @apiName PostreNova
+ * @apiName PostRenova
  * @apiGroup Statuses
  * @apiPermission private
  *
@@ -1993,15 +1991,15 @@ function getLookupNova() {
  * @apiUse novaObject
  **/
 
-function postreNova() {
+function postRenova() {
   return;
 }
 
 // ------------------------------------------------------------------------------------------
 /**
- * @api {get} /statuses/reNovars reNovars
+ * @api {get} /statuses/reNovars Renovars
  * @apiVersion 0.1.0
- * @apiName GetreNovars
+ * @apiName GetRenovars
  * @apiGroup Statuses
  * @apiPermission private
  *
@@ -2059,7 +2057,7 @@ function postreNova() {
  *      }
  **/
 
-function getreNovars() {
+function getRenovars() {
   return;
 }
 
@@ -2068,7 +2066,7 @@ function getreNovars() {
  * @api {post} /favorites/create Create Favorite(Like)
  * @apiVersion 0.1.0
  * @apiName PostFavoiteCreate
- * @apiGroup favorites
+ * @apiGroup Favorites
  * @apiPermission private
  * @apiSampleRequest localhost:3000/favorites/create.json
  *
@@ -2123,7 +2121,7 @@ function postFavoiteCreate() {
  * @api {post} /favorites/destroy Destroy Favorite(UnLike)
  * @apiVersion 0.1.0
  * @apiName PostFavoriteDestroy
- * @apiGroup favorites
+ * @apiGroup Favorites
  * @apiPermission private
  * @apiSampleRequest localhost:3000/favorites/destroy.json
  *
@@ -2177,7 +2175,7 @@ function postFavoriteDestroy() {
  * @api {get} /favorites/list Recent Favorites(Likes)
  * @apiVersion 0.1.0
  * @apiName GetFavoriteLike
- * @apiGroup favorites
+ * @apiGroup Favorites
  * @apiPermission private
  * @apiSampleRequest localhost:3000/favorites/list.json
  *
@@ -2229,3 +2227,57 @@ function postFavoriteDestroy() {
 function getFavoriteLike() {
   return;
 }
+
+// ------------------------------------------------------------------------------------------
+
+/**
+ * @api {get} /notification Notifications
+ * @apiVersion 0.1.0
+ * @apiName GetNotification
+ * @apiGroup Notification
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/notification.json
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/notification.json
+ *
+ *
+ * @apiDescription Returns the most recent ten notifications for the authenticating user.
+ *
+ * @apiSuccess {Object[]} notification_object The User Notifications (Array of notifications).
+ * @apiSuccess {Object} notification_object.renova_list the renova list notification.
+ * @apiSuccess {Number[]} notification_object.renova_list.nova_ID the renovaed novas IDs.
+ * @apiSuccess {Number[]} notification_object.renova_list.user_action_ID the user's ID who done the action
+ * @apiSuccess {Date} notification_object.renova_list.date Date of the action.
+ * @apiSuccess {Object} notification_object.mention_list the mention list notification.
+ * @apiSuccess {Number[]} notification_object.mention_list.nova_ID the mention novas IDs.
+ * @apiSuccess {Number[]} notification_object.mention_list.user_action_ID the user's ID who done the action
+ * @apiSuccess {Date} notification_object.mention_list.date Date of the action.
+ * @apiSuccess {Object} notification_object.favorite_list the favorite list notification.
+ * @apiSuccess {Number[]} notification_object.favorite_list.nova_ID the favorite novas IDs.
+ * @apiSuccess {Number[]} notification_object.favorite_list.user_action_ID the user's ID who done the action
+ * @apiSuccess {Date} notification_object.favorite_list.date Date of the action.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       [
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object,
+ *          notification_object
+ *       ]
+ *     }
+ */
+function getNotification() {
+  return;
+}
+
+//---------------------------------------------------------------------------------------------------

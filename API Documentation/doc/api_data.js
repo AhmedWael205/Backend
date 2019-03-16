@@ -74,7 +74,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Account"
   },
   {
@@ -193,7 +193,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Account"
   },
   {
@@ -232,8 +232,260 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Account"
+  },
+  {
+    "type": "post",
+    "url": "/account/signin",
+    "title": "SignIn (Log In)",
+    "version": "0.1.0",
+    "name": "PostSignIn",
+    "group": "Account",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/account/signin.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/account/signin.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>SignIn to Ennovate using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>[Required] The user email , it must be never used to any other user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>[Required] The user's password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"email\":\"ali_hamdy98@outlook.com\",\n  \"password\":\"User_Password\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>If the user email is not used or incorrect.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "IncorrectPassword",
+            "description": "<p>If the user entered a wrong password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "    HTTP/1.1 404 Not Found\n    {\n      \"error\": \"IncorrectPassword\"\n    }\n.",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>User Hashed Password and it's Type.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"token\":\"Bearer \"+\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Account"
+  },
+  {
+    "type": "post",
+    "url": "/account/signup",
+    "title": "SignUp (Register)",
+    "version": "0.1.0",
+    "name": "PostSignUp",
+    "group": "Account",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/account/signup.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/account/signup.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>SigningUp a new Ennovate account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>[Required] The user name as they have defined it , Not necessairly a person name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Required] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>[Required] The user email , it must be never used to any other user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>[Required] The user's password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"name\": \"Ali Hany\",\n  \"screen_name\":\"Messi_98\",\n  \"email\":\"ali_hamdy98@outlook.com\",\n  \"password\":\"User_Password\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailAlreadyExists",
+            "description": "<p>If the user email is already used by another user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"EmailAlreadyExists\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Account",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The user ID Number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The user name as they have defined it , Not necessairly a person name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>The Hashed password of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The User's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>Datetime that the user account was created on Ennovate.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"ID\":12345\n \"screen_name\": \"Messi_98\",\n \"name\":\"Ali Hamdy\",\n \"password\":\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\",\n \"email\":\"ali_hamdy98@outlook.com\",\n \"created_at\":\"2012-11-04T14:51:06.157Z\"\n}",
+          "type": "json"
+        }
+      ]
+    }
   },
   {
     "type": "post",
@@ -282,7 +534,7 @@ define({ "api": [
         "type": "json"
       }
     ],
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Account",
     "success": {
       "fields": {
@@ -509,6 +761,2536 @@ define({ "api": [
     }
   },
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/doc/main.js",
+    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_doc_main_js",
+    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_doc_main_js",
+    "name": ""
+  },
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
+    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
+    "name": ""
+  },
+  {
+    "type": "get",
+    "url": "/favorites/list",
+    "title": "Recent Favorites(Likes)",
+    "version": "0.1.0",
+    "name": "GetFavoriteLike",
+    "group": "Favorites",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/favorites/list.json"
+      }
+    ],
+    "description": "<p>Note: favorites are now known as likes. Returns the 20 most recent novas liked by the authenticating or specified user.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/favorites/list.json?count=2&screen_name=episod",
+        "type": "json"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>[OPTIONAL] ID of user to show results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[OPTIONAL] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[OPTIONAL] Specifies the number of records to retrieve.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "novaObject",
+            "description": "<p>The nova Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  [\n     nova-Object,\n     nova-Object\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Favorites"
+  },
+  {
+    "type": "post",
+    "url": "/favorites/create",
+    "title": "Create Favorite(Like)",
+    "version": "0.1.0",
+    "name": "PostFavoiteCreate",
+    "group": "Favorites",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/favorites/create.json"
+      }
+    ],
+    "description": "<p>favorites are now known as likes. Favorites (likes) the nova specified in the ID parameter as the authenticating user. Returns the favorite nova when successful. The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/favorites/create.json",
+        "type": "json"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The numerical ID of the nova to like</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"ID\": 313006\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{nova-object}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Favorites"
+  },
+  {
+    "type": "post",
+    "url": "/favorites/destroy",
+    "title": "Destroy Favorite(UnLike)",
+    "version": "0.1.0",
+    "name": "PostFavoriteDestroy",
+    "group": "Favorites",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/favorites/destroy.json"
+      }
+    ],
+    "description": "<p>Note: favorites are now known as likes. Unfavorites (un-likes) the nova specified in the ID parameter as the authenticating user. Returns the un-liked nova when successful. The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/favorites/destroy.json?id=243138128959913986",
+        "type": "json"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The numerical ID of the nova to like</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"ID\": 313006\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{nova-Object}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Favorites"
+  },
+  {
+    "type": "get",
+    "url": "/followers/ids",
+    "title": "Followers IDs",
+    "version": "0.1.0",
+    "name": "GetFollowersIDs",
+    "group": "Followers",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followers/ids.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user IDs for every user following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followers/ids.json?cursor=-1&screen_name=andypiper",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "followers_IDs",
+            "description": "<p>The User Followers IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n   \"followers_IDs\":[\n                        455974794,\n                        947576438684872705,\n                        850839346009780224,\n                        958850376630910976,\n                        889483959943536640,\n                        966094285119606784,\n                        1020583045,\n                        948604640811212801,\n                        967155179614240768,\n                        554514802,\n                        14873932,\n                        963916668731904000,\n                        970763391181746178,\n                        966091392631140358,\n                        .\n                        .\n                        .\n                        5000 ids later,\n                        .\n                        .\n                        .\n                        813143846,\n                        958604886735716353,\n                        402873729,\n                        958603486551330817,\n                        913076424897994753,\n                        820967329068707840,\n                        958593574932762624,\n                        958589381102665728,\n                        958573223737724929,\n                        889474485694410752\n                ],\n        \"next_cursor\": 1591087837626119954,\n        \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Followers"
+  },
+  {
+    "type": "get",
+    "url": "/followers/list",
+    "title": "Followers List",
+    "version": "0.1.0",
+    "name": "GetFollowersList",
+    "group": "Followers",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followers/list.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user objects for users following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests.roys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followers/list.json?cursor=-1&screen_name=Ennovatedev",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Followers object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ],\n     \"next_cursor\": 1489467234237774933,\n     \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Followers"
+  },
+  {
+    "type": "get",
+    "url": "/followings/ids",
+    "title": "Followings IDs",
+    "version": "0.1.0",
+    "name": "GetFollowingsIDs",
+    "group": "Followings",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followings/ids.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user IDs for every user the specified user is following (otherwise known as their &quot;friends&quot;). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followings/ids.json?cursor=-1&screen_name=andypiper",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "followings_IDs",
+            "description": "<p>The User Followings IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"followings_IDs\": [\n                657693,\n                183709371,\n                7588892,\n                38895958,\n                22891211,\n                9019482,\n                14488353,\n                11750202,\n                12249,\n                22915745,\n                1249881,\n                14927800,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                27674040,\n                26123649,\n                9576402,\n                821958,\n                7852612,\n                819797,\n                1401881,\n                8285392,\n                9160152,\n                795649,\n                3191321,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Followings"
+  },
+  {
+    "type": "get",
+    "url": "/followings/list",
+    "title": "Followings List",
+    "version": "0.1.0",
+    "name": "GetFollowingsList",
+    "group": "Followings",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/followings/list.json"
+      }
+    ],
+    "description": "<p>Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their &quot;friends&quot;). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/followings/list.json?cursor=-1&screen_name=Ennovatedev",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Followings object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ],\n     \"next_cursor\": 1489467234237774933,\n     \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Followings"
+  },
+  {
+    "type": "get",
+    "url": "/friendships/incoming",
+    "title": "Friendship Requests' IDs",
+    "version": "0.1.0",
+    "name": "GetFriendshipsIncoming",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/incoming.json"
+      }
+    ],
+    "description": "<p>Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/incoming.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "friendshipsRequetsIDs",
+            "description": "<p>The User friendships Requests IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"friendshipsRequetsIDs\": [\n                657693,\n                183709371,\n                7588892,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "get",
+    "url": "/friendships/Outgoing",
+    "title": "Friendship Pending Follow Requests' IDs",
+    "version": "0.1.0",
+    "name": "GetFriendshipsOutgoing",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/outgoing.json"
+      }
+    ],
+    "description": "<p>Returns a collection of numeric IDs for every user for whom the authenticating user has a pending follow request.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "cursor",
+            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"cursor\": 12893764510938\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/outgoing.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "friendshipsPendingIDs",
+            "description": "<p>The Users' IDs with a pending follow request.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "next_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "previous_cursor",
+            "description": "<p>To allow paging back and forth.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"friendshipsPendingIDs\": [\n                657693,\n                183709371,\n                7588892,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "get",
+    "url": "/friendships/show",
+    "title": "Friendship Relations",
+    "version": "0.1.0",
+    "name": "GetFriendshipsShow",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/friendships/show.json"
+      }
+    ],
+    "description": "<p>Returns detailed information about the relationship between two arbitrary users.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>[Required] The user_id of the subject user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "source_screen_name",
+            "description": "<p>[Optional] The screen_name of the subject user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "target_id",
+            "description": "<p>[Required] The user_id of the target user.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "target_screen_name",
+            "description": "<p>[Optional] The screen_name of the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"source_id\": 3191321,\n  \"source_screen_name\":\"raffi\",\n  \"target_id\":20,\n  \"target_screen_name\":\"noradio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/friendships/show.json?source_screen_name=bert&target_screen_name=ernie",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship",
+            "description": "<p>It shows the current relation between the source and the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.target",
+            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.target.ID",
+            "description": "<p>The target's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.target.screen_name",
+            "description": "<p>The target's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.following",
+            "description": "<p>Is The target followed by the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.followed_by",
+            "description": "<p>Is The target following the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.source",
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.source.ID",
+            "description": "<p>The source's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.source.screen_name",
+            "description": "<p>The source's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.following",
+            "description": "<p>Is The source followed by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.followed_by",
+            "description": "<p>Is The source following the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.notifications_enabled",
+            "description": "<p>Is The source wants to get notifications from the target.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"notifications_enabled\": false\n                                    }\n                    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "post",
+    "url": "/friendships/create",
+    "title": "Create Friendship (Follow)",
+    "version": "0.1.0",
+    "name": "PostFriendshipsCreate",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/create.json"
+      }
+    ],
+    "description": "<p>Allows the authenticating user to follow (friend) the user specified in the ID parameter. Returns the followed user when successful. Returns a string describing the failure condition when unsuccessful. If the user is already friends with the user a HTTP 403 may be returned, though for performance reasons this method may also return a HTTP 200 OK message even if the follow relationship already exists. Actions taken in this method are asynchronous. Changes will be eventually consistent.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Required] The ID of the user to follow.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user to follow.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "follow",
+            "description": "<p>[Optional] Enable notifications for the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\",\n  \"follow\":true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The User Required object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Array of novas Objects.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status.nova",
+            "description": "<p>nova Object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{nova-object}\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "post",
+    "url": "/friendships/Destroy",
+    "title": "Destroy Friendship (Unfollow)",
+    "version": "0.1.0",
+    "name": "PostFriendshipsDestroy",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/destroy.json"
+      }
+    ],
+    "description": "<p>AAllows the authenticating user to unfollow the user specified in the ID parameter. Returns the unfollowed user when successful. Returns a string describing the failure condition when unsuccessful. Actions taken in this method are asynchronous. Changes will be eventually consistent.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_ID",
+            "description": "<p>[Required] The ID of the user to unfollow.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[Optional] The screen name of the user to unfollow.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/friendships/destroy.json?user_id=2244994945",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The Unfollowed user object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Array of novas Objects.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "status.nova",
+            "description": "<p>nova Object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{nova-object}\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "post",
+    "url": "/friendships/update",
+    "title": "Friendship Update",
+    "version": "0.1.0",
+    "name": "PostFriendshipsUpdate",
+    "group": "Friendships",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/friendships/friendships/update.json"
+      }
+    ],
+    "description": "<p>Enable or disable device notifications from the specified user.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>[Required] The ID of the user being followed.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "source_screen_name",
+            "description": "<p>[Optional] The screen name of the user being followed.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "device",
+            "description": "<p>[Optional] Enable/disable device notifications from the target user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"source_id\": 12345,\n  \"source_screen_name\":\"Ennovatedev\",\n  \"device\":true,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/friendships/update.json?user_id=2244994945&device=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship",
+            "description": "<p>It shows the current relation between the source and the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.target",
+            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.target.ID",
+            "description": "<p>The target's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.target.screen_name",
+            "description": "<p>The target's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.following",
+            "description": "<p>Is The target followed by the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.target.followed_by",
+            "description": "<p>Is The target following the source.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "relationship.source",
+            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "relationship.source.ID",
+            "description": "<p>The source's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "relationship.source.screen_name",
+            "description": "<p>The source's screen_name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.following",
+            "description": "<p>Is The source followed by the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.followed_by",
+            "description": "<p>Is The source following the target.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "relationship.source.notifications_enabled",
+            "description": "<p>Is The source wants to get notifications from the target.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 2244994945,\n                                    \"screen_name\": \"Ennovatedev\",\n                                    \"following\": true,\n                                    \"followed_by\": true\n                                   },\n                        \"source\":  {\n                                    \"id\": 819797,\n                                    \"screen_name\": \"episod\",\n                                    \"following\": true,\n                                    \"followed_by\": true,\n                                    \"notifications_enabled\": true\n                                    }\n                    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Friendships"
+  },
+  {
+    "type": "get",
+    "url": "/notification",
+    "title": "Notifications",
+    "version": "0.1.0",
+    "name": "GetNotification",
+    "group": "Notification",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/notification.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/notification.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>Returns the most recent ten notifications for the authenticating user.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "notification_object",
+            "description": "<p>The User Notifications (Array of notifications).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "notification_object.renova_list",
+            "description": "<p>the renova list notification.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.renova_list.nova_ID",
+            "description": "<p>the renovaed novas IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.renova_list.user_action_ID",
+            "description": "<p>the user's ID who done the action</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "notification_object.renova_list.date",
+            "description": "<p>Date of the action.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "notification_object.mention_list",
+            "description": "<p>the mention list notification.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.mention_list.nova_ID",
+            "description": "<p>the mention novas IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.mention_list.user_action_ID",
+            "description": "<p>the user's ID who done the action</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "notification_object.mention_list.date",
+            "description": "<p>Date of the action.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "notification_object.favorite_list",
+            "description": "<p>the favorite list notification.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.favorite_list.nova_ID",
+            "description": "<p>the favorite novas IDs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "notification_object.favorite_list.user_action_ID",
+            "description": "<p>the user's ID who done the action</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "notification_object.favorite_list.date",
+            "description": "<p>Date of the action.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  [\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object,\n     notification_object\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Notification"
+  },
+  {
+    "type": "get",
+    "url": "/saved_searches/list",
+    "title": "Saved Searches",
+    "version": "0.1.0",
+    "name": "GetSavedSearches",
+    "group": "Saved_searches",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/saved_searches/list.json"
+      }
+    ],
+    "description": "<p>Returns the authenticated user's saved search queries.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/saved_searches/list.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "Search",
+            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "Search.created_at",
+            "description": "<p>Datetime of the user's search.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Search.ID",
+            "description": "<p>The search ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.name",
+            "description": "<p>The search name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.query",
+            "description": "<p>The search query.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@Ennovateapi\",\n         \"query\": \"@Ennovateapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\",\n         \"query\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\"\n      }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Saved_searches"
+  },
+  {
+    "type": "post",
+    "url": "/saved_searches/destroy/:id",
+    "title": "Delete search using ID",
+    "version": "0.1.0",
+    "name": "PostDeleteSearchByID",
+    "group": "Saved_searches",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/saved_searches/destroy/:id.json"
+      }
+    ],
+    "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>[Required] The ID of the saved search.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"ID\": 313006\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/saved_searches/destroy/9569704.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Search",
+            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "Search.created_at",
+            "description": "<p>Datetime of the user's search.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Search.ID",
+            "description": "<p>The search ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.name",
+            "description": "<p>The search name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.query",
+            "description": "<p>The search query.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"created_at\": \"2018-12-04T14:51:06.157Z\",\n    \"ID\": 9569704,\n    \"name\": \"@Ennovateapi\",\n    \"query\": \"@Ennovateapi\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Saved_searches"
+  },
+  {
+    "type": "post",
+    "url": "/saved_searches/delete_all",
+    "title": "Delete all Searches",
+    "version": "0.1.0",
+    "name": "PostDeleteSearchesAll",
+    "group": "Saved_searches",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/saved_searches/delete_all.json"
+      }
+    ],
+    "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/saved_searches/delete_all.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "Search",
+            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "Search.created_at",
+            "description": "<p>Datetime of the user's search.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Search.ID",
+            "description": "<p>The search ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.name",
+            "description": "<p>The search name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Search.query",
+            "description": "<p>The search query.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@Ennovateapi\",\n         \"query\": \"@Ennovateapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\",\n         \"query\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\"\n      }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Saved_searches"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/home_timeline",
+    "title": "Home Timeline",
+    "version": "0.1.0",
+    "name": "GetHomeTimeline",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/home_timeline.json"
+      }
+    ],
+    "description": "<p>Returns a collection of the most recent Novas and ReNovas posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Nova service.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "include_entities",
+            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"Count\": 5,\n  \"exclude_replies\":false,\n  \"include_entities\":false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/home_timeline.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"novas_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"renova_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 84376945 ],\n         \"replied_novas_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"novas_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"renova_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"renovaed_by_IDs\":[ 6548659],\n         \"replied_novas_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses"
+  },
+  {
     "type": "get",
     "url": "/statuses/lookup",
     "title": "Lookup Nova",
@@ -562,7 +3344,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Statuses",
     "success": {
       "fields": {
@@ -741,6 +3523,477 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/statuses/mentions_timeline",
+    "title": "Mentions Timeline",
+    "version": "0.1.0",
+    "name": "GetMentionsTimeline",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/mentions_timeline.json"
+      }
+    ],
+    "description": "<p>Returns the 20 most recent mentions (Novas containing a users's @screen_name) for the authenticating user. The timeline returned is the equivalent of the one seen when you view your mentions on Nova.com.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "include_entities",
+            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \n        \n  \"Count\": 5,\n  \"exclude_replies\":true,\n  \"include_entities\":false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                     [\n                      {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                       }\n                     ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"novas_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"renova_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [\n                          {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          },  \n                          {\n                           \"name\": \"Matt Harris\",\n                           \"id\": 777925,\n                           \"screen_name\": \"themattharris\"\n                          },\n                          {\n                           \"name\": \"ThinkWall\",        \n                           \"id\": 117426578,\n                           \"screen_name\": \"thinkwall\"\n                           }\n                          ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 84376945 ],\n         \"replied_novas_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"novas_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"renova_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [ \n                          {                           \n                          \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          }\n                         ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"renovaed_by_IDs\":[ 6548659],\n         \"replied_novas_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses"
+  },
+  {
+    "type": "get",
+    "url": "statuses/renovas_of_me",
+    "title": "My Renovas",
+    "version": "0.1.0",
+    "name": "GetMyRenovas",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/statuses/renovas_of_me.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>Returns the most recent Novas authored by the authenticating user that have been renovad by others. This timeline is a subset of the user's GET statuses / user_timeline.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional] Specifies the number of records to retrieve. Must be less than or equal to 100. If omitted, 20 will be assumed.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "include_entities",
+            "description": "<p>[optional] The nova entities node will not be included when set to false .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "boolean",
+            "optional": false,
+            "field": "include_user_entities",
+            "description": "<p>[optional] The user entities node will not be included when set to false .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n{\n  \"count\": \"50\",\n  \"include_entities\":\"false\",\n  \"include_user_entities\":\"true\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "novaObject",
+            "description": "<p>The nova Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {nova-Object},{nova-Object}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses"
+  },
+  {
+    "type": "get",
     "url": "/statuses/show",
     "title": "Show Nova",
     "version": "0.1.0",
@@ -800,7 +4053,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Statuses",
     "success": {
       "fields": {
@@ -980,9 +4233,9 @@ define({ "api": [
   {
     "type": "get",
     "url": "/statuses/reNovars",
-    "title": "reNovars",
+    "title": "Renovars",
     "version": "0.1.0",
-    "name": "GetreNovars",
+    "name": "GetRenovars",
     "group": "Statuses",
     "permission": [
       {
@@ -1051,7 +4304,492 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/renovas/:id",
+    "title": "Renova",
+    "version": "0.1.0",
+    "name": "GetRenovas",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/statuses/renovas/256321242121.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>Returns a collection of the 100 most recent renovas of the Nova specified by the id parameter.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Id",
+            "description": "<p>[Required] The numerical Id of the desired status.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[Optional] Specifies the number of records to retrieve. Must be less than or equal to 100. default value is 100.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "\n{\n  \"Id\": \"256321242121\",\n  \"count\":\"50\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "novaObject",
+            "description": "<p>The nova Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "nova.entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "nova.entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nova.entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nova.entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "nova.renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "nova.replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n     {nova-Object},{nova-Object}\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses"
+  },
+  {
+    "type": "get",
+    "url": "/statuses/User_timeline",
+    "title": "User Timeline",
+    "version": "0.1.0",
+    "name": "GetUserTimeline",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/User_timeline.json"
+      }
+    ],
+    "description": "<p>Returns a collection of the most recent Novas posted by the user indicated by the screen_name or user_id parameters The timeline returned is the equivalent of the one seen as a user's profile on  Nova.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>[optional]\tThe ID of the user for whom to    return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "screen_name",
+            "description": "<p>[optional]\tThe screen name of the user for whom to return results.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>[optional]\tSpecifies the number of Novas  to try and retrieve. The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "exclude_replies",
+            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{ \n  \"User_id\":12345,\n  \"Screen_name\":nordia,        \n  \"Count\": 5,\n  \"exclude_replies\":true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/User_timeline.json",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "renovaed_status",
+            "description": "<p>nova that has been renovaed by the authenticating user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "[",
+          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Another Nova\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":3683925,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
     "groupTitle": "Statuses"
   },
   {
@@ -1101,7 +4839,455 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n    \"ID\":114749583439036416,\n    \"text\":\"nova Button, Follow Button, and Web Intents\",\n    \"in_reply_to_status_id\":114749583439036416,\n    \"in_reply_to_user_id\":819797,\n    \"in_reply_to_screen_name\":\"Ennovateapi\",\n     \"user\": {\n                \"ID\": 6253282,\n                \"name\": \"Ennovate API\",\n                \"screen_name\": \"Ennovateapi\",\n                \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                \"location\": \"San Francisco, CA\",\n                \"bio\": \"The Real Ennovate API.\",\n                \"followers_count\": 21,\n                \"friends_count\": 32,\n                \"favourites_count\":13,\n                \"novas_count\":42,\n                \"profile_background_color\": \"e8f2f7\",\n                \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                \"default_profile\": fasle,\n                \"default_profile_image\": false\n             },\n        \"reply_count\":1585,\n        \"renova_count\":1585,\n        \"favorite_count\":1138,\n        \"entities\": {\n                        \"hashtags\":[],\n                        \"urls\":[],\n                        \"user_mentions\":[],\n                        \"media\":[]\n                    },\n        \"favorited\":true,\n        \"renovaed\":false,\n        \"favorited_by_IDs\":[12345 , 76454],\n        \"renovaed_by_IDs\":[ 8437836 ],\n        \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/statuses/reNova",
+    "title": "Renova",
+    "version": "0.1.0",
+    "name": "PostRenova",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/reNova.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/reNova.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>ReNovas a Nova.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>[Required] The numerical ID of the desired status.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id\": \"34930345\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Statuses",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>UTC time when this nova was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The actual UTF-8 text of the status update.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_status_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "in_reply_to_user_id",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "in_reply_to_screen_name",
+            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The user who posted this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reply_count",
+            "description": "<p>Number of times this nova has been replied to.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "renova_count",
+            "description": "<p>Number of times this nova has been renovaed.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "favorite_count",
+            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject",
+            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.hashtags",
+            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "entitiesObject.urls",
+            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "entitiesObject.users_mentions_ID",
+            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "entitiesObject.media",
+            "description": "<p>[Nullable] The Media Included in the nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.type",
+            "description": "<p>The media type or format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "entitiesObject.media.size",
+            "description": "<p>The size of this file in KBs.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "entitiesObject.media.url",
+            "description": "<p>The Media's URL.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "favorited",
+            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "renovaed",
+            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "favorited_by_IDs",
+            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "renovaed_by_IDs",
+            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number[]",
+            "optional": false,
+            "field": "replied_novas_IDs",
+            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n    \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n    \"ID\":114749583439036416,\n    \"text\":\"nova Button, Follow Button, and Web Intents\",\n    \"in_reply_to_status_id\":114749583439036416,\n    \"in_reply_to_user_id\":819797,\n    \"in_reply_to_screen_name\":\"Ennovateapi\",\n     \"user\": {\n                \"ID\": 6253282,\n                \"name\": \"Ennovate API\",\n                \"screen_name\": \"Ennovateapi\",\n                \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                \"location\": \"San Francisco, CA\",\n                \"bio\": \"The Real Ennovate API.\",\n                \"followers_count\": 21,\n                \"friends_count\": 32,\n                \"favourites_count\":13,\n                \"novas_count\":42,\n                \"profile_background_color\": \"e8f2f7\",\n                \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                \"default_profile\": fasle,\n                \"default_profile_image\": false\n             },\n        \"reply_count\":1585,\n        \"renova_count\":1585,\n        \"favorite_count\":1138,\n        \"entities\": {\n                        \"hashtags\":[],\n                        \"urls\":[],\n                        \"user_mentions\":[],\n                        \"media\":[]\n                    },\n        \"favorited\":true,\n        \"renovaed\":false,\n        \"favorited_by_IDs\":[12345 , 76454],\n        \"renovaed_by_IDs\":[ 8437836 ],\n        \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/statuses/unrenova/:id",
+    "title": "UnReNova",
+    "version": "0.1.0",
+    "name": "PostUnrenova",
+    "group": "Statuses",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/statuses/unrenova/:id.json"
+      }
+    ],
+    "description": "<p>unNovas a novad status. returns the original nova with renova details embedded</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>[required]  the numerical ID of the desired status</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id\":12345\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/statuses/unrenova.json",
+        "type": "json"
+      }
+    ],
+    "filename": "./Ennovate.js",
     "groupTitle": "Statuses",
     "success": {
       "fields": {
@@ -1353,231 +5539,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
-    "groupTitle": "Statuses",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n    \"ID\":114749583439036416,\n    \"text\":\"nova Button, Follow Button, and Web Intents\",\n    \"in_reply_to_status_id\":114749583439036416,\n    \"in_reply_to_user_id\":819797,\n    \"in_reply_to_screen_name\":\"Ennovateapi\",\n     \"user\": {\n                \"ID\": 6253282,\n                \"name\": \"Ennovate API\",\n                \"screen_name\": \"Ennovateapi\",\n                \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                \"location\": \"San Francisco, CA\",\n                \"bio\": \"The Real Ennovate API.\",\n                \"followers_count\": 21,\n                \"friends_count\": 32,\n                \"favourites_count\":13,\n                \"novas_count\":42,\n                \"profile_background_color\": \"e8f2f7\",\n                \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                \"default_profile\": fasle,\n                \"default_profile_image\": false\n             },\n        \"reply_count\":1585,\n        \"renova_count\":1585,\n        \"favorite_count\":1138,\n        \"entities\": {\n                        \"hashtags\":[],\n                        \"urls\":[],\n                        \"user_mentions\":[],\n                        \"media\":[]\n                    },\n        \"favorited\":true,\n        \"renovaed\":false,\n        \"favorited_by_IDs\":[12345 , 76454],\n        \"renovaed_by_IDs\":[ 8437836 ],\n        \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "post",
-    "url": "/statuses/reNova",
-    "title": "reNova",
-    "version": "0.1.0",
-    "name": "PostreNova",
-    "group": "Statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/statuses/reNova.json"
-      }
-    ],
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/statuses/reNova.json",
-        "type": "json"
-      }
-    ],
-    "description": "<p>ReNovas a Nova.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>[Required] The numerical ID of the desired status.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"id\": \"34930345\",\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "Statuses",
     "success": {
       "fields": {
@@ -1854,7 +5816,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "User"
   },
   {
@@ -1971,7 +5933,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "User"
   },
   {
@@ -2062,7 +6024,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "User"
   },
   {
@@ -2159,3786 +6121,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./Twitter.js",
+    "filename": "./Ennovate.js",
     "groupTitle": "User"
-  },
-  {
-    "type": "post",
-    "url": "/users/signin",
-    "title": "SignIn (Log In)",
-    "version": "0.1.0",
-    "name": "PostSignIn",
-    "group": "User",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/users/signin.json"
-      }
-    ],
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/account/signin.json",
-        "type": "json"
-      }
-    ],
-    "description": "<p>SignIn to Ennovate using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>[Required] The user email , it must be never used to any other user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>[Required] The user's password.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"email\":\"ali_hamdy98@outlook.com\",\n  \"password\":\"User_Password\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>If the user email is not used or incorrect.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "IncorrectPassword",
-            "description": "<p>If the user entered a wrong password.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"IncorrectPassword\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>Did the user signIn successfully.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>User Hashed Password and it's Type.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n \"success\":true,\n \"token\":\"Bearer \"+\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "User"
-  },
-  {
-    "type": "post",
-    "url": "/users/signup",
-    "title": "SignUp (Register)",
-    "version": "0.1.0",
-    "name": "PostSignUp",
-    "group": "User",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/users/signup.json"
-      }
-    ],
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/account/signup.json",
-        "type": "json"
-      }
-    ],
-    "description": "<p>SigningUp a new Ennovate account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>[Required] The user name as they have defined it , Not necessairly a person name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Required] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>[Required] The user email , it must be never used to any other user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>[Required] The user's password.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"name\": \"Ali Hany\",\n  \"screen_name\":\"Messi_98\",\n  \"email\":\"ali_hamdy98@outlook.com\",\n  \"password\":\"User_Password\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "EmailAlreadyExists",
-            "description": "<p>If the user email is already used by another user.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"EmailAlreadyExists\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "User",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The user ID Number.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>The user name as they have defined it , Not necessairly a person name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>The Hashed password of the user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>The User's email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>Datetime that the user account was created on Ennovate.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n \"ID\":12345\n \"screen_name\": \"Messi_98\",\n \"name\":\"Ali Hamdy\",\n \"password\":\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\",\n \"email\":\"ali_hamdy98@outlook.com\",\n \"created_at\":\"2012-11-04T14:51:06.157Z\"\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "get",
-    "url": "/favorites/list",
-    "title": "Recent Favorites(Likes)",
-    "version": "0.1.0",
-    "name": "GetFavoriteLike",
-    "group": "favorites",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/favorites/list.json"
-      }
-    ],
-    "description": "<p>Note: favorites are now known as likes. Returns the 20 most recent novas liked by the authenticating or specified user.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/favorites/list.json?count=2&screen_name=episod",
-        "type": "json"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_id",
-            "description": "<p>[OPTIONAL] ID of user to show results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[OPTIONAL] The screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[OPTIONAL] Specifies the number of records to retrieve.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "novaObject",
-            "description": "<p>The nova Object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  [\n     nova-Object,\n     nova-Object\n  ]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "favorites"
-  },
-  {
-    "type": "post",
-    "url": "/favorites/create",
-    "title": "Create Favorite(Like)",
-    "version": "0.1.0",
-    "name": "PostFavoiteCreate",
-    "group": "favorites",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/favorites/create.json"
-      }
-    ],
-    "description": "<p>favorites are now known as likes. Favorites (likes) the nova specified in the ID parameter as the authenticating user. Returns the favorite nova when successful. The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/favorites/create.json",
-        "type": "json"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The numerical ID of the nova to like</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"ID\": 313006\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{nova-object}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "favorites"
-  },
-  {
-    "type": "post",
-    "url": "/favorites/destroy",
-    "title": "Destroy Favorite(UnLike)",
-    "version": "0.1.0",
-    "name": "PostFavoriteDestroy",
-    "group": "favorites",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/favorites/destroy.json"
-      }
-    ],
-    "description": "<p>Note: favorites are now known as likes. Unfavorites (un-likes) the nova specified in the ID parameter as the authenticating user. Returns the un-liked nova when successful. The process invoked by this method is asynchronous. The immediately returned nova object may not indicate the resultant favorited status of the nova. A 200 OK response from this method will indicate whether the intended action was successful or not.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/favorites/destroy.json?id=243138128959913986",
-        "type": "json"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The numerical ID of the nova to like</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"ID\": 313006\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{nova-Object}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "favorites"
-  },
-  {
-    "type": "get",
-    "url": "/followers/ids",
-    "title": "Followers IDs",
-    "version": "0.1.0",
-    "name": "GetFollowersIDs",
-    "group": "followers",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/followers/ids.json"
-      }
-    ],
-    "description": "<p>Returns a cursored collection of user IDs for every user following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/followers/ids.json?cursor=-1&screen_name=andypiper",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "followers_IDs",
-            "description": "<p>The User Followers IDs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n   \"followers_IDs\":[\n                        455974794,\n                        947576438684872705,\n                        850839346009780224,\n                        958850376630910976,\n                        889483959943536640,\n                        966094285119606784,\n                        1020583045,\n                        948604640811212801,\n                        967155179614240768,\n                        554514802,\n                        14873932,\n                        963916668731904000,\n                        970763391181746178,\n                        966091392631140358,\n                        .\n                        .\n                        .\n                        5000 ids later,\n                        .\n                        .\n                        .\n                        813143846,\n                        958604886735716353,\n                        402873729,\n                        958603486551330817,\n                        913076424897994753,\n                        820967329068707840,\n                        958593574932762624,\n                        958589381102665728,\n                        958573223737724929,\n                        889474485694410752\n                ],\n        \"next_cursor\": 1591087837626119954,\n        \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "followers"
-  },
-  {
-    "type": "get",
-    "url": "/followers/list",
-    "title": "Followers List",
-    "version": "0.1.0",
-    "name": "GetFollowersList",
-    "group": "followers",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/followers/list.json"
-      }
-    ],
-    "description": "<p>Returns a cursored collection of user objects for users following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests.roys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/followers/list.json?cursor=-1&screen_name=Ennovatedev",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "users",
-            "description": "<p>The User Followers object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "users.ID",
-            "description": "<p>The user's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.email",
-            "description": "<p>The user's email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.screen_name",
-            "description": "<p>The user's screen name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ],\n     \"next_cursor\": 1489467234237774933,\n     \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "followers"
-  },
-  {
-    "type": "get",
-    "url": "/followings/ids",
-    "title": "Followings IDs",
-    "version": "0.1.0",
-    "name": "GetFollowingsIDs",
-    "group": "followings",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/followings/ids.json"
-      }
-    ],
-    "description": "<p>Returns a cursored collection of user IDs for every user the specified user is following (otherwise known as their &quot;friends&quot;). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 5,000 user IDs and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests. This method is especially powerful when used in conjunction with GET users / lookup, a method that allows you to convert user IDs into full user objects in bulk.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/followings/ids.json?cursor=-1&screen_name=andypiper",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "followings_IDs",
-            "description": "<p>The User Followings IDs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"followings_IDs\": [\n                657693,\n                183709371,\n                7588892,\n                38895958,\n                22891211,\n                9019482,\n                14488353,\n                11750202,\n                12249,\n                22915745,\n                1249881,\n                14927800,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                27674040,\n                26123649,\n                9576402,\n                821958,\n                7852612,\n                819797,\n                1401881,\n                8285392,\n                9160152,\n                795649,\n                3191321,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "followings"
-  },
-  {
-    "type": "get",
-    "url": "/followings/list",
-    "title": "Followings List",
-    "version": "0.1.0",
-    "name": "GetFollowingsList",
-    "group": "followings",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/followings/list.json"
-      }
-    ],
-    "description": "<p>Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their &quot;friends&quot;). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple &quot;pages&quot; of results can be navigated through using the next_cursor value in subsequent requests.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Optional] The ID of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the results to be broken into pages. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page&quot;. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\": 12345,\n  \"screen_name\":\"noradio\",\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/followings/list.json?cursor=-1&screen_name=Ennovatedev",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "users",
-            "description": "<p>The User Followings object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "users.ID",
-            "description": "<p>The user's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.email",
-            "description": "<p>The user's email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.screen_name",
-            "description": "<p>The user's screen name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ],\n     \"next_cursor\": 1489467234237774933,\n     \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "followings"
-  },
-  {
-    "type": "get",
-    "url": "/friendships/incoming",
-    "title": "Friendship Requests' IDs",
-    "version": "0.1.0",
-    "name": "GetFriendshipsIncoming",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/incoming.json"
-      }
-    ],
-    "description": "<p>Returns a collection of numeric IDs for every user who has a pending request to follow the authenticating user.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/friendships/incoming.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "friendshipsRequetsIDs",
-            "description": "<p>The User friendships Requests IDs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"friendshipsRequetsIDs\": [\n                657693,\n                183709371,\n                7588892,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "get",
-    "url": "/friendships/Outgoing",
-    "title": "Friendship Pending Follow Requests' IDs",
-    "version": "0.1.0",
-    "name": "GetFriendshipsOutgoing",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/outgoing.json"
-      }
-    ],
-    "description": "<p>Returns a collection of numeric IDs for every user for whom the authenticating user has a pending follow request.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "cursor",
-            "description": "<p>[Semi-Optional] Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filtered out after connections are queried. If no cursor is provided, a value of -1 will be assumed, which is the first &quot;page.&quot;</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"cursor\": 12893764510938\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/friendships/outgoing.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "friendshipsPendingIDs",
-            "description": "<p>The Users' IDs with a pending follow request.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "next_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "previous_cursor",
-            "description": "<p>To allow paging back and forth.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"friendshipsPendingIDs\": [\n                657693,\n                183709371,\n                7588892,\n                1523501,\n                22548447,\n                15062340,\n                133031077,\n                17874544,\n                777925,\n                4265731,\n                783214\n            ],\n    \"next_cursor\": 0,\n    \"previous_cursor\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "get",
-    "url": "/friendships/show",
-    "title": "Friendship Relations",
-    "version": "0.1.0",
-    "name": "GetFriendshipsShow",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/friendships/show.json"
-      }
-    ],
-    "description": "<p>Returns detailed information about the relationship between two arbitrary users.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "source_id",
-            "description": "<p>[Required] The user_id of the subject user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "source_screen_name",
-            "description": "<p>[Optional] The screen_name of the subject user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "target_id",
-            "description": "<p>[Required] The user_id of the target user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "target_screen_name",
-            "description": "<p>[Optional] The screen_name of the target user.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"source_id\": 3191321,\n  \"source_screen_name\":\"raffi\",\n  \"target_id\":20,\n  \"target_screen_name\":\"noradio\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/friendships/show.json?source_screen_name=bert&target_screen_name=ernie",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship",
-            "description": "<p>It shows the current relation between the source and the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship.target",
-            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "relationship.target.ID",
-            "description": "<p>The target's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "relationship.target.screen_name",
-            "description": "<p>The target's screen_name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.target.following",
-            "description": "<p>Is The target followed by the source.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.target.followed_by",
-            "description": "<p>Is The target following the source.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship.source",
-            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "relationship.source.ID",
-            "description": "<p>The source's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "relationship.source.screen_name",
-            "description": "<p>The source's screen_name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.following",
-            "description": "<p>Is The source followed by the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.followed_by",
-            "description": "<p>Is The source following the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.notifications_enabled",
-            "description": "<p>Is The source wants to get notifications from the target.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 12148,\n                                    \"screen_name\": \"ernie\",\n                                    \"following\": false,\n                                    \"followed_by\": false\n                                   },\n                        \"source\":  {\n                                    \"id\": 8649302,\n                                    \"screen_name\": \"bert\",\n                                    \"following\": false,\n                                    \"followed_by\": false,\n                                    \"notifications_enabled\": false\n                                    }\n                    }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "post",
-    "url": "/friendships/create",
-    "title": "Create Friendship (Follow)",
-    "version": "0.1.0",
-    "name": "PostFriendshipsCreate",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/create.json"
-      }
-    ],
-    "description": "<p>Allows the authenticating user to follow (friend) the user specified in the ID parameter. Returns the followed user when successful. Returns a string describing the failure condition when unsuccessful. If the user is already friends with the user a HTTP 403 may be returned, though for performance reasons this method may also return a HTTP 200 OK message even if the follow relationship already exists. Actions taken in this method are asynchronous. Changes will be eventually consistent.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Required] The ID of the user to follow.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user to follow.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "follow",
-            "description": "<p>[Optional] Enable notifications for the target user.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\",\n  \"follow\":true\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "users",
-            "description": "<p>The User Required object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "users.ID",
-            "description": "<p>The user's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.email",
-            "description": "<p>The user's email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.screen_name",
-            "description": "<p>The user's screen name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "status",
-            "description": "<p>Array of novas Objects.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "status.nova",
-            "description": "<p>nova Object.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "HTTP/1.1 200 OK",
-          "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{nova-object}\n   }",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "post",
-    "url": "/friendships/Destroy",
-    "title": "Destroy Friendship (Unfollow)",
-    "version": "0.1.0",
-    "name": "PostFriendshipsDestroy",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/destroy.json"
-      }
-    ],
-    "description": "<p>AAllows the authenticating user to unfollow the user specified in the ID parameter. Returns the unfollowed user when successful. Returns a string describing the failure condition when unsuccessful. Actions taken in this method are asynchronous. Changes will be eventually consistent.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_ID",
-            "description": "<p>[Required] The ID of the user to unfollow.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[Optional] The screen name of the user to unfollow.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/friendships/destroy.json?user_id=2244994945",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "users",
-            "description": "<p>The Unfollowed user object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "users.ID",
-            "description": "<p>The user's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.email",
-            "description": "<p>The user's email.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "users.screen_name",
-            "description": "<p>The user's screen name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "status",
-            "description": "<p>Array of novas Objects.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "status.nova",
-            "description": "<p>nova Object.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "HTTP/1.1 200 OK",
-          "content": "HTTP/1.1 200 OK\n   {\n        user-object,\n        \"status\":{nova-object}\n   }",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "post",
-    "url": "/friendships/update",
-    "title": "Friendship Update",
-    "version": "0.1.0",
-    "name": "PostFriendshipsUpdate",
-    "group": "friendships",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/friendships/friendships/update.json"
-      }
-    ],
-    "description": "<p>Enable or disable device notifications from the specified user.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "source_id",
-            "description": "<p>[Required] The ID of the user being followed.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "source_screen_name",
-            "description": "<p>[Optional] The screen name of the user being followed.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "device",
-            "description": "<p>[Optional] Enable/disable device notifications from the target user.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"source_id\": 12345,\n  \"source_screen_name\":\"Ennovatedev\",\n  \"device\":true,\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/friendships/update.json?user_id=2244994945&device=true",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship",
-            "description": "<p>It shows the current relation between the source and the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship.target",
-            "description": "<p>The Target Info (id,screen_name,following,followed_by)</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "relationship.target.ID",
-            "description": "<p>The target's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "relationship.target.screen_name",
-            "description": "<p>The target's screen_name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.target.following",
-            "description": "<p>Is The target followed by the source.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.target.followed_by",
-            "description": "<p>Is The target following the source.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "relationship.source",
-            "description": "<p>The Source Info (id,screen_name,following,followed_by,notifications_enabled)</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "relationship.source.ID",
-            "description": "<p>The source's ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "relationship.source.screen_name",
-            "description": "<p>The source's screen_name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.following",
-            "description": "<p>Is The source followed by the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.followed_by",
-            "description": "<p>Is The source following the target.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "relationship.source.notifications_enabled",
-            "description": "<p>Is The source wants to get notifications from the target.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"relationship\": {\n                        \"target\":  {\n                                    \"id\": 2244994945,\n                                    \"screen_name\": \"Ennovatedev\",\n                                    \"following\": true,\n                                    \"followed_by\": true\n                                   },\n                        \"source\":  {\n                                    \"id\": 819797,\n                                    \"screen_name\": \"episod\",\n                                    \"following\": true,\n                                    \"followed_by\": true,\n                                    \"notifications_enabled\": true\n                                    }\n                    }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "friendships"
-  },
-  {
-    "type": "get",
-    "url": "/saved_searches/list",
-    "title": "Saved Searches",
-    "version": "0.1.0",
-    "name": "GetSavedSearches",
-    "group": "saved_searches",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/saved_searches/list.json"
-      }
-    ],
-    "description": "<p>Returns the authenticated user's saved search queries.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/saved_searches/list.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "Search",
-            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "Search.created_at",
-            "description": "<p>Datetime of the user's search.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "Search.ID",
-            "description": "<p>The search ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.name",
-            "description": "<p>The search name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.query",
-            "description": "<p>The search query.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@Ennovateapi\",\n         \"query\": \"@Ennovateapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\",\n         \"query\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\"\n      }\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "saved_searches"
-  },
-  {
-    "type": "post",
-    "url": "/saved_searches/destroy/:id",
-    "title": "Delete search using ID",
-    "version": "0.1.0",
-    "name": "PostDeleteSearchByID",
-    "group": "saved_searches",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/saved_searches/destroy/:id.json"
-      }
-    ],
-    "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>[Required] The ID of the saved search.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"ID\": 313006\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/saved_searches/destroy/9569704.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "Search",
-            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "Search.created_at",
-            "description": "<p>Datetime of the user's search.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "Search.ID",
-            "description": "<p>The search ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.name",
-            "description": "<p>The search name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.query",
-            "description": "<p>The search query.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"created_at\": \"2018-12-04T14:51:06.157Z\",\n    \"ID\": 9569704,\n    \"name\": \"@Ennovateapi\",\n    \"query\": \"@Ennovateapi\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "saved_searches"
-  },
-  {
-    "type": "post",
-    "url": "/saved_searches/delete_all",
-    "title": "Delete all Searches",
-    "version": "0.1.0",
-    "name": "PostDeleteSearchesAll",
-    "group": "saved_searches",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/saved_searches/delete_all.json"
-      }
-    ],
-    "description": "<p>Destroys a saved search for the authenticating user. The authenticating user must be the owner of saved search id being destroyed.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/saved_searches/delete_all.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "Search",
-            "description": "<p>The search result info (created_at ,ID ,name ,query).</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "Search.created_at",
-            "description": "<p>Datetime of the user's search.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "Search.ID",
-            "description": "<p>The search ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.name",
-            "description": "<p>The search name.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "Search.query",
-            "description": "<p>The search query.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n     {\n         \"created_at\": \"2018-12-04T14:51:06.157Z\",\n         \"ID\": 9569704,\n         \"name\": \"@Ennovateapi\",\n         \"query\": \"@Ennovateapi\"\n     },\n      {\n         \"created_at\": \"2018-11-04T14:51:06.157Z\",\n         \"id\": 9569730,\n         \"name\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\",\n         \"query\": \"@Ennovate OR Ennovateapi OR \"Ennovate api\" OR \"@anywhere\"\"\n      }\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "saved_searches"
-  },
-  {
-    "type": "get",
-    "url": "statuses/renovas_of_me",
-    "title": "My Renovas (gets renovas of the user)",
-    "version": "0.1.0",
-    "name": "GetMyRenovas",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/statuses/renovas_of_me.json",
-        "type": "json"
-      }
-    ],
-    "description": "<p>Returns the most recent Novas authored by the authenticating user that have been renovad by others. This timeline is a subset of the user's GET statuses / user_timeline.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[optional] Specifies the number of records to retrieve. Must be less than or equal to 100. If omitted, 20 will be assumed.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "boolean",
-            "optional": false,
-            "field": "include_entities",
-            "description": "<p>[optional] The nova entities node will not be included when set to false .</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "boolean",
-            "optional": false,
-            "field": "include_user_entities",
-            "description": "<p>[optional] The user entities node will not be included when set to false .</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "\n{\n  \"count\": \"50\",\n  \"include_entities\":\"false\",\n  \"include_user_entities\":\"true\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "novaObject",
-            "description": "<p>The nova Object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n     {nova-Object},{nova-Object}\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses"
-  },
-  {
-    "type": "get",
-    "url": "/statuses/renovas/:id",
-    "title": "Renova (aka renova)",
-    "version": "0.1.0",
-    "name": "GetRenovas",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "GET localhost:3000/statuses/renovas/256321242121.json",
-        "type": "json"
-      }
-    ],
-    "description": "<p>Returns a collection of the 100 most recent renovas of the Nova specified by the id parameter.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "Id",
-            "description": "<p>[Required] The numerical Id of the desired status.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[Optional] Specifies the number of records to retrieve. Must be less than or equal to 100. default value is 100.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "\n{\n  \"Id\": \"256321242121\",\n  \"count\":\"50\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "novaObject",
-            "description": "<p>The nova Object.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "nova.entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "nova.entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "nova.entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "nova.entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "nova.renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "nova.replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n     {nova-Object},{nova-Object}\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses"
-  },
-  {
-    "type": "get",
-    "url": "/statuses/home_timeline",
-    "title": "Home Timeline",
-    "version": "0.1.0",
-    "name": "gethome_timeline",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/statuses/home_timeline.json"
-      }
-    ],
-    "description": "<p>Returns a collection of the most recent Novas and ReNovas posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Nova service.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "exclude_replies",
-            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "include_entities",
-            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"Count\": 5,\n  \"exclude_replies\":false,\n  \"include_entities\":false\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/statuses/home_timeline.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"novas_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"renova_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 84376945 ],\n         \"replied_novas_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"novas_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"renova_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"renovaed_by_IDs\":[ 6548659],\n         \"replied_novas_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses"
-  },
-  {
-    "type": "get",
-    "url": "/statuses/mentions_timeline",
-    "title": "Mentions Timeline",
-    "version": "0.1.0",
-    "name": "getmentions_timeline",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/statuses/mentions_timeline.json"
-      }
-    ],
-    "description": "<p>Returns the 20 most recent mentions (Novas containing a users's @screen_name) for the authenticating user. The timeline returned is the equivalent of the one seen when you view your mentions on Nova.com.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[optional]\tSpecifies the number of records to retrieve.  The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "exclude_replies",
-            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "include_entities",
-            "description": "<p>[optional] The entities node will not be included when set to false.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{ \n        \n  \"Count\": 5,\n  \"exclude_replies\":true,\n  \"include_entities\":false\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":819797,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                     [\n                      {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                       }\n                     ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n\n{\n \"created_at\":\"Wed Aug 27 13:09:00 +0000 2008\",\n     \"ID\":114749583439038416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":114749583439038416,\n     \"in_reply_to_user_id\":819897,\n     \"in_reply_to_screen_name\":\"HarryWilliams\",\n      \"user\": {\n                 \"ID\": 6896009,\n                 \"name\": \"Harry Williams\",\n                 \"screen_name\": \"HarryWilliams\",\n                 \"created_at\":\"2012-11-04T14:58:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"Just a test\",\n                 \"followers_count\": 95,\n                 \"friends_count\": 82,\n                 \"favourites_count\":7,\n                 \"novas_count\":48,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"https://si0.twimg.com/images/themes/theme1/bg.png\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":155,\n         \"renova_count\":158,\n         \"favorite_count\":118,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [\n                          {\n                           \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          },  \n                          {\n                           \"name\": \"Matt Harris\",\n                           \"id\": 777925,\n                           \"screen_name\": \"themattharris\"\n                          },\n                          {\n                           \"name\": \"ThinkWall\",        \n                           \"id\": 117426578,\n                           \"screen_name\": \"thinkwall\"\n                           }\n                          ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 84376945 ],\n         \"replied_novas_IDs\":[683484 , 7349867 , 398694876]\n\n},\n\n{\n \"created_at\":\"Wed Aug 27 15:00:00 +0000 2008\",\n     \"ID\":819897,\n     \"text\":\"Another Test\",\n     \"in_reply_to_status_id\":819897,\n     \"in_reply_to_user_id\":114749593439038416,\n     \"in_reply_to_screen_name\":\"willSmith\",\n      \"user\": {\n                 \"ID\": 7540760,\n                 \"name\": \"Will Smith\",\n                 \"screen_name\": \"WillSmith\",\n                 \"created_at\":\"2012-11-04T14:49:09.157Z\",\n                 \"location\": \"New York, CA\",\n                 \"bio\": \"TEST\",\n                 \"followers_count\": 13214,\n                 \"friends_count\": 549,\n                 \"favourites_count\":79,\n                 \"novas_count\":486,\n                 \"profile_background_color\": \"C0DEED\",\n                 \"profile_background_image_url\":\"http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg\",\n                 \"profile_image_url\":\"https://si0.twimg.com/profile_images/1270234259/raffi-headshot-casual_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":5437,\n         \"renova_count\":6467,\n         \"favorite_count\":364,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":\n                         [ \n                          {                           \n                          \"name\": \"Jason Costa\",\n                           \"id\": 14927800,\n                           \"screen_name\": \"jasoncosta\"\n                          }\n                         ],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[34745 , 57548],\n         \"renovaed_by_IDs\":[ 6548659],\n         \"replied_novas_IDs\":[69796 , 7349867 , 398694876]\n\n}\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses"
-  },
-  {
-    "type": "get",
-    "url": "/statuses/User_timeline",
-    "title": "User Timeline",
-    "version": "0.1.0",
-    "name": "getuser_timeline",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/statuses/User_timeline.json"
-      }
-    ],
-    "description": "<p>Returns a collection of the most recent Novas posted by the user indicated by the screen_name or user_id parameters The timeline returned is the equivalent of the one seen as a user's profile on  Nova.</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_id",
-            "description": "<p>[optional]\tThe ID of the user for whom to    return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "screen_name",
-            "description": "<p>[optional]\tThe screen name of the user for whom to return results.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "count",
-            "description": "<p>[optional]\tSpecifies the number of Novas  to try and retrieve. The value of count is best thought of as a limit to the number of Novas to return because suspended or deleted content is removed after the count has been applied.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "exclude_replies",
-            "description": "<p>[optional]\tThis parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Novas — this is because the count parameter retrieves that many Novas before filtering out ReNovas and replies.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{ \n  \"User_id\":12345,\n  \"Screen_name\":nordia,        \n  \"Count\": 5,\n  \"exclude_replies\":true\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/statuses/User_timeline.json",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "renovaed_status",
-            "description": "<p>nova that has been renovaed by the authenticating user.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "[",
-          "content": "[\n  {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"nova Button, Follow Button, and Web Intents\",\n     \"in_reply_to_status_id\":null,\n     \"in_reply_to_user_id\":null,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n },\n {\n     \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n     \"ID\":114749583439036416,\n     \"text\":\"Another Nova\",\n     \"in_reply_to_status_id\":114749583439036416,\n     \"in_reply_to_user_id\":3683925,\n     \"in_reply_to_screen_name\":\"Ennovateapi\",\n      \"user\": {\n                 \"ID\": 6253282,\n                 \"name\": \"Ennovate API\",\n                 \"screen_name\": \"Ennovateapi\",\n                 \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                 \"location\": \"San Francisco, CA\",\n                 \"bio\": \"The Real Ennovate API.\",\n                 \"followers_count\": 21,\n                 \"friends_count\": 32,\n                 \"favourites_count\":13,\n                 \"novas_count\":42,\n                 \"profile_background_color\": \"e8f2f7\",\n                 \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                 \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                 \"default_profile\": fasle,\n                 \"default_profile_image\": false\n              },\n         \"reply_count\":1585,\n         \"renova_count\":1585,\n         \"favorite_count\":1138,\n         \"entities\": {\n                         \"hashtags\":[],\n                         \"urls\":[],\n                         \"user_mentions\":[],\n                         \"media\":[]\n                     },\n         \"favorited\":true,\n         \"renovaed\":false,\n         \"favorited_by_IDs\":[12345 , 76454],\n         \"renovaed_by_IDs\":[ 8437836 ],\n         \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n }\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses"
-  },
-  {
-    "type": "post",
-    "url": "/statuses/unrenova/:id",
-    "title": "UnReNova",
-    "version": "0.1.0",
-    "name": "postUnrenova",
-    "group": "statuses",
-    "permission": [
-      {
-        "name": "private",
-        "title": "User access rights needed.",
-        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
-      }
-    ],
-    "sampleRequest": [
-      {
-        "url": "localhost:3000/statuses/unrenova/:id.json"
-      }
-    ],
-    "description": "<p>unNovas a novad status. returns the original nova with renova details embedded</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>[required]  the numerical ID of the desired status</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"id\":12345\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "POST localhost:3000/statuses/unrenova.json",
-        "type": "json"
-      }
-    ],
-    "filename": "./Twitter.js",
-    "groupTitle": "statuses",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "created_at",
-            "description": "<p>UTC time when this nova was created</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "ID",
-            "description": "<p>The integer representation of the unique identifier for this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "text",
-            "description": "<p>The actual UTF-8 text of the status update.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_status_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s ID.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "in_reply_to_user_id",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the integer representation of the original nova’s author ID. This will not necessarily always be the user directly mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "in_reply_to_screen_name",
-            "description": "<p>[Nullable] If the represented nova is a reply, this field will contain the screen name of the original nova’s author.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>The user who posted this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "reply_count",
-            "description": "<p>Number of times this nova has been replied to.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "renova_count",
-            "description": "<p>Number of times this nova has been renovaed.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "favorite_count",
-            "description": "<p>[Nullable] Indicates approximately how many times this nova has been liked by Ennovate users.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject",
-            "description": "<p>Entities which have been parsed out of the text of the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.hashtags",
-            "description": "<p>[Nullable] Array of Hastags in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String[]",
-            "optional": false,
-            "field": "entitiesObject.urls",
-            "description": "<p>[Nullable] Array of URLs in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "entitiesObject.users_mentions_ID",
-            "description": "<p>[Nullabe] Array of Users' IDs whom are mentioned in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "entitiesObject.media",
-            "description": "<p>[Nullable] The Media Included in the nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.type",
-            "description": "<p>The media type or format.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "entitiesObject.media.size",
-            "description": "<p>The size of this file in KBs.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "entitiesObject.media.url",
-            "description": "<p>The Media's URL.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "favorited",
-            "description": "<p>[Nullable] Indicates whether this nova has been liked by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "renovaed",
-            "description": "<p>Indicates whether this nova has been Renovaed by the authenticating user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "favorited_by_IDs",
-            "description": "<p>Array of Users' IDs whom favorite this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "renovaed_by_IDs",
-            "description": "<p>Array of Users' IDs whom renovaed this nova.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number[]",
-            "optional": false,
-            "field": "replied_novas_IDs",
-            "description": "<p>Array of novas' IDs whom replied to this nova.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "{",
-          "content": "{\n    \"created_at\":\"Wed Aug 27 13:08:45 +0000 2008\",\n    \"ID\":114749583439036416,\n    \"text\":\"nova Button, Follow Button, and Web Intents\",\n    \"in_reply_to_status_id\":114749583439036416,\n    \"in_reply_to_user_id\":819797,\n    \"in_reply_to_screen_name\":\"Ennovateapi\",\n     \"user\": {\n                \"ID\": 6253282,\n                \"name\": \"Ennovate API\",\n                \"screen_name\": \"Ennovateapi\",\n                \"created_at\":\"2012-11-04T14:51:06.157Z\",\n                \"location\": \"San Francisco, CA\",\n                \"bio\": \"The Real Ennovate API.\",\n                \"followers_count\": 21,\n                \"friends_count\": 32,\n                \"favourites_count\":13,\n                \"novas_count\":42,\n                \"profile_background_color\": \"e8f2f7\",\n                \"profile_background_image_url\":\"http://a2.twimg.com/profile_background_images/229557229/Ennovateapi-bg.png\",\n                \"profile_image_url\":\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\",\n                \"default_profile\": fasle,\n                \"default_profile_image\": false\n             },\n        \"reply_count\":1585,\n        \"renova_count\":1585,\n        \"favorite_count\":1138,\n        \"entities\": {\n                        \"hashtags\":[],\n                        \"urls\":[],\n                        \"user_mentions\":[],\n                        \"media\":[]\n                    },\n        \"favorited\":true,\n        \"renovaed\":false,\n        \"favorited_by_IDs\":[12345 , 76454],\n        \"renovaed_by_IDs\":[ 8437836 ],\n        \"replied_novas_IDs\":[217361273 , 732456254 , 83217437]\n}",
-          "type": "json"
-        }
-      ]
-    }
   }
 ] });
