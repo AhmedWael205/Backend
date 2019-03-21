@@ -76,7 +76,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
-    { _id: this._id, isAdmin: this.isAdmin },
+    { _id: this._id, screen_name: this.screen_name },
     config.get("jwtPrivateKey")
   );
   return token;
@@ -110,4 +110,4 @@ function validateUser(user) {
 }
 
 exports.User = User;
-exports.validate = validateUser;
+exports.validateSignUp = validateUser;
