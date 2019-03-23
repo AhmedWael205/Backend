@@ -48,11 +48,11 @@ router.post("/signup", async (req, res) => {
   const { error } = validateSignUp(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let user = await User.findOne().or([
-    { email: req.body.email },
-    { screen_name: req.body.screen_name }
-  ]);
-  if (user) return res.status(400).send("User already registered.");
+  let user = await User.findOne({ email: req.body.email });
+  if (user) return res.status(404).send("email already registered.");
+
+  user = await User.findOne({ screen_name: req.body.screen_name });
+  if (user) return res.status(404).send("screen name already registered.");
 
   user = new User(
     _.pick(req.body, ["name", "email", "screen_name", "password"])

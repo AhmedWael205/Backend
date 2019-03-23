@@ -1,10 +1,10 @@
 {
-  "name": "Ennovate_BE",
+  "name": "Ennovate_BK",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,12 @@
     "jsonwebtoken": "8.5.0",
     "lodash": "4.17.11",
     "mongoose": "5.4.19",
+    "nodemailer": "^4.0.1",
     "winston": "2.4.0",
     "winston-mongodb": "3.0.0"
+  },
+  "devDependencies": {
+    "jest": "24.5.0",
+    "supertest": "3.0.0"
   }
 }

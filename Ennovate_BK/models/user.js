@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 5,
-    maxlength: 128
+    minlength: 3,
+    maxlength: 15
   },
   email: {
     type: String,
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 8,
     maxlength: 1024
   },
   created_at: {
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
   screen_name: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 3,
     maxlength: 15,
     unique: true
   },
@@ -87,8 +87,8 @@ const User = mongoose.model("User", userSchema);
 function validateUser(user) {
   const schema = {
     name: Joi.string()
-      .min(5)
-      .max(128)
+      .min(3)
+      .max(15)
       .required(),
     email: Joi.string()
       .min(5)
@@ -96,11 +96,11 @@ function validateUser(user) {
       .required()
       .email(),
     password: Joi.string()
-      .min(5)
-      .max(128)
+      .min(8)
+      .max(25)
       .required(),
     screen_name: Joi.string()
-      .min(5)
+      .min(3)
       .max(15)
       .required()
       .token()

@@ -7,19 +7,21 @@ const friendships = require("../routes/friendships");
 const users = require("../routes/users");
 const notifications = require("../routes/notifications");
 const saved_searches = require("../routes/saved_searches");
-const statuses = require("../routes/statuses"); */
+const statuses = require("../routes/statuses")*/
+const forget_password = require("../routes/forget_password");
 const error = require("../middleware/error");
 
 module.exports = function(app) {
   app.use(express.json());
-  app.use("/api/accounts", accounts);
-  /* app.use("/api/favorites", favorites);
-  app.use("/api/followers", followers);
-  app.use("/api/followings", followings);
-  app.use("/api/friendships", friendships);
-  app.use("/api/notifications", notifications);
-  app.use("/api/saved_searches", saved_searches);
-  app.use("/api/statuses", statuses);
-  app.use("/api/users", users); */
+  app.use("/accounts", accounts);
+  /* app.use("/favorites", favorites);
+  app.use("/followers", followers);
+  app.use("/followings", followings);
+  app.use("/friendships", friendships);
+  app.use("/notifications", notifications);
+  app.use("/saved_searches", saved_searches);
+  app.use("/statuses", statuses);
+  app.use("/users", users); */
+  app.use("/forget_password", forget_password);
   app.use(error);
 };

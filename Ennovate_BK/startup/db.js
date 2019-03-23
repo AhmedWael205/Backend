@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 const config = require("config");
 
 module.exports = function() {
+  const db = config.get("dbUrl");
   mongoose
-    .connect(config.get("dbUrl"), {
+    .connect(db, {
       useCreateIndex: true,
       useNewUrlParser: true
     })
-    .then(() => winston.info("Connected to MongoDB..."));
+    .then(() => winston.info(`Connected to ${db}...`));
 };
