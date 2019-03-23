@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "get",
-    "url": "/account/settings",
+    "url": "/accounts/settings",
     "title": "Account Settings",
     "version": "0.1.0",
     "name": "GetSettings",
@@ -15,13 +15,13 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/settings.json"
+        "url": "localhost:3000/accounts/settings.json"
       }
     ],
     "examples": [
       {
         "title": "Example usage:",
-        "content": "GET localhost:3000/account/settings.json",
+        "content": "GET localhost:3000/accounts/settings.json",
         "type": "json"
       }
     ],
@@ -79,7 +79,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/account/settings",
+    "url": "/accounts/settings",
     "title": "Edit Account Settings",
     "version": "0.1.0",
     "name": "PostAccountSettings",
@@ -93,7 +93,7 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/settings.json"
+        "url": "localhost:3000/accounts/settings.json"
       }
     ],
     "description": "<p>Updates the authenticating user's settings.</p>",
@@ -141,7 +141,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/settings.json?screen_name=Messi_98",
+        "content": "POST localhost:3000/accounts/settings.json?screen_name=Messi_98",
         "type": "json"
       }
     ],
@@ -198,7 +198,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/account/remove_profile_banner",
+    "url": "/accounts/remove_profile_banner",
     "title": "Remove Profile Banner",
     "version": "0.1.0",
     "name": "PostRemoveProfileBanner",
@@ -212,14 +212,14 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/remove_profile_banner.json"
+        "url": "localhost:3000/accounts/remove_profile_banner.json"
       }
     ],
     "description": "<p>Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.</p>",
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/remove_profile_banner.json",
+        "content": "POST localhost:3000/accounts/remove_profile_banner.json",
         "type": "json"
       }
     ],
@@ -237,7 +237,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/account/signin",
+    "url": "/accounts/signin",
     "title": "SignIn (Log In)",
     "version": "0.1.0",
     "name": "PostSignIn",
@@ -251,13 +251,13 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/signin.json"
+        "url": "localhost:3000/accounts/signin.json"
       }
     ],
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/signin.json",
+        "content": "POST localhost:3000/accounts/signin.json",
         "type": "json"
       }
     ],
@@ -334,7 +334,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n \"token\":\"Bearer \"+\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n \"token\":\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
           "type": "json"
         }
       ]
@@ -344,7 +344,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/account/signup",
+    "url": "/accounts/signup",
     "title": "SignUp (Register)",
     "version": "0.1.0",
     "name": "PostSignUp",
@@ -358,13 +358,13 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/signup.json"
+        "url": "localhost:3000/accounts/signup.json"
       }
     ],
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/signup.json",
+        "content": "POST localhost:3000/accounts/signup.json",
         "type": "json"
       }
     ],
@@ -418,13 +418,24 @@ define({ "api": [
             "optional": false,
             "field": "EmailAlreadyExists",
             "description": "<p>If the user email is already used by another user.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ScreenNameAlreadyExists",
+            "description": "<p>If the user screen name is already used by another user.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"EmailAlreadyExists\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"email already registered.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"screen name already registered.\"\n}",
           "type": "json"
         }
       ]
@@ -489,7 +500,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/account/update_profile_image",
+    "url": "/accounts/update_profile_image",
     "title": "Update Profile Image",
     "version": "0.1.0",
     "name": "PostUpdateProfileImage",
@@ -503,7 +514,7 @@ define({ "api": [
     ],
     "sampleRequest": [
       {
-        "url": "localhost:3000/account/update_profile_image.json"
+        "url": "localhost:3000/accounts/update_profile_image.json"
       }
     ],
     "description": "<p>Updates the authenticating user's profile image. Note that this method expects image , not a URL to a raw multipart data. This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users / show.</p>",
@@ -530,7 +541,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/account/update_profile_image.json?imageURL=\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\"",
+        "content": "POST localhost:3000/accounts/update_profile_image.json?imageURL=\"http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png\"",
         "type": "json"
       }
     ],
@@ -759,62 +770,6 @@ define({ "api": [
         }
       ]
     }
-  },
-  {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/doc/main.js",
-    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_doc_main_js",
-    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_doc_main_js",
-    "name": ""
-  },
-  {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/main.js",
-    "group": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
-    "groupTitle": "D__Documents_CMPN_courses_Software_Engineering_Spring_2019_Project_Our_project_API_Documentation_doc_main_js",
-    "name": ""
   },
   {
     "type": "get",
@@ -1935,6 +1890,75 @@ define({ "api": [
     },
     "filename": "./Ennovate.js",
     "groupTitle": "Followings"
+  },
+  {
+    "type": "get",
+    "url": "/forget_password",
+    "title": "Forget Password",
+    "version": "0.1.0",
+    "name": "GetForgetPassword",
+    "group": "Forget_Password",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/forget_password.json"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/forget_password.json",
+        "type": "json"
+      }
+    ],
+    "description": "<p>Sends a link a to your email where you can change your password.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>[Required] The user email.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"email\":\"ali_hamdy98@outlook.com\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>If the user email is not used or incorrect.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Forget_Password"
   },
   {
     "type": "get",

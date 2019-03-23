@@ -6,16 +6,16 @@
 //      A- Manage account settings and profile
 // ------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/signup SignUp (Register)
+ * @api {post} /accounts/signup SignUp (Register)
  * @apiVersion 0.1.0
  * @apiName PostSignUp
  * @apiGroup Account
  * @apiPermission private
  *
- * @apiSampleRequest localhost:3000/account/signup.json
+ * @apiSampleRequest localhost:3000/accounts/signup.json
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/signup.json
+ * POST localhost:3000/accounts/signup.json
  *
  *
  * @apiDescription SigningUp a new Ennovate account it returns 200 and generates the user_ID and set the creation date if the user is successfully signedup and returns 400 if the email is already used or any other error occured.
@@ -37,7 +37,14 @@
  * @apiErrorExample Response (example):
  *     HTTP/1.1 404 Not Found
  *     {
- *       "error": "EmailAlreadyExists"
+ *       "error": "email already registered."
+ *     }
+ *
+ * @apiError ScreenNameAlreadyExists If the user screen name is already used by another user.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "screen name already registered."
  *     }
  *
  * @apiUse miniUserObject
@@ -48,16 +55,16 @@ function postSignUp() {
 }
 // ------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/signin SignIn (Log In)
+ * @api {post} /accounts/signin SignIn (Log In)
  * @apiVersion 0.1.0
  * @apiName PostSignIn
  * @apiGroup Account
  * @apiPermission private
  *
- * @apiSampleRequest localhost:3000/account/signin.json
+ * @apiSampleRequest localhost:3000/accounts/signin.json
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/signin.json
+ * POST localhost:3000/accounts/signin.json
  *
  *
  * @apiDescription SignIn to Ennovate using your email and password if it signIn successfully it returns 200 and a token , but if signIn field it returns 404 and the Error Type.
@@ -91,7 +98,7 @@ function postSignUp() {
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *      "token":"Bearer "+"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
+ *      "token":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
  *     }
  *
  */
@@ -101,16 +108,16 @@ function postSignIn() {
 // ------------------------------------------------------------------------------------------
 
 /**
- * @api {get} /account/settings Account Settings
+ * @api {get} /accounts/settings Account Settings
  * @apiVersion 0.1.0
  * @apiName GetSettings
  * @apiGroup Account
  * @apiPermission private
  *
- * @apiSampleRequest localhost:3000/account/settings.json
+ * @apiSampleRequest localhost:3000/accounts/settings.json
  *
  * @apiExample Example usage:
- * GET localhost:3000/account/settings.json
+ * GET localhost:3000/accounts/settings.json
  *
  *
  * @apiDescription Returns settings for the authenticating user.
@@ -188,17 +195,17 @@ function getProfileBanner() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/remove_profile_banner Remove Profile Banner
+ * @api {post} /accounts/remove_profile_banner Remove Profile Banner
  * @apiVersion 0.1.0
  * @apiName PostRemoveProfileBanner
  * @apiGroup Account
  * @apiPermission private
- * @apiSampleRequest localhost:3000/account/remove_profile_banner.json
+ * @apiSampleRequest localhost:3000/accounts/remove_profile_banner.json
  *
  * @apiDescription Removes the uploaded profile banner for the authenticating user. Returns HTTP 200 upon success.
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/remove_profile_banner.json
+ * POST localhost:3000/accounts/remove_profile_banner.json
  *
  * @apiSuccessExample  Success-Response:
  *     HTTP/1.1 200 OK
@@ -211,12 +218,12 @@ function postRemoveProfileBanner() {
 //---------------------------------------------------------------------------------------------------
 
 /**
- * @api {post} /account/settings Edit Account Settings
+ * @api {post} /accounts/settings Edit Account Settings
  * @apiVersion 0.1.0
  * @apiName PostAccountSettings
  * @apiGroup Account
  * @apiPermission private
- * @apiSampleRequest localhost:3000/account/settings.json
+ * @apiSampleRequest localhost:3000/accounts/settings.json
  *
  * @apiDescription Updates the authenticating user's settings.
  *
@@ -234,7 +241,7 @@ function postRemoveProfileBanner() {
  *    }
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/settings.json?screen_name=Messi_98
+ * POST localhost:3000/accounts/settings.json?screen_name=Messi_98
  *
  * @apiSuccess {Number} ID The user ID Number.
  * @apiSuccess {String} screen_name The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
@@ -258,12 +265,12 @@ function postAccountSettings() {
 
 //---------------------------------------------------------------------------------------------------
 /**
- * @api {post} /account/update_profile_image Update Profile Image
+ * @api {post} /accounts/update_profile_image Update Profile Image
  * @apiVersion 0.1.0
  * @apiName PostUpdateProfileImage
  * @apiGroup Account
  * @apiPermission private
- * @apiSampleRequest localhost:3000/account/update_profile_image.json
+ * @apiSampleRequest localhost:3000/accounts/update_profile_image.json
  *
  * @apiDescription Updates the authenticating user's profile image. Note that this method expects image , not a URL to a raw multipart data.
  * This method asynchronously processes the uploaded file before updating the user's profile image URL. You can either update your local cache the next time you request the user's information, or, at least 5 seconds after uploading the image, ask for the updated URL using GET users / show.
@@ -276,7 +283,7 @@ function postAccountSettings() {
  *     }
  *
  * @apiExample Example usage:
- * POST localhost:3000/account/update_profile_image.json?imageURL="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+ * POST localhost:3000/accounts/update_profile_image.json?imageURL="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
  *
  * @apiUse UserObject
  */
@@ -2281,3 +2288,40 @@ function getNotification() {
 }
 
 //---------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /forget_password Forget Password
+ * @apiVersion 0.1.0
+ * @apiName GetForgetPassword
+ * @apiGroup Forget Password
+ * @apiPermission private
+ *
+ * @apiSampleRequest localhost:3000/forget_password.json
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/forget_password.json
+ *
+ *
+ * @apiDescription Sends a link a to your email where you can change your password.
+ *
+ * @apiParam {String} email [Required] The user email.
+ *
+ * @apiParamExample {json} Request-Example:
+ *    {
+ *      "email":"ali_hamdy98@outlook.com"
+ *    }
+ *
+ * @apiError UserNotFound If the user email is not used or incorrect.
+ *
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "UserNotFound"
+ *     }
+ *
+ */
+function getForgetPassword() {
+  return;
+}
+// ------------------------------------------------------------------------------------------
