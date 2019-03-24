@@ -12,13 +12,13 @@ const router = express.Router();
 
 router.post("/signin", async (req, res) => {
   const { error } = validateSignIn(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({ msg: error.details[0].message });
 
   let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(404).send("UserNotFound");
+  if (!user) return res.status(404).send({ msg: "UserNotFound" });
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(404).send("IncorrectPassword");
+  if (!validPassword) return res.status(404).send({ msg: "IncorrectPassword" });
 
   const token = user.generateAuthToken();
   res.send(token);
@@ -46,13 +46,14 @@ function validateSignIn(req) {
 
 router.post("/signup", async (req, res) => {
   const { error } = validateSignUp(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({ msg: error.details[0].message });
 
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(404).send("email already registered.");
+  if (user) return res.status(404).send({ msg: "email already registered." });
 
   user = await User.findOne({ screen_name: req.body.screen_name });
-  if (user) return res.status(404).send("screen name already registered.");
+  if (user)
+    return res.status(404).send({ msg: "screen name already registered." });
 
   user = new User(
     _.pick(req.body, ["name", "email", "screen_name", "password"])
