@@ -1,71 +1,72 @@
-const Joi = require("joi");
-const bcrypt = require("bcrypt");
-const _ = require("lodash");
-const { User, validateSignUp } = require("../models/user");
-const mongoose = require("mongoose");
-const express = require("express");
-const router = express.Router();
+const Joi = require('joi')
+const bcrypt = require('bcrypt')
+const _ = require('lodash')
+const { User, validateSignUp } = require('../models/user')
+// const mongoose = require('mongoose')
+const express = require('express')
+const router = express.Router()
 
-//------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
 
 // Signin
 
-router.post("/signin", async (req, res) => {
-  const { error } = validateSignIn(req.body);
-  if (error) return res.status(400).send({ msg: error.details[0].message });
+router.post('/signin', async (req, res) => {
+  const { error } = validateSignIn(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
 
-  let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(404).send({ msg: "UserNotFound" });
+  let user = await User.findOne({ email: req.body.email })
+  if (!user) return res.status(404).send({ msg: 'UserNotFound' })
 
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(404).send({ msg: "IncorrectPassword" });
+  const validPassword = await bcrypt.compare(req.body.password, user.password)
+  if (!validPassword) return res.status(404).send({ msg: 'IncorrectPassword' })
 
-  const token = user.generateAuthToken();
-  res.send(token);
-});
+  const token = user.generateAuthToken()
+  res.send(token)
+})
 
 function validateSignIn(req) {
   const schema = {
     email: Joi.string()
       .min(5)
-      .max(255)
+      .max(128)
       .required()
       .email(),
     password: Joi.string()
-      .min(5)
-      .max(255)
+      .min(8)
+      .max(25)
       .required()
-  };
+  }
 
-  return Joi.validate(req, schema);
+  return Joi.validate(req, schema)
 }
 
-//----------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------
 
-//signUp
+// signUp
 
-router.post("/signup", async (req, res) => {
-  const { error } = validateSignUp(req.body);
-  if (error) return res.status(400).send({ msg: error.details[0].message });
+router.post('/signup', async (req, res) => {
+  const { error } = validateSignUp(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
 
-  let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(404).send({ msg: "email already registered." });
+  let user = await User.findOne({ email: req.body.email })
+  if (user) return res.status(404).send({ msg: 'email already registered.' })
 
-  user = await User.findOne({ screen_name: req.body.screen_name });
-  if (user)
-    return res.status(404).send({ msg: "screen name already registered." });
+  user = await User.findOne({ screen_name: req.body.screen_name })
+  if (user) {
+    return res.status(404).send({ msg: 'screen name already registered.' })
+  }
 
   user = new User(
-    _.pick(req.body, ["name", "email", "screen_name", "password"])
-  );
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
+    _.pick(req.body, ['name', 'email', 'screen_name', 'password'])
+  )
+  const salt = await bcrypt.genSalt(10)
+  user.password = await bcrypt.hash(user.password, salt)
+  await user.save()
 
-  const token = user.generateAuthToken();
+  const token = user.generateAuthToken()
   res
-    .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "screen_name", "name", "email", "created_at"]));
-});
+    .header('token', token)
+    .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at']))
+})
 
-module.exports = router;
+module.exports = router
