@@ -1,144 +1,19 @@
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:25:29.543Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:25:30.665Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:26:32.510Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:26:33.556Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:39:36.526Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:39:37.584Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:45:38.515Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:45:39.580Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:47:17.724Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:47:18.789Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T18:50:27.016Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T18:50:28.070Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T19:31:47.927Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T19:31:48.978Z"}
-{"message":"error is not defined","stack":"ReferenceError: error is not defined\n    at router.get (D:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\forget_password.js:40:53)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-22T19:31:52.726Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T19:32:21.729Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T19:32:22.779Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T19:33:49.053Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T19:33:50.095Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T19:37:47.973Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T19:37:49.017Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T19:45:19.804Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T19:45:20.860Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T20:56:34.802Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T20:56:35.845Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:00:31.430Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:00:32.474Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:05:02.220Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:05:03.259Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:08:57.764Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:08:58.818Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:10:12.869Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:10:13.902Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:12:54.329Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:12:55.389Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:13:16.920Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:13:17.979Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:16:53.631Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:16:54.718Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:18:05.300Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:18:06.350Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:21:48.233Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:21:49.278Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:23:29.270Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:23:30.316Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:29:22.353Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:29:23.386Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:29:50.377Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:29:51.416Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:31:46.781Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:31:47.818Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:32:57.972Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:32:59.022Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:36:08.281Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:36:09.341Z"}
-{"message":"smtpTransport is not defined","stack":"ReferenceError: smtpTransport is not defined\n    at router.get (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\forget_password.js:13:32)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-22T21:36:14.667Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:37:44.562Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:37:45.588Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:38:42.832Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:38:43.883Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:41:00.673Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:41:01.715Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:45:04.552Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:45:05.588Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-22T21:45:53.985Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-22T21:45:55.019Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-23T06:29:48.692Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-23T06:29:49.791Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-23T06:30:56.131Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-23T06:30:57.211Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-23T06:34:13.907Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-23T06:34:14.963Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-23T18:01:44.131Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-23T18:01:45.183Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-23T19:18:06.258Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-23T19:18:07.297Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-24T03:35:40.601Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T03:35:41.707Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T10:31:18.755Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T10:31:19.817Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T12:18:39.362Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T12:18:40.426Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:01:25.071Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:01:26.124Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:14:11.954Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:14:13.010Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:19:02.332Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:19:03.387Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:24:39.425Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:24:40.467Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:25:21.476Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:25:22.524Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:25:32.458Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:28:55.905Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:29:15.106Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:29:16.162Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:29:33.404Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:30:46.322Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:32:40.971Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:34:42.658Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:35:55.296Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:35:56.356Z"}
-{"message":"err is not defined","stack":"ReferenceError: err is not defined\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:18:14)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2019-03-24T13:36:06.341Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:37:03.860Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:37:04.922Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-24T13:49:04.087Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-24T13:49:05.149Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-25T06:31:14.363Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-25T06:31:15.494Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-25T06:42:39.012Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-25T06:42:40.048Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-27T03:50:46.412Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T03:50:47.511Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-27T03:51:15.993Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T03:51:17.037Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-27T03:51:58.155Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T03:51:59.210Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-27T09:24:21.257Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T09:24:22.305Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-27T09:26:05.875Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T09:26:06.922Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-27T09:28:08.278Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T09:28:09.329Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-27T09:31:29.037Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T09:31:30.072Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-27T09:36:39.641Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T09:36:40.692Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-27T11:13:14.688Z"}
-{"level":"info","message":"Connected to mongodb://localhost/ennovate...","timestamp":"2019-03-27T11:13:15.740Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-31T16:22:06.651Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-31T16:23:40.522Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T16:23:53.021Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-31T16:24:41.545Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T16:24:54.483Z"}
-{"level":"info","message":"Listening on port 3000...","timestamp":"2019-03-31T17:03:51.509Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T17:04:03.278Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T17:12:21.718Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T17:12:23.610Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T17:14:03.776Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T17:14:15.878Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T17:18:49.959Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T17:19:12.950Z"}
-{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T17:22:17.133Z"}
-{"level":"info","message":"Connected to mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true...","timestamp":"2019-03-31T17:22:29.744Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:26:47.741Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:27:00.857Z"}
+{"level":"info","message":"Email sent to: eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:27:18.226Z"}
+{"level":"info","message":"Email sent to: Eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:27:32.540Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:29:20.562Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:29:33.673Z"}
+{"message":"req.body.email.lowercase is not a function","stack":"TypeError: req.body.email.lowercase is not a function\n    at router.post (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\routes\\accounts.js:59:57)\n    at newFn (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at Route.dispatch (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\route.js:112:3)\n    at newFn (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:281:22\n    at Function.process_params (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:335:12)\n    at next (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:275:10)\n    at Function.handle (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:174:3)\n    at router (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at newFn (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:317:13)\n    at d:\\Documents\\CMPN courses\\Software Engineering\\Spring 2019\\Project\\Our_project\\Ennovate_BK\\node_modules\\express\\lib\\router\\index.js:284:7","level":"error","timestamp":"2019-03-31T21:29:48.153Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:32:42.863Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:32:56.671Z"}
+{"level":"info","message":"Email sent to: eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:33:10.863Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:37:29.663Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:37:48.809Z"}
+{"level":"info","message":"Email sent to: eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:38:04.776Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:40:05.069Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:40:18.294Z"}
+{"level":"info","message":"Email sent to: eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:40:29.848Z"}
+{"level":"info","message":"Listening on port 8080...","timestamp":"2019-03-31T21:53:06.843Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-03-31T21:53:20.550Z"}
+{"level":"info","message":"Email sent to: eng.ahmedwael205@gmail.com","timestamp":"2019-03-31T21:53:29.126Z"}

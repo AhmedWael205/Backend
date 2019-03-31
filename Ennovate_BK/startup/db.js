@@ -9,5 +9,5 @@ module.exports = function () {
       useCreateIndex: true,
       useNewUrlParser: true
     })
-    .then(() => winston.info(`Connected to ${db}...`))
+    .then(() => winston.info(`Connected to MongoDB...`))
 }

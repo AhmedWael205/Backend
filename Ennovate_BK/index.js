@@ -8,6 +8,9 @@ app.use(cors())
 // export ennovate_jwtPrivateKey=secret
 // Or // set ennovate_jwtPrivateKey=secret
 
+// export emailPass=Kokiwawa123
+// Or // set emailPass=Kokiwawa123
+
 require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()

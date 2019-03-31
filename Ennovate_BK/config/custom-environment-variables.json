@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "ennovate_jwtPrivateKey"
+  "jwtPrivateKey": "ennovate_jwtPrivateKey",
+  "pass": "emailPass"
 }

@@ -11,16 +11,21 @@ $ export ennovate_jwtPrivateKey=secret
 Or
 $ set ennovate_jwtPrivateKey=secret
 
-4) To run the unit testing functions, write in the terminal: (Optional)
+4) To Set The Email Password, write in the terminal: (Required)
+$ export emailPass=Kokiwawa123
+Or
+$ set emailPass=Kokiwawa123
+
+5) To run the unit testing functions, write in the terminal: (Optional)
 $ npm test
 
-5) To make sure everything is written in JS Standard, write in the terminal: (Optional) (Ignore Test Files adnd Configration Files)
+6) To make sure everything is written in JS Standard, write in the terminal: (Optional) (Ignore Test Files adnd Configration Files)
 $ standard
 
-6) To set the port number, write in the terminal: (Optional) (Default = 3000)
-$ export PORT=8080
+7) To set the port number, write in the terminal: (Optional) (Default = 8080)
+$ export PORT=3000
 
-7) To run the server, write in the terminal: (Required)
+8) To run the server, write in the terminal: (Required)
 $ npm index.js
 Or To keep running while making changes
 $ nodemon index.js

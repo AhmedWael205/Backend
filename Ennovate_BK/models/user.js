@@ -12,6 +12,8 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    lowercase: true,
+    trim: true,
     required: true,
     minlength: 5,
     maxlength: 128,
@@ -29,11 +31,14 @@ const userSchema = new mongoose.Schema({
   },
   screen_name: {
     type: String,
+    lowercase: true,
+    trim: true,
     required: true,
     minlength: 3,
     maxlength: 15,
     unique: true
   },
+  verified: { type: Boolean, default: false },
   location: String,
   bio: String,
   followers_count: { type: Number, default: 0 },

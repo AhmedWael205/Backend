@@ -1,6 +1,7 @@
 const { User } = require('../models/user')
 const config = require('config')
 const nodemailer = require('nodemailer')
+const winston = require('winston')
 const express = require('express')
 const router = express.Router()
 
@@ -13,8 +14,8 @@ router.get('/', async (req, res) => {
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'EnnovateTeam@gmail.com',
-      pass: 'Kokiwawa123'
+      user: config.get('email'),
+      pass: config.get('pass')
     },
     tls: {
       rejectUnauthorized: false
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
   })
 
   let mailOptions = {
-    from: 'EnnovateTeam@gmail.com',
+    from: config.get('email'),
     to: user.email,
     subject: 'Reset your account password',
     html:
@@ -43,13 +44,11 @@ router.get('/', async (req, res) => {
 
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error)
       return res.status(500).send('Unable to send email')
     } else {
-      console.log('Email sent: ' + info.response)
+      winston.info('Email sent to: ' + user.email)
       return res.json({
-        success: true,
-        message: 'Check your mail to reset your password.'
+        msg: 'Check your mail to reset your password.'
       })
     }
   })

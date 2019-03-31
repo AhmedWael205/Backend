@@ -9,6 +9,7 @@ const notifications = require('../routes/notifications')
 const saved_searches = require('../routes/saved_searches')
 const statuses = require('../routes/statuses') */
 const forgetPassword = require('../routes/forgetPassword')
+const verifyEmail = require('../routes/verifyEmail')
 const error = require('../middleware/error')
 
 module.exports = function (app) {
@@ -23,5 +24,6 @@ module.exports = function (app) {
   app.use('/statuses', statuses)
   app.use('/users', users) */
   app.use('/forgetPassword', forgetPassword)
+  app.use('/verifyEmail', verifyEmail)
   app.use(error)
 }

@@ -2,5 +2,7 @@
   "jwtPrivateKey": "",
   "dbUrl": "mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/test?retryWrites=true",
   "dbLocalUrl": "mongodb://localhost/ennovate",
-  "Url": "https://localhost:8080/"
+  "Url": "http://localhost:8080/",
+  "email": "EnnovateTeam@gmail.com",
+  "pass": ""
 }
