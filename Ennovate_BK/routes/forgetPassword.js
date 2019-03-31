@@ -11,30 +11,34 @@ router.get('/', async (req, res) => {
   const token = user.generateAuthToken()
 
   let transporter = nodemailer.createTransport({
-    host: 'box1109.bluehost.com',
-    port: 465,
+    service: 'gmail',
+    auth: {
+      user: 'EnnovateTeam@gmail.com',
+      pass: 'Kokiwawa123'
+    },
     tls: {
       rejectUnauthorized: false
     }
   })
 
   let mailOptions = {
+    from: 'EnnovateTeam@gmail.com',
     to: user.email,
     subject: 'Reset your account password',
     html:
       '<h4><b>Reset Password</b></h4>' +
       '<p>To reset your password, complete this form:</p>' +
-      '<a href=' +
+      '<a href="' +
       config.get('Url') +
       'reset_password/' +
       token +
-      '">' +
+      '" > ' +
       config.get('Url') +
       'reset_password/' +
       token +
       '</a>' +
       '<br><br>' +
-      '<p>--Team</p>'
+      '<p>--Ennovate Team</p>'
   }
 
   await transporter.sendMail(mailOptions, function (error, info) {
