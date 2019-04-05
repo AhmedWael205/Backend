@@ -48,10 +48,10 @@ const userSchema = new mongoose.Schema({
   novas_IDs: [mongoose.Schema.Types.ObjectId],
   favorites_novas_IDs: [mongoose.Schema.Types.ObjectId],
   profile_background_color: String,
-  profile_background_image_url: String,
-  profile_image_url: String,
-  default_profile: Boolean,
-  default_profile_image: Boolean,
+  profile_background_image_url: { type: String, default: 'http://i65.tinypic.com/21exjbc.jpg' },
+  profile_image_url: { type: String, default: 'http://i65.tinypic.com/2mxrh8y.jpg' },
+  default_profile: { type: Boolean, default: true },
+  default_profile_image: { type: Boolean, default: true },
   notification_object: {
     type: new mongoose.Schema({
       renova_list: {

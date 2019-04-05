@@ -5,8 +5,8 @@ const followers = require('../routes/followers')
 const followings = require('../routes/followings')
 const friendships = require('../routes/friendships')
 const notifications = require('../routes/notifications')
-const saved_searches = require('../routes/saved_searches')
-const statuses = require('../routes/statuses') */
+const saved_searches = require('../routes/saved_searches')  */
+const statuses = require('../routes/statuses')
 const users = require('../routes/users')
 const forgetPassword = require('../routes/forgetPassword')
 const verifyEmail = require('../routes/verifyEmail')
@@ -20,8 +20,8 @@ module.exports = function (app) {
   app.use('/followings', followings)
   app.use('/friendships', friendships)
   app.use('/notifications', notifications)
-  app.use('/saved_searches', saved_searches)
-  app.use('/statuses', statuses) */
+  app.use('/saved_searches', saved_searches)  */
+  app.use('/statuses', statuses)
   app.use('/users', users)
   app.use('/forgetPassword', forgetPassword)
   app.use('/verifyEmail', verifyEmail)
