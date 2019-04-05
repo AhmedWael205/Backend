@@ -1,5 +1,5 @@
 {
   "jwtPrivateKey": "1234",
   "dbUrl": "mongodb://localhost/ennovate_test",
-  "Url": "localhost:3000/"
+  "Url": "localhost:8080/"
 }

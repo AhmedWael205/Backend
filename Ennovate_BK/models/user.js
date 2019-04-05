@@ -89,7 +89,7 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model('User', userSchema)
 
-function validateUser(user) {
+function validateUser (user) {
   const schema = {
     name: Joi.string()
       .min(3)

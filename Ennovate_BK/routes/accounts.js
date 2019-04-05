@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const winston = require('winston')
 const config = require('config')
 const { User, validateSignUp } = require('../models/user')
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
 
@@ -32,7 +32,7 @@ router.post('/signin', async (req, res) => {
   res.send({ token: token })
 })
 
-function validateSignIn(req) {
+function validateSignIn (req) {
   const schema = {
     email: Joi.string()
       .min(5)
@@ -89,7 +89,7 @@ router.post('/signup', async (req, res) => {
     to: user.email,
     subject: 'Verify your account',
     html:
-      '<h4><b>Reset Password</b></h4>' +
+      '<h4><b>Verify your Account</b></h4>' +
       '<p>To verify your account, click the following link:</p>' +
       '<a href="' +
       config.get('Url') +
@@ -106,6 +106,7 @@ router.post('/signup', async (req, res) => {
 
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
+      console.log(error)
       return res.status(500).send('Unable to send email')
     } else {
       winston.info('Email sent to: ' + user.email)
@@ -116,13 +117,11 @@ router.post('/signup', async (req, res) => {
   })
 })
 
-
 // ----------------------------------------------------------------------------------
 
 // verify
 
 router.get('/verify/:token', async (req, res) => {
-
   const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'))
 
   const user = await User.findOneAndUpdate(decoded._id,
@@ -131,9 +130,7 @@ router.get('/verify/:token', async (req, res) => {
     }, { new: true })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
   return res.status(200).send('Your Account has been verified')
-
-});
-
+})
 
 // ----------------------------------------------------------------------------------
 module.exports = router
