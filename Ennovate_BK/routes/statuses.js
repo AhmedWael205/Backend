@@ -4,6 +4,7 @@ const _ = require('lodash')
 var pick = require('object.pick')
 const winston = require('winston')
 const { User } = require('../models/user')
+const { Following } = require('../models/following')
 const config = require('config')
 const mongoose = require('mongoose')
 const Nova = require('../models/nova')
@@ -21,20 +22,41 @@ router.get('/home_timeline', async (req, res) => {
   const excludeReplies = req.body.exclude_replies || true
   const includeEntities = req.body.include_entities || false
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-  const novas = await Nova // # TODO Zabtha
-    .find({ user: decoded._id })
-    .sort({ _id: 1 })
-    .limit(count)
+
+  const following = await Following
+    .find({ userID: decoded._id })
 
   if (!excludeReplies && includeEntities) {
+    let novas = await Nova
+      .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
+      .sort({ _id: 1 })
+      .limit(count)
     return res.send(novas)
   } else if (excludeReplies && includeEntities) {
-    return res.send(novas.select('-entitiesObject')) // # TODO Zabtha
-  } else if (!excludeReplies && !includeEntities) { 
-    return res.send(novas.select('-entitiesObject')) // # TODO Zabtha
+    let novas = await Nova
+      .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
+      .sort({ _id: 1 })
+      .limit(count)
+      .select({ entitiesObject: -1 })
+    return res.send(novas)
+  } else if (!excludeReplies && !includeEntities) {
+    let novas = await Nova
+      .find({ $and: [
+        { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
+        { in_reply_to_status_id: null } ] })
+      .sort({ _id: 1 })
+      .limit(count)
+    return res.send(novas)
   } else {
-    return res.send(_.pick(novas, ['text'])) // # TODO Zabtha
-  } 
+    let novas = await Nova
+      .find({ $and: [
+        { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
+        { in_reply_to_status_id: null } ] })
+      .sort({ _id: 1 })
+      .limit(count)
+      .select({ entitiesObject: -1 })
+    return res.send(novas)
+  }
 })
 
 // ------------------------------------------------------------------------------------------

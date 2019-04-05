@@ -11,9 +11,9 @@ const novaSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 256
   },
-  in_reply_to_status_id: mongoose.Schema.Types.ObjectId,
-  in_reply_to_user_id: mongoose.Schema.Types.ObjectId,
-  in_reply_to_screen_name: String,
+  in_reply_to_status_id: { type: mongoose.Schema.Types.ObjectId, default: null },
+  in_reply_to_user_id: { type: mongoose.Schema.Types.ObjectId, default: null },
+  in_reply_to_screen_name: { type: String, default: null },
   user: mongoose.Schema.Types.ObjectId,
   reply_count: { type: Number, default: 0 },
   renova_count: { type: Number, default: 0 },
