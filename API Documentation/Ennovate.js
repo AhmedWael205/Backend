@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------------------
-//1- Accounts and users
+// 1- Accounts and users
 // ------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------
@@ -37,20 +37,125 @@
  * @apiErrorExample Response (example):
  *     HTTP/1.1 404 Not Found
  *     {
- *       "error": "email already registered."
+ *       "msg": "email already registered."
+ *     }
+ *
+ * @apiError MinScreenNameLengthError If the user Entered a screen name less than 3 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"screen_name" length must be at least 3 characters long'
+ *     }
+ *
+ * @apiError ScreenNameInvalidCharacter If the user Entered a screen name with an invalid character.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": "\"screen_name\" must only contain alpha-numeric and underscore characters"
+ *     }
+ *
+ * @apiError PasswordIsRequired If the user doesn't enter the password value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"password\" is required"
+ *     }
+ *
+ * @apiError NameIsRequired If the user doesn't enter the name value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"name\" is required"
+ *     }
+ *
+ * @apiError ScreenNameIsRequired If the user doesn't enter the screen name value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"screen_name\" is required"
+ *     }
+ *
+ * @apiError EmailIsRequired If the user doesn't enter the email value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"email\" is required"
+ *     }
+ *
+ * @apiError MaxScreenNameLengthError If the user Entered a screen name more than 15 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"screen_name" length must be at less than or equal to 15 characters long'
+ *     }
+ *
+ * @apiError MinNameLengthError If the user Entered a name less than 3 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"name" length must be at least 3 characters long'
+ *     }
+ *
+ * @apiError MaxNameLengthError If the user Entered a name more than 15 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"name" length must be at less than or equal to 15 characters long'
+ *     }
+ *
+ * @apiError MinEmailLengthError If the user Entered a name less than 5 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" length must be at least 5 characters long'
+ *     }
+ *
+ * @apiError MaxEmailLengthError If the user Entered a name more than 128 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" length must be at less than or equal to 128 characters long'
+ *     }
+ *
+ * @apiError MinPasswordLengthError If the user Entered a password less than 8 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"password" length must be at least 8 characters long'
+ *     }
+ *
+ * @apiError MaxPasswordLengthError If the user Entered a password more than 25 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"passsword" length must be at less than or equal to 25 characters long'
+ *     }
+ *
+ * @apiError EmailError If the user Entered an invalid Email.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" must be valid email'
  *     }
  *
  * @apiError ScreenNameAlreadyExists If the user screen name is already used by another user.
  * @apiErrorExample Response (example):
  *     HTTP/1.1 404 Not Found
  *     {
- *       "error": "screen name already registered."
+ *       "msg": "screen name already registered."
+ *     }
+ *
+ * @apiError UnableToSendEmail If the user Entered an invalid Email.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "msg":'Unable to send email'
  *     }
  *
  * @apiUse miniUserObject
  *
  */
-function postSignUp() {
+function postSignUp(){
   return;
 }
 // ------------------------------------------------------------------------------------------
@@ -92,12 +197,68 @@ function postSignUp() {
  *     {
  *       "error": "IncorrectPassword"
  *     }
- *.
- * @apiSuccess {String} token User Hashed Password and it's Type.
+ * 
+ * @apiError PasswordIsRequired If the user doesn't enter the password value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"password\" is required"
+ *     }
+ * 
+ * @apiError EmailIsRequired If the user doesn't enter the email value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"email\" is required"
+ *     }
+ * 
+ * @apiError MinEmailLengthError If the user Entered a name less than 5 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" length must be at least 5 characters long'
+ *     }
  *
+ * @apiError MaxEmailLengthError If the user Entered a name more than 128 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" length must be at less than or equal to 128 characters long'
+ *     }
+ *
+ * @apiError MinPasswordLengthError If the user Entered a password less than 8 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"password" length must be at least 8 characters long'
+ *     }
+ *
+ * @apiError MaxPasswordLengthError If the user Entered a password more than 25 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"passsword" length must be at less than or equal to 25 characters long'
+ *     }
+ * 
+ * @apiError EmailError If the user Entered an invalid Email.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"email" must be valid email'
+ *     }
+ *
+ * @apiSuccess {String} token User Hashed Password and it's Type.
+ * @apiSuccess {String} msg A message to warn you that this user is not verified.
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
+ *      "token":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
+ *     }
+ * 
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "msg": "Please verify your email",
  *      "token":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
  *     }
  *
@@ -331,7 +492,7 @@ function getSavedSearches() {
   return;
 }
 
-//---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
 /**
  * @api {post} /saved_searches/destroy/:id Delete search using ID
  * @apiVersion 0.1.0
@@ -370,7 +531,7 @@ function postDeleteSearchByID() {
   return;
 }
 
-//---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
 
 /**
  * @api {post} /saved_searches/delete_all Delete all Searches

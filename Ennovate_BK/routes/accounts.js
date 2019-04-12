@@ -107,7 +107,7 @@ router.post('/signup', async (req, res) => {
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error)
-      return res.status(500).send('Unable to send email')
+      return res.status(500).send({ msg: 'Unable to send email' })
     } else {
       winston.info('Email sent to: ' + user.email)
       return res

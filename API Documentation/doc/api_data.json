@@ -303,6 +303,48 @@
             "optional": false,
             "field": "IncorrectPassword",
             "description": "<p>If the user entered a wrong password.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "PasswordIsRequired",
+            "description": "<p>If the user doesn't enter the password value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailIsRequired",
+            "description": "<p>If the user doesn't enter the email value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinEmailLengthError",
+            "description": "<p>If the user Entered a name less than 5 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxEmailLengthError",
+            "description": "<p>If the user Entered a name more than 128 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinPasswordLengthError",
+            "description": "<p>If the user Entered a password less than 8 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxPasswordLengthError",
+            "description": "<p>If the user Entered a password more than 25 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailError",
+            "description": "<p>If the user Entered an invalid Email.</p>"
           }
         ]
       },
@@ -314,7 +356,42 @@
         },
         {
           "title": "Response (example):",
-          "content": "    HTTP/1.1 404 Not Found\n    {\n      \"error\": \"IncorrectPassword\"\n    }\n.",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"IncorrectPassword\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"password\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"email\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" length must be at least 5 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" length must be at less than or equal to 128 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"password\" length must be at least 8 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"passsword\" length must be at less than or equal to 25 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" must be valid email'\n}",
           "type": "json"
         }
       ]
@@ -328,6 +405,13 @@
             "optional": false,
             "field": "token",
             "description": "<p>User Hashed Password and it's Type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>A message to warn you that this user is not verified.</p>"
           }
         ]
       },
@@ -335,6 +419,11 @@
         {
           "title": "Success-Response:",
           "content": "HTTP/1.1 200 OK\n{\n \"token\":\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"msg\": \"Please verify your email\",\n \"token\":\"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
           "type": "json"
         }
       ]
@@ -422,20 +511,185 @@
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "MinScreenNameLengthError",
+            "description": "<p>If the user Entered a screen name less than 3 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ScreenNameInvalidCharacter",
+            "description": "<p>If the user Entered a screen name with an invalid character.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "PasswordIsRequired",
+            "description": "<p>If the user doesn't enter the password value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NameIsRequired",
+            "description": "<p>If the user doesn't enter the name value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ScreenNameIsRequired",
+            "description": "<p>If the user doesn't enter the screen name value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailIsRequired",
+            "description": "<p>If the user doesn't enter the email value.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxScreenNameLengthError",
+            "description": "<p>If the user Entered a screen name more than 15 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinNameLengthError",
+            "description": "<p>If the user Entered a name less than 3 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxNameLengthError",
+            "description": "<p>If the user Entered a name more than 15 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinEmailLengthError",
+            "description": "<p>If the user Entered a name less than 5 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxEmailLengthError",
+            "description": "<p>If the user Entered a name more than 128 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinPasswordLengthError",
+            "description": "<p>If the user Entered a password less than 8 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxPasswordLengthError",
+            "description": "<p>If the user Entered a password more than 25 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailError",
+            "description": "<p>If the user Entered an invalid Email.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "ScreenNameAlreadyExists",
             "description": "<p>If the user screen name is already used by another user.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UnableToSendEmail",
+            "description": "<p>If the user Entered an invalid Email.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"email already registered.\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"msg\": \"email already registered.\"\n}",
           "type": "json"
         },
         {
           "title": "Response (example):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"screen name already registered.\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"screen_name\" length must be at least 3 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": \"\\\"screen_name\\\" must only contain alpha-numeric and underscore characters\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"password\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"name\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"screen_name\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"email\\\" is required\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"screen_name\" length must be at less than or equal to 15 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"name\" length must be at least 3 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"name\" length must be at less than or equal to 15 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" length must be at least 5 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" length must be at less than or equal to 128 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"password\" length must be at least 8 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"passsword\" length must be at less than or equal to 25 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"email\" must be valid email'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"msg\": \"screen name already registered.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"msg\":'Unable to send email'\n}",
           "type": "json"
         }
       ]
