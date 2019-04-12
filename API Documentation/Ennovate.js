@@ -1126,17 +1126,15 @@ function getUsersShow() {
 
  * @apiParam {Number} user_ID [Required] The ID of the user to follow.
  * @apiParam {String} screen_name [Optional] The screen name of the user to follow.
- * @apiParam {Boolean} follow [Optional] Enable notifications for the target user.
  *
  * @apiParamExample {json} Request-Example:
  *     {
  *       "user_ID":783214,
  *       "screen_name":"noradio",
- *       "follow":true
  *     }
  *
  * @apiExample Example usage:
- * POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true
+ * POST localhost:3000/friendships/create
  *
  * @apiSuccess {Object} users The User Required object.
  * @apiSuccess {Number} users.ID The user's ID.
@@ -1150,7 +1148,7 @@ function getUsersShow() {
  *         {
  *              user-object,
  *              "status":{nova-object}
- *         }    
+ *         }
  */
 function postFriendshipsCreate() {
   return;

@@ -133,4 +133,67 @@ router.get('/verify/:token', async (req, res) => {
 })
 
 // ----------------------------------------------------------------------------------
+
+// Edit Accounts Settings
+
+router.post('/settings', async (req, res) => {
+  const { error } = validateSettings(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send('The user with the nogiven ID was not found.')
+
+  const screen_name = req.body.screen_name || user.screen_name
+  const name = req.body.name || user.name
+  const location = req.body.location || user.location
+  const bio = req.body.bio || user.bio
+
+  user = await User.findOneAndUpdate(decoded._id,
+    {
+      screen_name: screen_name,
+      name: name,
+      location: location,
+      bio: bio
+    }, { new: true })
+
+  return res.send(_.pick(user, ['_id', 'screen_name', 'name', 'location', 'bio']))
+})
+
+function validateSettings (user) {
+  const schema = {
+    name: Joi.string()
+      .min(3)
+      .max(15),
+    screen_name: Joi.string()
+      .min(3)
+      .max(15)
+      .token(),
+    location: Joi.string()
+      .max(100),
+    bio: Joi.string()
+      .max(255)
+  }
+
+  return Joi.validate(user, schema)
+}
+
+// ----------------------------------------------------------------------------------
+
+// Edit Accounts Settings
+
+router.get('/settings', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send('The user with the nogiven ID was not found.')
+
+  return res.send(_.pick(user, ['_id', 'screen_name', 'name', 'location', 'bio']))
+})
+
 module.exports = router

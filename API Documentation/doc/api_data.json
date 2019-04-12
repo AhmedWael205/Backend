@@ -2586,20 +2586,13 @@
             "optional": false,
             "field": "screen_name",
             "description": "<p>[Optional] The screen name of the user to follow.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Boolean",
-            "optional": false,
-            "field": "follow",
-            "description": "<p>[Optional] Enable notifications for the target user.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\",\n  \"follow\":true\n}",
+          "content": "{\n  \"user_ID\":783214,\n  \"screen_name\":\"noradio\",\n}",
           "type": "json"
         }
       ]
@@ -2607,7 +2600,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "POST localhost:3000/friendships/create.json?user_id=USER_ID_TO_FOLLOW&follow=true",
+        "content": "POST localhost:3000/friendships/create",
         "type": "json"
       }
     ],
