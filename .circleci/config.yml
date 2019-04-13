@@ -1,14 +1,16 @@
 version: 2
 jobs:
   test:
-    working_directory: ~/Backend/Ennovate_BK
     docker:
       - image: circleci/node:latest
+    working_directory: ~/Backend/Ennovate_BK
     steps:
       - checkout
-      - run: npm test
+      - run:
+            -command: npm test
+            -background
 workflows:
   version: 2
-  build_and_test:
+  test:
     jobs:
       - test
