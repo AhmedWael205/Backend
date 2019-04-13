@@ -24,7 +24,13 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: npm test
+      - run: |
+      mkdir Backend
+      cd Backend
+      git clone https://AyahElSamadoni:ayahsamadoni1@github.com/AyahElSamadoni/Backend
+      cd /Backend/Ennovate_BK
+      npm i
+      npm test
 workflows:
   version: 2
   build_and_test:
