@@ -1,24 +1,5 @@
 version: 2
 jobs:
-  build:
-    working_directory: ~/Backend/Ennovate_BK
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout:
-          path: ~/Backend
-      - run:
-          name: Update npm
-          command: npm i
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install npm wee
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
   test:
     working_directory: ~/Backend/Ennovate_BK
     docker:
@@ -26,16 +7,13 @@ jobs:
     steps:
       - checkout:
           path: ~/Backend
-      - run: npm install jest    
+      - run: npm i   
       - run: npm test --forceExit 
 workflows:
   version: 2
-  build_and_test:
+  test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - test
           filters:
             branches:
               only: master
