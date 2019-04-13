@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/frontend
+    working_directory: ~/Backend/Ennovate_BK
     docker:
       - image: circleci/node:latest
     steps:
