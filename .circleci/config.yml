@@ -8,7 +8,7 @@ jobs:
       - checkout:
           path: ~/Backend
       - run: npm i   
-      - run: npm test --runInBand
+      - run: npm test 
 workflows:
   version: 2
   test:
