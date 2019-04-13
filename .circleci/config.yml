@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run: 
           command:|
-      mkdir Backend
+      mkdir -p Backend
       cd Backend
       git clone https://AyahElSamadoni:ayahsamadoni1@github.com/AyahElSamadoni/Backend
       cd /Backend/Ennovate_BK
