@@ -24,7 +24,8 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: |
+      - run: 
+          command:|
       mkdir Backend
       cd Backend
       git clone https://AyahElSamadoni:ayahsamadoni1@github.com/AyahElSamadoni/Backend
