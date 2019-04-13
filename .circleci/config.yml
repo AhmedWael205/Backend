@@ -8,7 +8,7 @@ jobs:
       - checkout:
           path: ~/Backend
       - run: npm i   
-      - run: npm test --forceExit --silent
+      - run: npm test --silent
 workflows:
   version: 2
   test:
