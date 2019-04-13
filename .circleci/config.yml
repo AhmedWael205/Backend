@@ -1,36 +1,36 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Backend/Ennovate_BK
+    working_directory: ~/Backend
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
       - run:
           name: Update npm
-          command: 'sudo npm install -g npm@latest'
+          command: |
+          cd Ennovate_BK
+          npm i
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install npm wee
-          command: npm install
+          command: |
+          cd Ennovate_BK
+          npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
   test:
-    working_directory: ~/Backend/Ennovate_BK
+    working_directory: ~/Backend
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
       - run: 
           command:|
-      mkdir -p Backend
-      cd Backend
-      git clone https://AyahElSamadoni:ayahsamadoni1@github.com/AyahElSamadoni/Backend
-      cd /Backend/Ennovate_BK
-      npm i
+      cd Ennovate_BK    
       npm test
 workflows:
   version: 2
