@@ -6,7 +6,7 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: cd Ennovate_BK, npm test
+      - run: "cd Ennovate_BK", "npm test"
 workflows:
   version: 2
   build_and_test:
