@@ -23,6 +23,7 @@ jobs:
     working_directory: ~/Backend/Ennovate_BK
     docker:
       - image: circleci/node:latest
+      - image: circleci/jest:latest
     steps:
       - checkout:
           path: ~/Backend
