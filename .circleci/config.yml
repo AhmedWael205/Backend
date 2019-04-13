@@ -27,7 +27,7 @@ jobs:
       - checkout:
           path: ~/Backend
       - run: npm install jest    
-      - run: npm test
+      - run: npm test --forceExit 
 workflows:
   version: 2
   build_and_test:
