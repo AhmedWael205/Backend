@@ -23,8 +23,7 @@ router.get('/home_timeline', async (req, res) => {
   const includeEntities = req.body.include_entities || false
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
-  const following = await Following
-    .find({ userID: decoded._id })
+  const following = await Following.findOne({ sourceID: decoded._id })
 
   if (!excludeReplies && includeEntities) {
     let novas = await Nova
@@ -57,6 +56,16 @@ router.get('/home_timeline', async (req, res) => {
       .select({ entitiesObject: -1 })
     return res.send(novas)
   }
+})
+
+// ------------------------------------------------------------------------------------------
+
+// Update Nova
+
+router.post('/update', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 })
 
 // ------------------------------------------------------------------------------------------

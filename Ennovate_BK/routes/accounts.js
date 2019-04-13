@@ -4,6 +4,8 @@ const _ = require('lodash')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const winston = require('winston')
+const multer = require('multer');
+const path = require('path');
 const config = require('config')
 const { User, validateSignUp } = require('../models/user')
 // const mongoose = require('mongoose')
@@ -124,7 +126,7 @@ router.post('/signup', async (req, res) => {
 router.get('/verify/:token', async (req, res) => {
   const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'))
 
-  const user = await User.findOneAndUpdate(decoded._id,
+  const user = await User.findOneAndUpdate({ _id: decoded._id },
     {
       verified: true
     }, { new: true })
@@ -144,23 +146,31 @@ router.post('/settings', async (req, res) => {
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-  var user = await User.findOne({ _id: decoded._id })
-  if (!user) return res.status(404).send('The user with the nogiven ID was not found.')
 
-  const screen_name = req.body.screen_name || user.screen_name
+  const user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send('The user with the given ID was not found.')
+
+  var screenName = req.body.screen_name
+  if (screenName) {
+    var user2 = await User.findOne({ screen_name: screenName })
+    if (user2) return res.status(404).send('screen name is already used')
+  } else {
+    screenName = user.screen_name
+  }
   const name = req.body.name || user.name
   const location = req.body.location || user.location
   const bio = req.body.bio || user.bio
 
-  user = await User.findOneAndUpdate(decoded._id,
-    {
-      screen_name: screen_name,
-      name: name,
-      location: location,
-      bio: bio
+  const user3 = await User.findOneAndUpdate({ _id: decoded._id },
+    { $set:
+      {
+        screen_name: screenName,
+        name: name,
+        location: location,
+        bio: bio }
     }, { new: true })
 
-  return res.send(_.pick(user, ['_id', 'screen_name', 'name', 'location', 'bio']))
+  return res.send(_.pick(user3, ['_id', 'screen_name', 'name', 'location', 'bio']))
 })
 
 function validateSettings (user) {
@@ -183,7 +193,7 @@ function validateSettings (user) {
 
 // ----------------------------------------------------------------------------------
 
-// Edit Accounts Settings
+// Accounts Settings
 
 router.get('/settings', async (req, res) => {
   const token = req.headers['token']
@@ -191,9 +201,58 @@ router.get('/settings', async (req, res) => {
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
   var user = await User.findOne({ _id: decoded._id })
-  if (!user) return res.status(404).send('The user with the nogiven ID was not found.')
+  if (!user) return res.status(404).send('The user with the given ID was not found.')
 
   return res.send(_.pick(user, ['_id', 'screen_name', 'name', 'location', 'bio']))
 })
 
+// ----------------------------------------------------------------------------------
+
+// Update Profile Image
+
+// Set The Storage Engine
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+
+// Init Upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  }
+}).single('myImage')
+
+// Check File Type
+function checkFileType (file, cb) {
+// Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true)
+  } else {
+    cb('Error: Images Only!')
+  }
+}
+
+router.post('/update_profile_image', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send('The user with the given ID was not found.')
+  upload.single('profileImage')
+  console.log(req.file)
+})
+
+// ----------------------------------------------------------------------------------
 module.exports = router
