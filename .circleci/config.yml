@@ -24,6 +24,7 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+      - run: cd Ennovate_BK
       - run: npm test
 workflows:
   version: 2
