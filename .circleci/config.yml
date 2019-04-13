@@ -19,6 +19,7 @@ jobs:
           paths:
             - node_modules
   test:
+    working_directory: ~/Backend/Ennovate_BK
     docker:
       - image: circleci/node:latest
     steps:
