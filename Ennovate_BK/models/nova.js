@@ -41,4 +41,19 @@ const novaSchema = new mongoose.Schema({
 
 const Nova = mongoose.model('Nova', novaSchema)
 
+
+
+function validateNova (Nova) {
+  const schema = {
+  text: Joi.string()
+  .min(1)
+  .max(256)
+  .required()
+  }
+  return Joi.validate(Nova, schema)
+  }
+
+
+
+
 exports.Nova = Nova

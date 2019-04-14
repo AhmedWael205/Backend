@@ -29,9 +29,9 @@ router.post('/signin', async (req, res) => {
   const token = user.generateAuthToken()
 
   if (!user.verified) {
-    return res.send({ msg: 'Please verify your email', token: token, user })
+    return res.send({ msg: 'Please verify your email', token: token })
   }
-  res.send({ token: token, user })
+  res.send({ token: token })
 })
 
 function validateSignIn (req) {
@@ -114,8 +114,7 @@ router.post('/signup', async (req, res) => {
       winston.info('Email sent to: ' + user.email)
       return res
         .header('token', token)
-        .send(user)
-      // .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
+        .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
     }
   })
 })
