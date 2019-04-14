@@ -62,12 +62,41 @@ router.get('/home_timeline', async (req, res) => {
 
 // Update Nova
 
-router.post('/update', async (req, res) => {
+/*router.post('/update', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 })
-
+*/
 // ------------------------------------------------------------------------------------------
+
+router.post('/statuses', async (req, res) => {
+  const { error } = validateNova(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+  
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  
+  const user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send('The user with the given ID was not found.')
+  
+  if (req.body.in_reply_to_status_id)
+  {
+  const inreplyid = await Nova.findOne({ _id: req.body.in_reply_to_status_id})
+  if (!inreplyid) return res.status(404).send('The Nova with the given ID was not found')
+  }
+  
+  // if (media ids)
+  
+  //if (place id)
+  
+  //if (display coordinates)
+  
+  //let nova = new Nova({text:req.body.text})
+
+})
+
 
 module.exports = router
