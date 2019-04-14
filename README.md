@@ -8,13 +8,9 @@ $ npm i
 
 3) To Set The private Key, write in the terminal: (Required)
 $ export ennovate_jwtPrivateKey=secret
-Or
-$ set ennovate_jwtPrivateKey=secret
 
 4) To Set The Email Password, write in the terminal: (Required)
 $ export emailPass=Kokiwawa123
-Or
-$ set emailPass=Kokiwawa123
 
 5) To run the unit testing functions, write in the terminal: (Optional)
 $ npm test
@@ -26,6 +22,6 @@ $ standard
 $ export PORT=3000
 
 8) To run the server, write in the terminal: (Required)
-$ npm index.js
+$ node index.js
 Or To keep running while making changes
 $ nodemon index.js
