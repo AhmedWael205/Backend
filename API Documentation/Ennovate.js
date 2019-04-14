@@ -155,7 +155,7 @@
  * @apiUse miniUserObject
  *
  */
-function postSignUp(){
+function postSignUp() {
   return;
 }
 // ------------------------------------------------------------------------------------------
@@ -197,21 +197,21 @@ function postSignUp(){
  *     {
  *       "error": "IncorrectPassword"
  *     }
- * 
+ *
  * @apiError PasswordIsRequired If the user doesn't enter the password value.
  * @apiErrorExample Response (example):
  *     HTTP/1.1 400 Bad Request
  *     {
  *        "msg": "\"password\" is required"
  *     }
- * 
+ *
  * @apiError EmailIsRequired If the user doesn't enter the email value.
  * @apiErrorExample Response (example):
  *     HTTP/1.1 400 Bad Request
  *     {
  *        "msg": "\"email\" is required"
  *     }
- * 
+ *
  * @apiError MinEmailLengthError If the user Entered a name less than 5 characters long.
  * @apiErrorExample Response (example):
  *     HTTP/1.1 400 Bad Request
@@ -239,7 +239,7 @@ function postSignUp(){
  *     {
  *       "msg": '"passsword" length must be at less than or equal to 25 characters long'
  *     }
- * 
+ *
  * @apiError EmailError If the user Entered an invalid Email.
  * @apiErrorExample Response (example):
  *     HTTP/1.1 400 Bad Request
@@ -254,7 +254,7 @@ function postSignUp(){
  *     {
  *      "token":"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
  *     }
- * 
+ *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
@@ -390,17 +390,76 @@ function postRemoveProfileBanner() {
  *
  * @apiParam {String} screen_name [Optional] The screen name, handle, or alias that this user identifies themselves with. screen_names are unique but subject to change. Use ID as a user identifier whenever possible.
  * @apiParam {String} name [Optional] The user name as they have defined it , Not necessairly a person name.
- * @apiParam {String} location [Nullable] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
- * @apiParam {String} bio [Nullable] The user's biographical.
+ * @apiParam {String} location [Optional] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.
+ * @apiParam {String} bio [Optional] The user's biographical.
  *
  * @apiParamExample {json} Request-Example:
  *    {
  *      "screen_name": "Messi_98",
  *      "name":"Ali Hamdy",
- *      "location":null,
- *      "bio":null
+ *      "location":"testLoc",
+ *      "bio":"testBio"
  *    }
+ * 
+ * @apiError ScreenNameAlreadyExists If the user screen name is already used by another user.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "msg": "screen name already registered."
+ *     }
  *
+ * 
+ * @apiError MinScreenNameLengthError If the user Entered a screen name less than 3 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"screen_name" length must be at least 3 characters long'
+ *     }
+ *
+ * @apiError ScreenNameInvalidCharacter If the user Entered a screen name with an invalid character.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": "\"screen_name\" must only contain alpha-numeric and underscore characters"
+ *     }
+ *
+ * 
+ * @apiError MaxScreenNameLengthError If the user Entered a screen name more than 15 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"screen_name" length must be at less than or equal to 15 characters long'
+ *     }
+ * 
+ *  @apiError MinNameLengthError If the user Entered a name less than 3 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"name" length must be at least 3 characters long'
+ *     }
+ *
+ * @apiError MaxNameLengthError If the user Entered a name more than 15 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"name" length must be at less than or equal to 15 characters long'
+ *     }
+ *
+ * 
+ *  @apiError MaxBioLengthError If the user Entered bio more than 255 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *  "msg": '"bio" length must be less than or equal to 255 characters  long'
+ *      }
+ *
+ *  @apiError MaxLocationLengthError If the user Entered location more than 255 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *  "msg": '"location" length must be less than or equal to 100 characters long'
+ *      }
+
  * @apiExample Example usage:
  * POST localhost:3000/accounts/settings.json?screen_name=Messi_98
  *
