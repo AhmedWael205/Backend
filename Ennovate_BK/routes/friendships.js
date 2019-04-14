@@ -97,7 +97,7 @@ router.post('/Destroy', async (req, res) => {
       })
      if(follow) 
       {
-        await User.deleteOne({sourceID: decoded._id,friendID: user2._id})
+        await Following.deleteOne({sourceID: decoded._id,friendID: user2._id})
       }
      else return res.status(404).send({ msg: 'you do not follow this person ' })
     }
@@ -105,6 +105,7 @@ router.post('/Destroy', async (req, res) => {
     }
     }
    else
+   {
       let user2 = await User.findOne({ screen_name: userSreenName })
     if (user2) {
       let follow = await Following.findOne({
@@ -113,15 +114,16 @@ router.post('/Destroy', async (req, res) => {
       })
       if (follow) 
       {
-        await User.deleteOne({sourceID: decoded._id,friendID: user2._id})
+        await Following.deleteOne({sourceID: decoded._id,friendID: user2._id})
       }
       else return res.status(404).send({ msg: 'The sreen name to unfollow is not valid' })
     } else {
       return res.status(404).send({ msg: 'The sreen name to unfollow is not valid' })
     }
+  }
     return res.status(200).send({msg: 'Successfully unfollowed'})
   })
-  
+
 // ------------------------------------------------------------------------------------------
 
 module.exports = router
