@@ -158,7 +158,7 @@ router.get('/show', async (req, res) => {
   if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
 
   if (novaID) {
-    if (mongoose.Types.ObjectId.isValid(userID)) {
+    if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova= await Nova.findOne({ _id: novaID })
       if (nova) { 
         return res.send(nova)
@@ -168,17 +168,5 @@ router.get('/show', async (req, res) => {
     }
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router
