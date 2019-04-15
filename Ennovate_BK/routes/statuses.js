@@ -60,15 +60,7 @@ router.get('/home_timeline', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// Update Nova
-
-/* router.post('/update', async (req, res) => {
-  const token = req.headers['token']
-  if (!token) return res.status(401).send({ msg: 'No token provided.' })
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-})
-*/
-// ------------------------------------------------------------------------------------------
+// update Nova 
 
 router.post('/update', async (req, res) => {
   const { error } = validateNova(req.body)
@@ -101,6 +93,7 @@ router.post('/update', async (req, res) => {
   // if (place id)
 
   // if (display coordinates)
+
   let nova = new Nova({text: req.body.text,
     in_reply_to_status_id: inreplyNovaID,
     in_reply_to_user_id: inreplyUserID,
@@ -113,12 +106,23 @@ router.post('/update', async (req, res) => {
     entitiesObject: null
   })
 
+
+
   if (inreply) {
-    db.inreply.update({
+    Nova.inreply.update({
       $inc: { reply_count: 1 }
     })
   }
   await nova.save()
+
+  await User.update({_id:decoded._id},
+    
+      {"$push": {"novas_IDs":nova._id},
+      $inc: {novas_count : 1}},{ new:true}
+    )
+
+
+
   res.send(nova)
 
   // replied_novas_IDs el mafrood ageeb kol el marat ely el ID bta3 el nova de fel in_reply_to_status_id
@@ -141,5 +145,40 @@ function validateNova (Nova) {
   }
   return Joi.validate(Nova, schema)
 }
+
+
+// ------------------------------------------------------------------------------------------
+// show nova
+
+router.post('/show', async (req, res) => {
+
+  let novaID = req.body.id
+  // when we do the renova part if include_my_reNova is true include the original nova id 
+
+  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
+
+  if (novaID) {
+    if (mongoose.Types.ObjectId.isValid(userID)) {
+      let nova= await Nova.findOne({ _id: novaID })
+      if (nova) { 
+        return res.send(nova)
+      } else  {
+        return res.status(404).send({ msg: 'Nova Not Found' })
+      }
+    }
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router
