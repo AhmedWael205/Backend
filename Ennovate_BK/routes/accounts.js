@@ -75,49 +75,57 @@ router.post('/signup', async (req, res) => {
 
   const token = user.generateAuthToken()
 
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: config.get('email'),
-      pass: config.get('pass')
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  })
+  const email = process.env.EMAIL || false
 
-  let mailOptions = {
-    from: config.get('email'),
-    to: user.email,
-    subject: 'Verify your account',
-    html:
-      '<h4><b>Verify your Account</b></h4>' +
-      '<p>To verify your account, click the following link:</p>' +
-      '<a href="' +
-      config.get('Url') +
-      'accounts/verify/' +
-      token +
-      '" > ' +
-      config.get('Url') +
-      'accounts/verify/' +
-      token +
-      '</a>' +
-      '<br><br>' +
-      '<p>--Ennovate Team</p>'
+  if (email) {
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: config.get('email'),
+        pass: config.get('pass')
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    })
+
+    let mailOptions = {
+      from: config.get('email'),
+      to: user.email,
+      subject: 'Verify your account',
+      html:
+        '<h4><b>Verify your Account</b></h4>' +
+        '<p>To verify your account, click the following link:</p>' +
+        '<a href="' +
+        config.get('Url') +
+        'accounts/verify/' +
+        token +
+        '" > ' +
+        config.get('Url') +
+        'accounts/verify/' +
+        token +
+        '</a>' +
+        '<br><br>' +
+        '<p>--Ennovate Team</p>'
+    }
+
+    await transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error)
+        return res.status(500).send({ msg: 'Unable to send email' })
+      } else {
+        winston.info('Email sent to: ' + user.email)
+        return res
+          .header('token', token)
+          // .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
+          .send(user)
+      }
+    })
+  } else {
+    return res
+      .header('token', token)
+      .send(user)
   }
-
-  await transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error)
-      return res.status(500).send({ msg: 'Unable to send email' })
-    } else {
-      winston.info('Email sent to: ' + user.email)
-      return res
-        .header('token', token)
-        // .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
-        .send(user)
-    }
-  })
 })
 
 // ----------------------------------------------------------------------------------

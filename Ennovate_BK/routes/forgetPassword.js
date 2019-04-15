@@ -30,11 +30,11 @@ router.get('/', async (req, res) => {
       '<h4><b>Reset Password</b></h4>' +
       '<p>To reset your password, complete this form:</p>' +
       '<a href="' +
-      config.get('Url') +
+      config.get('FrontUrl') +
       'reset_password/' +
       token +
       '" > ' +
-      config.get('Url') +
+      config.get('FrontUrl') +
       'reset_password/' +
       token +
       '</a>' +
