@@ -257,10 +257,15 @@ router.post('/update_profile_image', async (req, res) => {
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-  var user = await User.findOne({ _id: decoded._id })
+  const imgUrl = req.body.img_url || null
+
+  var user = await User.findOneAndUpdate({ _id: decoded._id }, {
+    $set:
+    { profile_image_url: imgUrl }
+  }, { new: true })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
-  upload.single('profileImage')
-  console.log(req.file)
+
+  return res.send(user)
 })
 
 // ----------------------------------------------------------------------------------

@@ -60,7 +60,7 @@ router.get('/home_timeline', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// update Nova 
+// update Nova
 
 router.post('/update', async (req, res) => {
   const { error } = validateNova(req.body)
@@ -106,8 +106,6 @@ router.post('/update', async (req, res) => {
     entitiesObject: null
   })
 
-
-
   if (inreply) {
     Nova.inreply.update({
       $inc: { reply_count: 1 }
@@ -115,13 +113,10 @@ router.post('/update', async (req, res) => {
   }
   await nova.save()
 
-  await User.update({_id:decoded._id},
-    
-      {"$push": {"novas_IDs":nova._id},
-      $inc: {novas_count : 1}},{ new:true}
-    )
-
-
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova._id },
+      $inc: { novas_count: 1 } }, { new: true }
+  )
 
   res.send(nova)
 
@@ -146,7 +141,6 @@ function validateNova (Nova) {
   return Joi.validate(Nova, schema)
 }
 
-
 // ------------------------------------------------------------------------------------------
 // show nova
 
@@ -159,14 +153,33 @@ router.get('/show', async (req, res) => {
 
   if (novaID) {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
-      let nova= await Nova.findOne({ _id: novaID })
-      if (nova) { 
+      let nova = await Nova.findOne({ _id: novaID })
+      if (nova) {
         return res.send(nova)
-      } else  {
+      } else {
         return res.status(404).send({ msg: 'Nova Not Found' })
       }
     }
   }
 })
+
+// ------------------------------------------------------------------------------------------
+
+// User Timeline
+
+router.get('/user_timeline', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  const count = req.query.count || 10
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey')) 
+  let novas = await Nova
+    .find({ user: decoded._id })
+    .sort({ _id: 1 })
+    .limit(count)
+  return res.send(novas)
+})
+
+// ------------------------------------------------------------------------------------------
 
 module.exports = router
