@@ -150,7 +150,7 @@ function validateNova (Nova) {
 // ------------------------------------------------------------------------------------------
 // show nova
 
-router.post('/show', async (req, res) => {
+router.get('/show', async (req, res) => {
 
   let novaID = req.body.id
   // when we do the renova part if include_my_reNova is true include the original nova id 
