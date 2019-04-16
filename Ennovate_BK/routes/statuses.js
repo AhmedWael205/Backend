@@ -170,7 +170,7 @@ router.get('/show', async (req, res) => {
 router.get('/user_timeline', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
-  const count = req.query.count || 10
+  const count = req.query.count || 100000000000
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey')) 
   let novas = await Nova
@@ -178,6 +178,30 @@ router.get('/user_timeline', async (req, res) => {
     .sort({ _id: 1 })
     .limit(count)
   return res.send(novas)
+})
+
+// ------------------------------------------------------------------------------------------
+
+// User Timeline 2
+
+router.get('/v2/user_timeline', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  const count = req.query.count || 100000000000
+  var i = 1
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey')) 
+  const user = await User.findOne({ _id: decoded._id })
+  let novasIDs = user.novas_IDs
+  var novasArray = []
+
+  for (var novaID of novasIDs) {
+    let nova = await Nova.findOne({ _id: novaID })
+    if (nova) novasArray.push(nova)
+    i = i + 1
+    if (i === count) break
+  }
+  return res.send(novasArray)
 })
 
 // ------------------------------------------------------------------------------------------
