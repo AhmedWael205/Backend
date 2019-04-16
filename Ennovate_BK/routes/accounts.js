@@ -77,7 +77,7 @@ router.post('/signup', async (req, res) => {
 
   const email = process.env.EMAIL || false
 
-  if (email) {
+  if (email === true) {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
