@@ -116,15 +116,15 @@ router.post('/signup', async (req, res) => {
       } else {
         winston.info('Email sent to: ' + user.email)
         return res
-          .header('token', token)
+          // .header('token', token)
           // .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
-          .send(user)
+          .send({ token: token, user })
       }
     })
   } else {
     return res
-      .header('token', token)
-      .send(user)
+      // .header('token', token)
+      .send({ token: token, user })
   }
 })
 
