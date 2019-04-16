@@ -93,8 +93,8 @@ router.get('/show', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(userID)) {
       let user = await User.findOne({ _id: userID })
       if (user) {
-        console.log(user.profile_image_url)
-        return res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+        return res.send(user)
+        // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
       } else {
         return res.status(404).send({ msg: 'UserNotFound' })
       }
@@ -104,7 +104,8 @@ router.get('/show', async (req, res) => {
   } else if (userSreenName) {
     let user = await User.findOne({ screen_name: userSreenName })
     if (user) {
-      return res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+      return res.send(user)
+      // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
     } else {
       return res.status(404).send({ msg: 'UserNotFound' })
     }

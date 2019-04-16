@@ -8,7 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const config = require('config')
 const { User, validateSignUp } = require('../models/user')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
 
