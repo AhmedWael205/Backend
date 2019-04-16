@@ -15,6 +15,16 @@ const novaSchema = new mongoose.Schema({
   in_reply_to_user_id: { type: mongoose.Schema.Types.ObjectId, default: null },
   in_reply_to_screen_name: { type: String, default: null },
   user: { type: mongoose.Schema.Types.ObjectId, default: null },
+  user_screen_name: {
+    type: String,
+    minlength: 3,
+    maxlength: 15
+  },
+  user_name: {
+    type: String,
+    minlength: 3,
+    maxlength: 15
+  },
   reply_count: { type: Number, default: 0 },
   renova_count: { type: Number, default: 0 },
   favorite_count: { type: Number, default: 0 },

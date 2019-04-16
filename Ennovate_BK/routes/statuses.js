@@ -99,6 +99,8 @@ router.post('/update', async (req, res) => {
     in_reply_to_user_id: inreplyUserID,
     in_reply_to_screen_name: inreplyScreenName,
     user: user,
+    user_screen_name: user.screen_name,
+    user_name: user.name,
     // this is to create a nova then it can't have been renovaed before or favorited
     replied_novas_IDs: [],
     favorited: false,

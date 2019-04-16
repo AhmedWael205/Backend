@@ -261,7 +261,8 @@ router.post('/update_profile_image', async (req, res) => {
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:
-    { profile_image_url: imgUrl }
+    { profile_image_url: imgUrl,
+      default_profile_image: false }
   }, { new: true })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
 
