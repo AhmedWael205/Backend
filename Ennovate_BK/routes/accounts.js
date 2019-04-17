@@ -8,6 +8,7 @@ const multer = require('multer')
 const path = require('path')
 const config = require('config')
 const { User, validateSignUp } = require('../models/user')
+const { Nova } = require('../models/nova')
 const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
@@ -177,6 +178,13 @@ router.post('/settings', async (req, res) => {
         name: name,
         location: location,
         bio: bio }
+    }, { new: true })
+
+  await Nova.updateMany({ user: decoded._id },
+    { $set:
+      {
+        user_screen_name: screenName,
+        user_name: name }
     }, { new: true })
 
   return res.send(_.pick(user3, ['_id', 'screen_name', 'name', 'location', 'bio']))
