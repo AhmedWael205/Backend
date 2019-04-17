@@ -76,9 +76,9 @@ router.post('/signup', async (req, res) => {
 
   const token = user.generateAuthToken()
 
-  const email = process.env.EMAIL || false
+  const email = process.env.EMAIL || true
 
-  if (email === true) {
+  
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -122,11 +122,11 @@ router.post('/signup', async (req, res) => {
           .send({ token: token, user })
       }
     })
-  } else {
-    return res
-      // .header('token', token)
-      .send({ token: token, user })
-  }
+  // } else {
+  //   return res
+  //     // .header('token', token)
+  //     .send({ token: token, user })
+  // }
 })
 
 // ----------------------------------------------------------------------------------
