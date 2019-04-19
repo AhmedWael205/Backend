@@ -22,6 +22,13 @@ router.get('/', async (req, res) => {
     }
   })
 
+  const global = process.env.GLOBAL || 'false'
+  var url = config.get('FrontUrl')
+
+  if (global === 'true') {
+    url = config.get('globalFrontUrl')
+  }
+
   let mailOptions = {
     from: config.get('email'),
     to: user.email,
@@ -30,11 +37,11 @@ router.get('/', async (req, res) => {
       '<h4><b>Reset Password</b></h4>' +
       '<p>To reset your password, complete this form:</p>' +
       '<a href="' +
-      config.get('FrontUrl') +
+      url +
       'reset_password/' +
       token +
       '" > ' +
-      config.get('FrontUrl') +
+      url +
       'reset_password/' +
       token +
       '</a>' +

@@ -72,13 +72,13 @@ router.post('/signup', async (req, res) => {
   )
   const salt = await bcrypt.genSalt(10)
   user.password = await bcrypt.hash(user.password, salt)
-  await user.save()
+  // await user.save()
 
   const token = user.generateAuthToken()
 
-  const email = process.env.EMAIL || true
+  const email = process.env.EMAIL || 'false'
 
-  
+  if (email === 'true') {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -90,6 +90,12 @@ router.post('/signup', async (req, res) => {
       }
     })
 
+    const global = process.env.GLOBAL || 'false'
+    var url = config.get('Url')
+
+    if (global === 'true') {
+      url = config.get('globalUrl')
+    }
     let mailOptions = {
       from: config.get('email'),
       to: user.email,
@@ -98,11 +104,11 @@ router.post('/signup', async (req, res) => {
         '<h4><b>Verify your Account</b></h4>' +
         '<p>To verify your account, click the following link:</p>' +
         '<a href="' +
-        config.get('Url') +
+        url +
         'accounts/verify/' +
         token +
         '" > ' +
-        config.get('Url') +
+        url +
         'accounts/verify/' +
         token +
         '</a>' +
@@ -110,23 +116,25 @@ router.post('/signup', async (req, res) => {
         '<p>--Ennovate Team</p>'
     }
 
-    await transporter.sendMail(mailOptions, function (error, info) {
+    await transporter.sendMail(mailOptions, async function (error, info) {
       if (error) {
         console.log(error)
         return res.status(500).send({ msg: 'Unable to send email' })
       } else {
         winston.info('Email sent to: ' + user.email)
+        await user.save()
         return res
           // .header('token', token)
           // .send(_.pick(user, ['_id', 'screen_name', 'name', 'email', 'created_at', 'verified']))
           .send({ token: token, user })
       }
     })
-  // } else {
-  //   return res
-  //     // .header('token', token)
-  //     .send({ token: token, user })
-  // }
+  } else {
+    await user.save()
+    return res
+      // .header('token', token)
+      .send({ token: token, user })
+  }
 })
 
 // ----------------------------------------------------------------------------------
@@ -240,32 +248,32 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
   fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
+    checkFileType(file, cb)
   }
-}).single('myImage')
+})
 
 // Check File Type
 function checkFileType (file, cb) {
 // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
+  const filetypes = /jpeg|jpg|png|gif/
   // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   // Check mime
-  const mimetype = filetypes.test(file.mimetype);
+  const mimetype = filetypes.test(file.mimetype)
 
   if (mimetype && extname) {
     return cb(null, true)
   } else {
-    cb('Error: Images Only!')
+    cb(null, false)
   }
 }
 
-router.post('/update_profile_image', async (req, res) => {
+router.post('/update_profile_image', upload.single('profileImage'), async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-  const imgUrl = req.body.img_url || null
+  const imgUrl = (config.get('Url') + 'public/uploads/' + req.file.filename) || null
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:

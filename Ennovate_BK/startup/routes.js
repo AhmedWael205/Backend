@@ -11,6 +11,7 @@ const users = require('../routes/users')
 const forgetPassword = require('../routes/forgetPassword')
 const verifyEmail = require('../routes/verifyEmail')
 const error = require('../middleware/error')
+const path = require('path')
 
 module.exports = function (app) {
   app.use(express.json())
@@ -25,5 +26,6 @@ module.exports = function (app) {
   app.use('/users', users)
   app.use('/forgetPassword', forgetPassword)
   app.use('/verifyEmail', verifyEmail)
+  app.use('/public/uploads', express.static(path.join(__dirname, '../public/uploads')))
   app.use(error)
 }
