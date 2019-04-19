@@ -22,16 +22,18 @@ router.post('/create', async (req, res) => {
   var verifyOptions = { expiresIn: '1h' }
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   var user = await User.findOne({ _id: decoded._id })
-  if (!user)
+  if (!user) {
     return res
       .status(404)
       .send({ msg: 'The user with the given ID was not found.' })
+  }
 
   let userID = req.body.user_ID
   let userSreenName = req.body.screen_name
 
-  if (!userID && !userSreenName)
+  if (!userID && !userSreenName) {
     return res.status(404).send({ msg: 'NoUsersFound' })
+  }
 
   if (userID) {
     if (mongoose.Types.ObjectId.isValid(userID)) {
@@ -171,7 +173,7 @@ router.get('/show', async (req, res) => {
     return await res.status(404).send({'relationship': { 'target': { 'id': target_ID, 'following': false, 'followed_by': true}, 'source': { 'id': source_ID, 'following': true, 'followed_by': false}} })
   }
 })
-  
-// ------------------------------------------------------------------------------------------  
+
+// ------------------------------------------------------------------------------------------
 
 module.exports = router

@@ -90,7 +90,7 @@ router.post('/signup', async (req, res) => {
       }
     })
 
-    const global = process.env.GLOBAL || 'false'
+    let global = process.env.GLOBAL || 'false'
     var url = config.get('Url')
 
     if (global === 'true') {
@@ -142,7 +142,8 @@ router.post('/signup', async (req, res) => {
 // verify
 
 router.get('/verify/:token', async (req, res) => {
-  const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'), verifyOptions)
 
   const user = await User.findOneAndUpdate({ _id: decoded._id },
     {
@@ -278,7 +279,7 @@ router.post('/update_profile_image', upload.single('profileImage'), async (req, 
   var verifyOptions = { expiresIn: '1h' }
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
 
-  const global = process.env.GLOBAL || 'false'
+  let global = process.env.GLOBAL || 'false'
   var url = config.get('Url')
 
   if (global === 'true') {

@@ -23,7 +23,7 @@ router.get('/:token', async (req, res) => {
     }
   })
 
-  const global = process.env.GLOBAL || 'false'
+  let global = process.env.GLOBAL || 'false'
   var url = config.get('Url')
 
   if (global === 'true') {

@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const mongoose = require('mongoose')
 
-const global = process.env.GLOBAL || 'false'
+let global2 = process.env.GLOBAL || 'false'
 var url = config.get('Url')
 
-if (global === 'true') {
+if (global2 === 'true') {
   url = config.get('globalUrl')
 }
 

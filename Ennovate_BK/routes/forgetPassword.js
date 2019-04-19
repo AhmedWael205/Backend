@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     }
   })
 
-  const global = process.env.GLOBAL || 'false'
+  let global = process.env.GLOBAL || 'false'
   var url = config.get('FrontUrl')
 
   if (global === 'true') {

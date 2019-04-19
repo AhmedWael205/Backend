@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --maxWorkers=2"
+    "test": "jest --verbose --maxWorkers=2"
   },
   "keywords": [],
   "author": "",

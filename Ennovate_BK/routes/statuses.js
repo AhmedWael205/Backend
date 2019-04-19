@@ -128,7 +128,7 @@ router.post('/update', upload.single('novaImage'), async (req, res) => {
     inreplyScreenName = inreply.user.screen_name
   }
 
-  const global = process.env.GLOBAL || 'false'
+  let global = process.env.GLOBAL || 'false'
   var url = config.get('Url')
 
   if (global === 'true') {
