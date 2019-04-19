@@ -3,6 +3,13 @@ const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const mongoose = require('mongoose')
 
+const global = process.env.GLOBAL || 'false'
+var url = config.get('Url')
+
+if (global === 'true') {
+  url = config.get('globalUrl')
+}
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -47,10 +54,7 @@ const userSchema = new mongoose.Schema({
   novas_count: { type: Number, default: 0 },
   novas_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
   favorites_novas_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
-  profile_background_color:  { type: String, default: null },
-  profile_background_image_url: { type: String, default: 'http://i65.tinypic.com/21exjbc.jpg' },
-  profile_image_url: { type: String, default: 'http://i65.tinypic.com/2mxrh8y.jpg' },
-  default_profile: { type: Boolean, default: true },
+  profile_image_url: { type: String, default: url + 'public/uploads/profileImages/' + config.get('defaultImage') },
   default_profile_image: { type: Boolean, default: true },
   notification_object: {
     type: new mongoose.Schema({

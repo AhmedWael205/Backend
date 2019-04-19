@@ -35,14 +35,14 @@ const novaSchema = new mongoose.Schema({
   renovaed: Boolean,
   entitiesObject: {
     type: new mongoose.Schema({
-      hashtags: [String],
-      urls: [String],
-      users_mentions_ID: [mongoose.Schema.Types.ObjectId],
+      hashtags: { type: [String], default: null },
+      urls: { type: [String], default: null },
+      users_mentions_ID: { type: [mongoose.Schema.Types.ObjectId], default: null },
       media: {
         type: new mongoose.Schema({
-          type: String,
-          size: Number,
-          url: String
+          type: { type: String, default: null },
+          size: { type: Number, default: null },
+          url: { type: String, default: null }
         })
       }
     })

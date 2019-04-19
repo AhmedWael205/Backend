@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
+const mongoose = require('mongoose')
+const Joi = require('joi')
 
 const searchSchema = new mongoose.Schema({
   created_at: {
@@ -21,9 +21,9 @@ const searchSchema = new mongoose.Schema({
     required: true,
     maxlength: 15
   }
-});
+})
 
-function validateSearch(search) {
+function validateSearch (search) {
   const schema = {
     name: Joi.string()
       .max(15)
@@ -31,12 +31,12 @@ function validateSearch(search) {
     query: Joi.string()
       .max(15)
       .required()
-  };
+  }
 
-  return Joi.validate(user, schema);
+  return Joi.validate(search, schema)
 }
 
-const Search = mongoose.model("Search", searchSchema);
+const Search = mongoose.model('Search', searchSchema)
 
-exports.Search = Search;
-exports.validateSearch = validateSearch;
+exports.Search = Search
+exports.validateSearch = validateSearch
