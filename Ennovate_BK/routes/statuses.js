@@ -5,6 +5,8 @@ var pick = require('object.pick')
 const winston = require('winston')
 const { User } = require('../models/user')
 const { Following } = require('../models/following')
+const multer = require('multer')
+const path = require('path')
 const config = require('config')
 const mongoose = require('mongoose')
 const { Nova } = require('../models/nova')
@@ -64,7 +66,40 @@ router.get('/home_timeline', async (req, res) => {
 
 // update Nova
 
-router.post('/update', async (req, res) => {
+// Set The Storage Engine
+const storage = multer.diskStorage({
+  destination: './public/uploads/novaImages',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+
+// Init Upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb)
+  }
+})
+
+// Check File Type
+function checkFileType (file, cb) {
+// Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype)
+
+  if (mimetype && extname) {
+    return cb(null, true)
+  } else {
+    cb(null, false)
+  }
+}
+
+router.post('/update', upload.single('novaImage'), async (req, res) => {
   const { error } = validateNova(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
 
@@ -87,17 +122,25 @@ router.post('/update', async (req, res) => {
   var inreplyNovaID = null
   var inreplyScreenName = null
 
-  if (inreply) { inreplyNovaID = inreply._id
+  if (inreply) {
+    inreplyNovaID = inreply._id
     inreplyUserID = inreply.user._id
     inreplyScreenName = inreply.user.screen_name
   }
-  // if (media ids)
 
-  // if (place id)
+  const global = process.env.GLOBAL || 'false'
+  var url = config.get('Url')
 
-  // if (display coordinates)
+  if (global === 'true') {
+    url = config.get('globalUrl')
+  }
 
-  let nova = new Nova({text: req.body.text,
+  const imgUrl = (url + 'public/uploads/novaImages/' + req.file.filename) || null
+  const imgSize = req.file.size || null
+  const imgType = path.extname(req.file.originalname) || null
+
+  let nova = new Nova({
+    text: req.body.text,
     in_reply_to_status_id: inreplyNovaID,
     in_reply_to_user_id: inreplyUserID,
     in_reply_to_screen_name: inreplyScreenName,
@@ -108,7 +151,13 @@ router.post('/update', async (req, res) => {
     replied_novas_IDs: [],
     favorited: false,
     renovaed: false,
-    entitiesObject: null
+    entitiesObject: { 
+      media:{
+        type: imgType,
+        size: imgSize,
+        url: imgUrl
+      }
+    }
   })
 
   if (inreply) {
@@ -150,7 +199,6 @@ function validateNova (Nova) {
 // show nova
 
 router.get('/show', async (req, res) => {
-
   let novaID = req.body.id
   // when we do the renova part if include_my_reNova is true include the original nova id 
 

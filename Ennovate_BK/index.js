@@ -11,6 +11,12 @@ app.use(cors())
 // export emailPass=Kokiwawa123
 // Or // set emailPass=Kokiwawa123
 
+// export EMAIL=true  // to send a Email
+// Or // set EMAIL=true
+
+// export GLOBAL=true  // to use global url
+// Or // set GLOBAL=true
+
 require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()

@@ -278,7 +278,14 @@ router.post('/update_profile_image', upload.single('profileImage'), async (req, 
   var verifyOptions = { expiresIn: '1h' }
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
 
-  const imgUrl = (config.get('Url') + 'public/uploads/profileImages/' + req.file.filename) || null
+  const global = process.env.GLOBAL || 'false'
+  var url = config.get('Url')
+
+  if (global === 'true') {
+    url = config.get('globalUrl')
+  }
+
+  const imgUrl = (url + 'public/uploads/profileImages/' + req.file.filename) || null
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:
