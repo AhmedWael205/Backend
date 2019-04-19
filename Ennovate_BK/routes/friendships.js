@@ -88,16 +88,18 @@ router.post('/Destroy', async (req, res) => {
   var verifyOptions = { expiresIn: '1h' }
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   var user = await User.findOne({ _id: decoded._id })
-  if (!user)
+  if (!user) {
     return res
       .status(404)
       .send({ msg: 'The user with the given ID was not found.' })
+  }
 
   let userID = req.body.user_ID
   let userSreenName = req.body.screen_name
 
-  if (!userID && !userSreenName)
+  if (!userID && !userSreenName) {
     return res.status(404).send({ msg: 'No Users Found' })
+  }
 
   if (userID) {
     if (mongoose.Types.ObjectId.isValid(userID)) {
@@ -112,11 +114,14 @@ router.post('/Destroy', async (req, res) => {
             sourceID: decoded._id,
             friendID: user2._id
           })
-        } else return res
+        } else {
+          return res
             .status(404)
             .send({ msg: 'you do not follow this person ' })
-      } else
+        }
+      } else {
         return res.status(404).send({ msg: 'The ID to unfollow is not found' })
+      }
     }
   } else {
     let user2 = await User.findOne({ screen_name: userSreenName })
@@ -130,10 +135,11 @@ router.post('/Destroy', async (req, res) => {
           sourceID: decoded._id,
           friendID: user2._id
         })
-      } else
+      } else {
         return res
           .status(404)
           .send({ msg: 'The sreen name to unfollow is not valid' })
+      }
     } else {
       return res
         .status(404)
@@ -150,21 +156,21 @@ router.post('/Destroy', async (req, res) => {
 router.get('/show', async (req, res) => {
   let source_ID = req.body.source_ID
   let target_ID = req.body.target_ID
-  
+
   let source_screen_name = req.body.source_screen_name
   let target_screen_name = req.body.target_screen_name
-  
+
   let sourcefollowstarget = await Following.findOne({
     sourceID: source_ID,
     friendID: target_ID
   }
   )
-  
-  if(sourcefollowstarget)
+
+  if (sourcefollowstarget)
   {
-  return await res.status(404).send({'relationship': { 'target': { 'id': target_ID, 'following': false, 'followed_by': true}, 'source': { 'id': source_ID, 'following': true, 'followed_by': false}} })
+    return await res.status(404).send({'relationship': { 'target': { 'id': target_ID, 'following': false, 'followed_by': true}, 'source': { 'id': source_ID, 'following': true, 'followed_by': false}} })
   }
-  })
+})
   
 // ------------------------------------------------------------------------------------------  
 

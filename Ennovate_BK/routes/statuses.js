@@ -151,8 +151,8 @@ router.post('/update', upload.single('novaImage'), async (req, res) => {
     replied_novas_IDs: [],
     favorited: false,
     renovaed: false,
-    entitiesObject: { 
-      media:{
+    entitiesObject: {
+      media: {
         type: imgType,
         size: imgSize,
         url: imgUrl
@@ -200,7 +200,7 @@ function validateNova (Nova) {
 
 router.get('/show', async (req, res) => {
   let novaID = req.body.id
-  // when we do the renova part if include_my_reNova is true include the original nova id 
+  // when we do the renova part if include_my_reNova is true include the original nova id
 
   if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
 
