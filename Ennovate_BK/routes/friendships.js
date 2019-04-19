@@ -19,7 +19,8 @@ router.post('/create', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   var user = await User.findOne({ _id: decoded._id })
   if (!user)
     return res
@@ -84,7 +85,8 @@ router.post('/Destroy', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   var user = await User.findOne({ _id: decoded._id })
   if (!user)
     return res

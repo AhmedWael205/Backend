@@ -26,6 +26,7 @@ module.exports = function (app) {
   app.use('/users', users)
   app.use('/forgetPassword', forgetPassword)
   app.use('/verifyEmail', verifyEmail)
-  app.use('/public/uploads', express.static(path.join(__dirname, '../public/uploads')))
+  app.use('/public/uploads/profileImages', express.static(path.join(__dirname, '../public/uploads/profileImages')))
+  app.use('/public/uploads/novaImages', express.static(path.join(__dirname, '../public/uploads/novaImages')))
   app.use(error)
 }

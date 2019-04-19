@@ -163,7 +163,8 @@ router.post('/settings', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
 
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
@@ -224,7 +225,9 @@ router.get('/settings', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+
   var user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
 
@@ -237,7 +240,7 @@ router.get('/settings', async (req, res) => {
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: './public/uploads/profileImages',
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
@@ -255,7 +258,7 @@ const upload = multer({
 // Check File Type
 function checkFileType (file, cb) {
 // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/
+  const filetypes = /jpeg|jpg|png/
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   // Check mime
@@ -272,8 +275,10 @@ router.post('/update_profile_image', upload.single('profileImage'), async (req, 
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-  const imgUrl = (config.get('Url') + 'public/uploads/' + req.file.filename) || null
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+
+  const imgUrl = (config.get('Url') + 'public/uploads/profileImages/' + req.file.filename) || null
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:

@@ -21,7 +21,9 @@ router.get('/home_timeline', async (req, res) => {
   const count = req.body.count || 10
   const excludeReplies = req.body.exclude_replies || true
   const includeEntities = req.body.include_entities || false
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
 
   const following = await Following.findOne({ sourceID: decoded._id })
 
@@ -69,7 +71,8 @@ router.post('/update', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
 
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
@@ -174,7 +177,8 @@ router.get('/user_timeline', async (req, res) => {
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
   const count = req.query.count || 100000000000
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey')) 
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   let novas = await Nova
     .find({ user: decoded._id })
     .sort({ _id: 1 })
@@ -192,7 +196,8 @@ router.get('/v2/user_timeline', async (req, res) => {
   const count = req.query.count || 100000000000
   var i = 1
 
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey')) 
+  var verifyOptions = { expiresIn: '1h' }
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   const user = await User.findOne({ _id: decoded._id })
   let novasIDs = user.novas_IDs
   var novasArray = []
