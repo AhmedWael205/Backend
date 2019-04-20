@@ -10,12 +10,6 @@ const searchSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  searchID: { type: mongoose.Schema.Types.ObjectId, required: true },
-  name: {
-    type: String,
-    required: true,
-    maxlength: 15
-  },
   query: {
     type: String,
     required: true,
@@ -25,9 +19,6 @@ const searchSchema = new mongoose.Schema({
 
 function validateSearch (search) {
   const schema = {
-    name: Joi.string()
-      .max(15)
-      .required(),
     query: Joi.string()
       .max(15)
       .required()

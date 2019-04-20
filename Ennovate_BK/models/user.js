@@ -83,6 +83,8 @@ const userSchema = new mongoose.Schema({
   }
 })
 
+userSchema.index({ name: 'text', screen_name: 'text', email: 'text' })
+
 var signOptions = { expiresIn: '1h' }
 
 userSchema.methods.generateAuthToken = function () {

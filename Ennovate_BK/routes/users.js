@@ -4,8 +4,10 @@ const _ = require('lodash')
 var pick = require('object.pick')
 const winston = require('winston')
 const { User } = require('../models/user')
+const { Search, validateSearch } = require('../models/search')
 const mongoose = require('mongoose')
 const Nova = require('../models/nova')
+const config = require('config')
 const express = require('express')
 const router = express.Router()
 
@@ -54,7 +56,7 @@ router.get('/lookup', async (req, res) => {
 
 // Profile Banner
 
-router.get('/profile_banner', async (req, res) => {
+router.get('/profile_image', async (req, res) => {
   let userID = req.query.user_ID
   let userSreenName = req.query.screen_name
   if (!userID && !userSreenName) return res.status(404).send({ msg: 'NoUsersFound' })
@@ -110,6 +112,35 @@ router.get('/show', async (req, res) => {
       return res.status(404).send({ msg: 'UserNotFound' })
     }
   }
+})
+
+// ------------------------------------------------------------------------------------------
+
+// Search
+router.get('/search', async (req, res) => {
+  let query = req.query.q
+  console.log(query)
+  const { error } = validateSearch(query)
+  // if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  const token = req.headers['token']
+  if (token) {
+    var verifyOptions = { expiresIn: '1h' }
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+    const search = new Search({
+      userID: decoded._id,
+      query: query
+    })
+    await search.save()
+  }
+
+  const searchResult = User.find(
+    { $text: { $search: query } })
+  //, { score: { $meta: 'textScore' } } ).sort({ score: { $meta: 'textScore' } })
+
+  console.log(searchResult)
+
+  return res.send(null)
 })
 
 // ------------------------------------------------------------------------------------------
