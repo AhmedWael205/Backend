@@ -7,7 +7,7 @@ const searchSchema = new mongoose.Schema({
     default: Date.now
   },
   userId: {
-    type: Number,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   query: {

@@ -118,29 +118,31 @@ router.get('/show', async (req, res) => {
 
 // Search
 router.get('/search', async (req, res) => {
-  let query = req.query.q
-  console.log(query)
-  const { error } = validateSearch(query)
-  // if (error) return res.status(400).send({ msg: error.details[0].message })
+  const { error } = validateSearch(req.query)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  let query = req.query.query
 
   const token = req.headers['token']
   if (token) {
     var verifyOptions = { expiresIn: '1h' }
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+
     const search = new Search({
-      userID: decoded._id,
+      userId: decoded._id,
       query: query
     })
     await search.save()
   }
 
-  const searchResult = User.find(
-    { $text: { $search: query } })
-  //, { score: { $meta: 'textScore' } } ).sort({ score: { $meta: 'textScore' } })
+  const searchResult = await User.find(
+    { $or: [
+      { name: new RegExp('.*' + query + '.*', 'i') },
+      { screen_name: new RegExp('.*' + query + '.*', 'i') },
+      { email: new RegExp('.*' + query + '.*', 'i') }]
+    })
 
-  console.log(searchResult)
-
-  return res.send(null)
+  return res.send(searchResult)
 })
 
 // ------------------------------------------------------------------------------------------
