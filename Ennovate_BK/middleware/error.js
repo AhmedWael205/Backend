@@ -1,14 +1,6 @@
 const winston = require('winston')
 
 module.exports = function (err, req, res, next) {
-  winston.error(err.message, err)
-
-  // error
-  // warn
-  // info
-  // verbose
-  // debug
-  // silly
-
-  res.status(500).send('Something failed.')
+  winston.error(err.name, err.message)
+  res.status(500).send({ msg: err.message })
 }
