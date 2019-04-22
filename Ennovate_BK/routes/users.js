@@ -129,9 +129,16 @@ router.get('/search', async (req, res) => {
       query: query
     })
     await search.save()
+
+    let searchResult = await User.find(
+      { $and: [ { $or: [
+        { name: new RegExp('.*' + query + '.*', 'i') },
+        { screen_name: new RegExp('.*' + query + '.*', 'i') },
+        { email: new RegExp('.*' + query + '.*', 'i') }] }, { _id: { $ne: decoded._id } }] })
+    return res.send(searchResult)
   }
 
-  const searchResult = await User.find(
+  let searchResult = await User.find(
     { $or: [
       { name: new RegExp('.*' + query + '.*', 'i') },
       { screen_name: new RegExp('.*' + query + '.*', 'i') },
