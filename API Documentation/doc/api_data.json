@@ -119,21 +119,117 @@
             "type": "String",
             "optional": false,
             "field": "location",
-            "description": "<p>[Nullable] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.</p>"
+            "description": "<p>[Optional] The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "bio",
-            "description": "<p>[Nullable] The user's biographical.</p>"
+            "description": "<p>[Optional] The user's biographical.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"screen_name\": \"Messi_98\",\n  \"name\":\"Ali Hamdy\",\n  \"location\":null,\n  \"bio\":null\n}",
+          "content": "{\n  \"screen_name\": \"Messi_98\",\n  \"name\":\"Ali Hamdy\",\n  \"location\":\"testLoc\",\n  \"bio\":\"testBio\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ScreenNameAlreadyExists",
+            "description": "<p>If the user screen name is already used by another user.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinScreenNameLengthError",
+            "description": "<p>If the user Entered a screen name less than 3 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ScreenNameInvalidCharacter",
+            "description": "<p>If the user Entered a screen name with an invalid character.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxScreenNameLengthError",
+            "description": "<p>If the user Entered a screen name more than 15 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinNameLengthError",
+            "description": "<p>If the user Entered a name less than 3 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxNameLengthError",
+            "description": "<p>If the user Entered a name more than 15 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxBioLengthError",
+            "description": "<p>If the user Entered bio more than 255 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxLocationLengthError",
+            "description": "<p>If the user Entered location more than 255 characters long.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"msg\": \"screen name already registered.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"screen_name\" length must be at least 3 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": \"\\\"screen_name\\\" must only contain alpha-numeric and underscore characters\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"screen_name\" length must be at less than or equal to 15 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"name\" length must be at least 3 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"name\" length must be at less than or equal to 15 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "   HTTP/1.1 400 Bad Request\n   {\n\"msg\": '\"bio\" length must be less than or equal to 255 characters  long'\n    }",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "   HTTP/1.1 400 Bad Request\n   {\n\"msg\": '\"location\" length must be less than or equal to 100 characters long'\n    }",
           "type": "json"
         }
       ]
@@ -3068,6 +3164,124 @@
     },
     "filename": "./Ennovate.js",
     "groupTitle": "Notification"
+  },
+  {
+    "type": "post",
+    "url": "/reset_password",
+    "title": "reset password",
+    "version": "0.1.0",
+    "name": "ResetPassword",
+    "group": "Reset_Password",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/reset_password"
+      }
+    ],
+    "description": "<p>changes the user with the given token password, return the modified user object and a token.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>[Required] The user's new password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"password\":\"kokiwawa\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MinPasswordLengthError",
+            "description": "<p>If the user Entered a password less than 8 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "MaxPasswordLengthError",
+            "description": "<p>If the user Entered a password more than 25 characters long.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "PasswordIsRequired",
+            "description": "<p>If the user doesn't enter the password value.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"password\" length must be at least 8 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"msg\": '\"passsword\" length must be at less than or equal to 25 characters long'\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response (example):",
+          "content": "HTTP/1.1 400 Bad Request\n{\n   \"msg\": \"\\\"password\\\" is required\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "POST localhost:3000/reset_password?token=$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The modified user object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The modified user token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"user\":{user-object},\n     \"token\": \"$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "Reset_Password"
   },
   {
     "type": "get",
@@ -6172,6 +6386,97 @@
             "optional": false,
             "field": "users",
             "description": "<p>The User Followers object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "users.ID",
+            "description": "<p>The user's ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.email",
+            "description": "<p>The user's email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "users.screen_name",
+            "description": "<p>The user's screen name.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": " {\n     \"users\":[\n                 {user-object},\n                 {user-object}\n             ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./Ennovate.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/users/search",
+    "title": "Search",
+    "version": "0.1.0",
+    "name": "GetUsersSearch",
+    "group": "User",
+    "permission": [
+      {
+        "name": "private",
+        "title": "User access rights needed.",
+        "description": "<p>Optionally you can write here further Informations about the permission. To be modified later</p>"
+      }
+    ],
+    "sampleRequest": [
+      {
+        "url": "localhost:3000/users/search.json"
+      }
+    ],
+    "description": "<p>Provides a simple, relevance-based search interface to public user accounts on Ennovate. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported. Only the first 1,000 matching results are available.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "q",
+            "description": "<p>[Required] The search query to run against people search.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"q\":\"Ennovate%20API\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "GET localhost:3000/users/search.json?q=soccer",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>The Users matching objects.</p>"
           },
           {
             "group": "Success 200",

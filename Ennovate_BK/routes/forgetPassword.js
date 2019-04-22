@@ -5,8 +5,8 @@ const winston = require('winston')
 const express = require('express')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  let user = await User.findOne({ email: req.body.email })
+router.get('/:email', async (req, res) => {
+  let user = await User.findOne({ email: req.params.email })
   if (!user) return res.status(404).send('UserNotFound')
 
   const token = user.generateAuthToken()
