@@ -240,7 +240,7 @@ router.get('/settings', async (req, res) => {
 
 // ----------------------------------------------------------------------------------
 
-// Update Profile Image
+// Update Profile Image V2
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -275,7 +275,7 @@ function checkFileType (file, cb) {
   }
 }
 
-router.post('/update_profile_image', upload.single('profileImage'), async (req, res) => {
+router.post('/v2/update_profile_image', upload.single('profileImage'), async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
@@ -291,6 +291,37 @@ router.post('/update_profile_image', upload.single('profileImage'), async (req, 
   }
 
   const imgUrl = (url + 'public/uploads/profileImages/' + req.file.filename) || null
+
+  var user = await User.findOneAndUpdate({ _id: decoded._id }, {
+    $set:
+    { profile_image_url: imgUrl,
+      default_profile_image: false }
+  }, { new: true })
+  if (!user) return res.status(404).send('The user with the given ID was not found.')
+
+  return res.send(user)
+})
+
+// ----------------------------------------------------------------------------------
+
+// Update Profile Image
+
+router.post('/update_profile_image', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
+  // let global = process.env.GLOBAL || 'false'
+  // var url = config.get('Url')
+
+  // if (global === 'true') {
+  //   url = config.get('globalUrl')
+  // }
+
+  const imgUrl = req.body.imgUrl || null
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:

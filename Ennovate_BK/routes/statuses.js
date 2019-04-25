@@ -65,7 +65,7 @@ router.get('/home_timeline', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// update Nova
+// update Nova V2 (Uploading the Image to the backend)
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -100,7 +100,7 @@ function checkFileType (file, cb) {
   }
 }
 
-router.post('/update', upload.single('novaImage'), async (req, res) => {
+router.post('/v2/update', upload.single('novaImage'), async (req, res) => {
   const { error } = validateNova(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
 
@@ -193,6 +193,100 @@ function validateNova (Nova) {
       .min(1)
       .max(256)
       .required()
+  }
+  return Joi.validate(Nova, schema)
+}
+
+// ------------------------------------------------------------------------------------------
+
+// update Nova (Uploading the Image url only)
+
+router.post('/update', async (req, res) => {
+  const { error } = validateNovaV2(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
+  const user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+
+  var inreply = null
+  if (req.body.in_reply_to_status_id) {
+    inreply = await Nova.findOne({ _id: req.body.in_reply_to_status_id })
+    if (!inreply) return res.status(404).send({ msg: 'The Nova with the given ID was not found' })
+  }
+
+  var inreplyUserID = null
+  var inreplyNovaID = null
+  var inreplyScreenName = null
+
+  if (inreply) {
+    inreplyNovaID = inreply._id
+    inreplyUserID = inreply.user._id
+    inreplyScreenName = inreply.user.screen_name
+  }
+
+  // let global = process.env.GLOBAL || 'false'
+  // var url = config.get('Url')
+
+  // if (global === 'true') {
+  //   url = config.get('globalUrl')
+  // }
+
+  const imgUrl = req.body.imgUrl || null
+  const imgSize = req.body.imgSize || null
+  const imgType = req.body.imgType || null
+
+  let nova = new Nova({
+    text: req.body.text,
+    in_reply_to_status_id: inreplyNovaID,
+    in_reply_to_user_id: inreplyUserID,
+    in_reply_to_screen_name: inreplyScreenName,
+    user: user,
+    user_screen_name: user.screen_name,
+    user_name: user.name,
+    // this is to create a nova then it can't have been renovaed before or favorited
+    replied_novas_IDs: [],
+    favorited: false,
+    renovaed: false,
+    entitiesObject: {
+      media: {
+        type: imgType,
+        size: imgSize,
+        url: imgUrl
+      }
+    }
+  })
+
+  if (inreply) {
+    Nova.inreply.update({
+      $inc: { reply_count: 1 }
+    })
+  }
+  await nova.save()
+
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova._id },
+      $inc: { novas_count: 1 } }, { new: true }
+  )
+
+  res.send(nova)
+})
+
+function validateNovaV2 (Nova) {
+  const schema = {
+    text: Joi.string()
+      .min(1)
+      .max(256)
+      .required(),
+    imgUrl: Joi.string()
+      .min(3)
+      .max(512)
   }
   return Joi.validate(Nova, schema)
 }
