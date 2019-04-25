@@ -144,7 +144,7 @@ router.post('/signup', async (req, res) => {
 router.get('/verify/:token', async (req, res) => {
   // var verifyOptions = { expiresIn: '1h' }
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'))
 
   const user = await User.findOneAndUpdate({ _id: decoded._id },
     {

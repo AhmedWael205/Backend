@@ -123,9 +123,9 @@ router.get('/search', async (req, res) => {
 
   const token = req.headers['token']
   if (token) {
-    // var verifyOptions = { expiresIn: '1h' }
+  // var verifyOptions = { expiresIn: '1h' }
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
     const search = new Search({
       userId: decoded._id,
