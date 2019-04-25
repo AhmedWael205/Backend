@@ -25,6 +25,8 @@ router.get('/lookup', async (req, res) => {
         if (user) {
           usersArray.push((
             _.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified'])))
+        } else {
+          unfoundUsers = unfoundUsers + 1
         }
       } else {
         unfoundUsers = unfoundUsers + 1
@@ -50,7 +52,7 @@ router.get('/lookup', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// Profile Banner
+// Profile image
 
 router.get('/profile_image', async (req, res) => {
   let userID = req.query.user_ID
@@ -121,8 +123,9 @@ router.get('/search', async (req, res) => {
 
   const token = req.headers['token']
   if (token) {
-    var verifyOptions = { expiresIn: '1h' }
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+    // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
     const search = new Search({
       userId: decoded._id,

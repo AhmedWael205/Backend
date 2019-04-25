@@ -32,7 +32,7 @@ const novaSchema = new mongoose.Schema({
   renovaed_by_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
   replied_novas_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
   favorited: Boolean,
-  renovaed: Boolean,
+  renovaed: { type: Boolean, default: false },
   entitiesObject: {
     type: new mongoose.Schema({
       hashtags: { type: [String], default: null },

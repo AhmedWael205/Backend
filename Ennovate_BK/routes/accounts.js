@@ -142,8 +142,9 @@ router.post('/signup', async (req, res) => {
 // verify
 
 router.get('/verify/:token', async (req, res) => {
-  var verifyOptions = { expiresIn: '1h' }
-  const decoded = jwt.verify(req.params.token, config.get('jwtPrivateKey'), verifyOptions)
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
   const user = await User.findOneAndUpdate({ _id: decoded._id },
     {
@@ -164,8 +165,9 @@ router.post('/settings', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  var verifyOptions = { expiresIn: '1h' }
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
@@ -226,8 +228,9 @@ router.get('/settings', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  var verifyOptions = { expiresIn: '1h' }
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
   var user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send('The user with the given ID was not found.')
@@ -276,8 +279,9 @@ router.post('/update_profile_image', upload.single('profileImage'), async (req, 
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  var verifyOptions = { expiresIn: '1h' }
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
   let global = process.env.GLOBAL || 'false'
   var url = config.get('Url')

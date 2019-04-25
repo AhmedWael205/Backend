@@ -83,12 +83,12 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-var signOptions = { expiresIn: '1h' }
+// var signOptions = { expiresIn: '1h' }
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, screen_name: this.screen_name },
-    config.get('jwtPrivateKey'), signOptions
+    config.get('jwtPrivateKey') // ,signOptions
   )
   return token
 }

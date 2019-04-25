@@ -10,8 +10,9 @@ router.post('/', async (req, res) => {
   const token = req.query.token
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
-  var verifyOptions = { expiresIn: '1h' }
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
   const { error } = validatePassword(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
