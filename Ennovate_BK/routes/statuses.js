@@ -30,25 +30,25 @@ router.get('/home_timeline', async (req, res) => {
 
   const following = await Following.findOne({ sourceID: decoded._id })
 
-  if (!excludeReplies && includeEntities) {
+  if (excludeReplies === 'false' && includeEntities === 'true') {
     let novas = await Nova
       .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
-      .sort({ _id: 1 })
+      .sort({ _id: -1 })
       .limit(count)
     return res.send(novas)
-  } else if (excludeReplies && includeEntities) {
+  } else if (excludeReplies === 'true' && includeEntities === 'true') {
     let novas = await Nova
       .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
-      .sort({ _id: 1 })
+      .sort({ _id: -1 })
       .limit(count)
-      .select({ entitiesObject: -1 })
-    return res.send(novas)
-  } else if (!excludeReplies && !includeEntities) {
+      // .select({ entitiesObject: -1 })
+    return res.send(_.pick([novas], ['created_at', 'text', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'user', 'user_screen_name', 'user_name', 'reply_count', 'renova_count', 'favorite_count', 'favorited_by_IDs', 'renovaed_by_IDs', 'replied_novas_IDs', 'favorited', 'renovaed', '-entitiesObject']))
+  } else if (excludeReplies === 'false' && includeEntities === 'false') {
     let novas = await Nova
       .find({ $and: [
         { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
         { in_reply_to_status_id: null } ] })
-      .sort({ _id: 1 })
+      .sort({ _id: -1 })
       .limit(count)
     return res.send(novas)
   } else {
@@ -56,10 +56,10 @@ router.get('/home_timeline', async (req, res) => {
       .find({ $and: [
         { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
         { in_reply_to_status_id: null } ] })
-      .sort({ _id: 1 })
+      .sort({ _id: -1 })
       .limit(count)
-      .select({ entitiesObject: -1 })
-    return res.send(novas)
+      // .select({ entitiesObject: -1 })
+    return res.send(_.pick([novas], ['created_at', 'text', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'user', 'user_screen_name', 'user_name', 'reply_count', 'renova_count', 'favorite_count', 'favorited_by_IDs', 'renovaed_by_IDs', 'replied_novas_IDs', 'favorited', 'renovaed', '-entitiesObject']))
   }
 })
 
