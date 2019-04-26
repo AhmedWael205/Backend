@@ -89,7 +89,7 @@ router.post('/create', async (req, res) => {
 
 // Destory Friendship
 
-router.post('/Destroy', async (req, res) => {
+router.post('/destroy', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
@@ -133,8 +133,8 @@ router.post('/Destroy', async (req, res) => {
       })
       if (follow) {
         await Following.deleteOne({ sourceID: decoded._id, friendID: user2._id })
-        await User.update({ _id: decoded._id }, { $inc: { friends_count: 1 } }, { new: true })
-        await User.update({ _id: user2._id }, { $inc: { followers_count: 1 } }, { new: true })
+        await User.update({ _id: decoded._id }, { $dec: { friends_count: 1 } }, { new: true })
+        await User.update({ _id: user2._id }, { $dec: { followers_count: 1 } }, { new: true })
       } else {
         return res.status(404).send({ msg: 'The sreen name to unfollow is not valid' })
       }
