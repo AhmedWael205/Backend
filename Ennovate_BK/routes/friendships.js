@@ -115,8 +115,8 @@ router.post('/destroy', async (req, res) => {
         })
         if (follow) {
           await Following.deleteOne({ sourceID: decoded._id, friendID: user2._id })
-          await User.update({ _id: decoded._id }, { $dec: { friends_count: 1 } }, { new: true })
-          await User.update({ _id: user2._id }, { $dec: { followers_count: 1 } }, { new: true })
+          await User.update({ _id: decoded._id }, { $inc: { friends_count: -1 } }, { new: true })
+          await User.update({ _id: user2._id }, { $inc: { followers_count: -1 } }, { new: true })
         } else {
           return res.status(404).send({ msg: 'you do not follow this person ' })
         }
@@ -133,8 +133,8 @@ router.post('/destroy', async (req, res) => {
       })
       if (follow) {
         await Following.deleteOne({ sourceID: decoded._id, friendID: user2._id })
-        await User.update({ _id: decoded._id }, { $dec: { friends_count: 1 } }, { new: true })
-        await User.update({ _id: user2._id }, { $dec: { followers_count: 1 } }, { new: true })
+        await User.update({ _id: decoded._id }, { $inc: { friends_count: -1 } }, { new: true })
+        await User.update({ _id: user2._id }, { $inc: { followers_count: -1 } }, { new: true })
       } else {
         return res.status(404).send({ msg: 'The sreen name to unfollow is not valid' })
       }
