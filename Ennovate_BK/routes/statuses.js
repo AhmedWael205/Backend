@@ -20,34 +20,20 @@ const router = express.Router()
 router.get('/home_timeline', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
-  const count = req.body.count || 10
+  const count = req.body.count || 10000000000
   const excludeReplies = req.body.exclude_replies || true
-  const includeEntities = req.body.include_entities || false
 
   // var verifyOptions = { expiresIn: '1h' }
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
 
+  // to do make it find many and use a for loop
+
   const following = await Following.findOne({ sourceID: decoded._id })
 
-  if (excludeReplies === 'false' && includeEntities === 'true') {
+  if (excludeReplies === 'false') {
     let novas = await Nova
       .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
-      .sort({ _id: -1 })
-      .limit(count)
-    return res.send(novas)
-  } else if (excludeReplies === 'true' && includeEntities === 'true') {
-    let novas = await Nova
-      .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
-      .sort({ _id: -1 })
-      .limit(count)
-      // .select({ entitiesObject: -1 })
-    return res.send(_.pick([novas], ['created_at', 'text', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'user', 'user_screen_name', 'user_name', 'reply_count', 'renova_count', 'favorite_count', 'favorited_by_IDs', 'renovaed_by_IDs', 'replied_novas_IDs', 'favorited', 'renovaed', '-entitiesObject']))
-  } else if (excludeReplies === 'false' && includeEntities === 'false') {
-    let novas = await Nova
-      .find({ $and: [
-        { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
-        { in_reply_to_status_id: null } ] })
       .sort({ _id: -1 })
       .limit(count)
     return res.send(novas)
@@ -58,8 +44,7 @@ router.get('/home_timeline', async (req, res) => {
         { in_reply_to_status_id: null } ] })
       .sort({ _id: -1 })
       .limit(count)
-      // .select({ entitiesObject: -1 })
-    return res.send(_.pick([novas], ['created_at', 'text', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'user', 'user_screen_name', 'user_name', 'reply_count', 'renova_count', 'favorite_count', 'favorited_by_IDs', 'renovaed_by_IDs', 'replied_novas_IDs', 'favorited', 'renovaed', '-entitiesObject']))
+    return res.send(novas)
   }
 })
 

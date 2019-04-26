@@ -321,7 +321,7 @@ router.post('/update_profile_image', async (req, res) => {
   //   url = config.get('globalUrl')
   // }
 
-  const imgUrl = req.body.imgUrl || null
+  const imgUrl = req.body.profile_image_url || null
 
   var user = await User.findOneAndUpdate({ _id: decoded._id }, {
     $set:
