@@ -1,8 +1,12 @@
 {
   "jwtPrivateKey": "",
-  "dbUrl": "mongodb+srv://AhmedWael_205:kokiwawa@ennovatecluster-ztwcb.mongodb.net/Ennovate_Test?retryWrites=true",
+  "dbUrl": "mongodb+srv://Backend-Master:kokiwawa@ennovatecluster-ztwcb.mongodb.net/Ennovate_Test?retryWrites=true",
   "dbLocalUrl": "mongodb://localhost/ennovate",
   "Url": "http://localhost:8080/",
+  "globalUrl":"http://3.19.122.178:3000/",
+  "globalFrontUrl":"http://3.19.122.178",
+  "FrontUrl":"http://localhost:3000/",
+  "defaultImage":"default.jpg",
   "email": "EnnovateTeam@gmail.com",
   "pass": ""
 }

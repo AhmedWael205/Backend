@@ -153,16 +153,93 @@ router.get('/show', async (req, res) => {
   let source_screen_name=req.body.source_screen_name
   let target_screen_name=req.body.target_screen_name
   
-  let sourcefollowstarget= await Following.findOne({
+  let sourcefollowstarget = await Following.findOne({
     sourceID: source_ID,
     friendID: target_ID
   }
   )
   
-  if(sourcefollowstarget)
+  let targetfollowssource= await Following.findOne({
+  sourceID: target_ID,
+  friendID: source_ID
+  })
+if(!source_screen_name&&!target_screen_name)
+{
+
+  if(sourcefollowstarget&&!targetfollowssource)
   {
   return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": false, "followed_by": true}, "source": { "id": source_ID, "following": true, "followed_by": false}} })
   }
+  if(targetfollowssource&&!sourcefollowstarget)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": true, "followed_by": false}, "source": { "id": source_ID, "following": false, "followed_by": true}} }) 
+  }
+  if(sourcefollowstarget&&targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": true, "followed_by": true}, "source": { "id": source_ID, "following": true, "followed_by": true}} })
+  }
+  if(!sourcefollowstarget&&!targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": false, "followed_by": false}, "source": { "id": source_ID, "following": false, "followed_by": false}} })
+  }
+}
+   if(source_screen_name&&!target_screen_name)
+{
+  if(sourcefollowstarget&&!targetfollowssource)
+  {
+  return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": false, "followed_by": true}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": true, "followed_by": false}} })
+  }
+  if(targetfollowssource&&!sourcefollowstarget)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": true, "followed_by": false}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": false, "followed_by": true}} }) 
+  }
+  if(sourcefollowstarget&&targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": true, "followed_by": true}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": true, "followed_by": true}} })
+  }
+  if(!sourcefollowstarget&&!targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": false, "followed_by": false}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": false, "followed_by": false}} })
+  }
+}
+if(!source_screen_name&&target_screen_name)
+{
+  if(sourcefollowstarget&&!targetfollowssource)
+  {
+  return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": false, "followed_by": true}, "source": { "id": source_ID, "following": true, "followed_by": false}} })
+  }
+  if(targetfollowssource&&!sourcefollowstarget)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": true, "followed_by": false}, "source": { "id": source_ID, "following": false, "followed_by": true}} }) 
+  }
+  if(sourcefollowstarget&&targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": true, "followed_by": true}, "source": { "id": source_ID, "following": true, "followed_by": true}} })
+  }
+  if(!sourcefollowstarget&&!targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": false, "followed_by": false}, "source": { "id": source_ID, "following": false, "followed_by": false}} })
+  }
+}
+if(source_screen_name&&target_screen_name)
+{
+  if(sourcefollowstarget&&!targetfollowssource)
+  {
+  return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": false, "followed_by": true}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": true, "followed_by": false}} })
+  }
+  if(targetfollowssource&&!sourcefollowstarget)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": true, "followed_by": false}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": false, "followed_by": true}} }) 
+  }
+  if(sourcefollowstarget&&targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": true, "followed_by": true}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": true, "followed_by": true}} })
+  }
+  if(!sourcefollowstarget&&!targetfollowssource)
+  {
+    return await res.status(404).send({"relationship": { "target": { "id": target_ID, "screen_name": target_screen_name, "following": false, "followed_by": false}, "source": { "id": source_ID, "screen_name": source_screen_name, "following": false, "followed_by": false}} })
+  }
+}
   })
   
 // ------------------------------------------------------------------------------------------  
