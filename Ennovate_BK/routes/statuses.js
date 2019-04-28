@@ -29,22 +29,41 @@ router.get('/home_timeline', async (req, res) => {
 
   // to do make it find many and use a for loop
 
-  const following = await Following.findOne({ sourceID: decoded._id })
+  const following = await Following.find({ sourceID: decoded._id })
+  const friendIDs = []
 
-  if (excludeReplies === 'false') {
-    let novas = await Nova
-      .find({ $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] })
-      .sort({ _id: -1 })
-      .limit(count)
-    return res.send(novas)
+  for (var friend of following) friendIDs.push(new mongoose.Types.ObjectId(friend.friendID))
+
+  if (following) {
+    if (excludeReplies === 'false') {
+      let novas = await Nova
+        .find({ $or: [ { user: decoded._id }, { user: { $in: friendIDs } } ] })
+        .sort({ _id: -1 })
+        .limit(count)
+      return res.send(novas)
+    } else {
+      let novas = await Nova
+        .find({ $and: [
+          { $or: [ { user: decoded._id }, { user: { $in: friendIDs } } ] },
+          { in_reply_to_status_id: null } ] })
+        .sort({ _id: -1 })
+        .limit(count)
+      return res.send(novas)
+    }
   } else {
-    let novas = await Nova
-      .find({ $and: [
-        { $or: [ { user: decoded._id }, { user: { $in: [ following.friendID ] } } ] },
-        { in_reply_to_status_id: null } ] })
-      .sort({ _id: -1 })
-      .limit(count)
-    return res.send(novas)
+    if (excludeReplies === 'false') {
+      let novas = await Nova
+        .find({ user: decoded._id })
+        .sort({ _id: -1 })
+        .limit(count)
+      return res.send(novas)
+    } else {
+      let novas = await Nova
+        .find({ $and: [ { user: decoded._id }, { in_reply_to_status_id: null } ] })
+        .sort({ _id: -1 })
+        .limit(count)
+      return res.send(novas)
+    }
   }
 })
 
