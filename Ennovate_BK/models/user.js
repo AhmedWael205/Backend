@@ -3,6 +3,13 @@ const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const mongoose = require('mongoose')
 
+let global2 = process.env.GLOBAL || 'false'
+var url = config.get('Url')
+
+if (global2 === 'true') {
+  url = config.get('globalUrl')
+}
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -39,18 +46,15 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   verified: { type: Boolean, default: false },
-  location: String,
-  bio: String,
+  location: { type: String, default: null },
+  bio: { type: String, default: null },
   followers_count: { type: Number, default: 0 },
   favorites_count: { type: Number, default: 0 },
   friends_count: { type: Number, default: 0 },
   novas_count: { type: Number, default: 0 },
-  novas_IDs: [mongoose.Schema.Types.ObjectId],
-  favorites_novas_IDs: [mongoose.Schema.Types.ObjectId],
-  profile_background_color: String,
-  profile_background_image_url: { type: String, default: 'http://i65.tinypic.com/21exjbc.jpg' },
-  profile_image_url: { type: String, default: 'http://i65.tinypic.com/2mxrh8y.jpg' },
-  default_profile: { type: Boolean, default: true },
+  novas_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
+  favorites_novas_IDs: { type: [mongoose.Schema.Types.ObjectId], default: null },
+  profile_image_url: { type: String, default: url + 'public/uploads/profileImages/' + config.get('defaultImage') },
   default_profile_image: { type: Boolean, default: true },
   notification_object: {
     type: new mongoose.Schema({
@@ -79,10 +83,12 @@ const userSchema = new mongoose.Schema({
   }
 })
 
+// var signOptions = { expiresIn: '1h' }
+
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, screen_name: this.screen_name },
-    config.get('jwtPrivateKey')
+    config.get('jwtPrivateKey') // ,signOptions
   )
   return token
 }

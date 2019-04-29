@@ -21,7 +21,13 @@ $ standard
 7) To set the port number, write in the terminal: (Optional) (Default = 8080)
 $ export PORT=3000
 
-8) To run the server, write in the terminal: (Required)
+8) To send verification emails to the users, write in the terminal: (Optional) (Default = 8080)
+$ export EMAIL=true
+
+9) To use the global URL, write in the terminal: (Optional) (Default = 8080)
+$ export GLOBAL=true
+
+10) To run the server, write in the terminal: (Required)
 $ node index.js
 Or To keep running while making changes
 $ nodemon index.js

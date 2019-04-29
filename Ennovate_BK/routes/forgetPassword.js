@@ -5,8 +5,8 @@ const winston = require('winston')
 const express = require('express')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  let user = await User.findOne({ email: req.body.email })
+router.get('/:email', async (req, res) => {
+  let user = await User.findOne({ email: req.params.email })
   if (!user) return res.status(404).send('UserNotFound')
 
   const token = user.generateAuthToken()
@@ -22,6 +22,13 @@ router.get('/', async (req, res) => {
     }
   })
 
+  let global = process.env.GLOBAL || 'false'
+  var url = config.get('FrontUrl')
+
+  if (global === 'true') {
+    url = config.get('globalFrontUrl')
+  }
+
   let mailOptions = {
     from: config.get('email'),
     to: user.email,
@@ -30,11 +37,11 @@ router.get('/', async (req, res) => {
       '<h4><b>Reset Password</b></h4>' +
       '<p>To reset your password, complete this form:</p>' +
       '<a href="' +
-      config.get('Url') +
+      url +
       'reset_password/' +
       token +
       '" > ' +
-      config.get('Url') +
+      url +
       'reset_password/' +
       token +
       '</a>' +

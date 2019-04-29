@@ -2543,3 +2543,101 @@ function getForgetPassword() {
   return;
 }
 // ------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {get} /users/search Search
+ * @apiVersion 0.1.0
+ * @apiName GetUsersSearch
+ * @apiGroup User
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/users/search.json
+ *
+ * @apiDescription Provides a simple, relevance-based search interface to public user accounts on Ennovate. Try querying by topical interest, full name, company name, location, or other criteria. Exact match searches are not supported.
+ * Only the first 1,000 matching results are available.
+ *
+ * @apiParam {String} q [Required] The search query to run against people search.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "q":"Ennovate%20API"
+ *     }
+ *
+ * @apiExample Example usage:
+ * GET localhost:3000/users/search.json?q=soccer
+ *
+ * @apiSuccess {Object[]} users The Users matching objects.
+ * @apiSuccess {Number} users.ID The user's ID.
+ * @apiSuccess {String} users.email The user's email.
+ * @apiSuccess {String} users.screen_name The user's screen name.
+ *
+ * @apiSuccessExample
+ *      {
+ *          "users":[
+ *                      {user-object},
+ *                      {user-object}
+ *                  ]
+ *     }
+ */
+function getUsersSearch() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------
+/**
+ * @api {post} /reset_password reset password
+ * @apiVersion 0.1.0
+ * @apiName ResetPassword
+ * @apiGroup Reset Password
+ * @apiPermission private
+ * @apiSampleRequest localhost:3000/reset_password
+ *
+ * @apiDescription changes the user with the given token password, return the modified user object and a token.
+ *
+ * @apiParam {String} password [Required] The user's new password
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "password":"kokiwawa"
+ *     }
+ * 
+ * @apiError MinPasswordLengthError If the user Entered a password less than 8 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"password" length must be at least 8 characters long'
+ *     }
+ *
+ * @apiError MaxPasswordLengthError If the user Entered a password more than 25 characters long.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "msg": '"passsword" length must be at less than or equal to 25 characters long'
+ *     }
+ * 
+ * @apiError PasswordIsRequired If the user doesn't enter the password value.
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *        "msg": "\"password\" is required"
+ *     }
+ *
+
+ *
+ * @apiExample Example usage:
+ * POST localhost:3000/reset_password?token=$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe
+ * 
+ * @apiSuccess {Object} user The modified user object.
+ * @apiSuccess {string} token The modified user token.
+ * 
+ *  @apiSuccessExample
+ *      {
+ *          "user":{user-object},
+ *          "token": "$2a$05$bvIG6Nmid91Mu9RcmmWZfO5HJIMCT8riNW0hEp8f6/FuA2/mHZFpe"
+ *     }
+ */
+function resetPassword() {
+  return;
+}
+
+// ------------------------------------------------------------------------------------------

@@ -1,11 +1,9 @@
-const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 const _ = require('lodash')
-var pick = require('object.pick')
-const winston = require('winston')
 const { User } = require('../models/user')
+const { Search, validateSearch } = require('../models/search')
 const mongoose = require('mongoose')
-const Nova = require('../models/nova')
+const config = require('config')
 const express = require('express')
 const router = express.Router()
 
@@ -27,6 +25,8 @@ router.get('/lookup', async (req, res) => {
         if (user) {
           usersArray.push((
             _.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified'])))
+        } else {
+          unfoundUsers = unfoundUsers + 1
         }
       } else {
         unfoundUsers = unfoundUsers + 1
@@ -52,9 +52,9 @@ router.get('/lookup', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// Profile Banner
+// Profile image
 
-router.get('/profile_banner', async (req, res) => {
+router.get('/profile_image', async (req, res) => {
   let userID = req.query.user_ID
   let userSreenName = req.query.screen_name
   if (!userID && !userSreenName) return res.status(404).send({ msg: 'NoUsersFound' })
@@ -93,8 +93,8 @@ router.get('/show', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(userID)) {
       let user = await User.findOne({ _id: userID })
       if (user) {
-        console.log(user.profile_image_url)
-        return res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+        return res.send(user)
+        // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
       } else {
         return res.status(404).send({ msg: 'UserNotFound' })
       }
@@ -104,11 +104,51 @@ router.get('/show', async (req, res) => {
   } else if (userSreenName) {
     let user = await User.findOne({ screen_name: userSreenName })
     if (user) {
-      return res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+      return res.send(user)
+      // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
     } else {
       return res.status(404).send({ msg: 'UserNotFound' })
     }
   }
+})
+
+// ------------------------------------------------------------------------------------------
+
+// Search
+router.get('/search', async (req, res) => {
+  const { error } = validateSearch(req.query)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  let query = req.query.query
+
+  const token = req.headers['token']
+  if (token) {
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
+    const search = new Search({
+      userId: decoded._id,
+      query: query
+    })
+    await search.save()
+
+    let searchResult = await User.find(
+      { $and: [ { $or: [
+        { name: new RegExp('.*' + query + '.*', 'i') },
+        { screen_name: new RegExp('.*' + query + '.*', 'i') },
+        { email: new RegExp('.*' + query + '.*', 'i') }] }, { _id: { $ne: decoded._id } }] })
+    return res.send(searchResult)
+  }
+
+  let searchResult = await User.find(
+    { $or: [
+      { name: new RegExp('.*' + query + '.*', 'i') },
+      { screen_name: new RegExp('.*' + query + '.*', 'i') },
+      { email: new RegExp('.*' + query + '.*', 'i') }]
+    })
+
+  return res.send(searchResult)
 })
 
 // ------------------------------------------------------------------------------------------
