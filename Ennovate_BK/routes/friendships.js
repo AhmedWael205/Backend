@@ -150,27 +150,17 @@ router.post('/destroy', async (req, res) => {
 // Friendship Relationships
 
 router.get('/show', async (req, res) => {
-<<<<<<< HEAD
   let source_ID=req.body.source_ID
   let target_ID=req.body.target_ID
   
   let source_screen_name=req.body.source_screen_name
   let target_screen_name=req.body.target_screen_name
   
-=======
-  let source_ID = req.body.source_ID
-  let target_ID = req.body.target_ID
-
-  let source_screen_name = req.body.source_screen_name
-  let target_screen_name = req.body.target_screen_name
-
->>>>>>> f4dbf63f84ad68ce07f45dfba5e4cddf1275e6c4
   let sourcefollowstarget = await Following.findOne({
     sourceID: source_ID,
     friendID: target_ID
   }
   )
-<<<<<<< HEAD
   
   let targetfollowssource= await Following.findOne({
   sourceID: target_ID,
@@ -180,14 +170,9 @@ if(!source_screen_name&&!target_screen_name)
 {
 
   if(sourcefollowstarget&&!targetfollowssource)
-=======
-
-  if (sourcefollowstarget)
->>>>>>> f4dbf63f84ad68ce07f45dfba5e4cddf1275e6c4
   {
     return await res.status(404).send({'relationship': { 'target': { 'id': target_ID, 'following': false, 'followed_by': true}, 'source': { 'id': source_ID, 'following': true, 'followed_by': false}} })
   }
-<<<<<<< HEAD
   if(targetfollowssource&&!sourcefollowstarget)
   {
     return await res.status(404).send({"relationship": { "target": { "id": target_ID, "following": true, "followed_by": false}, "source": { "id": source_ID, "following": false, "followed_by": true}} }) 
@@ -261,10 +246,5 @@ if(source_screen_name&&target_screen_name)
   })
   
 // ------------------------------------------------------------------------------------------  
-=======
-})
-
-// ------------------------------------------------------------------------------------------
->>>>>>> f4dbf63f84ad68ce07f45dfba5e4cddf1275e6c4
 
 module.exports = router
