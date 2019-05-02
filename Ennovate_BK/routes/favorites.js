@@ -46,6 +46,8 @@ router.post('/create', async (req, res) => {
   } else return res.status(404).send({ msg: 'User Not Valid' })
 })
 
+// ------------------------------------------------------------------------------------------
+
 router.post('/destroy', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
