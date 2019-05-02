@@ -47,7 +47,7 @@ router.get('/:token', async (req, res) => {
             '</a>' +
             '<br><br>' +
             '<p>--Ennovate Team</p>'
-}
+  }
 
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {

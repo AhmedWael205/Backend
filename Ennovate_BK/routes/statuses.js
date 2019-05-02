@@ -1,8 +1,5 @@
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
-const _ = require('lodash')
-var pick = require('object.pick')
-const winston = require('winston')
 const { User } = require('../models/user')
 const { Following } = require('../models/following')
 const multer = require('multer')

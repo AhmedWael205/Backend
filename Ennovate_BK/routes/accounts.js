@@ -323,7 +323,7 @@ router.post('/update_profile_image', async (req, res) => {
 
   const imgUrl = req.body.profile_image_url || null
 
-  var user = await User.findOneAndUpdate({ _id: decoded._id }, {
+  var user = await User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(decoded._id) }, {
     $set:
     { profile_image_url: imgUrl,
       default_profile_image: false }
