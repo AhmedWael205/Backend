@@ -248,34 +248,41 @@ if(source_screen_name&&target_screen_name)
 // ------------------------------------------------------------------------------------------
 
 router.get('/ids', async (req, res) => {
-  let check = await User.findOne({ _id: req.user._id });
-      if (!check) return res.status(400).send({"ReturnMsg":"User Doesn't Exist"})
-      let follow = await Following.find({sourceID:  req.user._id})
-      var Followings = {"FollowingIDs":[]}
-      follow.forEach( function(Data) { Followings.FollowingIDs.push(Data.friendID) })
-      res.status(200).send(`FollowingsIDs: ${Followings}`)
+  var userID = req.query.user_id
+  var ScreenName = req.query.screen_name
 
+  let user = await User.findOne({ $or: [{ screen_name: ScreenName }, { _id: userID }] })
+  if (!user) return res.status(400).send({ 'msg': 'User Doesnt Exist' })
+
+  let follow = await Following.find({ sourceID: user._id })
+  var FollowingIDs = []
+  follow.forEach(function (Data) { FollowingIDs.push(Data.friendID) })
+  res.status(200).send({ FollowingIDs })
 })
 
+// ------------------------------------------------------------------------------------------
+
 router.get('/list', async (req, res) => {
-  let UserID = req.user._id
-  let check = await User.fineOne({_id: req.user._id});
-  if(!check) return res.status(400).send({"ReturnMsg":"User Doesn't Exist"});
+  var userID = req.query.user_id
+  var ScreenName = req.query.screen_name
+
+  let user = await User.findOne({ $or: [{ screen_name: ScreenName }, { _id: userID }] })
+  if (!user) return res.status(400).send({ 'msg': 'User Doesnt Exist' })
+
   var UsersArray = []
-  let follow = await Following.find({sourceID:  req.user._id});
-  var Followings = {"FollowingsIDs":[]};
-  follow.forEach( function(Data) { Followings.FollowingsIDs.push(Data.friendID) } );
-  for(var _id of Followings){
-    if(mongoose.Types.ObjectId.isValid(_id)){
-      let User = await User.findOne({_id})
-      if(User){
-        UserArray.push((_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified'])))
+  let follow = await Following.find({ sourceID: user._id })
+  var FollowingsIDs = []
+  follow.forEach(function (Data) { FollowingsIDs.push(new mongoose.Types.ObjectId(Data.sourceID)) })
+  for (var _id of FollowingsIDs) {
+    if (mongoose.Types.ObjectId.isValid(_id)) {
+      let user2 = await User.findOne({ _id })
+      if (user2) {
+        UsersArray.push(user2)
       }
     }
   }
-  return res.status(200).send ({"users": UsersArray})
+  return res.status(200).send({ 'users': UsersArray })
 })
-
 
 // ------------------------------------------------------------------------------------------
 
