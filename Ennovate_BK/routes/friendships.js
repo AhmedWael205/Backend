@@ -272,7 +272,7 @@ router.get('/list', async (req, res) => {
   var UsersArray = []
   let follow = await Following.find({ sourceID: user._id })
   var FollowingsIDs = []
-  follow.forEach(function (Data) { FollowingsIDs.push(new mongoose.Types.ObjectId(Data.sourceID)) })
+  follow.forEach(function (Data) { FollowingsIDs.push(new mongoose.Types.ObjectId(Data.friendID)) })
   for (var _id of FollowingsIDs) {
     if (mongoose.Types.ObjectId.isValid(_id)) {
       let user2 = await User.findOne({ _id })
