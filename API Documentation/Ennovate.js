@@ -525,27 +525,37 @@ function postUpdateProfileImage() {
  * @apiExample Example usage:
  * GET localhost:3000/saved_searches/list.json
  *
- * @apiSuccess {Object[]} Search The search result info (created_at ,ID ,name ,query).
+ * 
+ * @apiSuccess {Object[]} list The search result info (created_at ,id ,query,userId).
  * @apiSuccess {Date} Search.created_at Datetime of the user's search.
  * @apiSuccess {Number} Search.ID The search ID.
- * @apiSuccess {String} Search.name The search name.
+ * @apiSuccess {number} Search.userId The user id who made the search.
  * @apiSuccess {String} Search.query The search query.
  *
  * @apiSuccessExample
- * [
- *      {
- *          "created_at": "2018-12-04T14:51:06.157Z",
- *          "ID": 9569704,
- *          "name": "@Ennovateapi",
- *          "query": "@Ennovateapi"
- *      },
- *       {
- *          "created_at": "2018-11-04T14:51:06.157Z",
- *          "id": 9569730,
- *          "name": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere"",
- *          "query": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere""
- *       }
- * ]
+ *   "list": [
+        {
+            "_id": "5cc9bac749ef210da830395f",
+            "userId": "5cba00939b8b142010867705",
+            "query": "wael",
+            "created_at": "2019-05-01T15:27:03.649Z",
+            "__v": 0
+        },
+        {
+            "_id": "5cc9bace49ef210da8303960",
+            "userId": "5cba00939b8b142010867705",
+            "query": "avjdsbvd",
+            "created_at": "2019-05-01T15:27:10.865Z",
+            "__v": 0
+        },
+        {
+            "_id": "5cc9badb49ef210da8303961",
+            "userId": "5cba00939b8b142010867705",
+            "query": "maramm",
+            "created_at": "2019-05-01T15:27:23.996Z",
+            "__v": 0
+        }
+    ]
  */
 function getSavedSearches() {
   return;
@@ -564,27 +574,37 @@ function getSavedSearches() {
  *
  * @apiParam {Number} ID [Required] The ID of the saved search.
  *
- * @apiParamExample {json} Request-Example:
+ *  @apiError searchIdRequired if the required serach id was not sent in the header
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 400 bad request
  *     {
- *       "ID": 313006
+ *        msg: "serachId is required." 
+ *     }
+ *
+ *  @apiError NoMatchesFound if the user doesn't have this search and vise verca
+ * @apiErrorExample Response (example):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *        msg: "No Matches Found" 
  *     }
  *
  * @apiExample Example usage:
  * POST localhost:3000/saved_searches/destroy/9569704.json
  *
- * @apiSuccess {Object} Search The search result info (created_at ,ID ,name ,query).
+ * @apiSuccess {Object} deletedsearch The search result info (created_at ,ID,query,userId).
  * @apiSuccess {Date}   Search.created_at Datetime of the user's search.
  * @apiSuccess {Number} Search.ID The search ID.
- * @apiSuccess {String} Search.name The search name.
+ * @apiSuccess {number} Search.userId The user id who made the search.
  * @apiSuccess {String} Search.query The search query.
  *
  * @apiSuccessExample
- *      {
- *          "created_at": "2018-12-04T14:51:06.157Z",
- *          "ID": 9569704,
- *          "name": "@Ennovateapi",
- *          "query": "@Ennovateapi"
- *      }
+ *       "deletedsearch": {
+        "_id": "5cc9b3afdb6dad40ec8305d8",
+        "userId": "5cba00939b8b142010867705",
+        "query": "wael",
+        "created_at": "2019-05-01T14:56:47.643Z",
+        "__v": 0
+    }
  */
 function postDeleteSearchByID() {
   return;
@@ -605,27 +625,35 @@ function postDeleteSearchByID() {
  * @apiExample Example usage:
  * POST localhost:3000/saved_searches/delete_all.json
  *
- * @apiSuccess {Object[]} Search The search result info (created_at ,ID ,name ,query).
+ * @apiSuccess {Object[]} deletedlist The search result info (created_at ,id,query,userId).
  * @apiSuccess {Date} Search.created_at Datetime of the user's search.
  * @apiSuccess {Number} Search.ID The search ID.
- * @apiSuccess {String} Search.name The search name.
  * @apiSuccess {String} Search.query The search query.
- *
+ * @apiSuccess {number} Search.userId The user id who made the search.
  * @apiSuccessExample
- * [
- *      {
- *          "created_at": "2018-12-04T14:51:06.157Z",
- *          "ID": 9569704,
- *          "name": "@Ennovateapi",
- *          "query": "@Ennovateapi"
- *      },
- *       {
- *          "created_at": "2018-11-04T14:51:06.157Z",
- *          "id": 9569730,
- *          "name": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere"",
- *          "query": "@Ennovate OR Ennovateapi OR "Ennovate api" OR "@anywhere""
- *       }
- * ]
+ * "deletedlist": [
+        {
+            "_id": "5cc9abb75425ba48b4303aab",
+            "userId": "5cba00939b8b142010867705",
+            "query": "maramm",
+            "created_at": "2019-05-01T14:22:47.703Z",
+            "__v": 0
+        },
+        {
+            "_id": "5cc9abc15425ba48b4303aac",
+            "userId": "5cba00939b8b142010867705",
+            "query": "waeeeeel",
+            "created_at": "2019-05-01T14:22:57.978Z",
+            "__v": 0
+        },
+        {
+            "_id": "5cc9abd45425ba48b4303aad",
+            "userId": "5cba00939b8b142010867705",
+            "query": "wael",
+            "created_at": "2019-05-01T14:23:16.197Z",
+            "__v": 0
+        }
+    ]
  */
 function postDeleteSearchesAll() {
   return;
