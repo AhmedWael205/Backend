@@ -58,27 +58,27 @@ const userSchema = new mongoose.Schema({
   default_profile_image: { type: Boolean, default: true },
   notification_object: {
     type: new mongoose.Schema({
-      renova_list: {
+      renova_list: [{
         type: new mongoose.Schema({
-          nova_ID: [mongoose.Schema.Types.ObjectId],
-          user_action_ID: [mongoose.Schema.Types.ObjectId],
+          nova_ID: mongoose.Schema.Types.ObjectId,
+          user_action_ID: mongoose.Schema.Types.ObjectId,
           date: Date
         })
-      },
-      mention_list: {
+      }],
+      mention_list: [{
         type: new mongoose.Schema({
-          nova_ID: [mongoose.Schema.Types.ObjectId],
-          user_action_ID: [mongoose.Schema.Types.ObjectId],
+          nova_ID: mongoose.Schema.Types.ObjectId,
+          user_action_ID: mongoose.Schema.Types.ObjectId,
           date: Date
         })
-      },
-      favorite_list: {
+      }],
+      favorite_list: [{
         type: new mongoose.Schema({
-          nova_ID: [mongoose.Schema.Types.ObjectId],
-          user_action_ID: [mongoose.Schema.Types.ObjectId],
+          nova_ID: mongoose.Schema.Types.ObjectId,
+          user_action_ID: mongoose.Schema.Types.ObjectId,
           date: Date
         })
-      }
+      }]
     })
   }
 })
