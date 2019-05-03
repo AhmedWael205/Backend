@@ -85,12 +85,23 @@ router.post('/destroy', async (req, res) => {
   } else return res.status(404).send({ msg: 'User Not Valid' })
 })
 
-// router.get('/list', async(req, res) => {
-//   let Userr = await User.findOne({ _id: req.user._id });
-//       if (!check) return res.status(400).send({"ReturnMsg":"User Doesn't Exist"});
-//       const Favorited = Userr.favorites_novas_IDs;
-//       const Length1 = Favorited.Length();
-//       if(Length1 < 20) return res.status(200).send({ "" })
-// })
+// ------------------------------------------------------------------------------------------
+
+router.get('/list', async (req, res) => {
+  let user = await User.findOne({ _id: req.body.user_id })
+  if (!user) return res.status(404).send({ 'msg': 'User Doesnt Exist' })
+  var Favorited = await User.find({ _id: req.body.user_id }, { favorites_novas_IDs: 1, _id: 0 })
+
+  const Length1 = Favorited.length
+  if (Length1 === 0) return res.status(200).send({ 'novaFavorited: ': [] })
+  if (Length1 <= 20) return res.status(200).send({ 'novaFavorited: ': Favorited })
+  var novaFavorited = []
+  for (var i = Length1 - 21; i < Length1; i++) {
+    novaFavorited.push(Favorited[i])
+  }
+  return res.status(200).send({ novaFavorited })
+})
+
+// ------------------------------------------------------------------------------------------
 
 module.exports = router
