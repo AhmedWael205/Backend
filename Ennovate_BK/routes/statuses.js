@@ -518,7 +518,7 @@ router.post('/destroy', async (req, res) => {
     if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
     let novaid = req.body._id
     let nova = await Nova.findOne({ _id: novaid })
-    if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
+    if (!nova) return res.status(404).send({ msg: 'The reNova with the given ID was not found.' })
     // check 3ala el renovaed boolean
     if (!nova.renovaed) return res.status(401).send({ msg: 'bad request this is not a renova'})
     
@@ -575,11 +575,6 @@ router.post('/destroy', async (req, res) => {
     }
     else return res.status(404).send({ msg: 'No authentication to delete this renova' })
     })
-
-
-
-
-
   // ------------------------------------------------------------------------------------------
   
   
