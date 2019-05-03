@@ -380,11 +380,62 @@ router.post('/renova', async (req, res) => {
 
   let novauser = await User.findOne({ _id: nova.user })
 
+  // maynfa3sh a3ml renova le renova
+
+  if (!nova.renovaed) // law mahyash aslan renova
+  {
+    let nova1 = new Nova({
+      text: nova.text,
+      in_reply_to_status_id: new mongoose.Types.ObjectId(nova._id),
+      in_reply_to_user_id: new mongoose.Types.ObjectId(novauser._id),
+      in_reply_to_screen_name: nova.user_screen_name,
+      user: user,
+      user_screen_name: user.screen_name,
+      user_name: user.name,
+      renovaed: true
+    })
+  
+    await nova1.save()
+  
+    await User.update({ _id: decoded._id },
+      { '$push': { 'novas_IDs': nova1._id },
+        $inc: { novas_count: 1 } }, { new: true }
+    )
+  
+    await Nova.update({ _id: nova._id },
+      { $inc: { renova_count: 1 },
+        '$push': { 'renovaed_by_IDs': user._id } }
+    )
+  
+    user = await User.findOne({ _id: decoded._id })
+    novauser = await User.findOne({ _id: nova.user })
+    
+    //const notify = { nova_ID: nova._id, user_action_ID: user._id, date: Date(Date.now()) }
+  
+    //novauser.notification_object.renova_list.push(notify)
+    //const renovaList = novauser.notification_object.renova_list
+  
+    //await User.updateOne({ screen_name: novauser.screen_name },
+    // { notification_object: {
+    //  renova_list: renovaList
+    // }
+    //}, { new: true }
+    //)
+  
+    var userArray = { user, novauser }
+    return res.status(200).send(userArray)
+  }
+  // law hya renova
+  // el renova hatb2a lel original nova
+
+  let originalNova = await Nova.findOne({ _id: nova.in_reply_to_status_id})
+  if (!originalNova) return res.status(404).send({ msg: 'the nova you want to renova is not found' })
+
   let nova1 = new Nova({
-    text: nova.text,
-    in_reply_to_status_id: new mongoose.Types.ObjectId(nova._id),
-    in_reply_to_user_id: new mongoose.Types.ObjectId(novauser._id),
-    in_reply_to_screen_name: nova.user_screen_name,
+    text: ooriginalNova.text,
+    in_reply_to_status_id: new mongoose.Types.ObjectId(originalNova._id),
+    in_reply_to_user_id: new mongoose.Types.ObjectId(originalNova.user),
+    in_reply_to_screen_name: originalNova.user_screen_name,
     user: user,
     user_screen_name: user.screen_name,
     user_name: user.name,
@@ -398,7 +449,7 @@ router.post('/renova', async (req, res) => {
       $inc: { novas_count: 1 } }, { new: true }
   )
 
-  await Nova.update({ _id: nova._id },
+  await Nova.update({ _id: originalNova._id },
     { $inc: { renova_count: 1 },
       '$push': { 'renovaed_by_IDs': user._id } }
   )
@@ -419,7 +470,7 @@ router.post('/renova', async (req, res) => {
   //)
 
   var userArray = { user, novauser }
-  return res.status(200).send(userArray)
+  return res.status(200).send(userArray) 
 })
 
 
@@ -543,7 +594,7 @@ router.post('/destroy', async (req, res) => {
     }
     
     }
-    
+    ////////// this is to be commented because you can't renova a renova
     const lengthRenova = nova.renova_count
     if (lengthRenova != 0 )
     {
@@ -562,6 +613,8 @@ router.post('/destroy', async (req, res) => {
     }
     
     }
+    ////////////////////////////////////////////////
+    
     await Nova.update({_id: nova.in_reply_to_status_id},
     {'$pull': {'renovaed_by_IDs': novaid },
     $inc: {renova_count: -1}})
@@ -577,10 +630,6 @@ router.post('/destroy', async (req, res) => {
     })
   // ------------------------------------------------------------------------------------------
   
-  
-  
-
-
 
 module.exports = router
 
