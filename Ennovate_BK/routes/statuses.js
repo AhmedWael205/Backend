@@ -382,8 +382,8 @@ router.post('/renova', async (req, res) => {
 
   let nova1 = new Nova({
     text: nova.text,
-    in_reply_to_status_id: nova._id,
-    in_reply_to_user_id: novauser._id,
+    in_reply_to_status_id: new mongoose.Types.ObjectId(nova._id),
+    in_reply_to_user_id: new mongoose.Types.ObjectId(novauser._id),
     in_reply_to_screen_name: novauser.user_screen_name,
     user: user,
     user_screen_name: user.user_screen_name,
