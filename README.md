@@ -21,10 +21,10 @@ $ standard
 7) To set the port number, write in the terminal: (Optional) (Default = 8080)
 $ export PORT=3000
 
-8) To send verification emails to the users, write in the terminal: (Optional) (Default = 8080)
+8) To send verification emails to the users, write in the terminal: (Optional) (Default = false)
 $ export EMAIL=true
 
-9) To use the global URL, write in the terminal: (Optional) (Default = 8080)
+9) To use the global URL, write in the terminal: (Optional) (Default = false)
 $ export GLOBAL=true
 
 10) To run the server, write in the terminal: (Required)
