@@ -360,6 +360,66 @@ router.get('/v2/user_timeline', async (req, res) => {
   return res.send(novasArray)
 })
 
-// ------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------
+  // renova post
+  
+  router.post('/renova', async (req, res) => {
+  
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  
+  let user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+  
+  let novaid = req.body._id
+  if (!novaid) return res.status(404).send({ msg: 'No nova id provided' })
+  
+  let nova = await Nova.findOne({ _id: novaid })
+  if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
+
+  let novauser = await User.findOne({ _id: nova.user })
+
+
+  let nova1 = new Nova ({
+
+    text: nova.text,
+    in_reply_to_status_id: nova._id,
+    in_reply_to_user_id: novauser._id,
+    in_reply_to_screen_name: novauser.user_screen_name,
+    user: user,
+    user_screen_name: user.user_screen_name,
+    user_name: user.user_name,
+    renovaed: true,
+    //entities object ????
+
+  })
+
+  await nova1.save()
+
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova1._id },
+      $inc: { novas_count: 1 } }, { new: true }
+  )
+
+  await Nova.update({ _id: nova._id },
+    { $inc: { renova_count: 1 },
+     '$push': {'renovaed_by_IDs': user._id }}
+  )
+
+  user = await User.findOne({ _id: decoded._id })
+  novauser = await User.findOne({ _id: nova.user })
+
+  var userArray = {user,novauser}
+
+  return res.status(200).send(userArray)
+  })
+  // ------------------------------------------------------------------------------------------
 
 module.exports = router
+
+
+
+
+//fe update nova el mafrood law hya reply nzawed el reply ids fel original wel reply count
