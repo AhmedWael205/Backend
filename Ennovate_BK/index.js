@@ -1,7 +1,5 @@
 const winston = require('winston')
 const express = require('express')
-var socketIO = require('socket.io')
-var socketIOHelper = require('./app/helpers/socketio')
 const cors = require('cors')
 
 const app = express()
@@ -29,10 +27,5 @@ const port = process.env.PORT || 8080
 const server = app.listen(port, () =>
   winston.info(`Listening on port ${port}...`)
 )
-
-var io = socketIO(server)
-socketIOHelper.set(io)
-var receivers = require('./app/sockets/receivers.server.sockets')
-receivers.receivers(io)
 
 module.exports = server
