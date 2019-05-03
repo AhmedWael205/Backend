@@ -384,10 +384,10 @@ router.post('/renova', async (req, res) => {
     text: nova.text,
     in_reply_to_status_id: new mongoose.Types.ObjectId(nova._id),
     in_reply_to_user_id: new mongoose.Types.ObjectId(novauser._id),
-    in_reply_to_screen_name: novauser.user_screen_name,
+    in_reply_to_screen_name: nova.user_screen_name,
     user: user,
-    user_screen_name: user.user_screen_name,
-    user_name: user.user_name,
+    user_screen_name: user.screen_name,
+    user_name: user.name,
     renovaed: true
   })
 
