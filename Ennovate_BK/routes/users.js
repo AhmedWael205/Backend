@@ -115,7 +115,6 @@ router.get('/show', async (req, res) => {
       else {
         const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
         let follow = await Following.findOne({ $and: [{ friendID: user._id }, { sourceID: decoded._id }] })
-        console.log(follow)
         if (!follow) return res.send({ following: 'false', user })
         else return res.send({ following: 'true', user })
       }
