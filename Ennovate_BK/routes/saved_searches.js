@@ -49,7 +49,7 @@ router.post('/delete_all', async (req, res) => {
     return res.status(200).send({
       deletedlist: searchArray
     })
-  } else  {
+  } else {
     return res.status(404).send({ msg: 'No searches to be deleted' })
   }
 })

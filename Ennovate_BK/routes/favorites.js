@@ -38,15 +38,19 @@ router.post('/create', async (req, res) => {
       , { $inc: { favorites_count: 1 },
         '$push': { 'favorites_novas_IDs': req.body.nova_ID } }, { new: true }
     )
-    // const notifyObject =
+
     await User.update({ _id: user2._id },
       { notification_object: {
-        favorite_list: {
-          '$push': { 'nova_ID': nova._id, 'user_action_ID': user._id, 'date': Date(Date.now()) }
+        $push: {
+          favorite_list: {
+            $each: [ { nova_ID: nova._id, user_action_ID: user._id, date: Date(Date.now()) } ]
+          }
         }
       }
       }, { new: true }
     )
+    console.log(user2.notification_object.favorite_list)
+
     return res.status(200).send({ msg: 'Succussfully Liked', user, user2 })
   } else return res.status(404).send({ msg: 'User Not Valid' })
 })
