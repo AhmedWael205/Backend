@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const _ = require('lodash')
 const { User } = require('../models/user')
 const { Search, validateSearch } = require('../models/search')
+const { Following } = require('../models/following')
 const mongoose = require('mongoose')
 const config = require('config')
 const express = require('express')
@@ -85,6 +86,7 @@ router.get('/profile_image', async (req, res) => {
 // Show
 
 router.get('/show', async (req, res) => {
+  const token = req.headers['token']
   let userID = req.query.user_ID
   let userSreenName = req.query.screen_name
   if (!userID && !userSreenName) return res.status(404).send({ msg: 'NoUsersFound' })
@@ -93,8 +95,13 @@ router.get('/show', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(userID)) {
       let user = await User.findOne({ _id: userID })
       if (user) {
-        return res.send(user)
-        // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+        if (!token) return res.send({ 'user': user })
+        else {
+          const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+          let follow = await Following.findOne({ $and: [{ friendID: userID }, { sourceID: decoded._id }] })
+          if (follow) return res.send(user, 'following: true')
+          else return res.send(user, 'following: false')
+        }
       } else {
         return res.status(404).send({ msg: 'UserNotFound' })
       }
@@ -104,8 +111,14 @@ router.get('/show', async (req, res) => {
   } else if (userSreenName) {
     let user = await User.findOne({ screen_name: userSreenName })
     if (user) {
-      return res.send(user)
-      // res.send(_.pick(user, ['_id', 'name', 'email', 'screen_name', 'verified', 'location', 'bio', 'followers_count', 'friends_count', 'novas_count', 'profile_image_url', 'profile_background_image_url']))
+      if (!token) return res.send({ 'user': user })
+      else {
+        const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+        let follow = await Following.findOne({ $and: [{ friendID: user._id }, { sourceID: decoded._id }] })
+        console.log(follow)
+        if (!follow) return res.send({ following: 'false', user })
+        else return res.send({ following: 'true', user })
+      }
     } else {
       return res.status(404).send({ msg: 'UserNotFound' })
     }
