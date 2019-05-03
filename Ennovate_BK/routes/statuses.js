@@ -419,7 +419,98 @@ router.post('/renova', async (req, res) => {
   var userArray = { user, novauser }
   return res.status(200).send(userArray)
 })
+
 // ------------------------------------------------------------------------------------------
+// delete nova
+
+router.post('/destroy', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  let user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+  let novaid = req.body._id
+  let nova = await Nova.findOne({ _id: novaid })
+  if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
+  // check 3ala el renovaed boolean law msh false maynfa3sh el request deh aslan
+  if (nova.renovaed) return res.status(401).send({ msg: 'bad request this is a renova not a nova'})
+  
+  let user2 = await User.findOne({ _id: nova.user})
+  if (user=user2) // check if The user can delete this nova
+  {
+  
+  //if it was in reply to another nova
+  // dec reply count in original nova
+  //pull from inreplytonovaids
+  if (nova.in_reply_to_status_id) {
+  
+  await Nova.update({ _id: nova.in_reply_to_status_id },
+  {$inc: { reply_count: -1 },
+  '$pull':{'replied_novas_IDs':novaid}})
+  }
+  
+  //normal nova
+  //delete kol el in_reply_to_status_ids
+  //delete kol el renovas bta3etha
+  //nro7 l kol el users ely 3amlo reply/renova dec el count w kaman pull mn el array
+  
+  //ngeeb kol el ids el awel
+  //for loop n3ady 3ala id id ndelete
+  //nro7 lel user n dec el nova count n pull mn el novaids n delete el nova mn el database
+  
+  const lengthReply = nova.reply_count
+  if (lengthReply != 0 )
+  {
+  var inreplyarray = []
+  for (var i = 0; i < lengthReply ; i++ )
+  {
+  inreplyarray.push(nova.replied_novas_IDs[i])
+  }
+  for (var i = 0; i < lengthReply ; i++ )
+  {
+  await User.update({_id: inreplyarray[i].user },
+  {'$pull': {'novas_IDs': inreplyarray[i]._id },
+  $inc: {novas_count: -1}}
+  )
+  await Nova.deleteOne({ _id: inreplyarray[i]._id })
+  }
+  
+  }
+  
+  const lengthRenova = nova.renova_count
+  if (lengthRenova != 0 )
+  {
+  var renovaArray = []
+  for (var i = 0; i < lengthRenova ; i++ )
+  {
+  renovaArray.push(nova.renovaed_by_IDs[i])
+  }
+  for (var i = 0; i < lengthRenova ; i++ )
+  {
+  await User.update({_id: renovaArray[i].user },
+  {'$pull': {'novas_IDs': renovaArray[i]._id },
+  $inc: {novas_count: -1}}
+  )
+  await Nova.deleteOne({ _id: renovaArray[i]._id })
+  }
+  
+  }
+  
+  await User.update({_id: user._id},
+  {'$pull': {'novas_IDs': novaid },
+  $inc: {novas_count: -1}})
+  await Nova.deleteOne({ _id: novaid })
+  return res.status(200).send(user)
+  }
+  else return res.status(404).send({ msg: 'No authentication to delete this nova' })
+  })
+  // ------------------------------------------------------------------------------------------
+  
+  
+  
+  
+
+
 
 module.exports = router
 
