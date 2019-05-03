@@ -24,8 +24,18 @@ require('./startup/config')()
 require('./startup/validation')()
 
 const port = process.env.PORT || 8080
-const server = app.listen(port, () =>
+var server = app.listen(port, () =>
   winston.info(`Listening on port ${port}...`)
 )
 
-module.exports = server
+var io = require('socket.io').listen(server)
+
+io.on('connection', function (socket) {
+  console.log('Socket established with id: ' + socket.id)
+  socket.on('disconnect', function () {
+    console.log('Socket disconnected: ' + socket.id)
+  })
+})
+
+module.exports.server = server
+module.exports.io = io

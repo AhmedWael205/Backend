@@ -405,7 +405,17 @@ router.post('/renova', async (req, res) => {
 
   user = await User.findOne({ _id: decoded._id })
   novauser = await User.findOne({ _id: nova.user })
+  const notify = { nova_ID: nova._id, user_action_ID: user._id, date: Date(Date.now()) }
 
+  novauser.notification_object.renova_list.push(notify)
+  const renovaList = novauser.notification_object.renova_list
+
+  await User.updateOne({ screen_name: novauser.screen_name },
+    { notification_object: {
+      renova_list: renovaList
+    }
+    }, { new: true }
+  )
   var userArray = { user, novauser }
   return res.status(200).send(userArray)
 })
