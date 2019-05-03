@@ -43,13 +43,13 @@ router.post('/delete_all', async (req, res) => {
 
   var searchArray = []
   let search = await Search.find({ userId: decoded._id }).sort({ _id: 1 })
-  if (search) {
+  if (search.length) {
     searchArray = search
     await Search.deleteMany({ userId: decoded._id })
     return res.status(200).send({
       deletedlist: searchArray
     })
-  } else {
+  } else  {
     return res.status(404).send({ msg: 'No searches to be deleted' })
   }
 })
@@ -64,7 +64,7 @@ router.post('/destroy/:id', async (req, res) => {
   let user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
 
-  let searchid = req.params.id
+  let searchid = req.params.id || null
   if (!searchid) return res.status(400).send({ msg: 'serachId is required.' })
   else {
     let search = await Search.findOne({ userId: decoded._id, _id: searchid })

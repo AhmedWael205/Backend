@@ -334,4 +334,25 @@ router.post('/update_profile_image', async (req, res) => {
 })
 
 // ----------------------------------------------------------------------------------
+
+// Remove Profile Image
+
+router.post('/remove_profile_image', async (req, res) => {
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  
+  let user = await User.findOne({_id:decoded._id})
+  if(!user)  return res.status(404).send({msg:'The user with the given ID was not found.'})
+  else
+  {
+    var url = config.get('Url')
+   await User.findOneAndUpdate({ _id: decoded._id},{$set:
+    { profile_image_url: url + 'public/uploads/profileImages/' + config.get('defaultImage') ,
+      default_profile_image: true }
+  })
+  return res.status(200).send({msg: 'Successfully deleted.'})
+  }
+})
 module.exports = router
