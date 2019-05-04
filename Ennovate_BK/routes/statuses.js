@@ -330,6 +330,7 @@ router.get('/show/:novaID', async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(novaID)) {
   let nova = await Nova.findOne({ _id: novaID })
   if (nova) {
+  nova = { favorited : false}
   var replyArray = []
   //ashof if nova favorited by user wala la2
   if (nova.favorite_count !== 0)
@@ -351,6 +352,7 @@ router.get('/show/:novaID', async (req, res) => {
   }
   for (let i = 0; i < lengthReply; i++) {
   let anova = await Nova.findOne({ _id: replyIDarray[i]})
+  anova = { favorited : false}
   //ashof if favorited by this user
   if (anova.favorite_count !== 0)
   {
