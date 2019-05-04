@@ -327,13 +327,13 @@ router.get('/show/:novaID', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
-        nova = { favorited: false }
+        nova.favorited = false
         var replyArray = []
         // ashof if nova favorited by user wala la2
         if (nova.favorite_count !== 0) {
           for (let i = 0; i < nova.favorite_count; i++) {
             if (nova.favorited_by_IDs[i] === decoded._id) {
-              nova = { favorited: true }
+              nova.favorited = true
               i = nova.favorite_count
             }
           }
@@ -347,12 +347,12 @@ router.get('/show/:novaID', async (req, res) => {
           }
           for (let i = 0; i < lengthReply; i++) {
             let anova = await Nova.findOne({ _id: replyIDarray[i] })
-            anova = { favorited: false }
+            anova.favorited = false
             // ashof if favorited by this user
             if (anova.favorite_count !== 0) {
               for (let i = 0; i < anova.favorite_count; i++) {
                 if (anova.favorited_by_IDs[i] === decoded._id) {
-                  anova = { favorited: true }
+                  anova.favorited = true
                   i = anova.favorite_count
                 }
               }
