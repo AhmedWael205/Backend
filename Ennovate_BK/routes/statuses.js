@@ -239,19 +239,19 @@ router.post('/update', async (req, res) => {
   //   url = config.get('globalUrl')
   // }
 
-   // user mentions
+  // user mentions
 
-   const lengthMentions = req.body.user_mentions_count
-   if (lengthMentions !== 0) {
-     var mentionsArray = []
-     var mentionsId = []
-     for (let i = 0; i < lengthMentions; i++) {
-       mentionsArray.push(req.body.user_mentions_screen_names[i])
-     }
-     for (let i = 0; i < lengthMentions; i++) {
-       mentionsId.push(await User.findOne({ screen_name: mentionsArray[i]}))
-     }
-   }
+  const lengthMentions = req.body.user_mentions_count
+  if (lengthMentions !== 0) {
+    var mentionsArray = []
+    var mentionsId = []
+    for (let i = 0; i < lengthMentions; i++) {
+      mentionsArray.push(req.body.user_mentions_screen_names[i])
+    }
+    for (let i = 0; i < lengthMentions; i++) {
+      mentionsId.push(await User.findOne({ screen_name: mentionsArray[i] }))
+    }
+  }
 
   const imgUrl = req.body.imgUrl || null
   const imgSize = req.body.imgSize || null
@@ -275,20 +275,19 @@ router.post('/update', async (req, res) => {
         size: imgSize,
         url: imgUrl
       },
-      users_mentions_ID : mentionsId
+      users_mentions_ID: mentionsId
     }
   })
 
   await nova.save()
-  
-  if (inreply)
-  {
+
+  if (inreply) {
     Nova.update({ _id: inreply._id },
-      { '$push' : {'replied_novas_IDs' : inreply._id},
-        $inc : {reply_count: 1} 
+      { '$push': { 'replied_novas_IDs': inreply._id },
+        $inc: { reply_count: 1 }
       })
   }
-  
+
   await User.update({ _id: decoded._id },
     { '$push': { 'novas_IDs': nova._id },
       $inc: { novas_count: 1 } }, { new: true }
@@ -323,7 +322,6 @@ router.get('/show/:novaID', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
-
         const lengthReply = nova.reply_count
         if (lengthReply !== 0) {
           var replyArray = []
@@ -353,7 +351,7 @@ router.get('/user_timeline/:screen_name', async (req, res) => {
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   const user = await User.findOne({ screen_name: req.params.screen_name })
   let novas = await Nova
-    .find({ user: user._id })
+    .find({ $and: [ { user: user._id }, { in_reply_to_status_id: null } ] })
     .sort({ _id: 1 })
     .limit(count)
 
@@ -598,7 +596,6 @@ router.post('/unrenova', async (req, res) => {
 // get renovars
 
 router.get('/renovars/:novaID', async (req, res) => {
-  
   let novaID = req.params.novaID
 
   if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
@@ -607,7 +604,6 @@ router.get('/renovars/:novaID', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
-
         const lengthRenova = nova.renova_count
         if (lengthRenova !== 0) {
           var renovarsArray = []
@@ -627,9 +623,8 @@ router.get('/renovars/:novaID', async (req, res) => {
 // ------------------------------------------------------------------------------------------
 // get replies
 
+// router.get('/replies', async (req, res) => {
 
-//router.get('/replies', async (req, res) => {
-//  
 //  let novaID = req.body.id
 //
 //  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
@@ -653,7 +648,7 @@ router.get('/renovars/:novaID', async (req, res) => {
 //    }
 //    return res.status(404).send({ msg: 'Nova Not Found' })
 //  }
-//})
+// })
 // ------------------------------------------------------------------------------------------
 
 module.exports = router
