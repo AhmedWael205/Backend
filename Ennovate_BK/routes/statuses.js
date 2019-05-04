@@ -507,7 +507,7 @@ router.post('/destroy', async (req, res) => {
   if (nova.renovaed) return res.status(401).send({ msg: 'bad request this is a renova not a nova' })
 
   let user2 = await User.findOne({ _id: nova.user })
-  if (user === user2) {
+  if (user._id.equals(user2._id)) {
   // check if The user can delete this nova
   // if it was in reply to another nova
   // dec reply count in original nova
