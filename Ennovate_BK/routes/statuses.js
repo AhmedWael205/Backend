@@ -239,6 +239,20 @@ router.post('/update', async (req, res) => {
   //   url = config.get('globalUrl')
   // }
 
+   // user mentions
+
+   const lengthMentions = req.body.user_mentions_count
+   if (lengthMentions !== 0) {
+     var mentionsArray = []
+     var mentionsId = []
+     for (let i = 0; i < lengthMentions; i++) {
+       mentionsArray.push(req.body.user_mentions_screen_names[i])
+     }
+     for (let i = 0; i < lengthMentions; i++) {
+       mentionsId.push(await User.findOne({ screen_name: mentionsArray[i]}))
+     }
+   }
+
   const imgUrl = req.body.imgUrl || null
   const imgSize = req.body.imgSize || null
   const imgType = req.body.imgType || null
@@ -260,17 +274,21 @@ router.post('/update', async (req, res) => {
         type: imgType,
         size: imgSize,
         url: imgUrl
-      }
+      },
+      users_mentions_ID : mentionsId
     }
   })
 
-  if (inreply) {
-    Nova.inreply.update({
-      $inc: { reply_count: 1 }
-    })
-  }
   await nova.save()
-
+  
+  if (inreply)
+  {
+    Nova.update({ _id: inreply._id },
+      { '$push' : {'replied_novas_IDs' : inreply._id},
+        $inc : {reply_count: 1} 
+      })
+  }
+  
   await User.update({ _id: decoded._id },
     { '$push': { 'novas_IDs': nova._id },
       $inc: { novas_count: 1 } }, { new: true }
@@ -305,12 +323,22 @@ router.get('/show', async (req, res) => {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
-        return res.send(nova)
+
+        const lengthReply = nova.reply_count
+        if (lengthReply !== 0) {
+          var replyArray = []
+          replyArray.push(nova)
+          for (let i = 0; i < lengthReply; i++) {
+            replyArray.push(nova.replied_novas_IDs[i])
+          }
+          return res.status(200).send(replyArray)
+        }
       } else {
         return res.status(404).send({ msg: 'Nova Not Found' })
       }
     }
   }
+  return res.status(404).send({ msg: 'Nova Not Found' })
 })
 
 // ------------------------------------------------------------------------------------------
@@ -566,7 +594,66 @@ router.post('/unrenova', async (req, res) => {
   } else return res.status(404).send({ msg: 'No authentication to delete this renova' })
 })
 // ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// get renovars
+
+router.get('/renovars/:novaID', async (req, res) => {
+  
+  let novaID = req.params.novaID
+
+  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
+
+  if (novaID) {
+    if (mongoose.Types.ObjectId.isValid(novaID)) {
+      let nova = await Nova.findOne({ _id: novaID })
+      if (nova) {
+
+        const lengthRenova = nova.renova_count
+        if (lengthRenova !== 0) {
+          var renovarsArray = []
+          for (let i = 0; i < lengthRenova; i++) {
+            renovarsArray.push(nova.renovaed_by_IDs[i])
+          }
+          return res.status(200).send(renovarsArray)
+        }
+      } else {
+        return res.status(404).send({ msg: 'Nova Not Found' })
+      }
+    }
+  }
+  return res.status(404).send({ msg: 'Nova Not Found' })
+})
+
+// ------------------------------------------------------------------------------------------
+// get replies
+
+
+//router.get('/replies', async (req, res) => {
+//  
+//  let novaID = req.body.id
+//
+//  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
+//
+//  if (novaID) {
+//    if (mongoose.Types.ObjectId.isValid(novaID)) {
+//      let nova = await Nova.findOne({ _id: novaID })
+//      if (nova) {
+//
+//        const lengthReply = nova.reply_count
+//        if (lengthReply !== 0) {
+//          var replyArray = []
+//          for (let i = 0; i < lengthReply; i++) {
+//            replyArray.push(nova.replied_novas_IDs[i])
+//          }
+//          return res.status(200).send(replyArray)
+//        }
+//      } else {
+//        return res.status(404).send({ msg: 'Nova Not Found' })
+//      }
+//    }
+//    return res.status(404).send({ msg: 'Nova Not Found' })
+//  }
+//})
+// ------------------------------------------------------------------------------------------
 
 module.exports = router
-
-// fe update nova el mafrood law hya reply nzawed el reply ids fel original wel reply count
