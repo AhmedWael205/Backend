@@ -313,8 +313,8 @@ function validateNovaV2 (Nova) {
 // ------------------------------------------------------------------------------------------
 // show nova
 
-router.get('/show', async (req, res) => {
-  let novaID = req.body.id
+router.get('/show/:novaID', async (req, res) => {
+  let novaID = req.params.novaID
   // when we do the renova part if include_my_reNova is true include the original nova id
 
   if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
