@@ -313,32 +313,72 @@ function validateNovaV2 (Nova) {
 // show nova
 
 router.get('/show/:novaID', async (req, res) => {
+
+
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  
+  
+  const user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+  
   let novaID = req.params.novaID
   // when we do the renova part if include_my_reNova is true include the original nova id
-
-  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
-
+  
   if (novaID) {
-    if (mongoose.Types.ObjectId.isValid(novaID)) {
-      let nova = await Nova.findOne({ _id: novaID })
-      if (nova) {
-        const lengthReply = nova.reply_count
-        if (lengthReply !== 0) {
-          var replyArray = []
-          replyArray.push(nova)
-          for (let i = 0; i < lengthReply; i++) {
-            replyArray.push(nova.replied_novas_IDs[i])
-          }
-          return res.status(200).send(replyArray)
-        }
-      } else {
-        return res.status(404).send({ msg: 'Nova Not Found' })
-      }
-    }
+  if (mongoose.Types.ObjectId.isValid(novaID)) {
+  let nova = await Nova.findOne({ _id: novaID })
+  if (nova) {
+  var replyArray = []
+  //ashof if nova favorited by user wala la2
+  if (nova.favorite_count !== 0)
+  {
+  for (let i = 0 ; i < nova.favorite_count ; i++ ) {
+  if (nova.favorited_by_IDs[i] === decoded._id )
+  {
+  nova = { favorited : true}
+  i = anova.favorite_count
   }
+  }
+  }
+  replyArray.push(nova)
+  const lengthReply = nova.reply_count
+  var replyIDarray = []
+  if (lengthReply !== 0) {
+  for (let i = 0; i < lengthReply; i++) {
+  replyIDarray.push(nova.replied_novas_IDs[i])
+  }
+  for (let i = 0; i < lengthReply; i++) {
+  let anova = await Nova.findOne({ _id: replyIDarray[i]})
+  //ashof if favorited by this user
+  if (anova.favorite_count !== 0)
+  {
+  for (let i = 0 ; i < anova.favorite_count ; i++ ) {
+  if (anova.favorited_by_IDs[i] === decoded._id )
+  {
+  anova = { favorited : true}
+  i = anova.favorite_count
+  }
+  }
+  }
+  replyArray.push(anova)
+  }
+  }
+  return res.status(200).send(replyArray)
+  } else {
   return res.status(404).send({ msg: 'Nova Not Found' })
-})
-
+  }
+  }
+  }
+  else {
+  return res.status(404).send({ msg: 'Nova id not sent' })
+  }
+  })
+  
+  
+  
+  
 // ------------------------------------------------------------------------------------------
 
 // User Timeline
@@ -592,17 +632,13 @@ router.post('/unrenova', async (req, res) => {
     return res.status(200).send(user)
   } else return res.status(404).send({ msg: 'No authentication to delete this renova' })
 })
-// ------------------------------------------------------------------------------------------
+
 // ------------------------------------------------------------------------------------------
 // get renovars
 
 router.get('/renovars/:novaID', async (req, res) => {
   let novaID = req.params.novaID
-
-  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
-
   if (novaID) {
-    if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
         const lengthRenova = nova.renova_count
@@ -611,152 +647,152 @@ router.get('/renovars/:novaID', async (req, res) => {
           for (let i = 0; i < lengthRenova; i++) {
             renovarsArray.push(nova.renovaed_by_IDs[i])
           }
-          return res.status(200).send(renovarsArray)
+          var renovars = []
+          for (let i = 0; i < lengthRenova; i++) {
+            let renovar = await User.findOne({ _id: renovarsArray[i]})
+            renovars.push(renovar)
+          }
+          return res.status(200).send(renovars)
         }
-      } else {
+        else {
+          return res.status(200).send({ msg : 'No renovars for this nova'})
+        }
+      } 
+      else {
         return res.status(404).send({ msg: 'Nova Not Found' })
       }
-    }
   }
-  return res.status(404).send({ msg: 'Nova Not Found' })
+  return res.status(404).send({ msg: 'Nova id  not sent' })
 })
 
 // ------------------------------------------------------------------------------------------
-// get replies
-
-// router.get('/replies', async (req, res) => {
-
-//  let novaID = req.body.id
-//
-//  if (!novaID) return res.status(404).send({ msg: 'Nova id  not sent' })
-//
-//  if (novaID) {
-//    if (mongoose.Types.ObjectId.isValid(novaID)) {
-//      let nova = await Nova.findOne({ _id: novaID })
-//      if (nova) {
-//
-//        const lengthReply = nova.reply_count
-//        if (lengthReply !== 0) {
-//          var replyArray = []
-//          for (let i = 0; i < lengthReply; i++) {
-//            replyArray.push(nova.replied_novas_IDs[i])
-//          }
-//          return res.status(200).send(replyArray)
-//        }
-//      } else {
-//        return res.status(404).send({ msg: 'Nova Not Found' })
-//      }
-//    }
-//    return res.status(404).send({ msg: 'Nova Not Found' })
-//  }
-// })
-// ------------------------------------------------------------------------------------------
+// update nova v3
 
 router.post('/v3/update', async (req, res) => {
-  const { error } = validateNovaV2(req.body)
-  if (error) return res.status(400).send({ msg: error.details[0].message })
 
+  const { error } = validateNovaV3(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+  
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
-
+  
   // var verifyOptions = { expiresIn: '1h' }
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
-
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-
+  
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
-
+  
   const imgUrl = req.body.imgUrl || null
   const imgSize = req.body.imgSize || null
   const imgType = req.body.imgType || null
-
+  
   let inreplytostatusid = req.body.in_reply_to_status_id || null
+  if(inreplytostatusid)
+  {
+
+  let inreplynova = await Nova.findOne({ _id: inreplytostatusid})
+  if (inreplynova) {
+  var inreplyuserid = inreplynova.user
+  var inreplyscreenname = inreplynova.user_screen_name
+  
+  
+  
+  }
+  else {
+  return res.status(404).send({ msg: 'The Nova to reply to was not found' })
+  }
+  }
+  else {
   var inreplyuserid = null
   var inreplyscreenname = null
-  if (inreplytostatusid) {
-    console.log('1')
-    let inreplynova = await Nova.findOne({ _id: inreplytostatusid })
-    if (inreplynova) {
-      console.log('2')
-      let inreplyuserid = inreplynova.user
-      let inreplyscreenname = inreplynova.user_screen_name
-    } else {
-      console.log('3')
-      return res.status(404).send({ msg: 'The Nova to reply to was not found' })
-    }
   }
-  // user mentions
+  //user mentions
   if (req.body.user_mentions_count) {
-    console.log('4')
-    if (req.body.user_mentions_count !== 0) {
-      console.log('5')
-
-      if (req.body.user_mentions_screen_names) {
-        console.log('6')
-        var mentionsArray = []
-        var mentionsId = []
-        for (let i = 0; i < req.body.user_mentions_count; i++) {
-          mentionsArray.push(req.body.user_mentions_screen_names[i])
-        }
-        for (let i = 0; i < req.body.user_mentions_count; i++) {
-          let mentionuser = await User.findOne({ screen_name: mentionsArray[i] })
-          if (mentionuser) {
-            mentionsId.push(mentionuser)
-          } else {
-            console.log('67')
-            return res.status(404).send({ msg: 'The user ' + mentionsArray[i] + ' mentioned was not found' })
-          }
-        }
-      } else {
-        console.log('7')
-        return res.status(404).send({ msg: 'bad request the mentions screen names was not sent ' })
-      }
-    } else {
-      console.log('8')
-      let mentionsId = null
-    }
-  } else {
-    console.log('9')
-    let mentionsId = null
+  if (req.body.user_mentions_count !== 0) {
+  
+  if (req.body.user_mentions_screen_names) {
+  var mentionsArray = []
+  var mentionsId = []
+  for (let i = 0; i < req.body.user_mentions_count; i++) {
+  mentionsArray.push(req.body.user_mentions_screen_names[i])
   }
-
+  for (let i = 0; i < req.body.user_mentions_count ; i++) {
+  let mentionuser = await User.findOne({ screen_name: mentionsArray[i] })
+  if(mentionuser){
+  mentionsId.push(mentionuser)
+  }
+  else {
+  return res.status(404).send({ msg: 'The user '+mentionsArray[i]+' mentioned was not found'})
+  }
+  }
+  }
+  else {
+  return res.status(404).send({ msg: 'bad request the mentions screen names was not sent '})
+  }
+  }
+  else {
+  let mentionsId = null
+  }
+  }
+  else {
+  let mentionsId = null
+  }
+  
+  
   let nova = new Nova({
-    text: req.body.text,
-    in_reply_to_status_id: inreplytostatusid,
-    in_reply_to_user_id: inreplyuserid,
-    in_reply_to_screen_name: inreplyscreenname,
-    user: user,
-    user_screen_name: user.screen_name,
-    user_name: user.user_name,
-    entitiesObject: {
-      users_mentions_ID: mentionsId,
-      media: {
-        type: imgType,
-        size: imgSize,
-        url: imgUrl
-      }
-    }
+  text: req.body.text,
+  in_reply_to_status_id: inreplytostatusid,
+  in_reply_to_user_id: inreplyuserid,
+  in_reply_to_screen_name: inreplyscreenname,
+  user: user,
+  user_screen_name: user.screen_name,
+  user_name: user.user_name,
+  entitiesObject: {
+  users_mentions_ID: mentionsId,
+  media: {
+  type: imgType,
+  size: imgSize,
+  url: imgUrl
+  }
+  }
   })
-
-  console.log('10')
   await nova.save()
   if (inreplyuserid) {
-    console.log('11')
-    await Nova.update({ _id: inreplytostatusid },
-      { '$push': { 'replied_novas_ID': nova._id },
-        $inc: { reply_count: 1 } }, { new: true }
-    )
+  await Nova.update({ _id: inreplytostatusid},
+  { '$push': {'replied_novas_IDs': nova._id},
+  $inc: {reply_count: 1}},{ new: true }
+  )
+  }
+  await User.update({ _id: decoded._id },
+  { '$push': { 'novas_IDs': nova._id },
+  $inc: { novas_count: 1 } }, { new: true }
+  )  
+  return res.send(nova)
+  })
+  
+  
+
+// ------------------------------------------------------------------------------------------
+// validate request body v3
+function validateNovaV3 (Nova) {
+  const schema = {
+  text: Joi.string()
+  .min(1)
+  .max(256)
+  .required(),
+  imgUrl: Joi.string()
+  .min(3)
+  .max(512),
+  imgType : Joi.string(),
+  imgSize : Joi.string(),
+  in_reply_to_status_id : Joi.string(),
+  user_mentions_count : Joi.string(),
+  user_mentions_screen_names : Joi.array()
+  }
+  return Joi.validate(Nova, schema)
   }
 
-  await User.update({ _id: decoded._id },
-    { '$push': { 'novas_IDs': nova._id },
-      $inc: { novas_count: 1 } }, { new: true }
-  )
-
-  console.log('12')
-
-  return res.send(nova)
-})
+// ------------------------------------------------------------------------------------------
 
 module.exports = router
