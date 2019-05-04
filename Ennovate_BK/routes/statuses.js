@@ -217,14 +217,14 @@ router.post('/update', async (req, res) => {
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
 
   var inreply = null
-  if (req.body.in_reply_to_status_id) {
-    inreply = await Nova.findOne({ _id: req.body.in_reply_to_status_id })
+  var inreplyUserID = null
+  var inreplyNovaID = req.body.in_reply_to_status_id || null
+  var inreplyScreenName = null
+
+  if (inreplyNovaID) {
+    inreply = await Nova.findOne({ _id: new mongoose.Types.ObjectId(inreplyNovaID) })
     if (!inreply) return res.status(404).send({ msg: 'The Nova with the given ID was not found' })
   }
-
-  var inreplyUserID = null
-  var inreplyNovaID = null
-  var inreplyScreenName = null
 
   if (inreply) {
     inreplyNovaID = inreply._id
