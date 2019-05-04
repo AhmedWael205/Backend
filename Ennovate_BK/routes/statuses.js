@@ -66,7 +66,7 @@ router.get('/home_timeline', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-// update Nova V2 (Uploading the Image to the backend)
+// update Nova V3 (Uploading the Image to the backend)
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -101,7 +101,7 @@ function checkFileType (file, cb) {
   }
 }
 
-router.post('/v2/update', upload.single('novaImage'), async (req, res) => {
+router.post('/v3/update', upload.single('novaImage'), async (req, res) => {
   const { error } = validateNova(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
 
@@ -200,9 +200,9 @@ function validateNova (Nova) {
 
 // ------------------------------------------------------------------------------------------
 
-// update Nova (Uploading the Image url only)
+// update Nova V2 (Uploading the Image url only)
 
-router.post('/update', async (req, res) => {
+router.post('/v2/update', async (req, res) => {
   const { error } = validateNovaV2(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
 
@@ -670,7 +670,7 @@ router.get('/renovars/:novaID', async (req, res) => {
 // ------------------------------------------------------------------------------------------
 // update nova v3
 
-router.post('/v3/update', async (req, res) => {
+router.post('/update', async (req, res) => {
 
   const { error } = validateNovaV3(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
