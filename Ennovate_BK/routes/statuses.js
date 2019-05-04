@@ -383,7 +383,7 @@ router.get('/user_timeline/:screen_name', async (req, res) => {
   const user = await User.findOne({ screen_name: req.params.screen_name })
   if (!user) return res.status(404).send({ msg: 'The user with the given screen name was not found.' })
   let novas = await Nova
-    .find({ $and: [ { user: user._id }, { renovaed: false } ] })
+    .find({ $or: [{ $and: [ { user: user._id }, { renovaed: true } ] }, { $and: [{ user: user._id }, { renovaed: false }, { in_reply_to_status_id: null }] }] })
     .sort({ _id: 1 })
     .limit(count)
 
