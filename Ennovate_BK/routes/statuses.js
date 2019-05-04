@@ -651,4 +651,127 @@ router.get('/renovars/:novaID', async (req, res) => {
 // })
 // ------------------------------------------------------------------------------------------
 
+
+router.post('/v3/update', async (req, res) => {
+  const { error } = validateNovaV2(req.body)
+  if (error) return res.status(400).send({ msg: error.details[0].message })
+
+  const token = req.headers['token']
+  if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
+  // var verifyOptions = { expiresIn: '1h' }
+  // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
+  
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
+  const user = await User.findOne({ _id: decoded._id })
+  if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+
+  const imgUrl = req.body.imgUrl || null
+  const imgSize = req.body.imgSize || null
+  const imgType = req.body.imgType || null
+
+  let inreplytostatusid = req.body.in_reply_to_status_id || null
+  var inreplyuserid = null
+  var inreplyscreenname = null
+  if(inreplytostatusid) 
+  {
+    console.log('1')
+    let inreplynova = await Nova.findOne({ _id: inreplytostatusid})
+    if (inreplynova) {
+      console.log('2')
+      let inreplyuserid = inreplynova.user
+      let inreplyscreenname = inreplynova.user_screen_name
+    }
+    else {
+      console.log('3')
+      return res.status(404).send({ msg: 'The Nova to reply to was not found' })
+    }
+  }
+//user mentions
+  if (req.body.user_mentions_count) {
+    console.log('4')
+    if (req.body.user_mentions_count !== 0) {
+      console.log('5')
+
+      if (req.body.user_mentions_screen_names) {
+        console.log('6')
+        var mentionsArray = []
+        var mentionsId = []
+        for (let i = 0; i < req.body.user_mentions_count; i++) {
+          mentionsArray.push(req.body.user_mentions_screen_names[i])
+        }
+        for (let i = 0; i < req.body.user_mentions_count ; i++) {
+          let mentionuser = await User.findOne({ screen_name: mentionsArray[i] })
+          if(mentionuser){
+            mentionsId.push(mentionuser)
+          }
+          else {
+            console.log('67')
+            return res.status(404).send({ msg: 'The user '+mentionsArray[i]+' mentioned was not found'})
+          }
+        }
+      }
+      else {
+        console.log('7')
+        return res.status(404).send({ msg: 'bad request the mentions screen names was not sent '})
+      }
+    }
+    else {
+      console.log('8')
+      let mentionsId = null
+    }
+  }
+  else {
+    console.log('9')
+    let mentionsId = null
+  }
+
+  let nova = new Nova({
+    text: req.body.text,
+    in_reply_to_status_id: inreplytostatusid,
+    in_reply_to_user_id: inreplyuserid,
+    in_reply_to_screen_name: inreplyscreenname,
+    user: user,
+    user_screen_name: user.screen_name,
+    user_name: user.user_name,
+    entitiesObject: { 
+        users_mentions_ID: mentionsId,
+        media: {
+          
+            type: imgType,
+            size: imgSize,
+            url: imgUrl
+        }
+      
+    }
+  })
+  
+  console.log('10')
+  await nova.save()
+  if (inreplyuserid) {
+    console.log('11')
+    await Nova.update({ _id: inreplytostatusid},
+      { '$push': {'replied_novas_ID': nova._id},
+      $inc: {reply_count: 1}},{ new: true }
+    )
+  }
+ 
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova._id },
+    $inc: { novas_count: 1 } }, { new: true }
+    )
+
+  console.log('12')
+
+  return res.send(nova)
+})
+
+
+
+
+
+
+
+
 module.exports = router
