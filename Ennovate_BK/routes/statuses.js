@@ -722,7 +722,7 @@ router.post('/update', async (req, res) => {
     in_reply_to_screen_name: inreplyscreenname,
     user: user,
     user_screen_name: user.screen_name,
-    user_name: user.user_name,
+    user_name: user.name,
     entitiesObject: {
       users_mentions_ID: mentionsId,
       media: {
