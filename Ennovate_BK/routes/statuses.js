@@ -435,12 +435,16 @@ router.post('/renova', async (req, res) => {
 router.post('/destroy', async (req, res) => {
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+
   let user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+
   let novaid = req.body._id
   let nova = await Nova.findOne({ _id: novaid })
   if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
+
   // check 3ala el renovaed boolean law msh false maynfa3sh el request deh aslan
   if (nova.renovaed) return res.status(401).send({ msg: 'bad request this is a renova not a nova' })
 

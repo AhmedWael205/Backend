@@ -25,10 +25,10 @@ router.post('/create', async (req, res) => {
   var novaUser = await User.findOne({ _id: new mongoose.Types.ObjectId(nova.user) })
   if (!novaUser) return res.status(404).send({ msg: 'The Owner of this Nova no longer exist' })
 
-  const notify = { nova_ID: nova._id, user_action_ID: actionUser._id, date: Date(Date.now()) }
+  // const notify = { nova_ID: nova._id, user_action_ID: actionUser._id, date: Date(Date.now()) }
 
-  novaUser.notification_object.favorite_list.push(notify)
-  const favoriteList = novaUser.notification_object.favorite_list
+  // novaUser.notification_object.favorite_list.push(notify)
+  // const favoriteList = novaUser.notification_object.favorite_list
 
   if (mongoose.Types.ObjectId.isValid(decoded._id)) {
     let favorited = await Nova.findOne({ $and: [{ _id: req.body.nova_ID }, { favorited_by_IDs: actionUser }] })
@@ -44,14 +44,15 @@ router.post('/create', async (req, res) => {
         '$push': { 'favorites_novas_IDs': req.body.nova_ID } }, { new: true }
     )
 
-    await User.updateOne({ screen_name: novaUser.screen_name },
-      { notification_object: {
-        favorite_list: favoriteList
-      }
-      }, { new: true }
-    )
+    // await User.updateOne({ screen_name: novaUser.screen_name },
+    //   { notification_object: {
+    //     favorite_list: favoriteList
+    //   }
+    //   }, { new: true }
+    // )
 
-    return res.status(200).send({ msg: 'Succussfully Liked', actionUser, novaUser })
+    if (actionUser.screen_name === novaUser.screen_name) return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser })
+    else return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser, novaUser })
   } else return res.status(404).send({ msg: 'User Not Valid' })
 })
 
@@ -84,7 +85,8 @@ router.post('/destroy', async (req, res) => {
         { $inc: { favorites_count: -1 },
           '$pull': { 'favorites_novas_IDs': nova._id } }, { new: true }
       )
-      return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser, novaUser })
+      if (actionUser.screen_name === novaUser.screen_name) return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser })
+      else return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser, novaUser })
     } else return res.status(403).send({ msg: 'You dont like this nova' })
   } else return res.status(404).send({ msg: 'User Not Valid' })
 })
@@ -92,9 +94,9 @@ router.post('/destroy', async (req, res) => {
 // ------------------------------------------------------------------------------------------
 
 router.get('/list', async (req, res) => {
-  let user = await User.findOne({ _id: req.body.user_id })
+  let user = await User.findOne({ _id: req.params.user_id })
   if (!user) return res.status(404).send({ 'msg': 'User Doesnt Exist' })
-  var Favorited = await User.find({ _id: req.body.user_id }, { favorites_novas_IDs: 1, _id: 0 })
+  var Favorited = await User.find({ _id: req.params.user_id }, { favorites_novas_IDs: 1, _id: 0 })
 
   const Length1 = Favorited.length
   if (Length1 === 0) return res.status(200).send({ 'novaFavorited: ': [] })
