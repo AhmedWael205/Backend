@@ -99,8 +99,8 @@ router.post('/destroy', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-router.get('/list/:user_id', async (req, res) => {
-  let user = await User.findOne({ _id: req.params.user_id })
+router.get('/list/:screen_name', async (req, res) => {
+  let user = await User.findOne({ screen_name: req.params.screen_name })
   if (!user) return res.status(404).send({ 'msg': 'User Doesnt Exist' })
   var favorited = await User.findOne({ _id: req.params.user_id }, { favorites_novas_IDs: 1, _id: 0 })
 
