@@ -102,7 +102,7 @@ router.post('/destroy', async (req, res) => {
 router.get('/list/:screen_name', async (req, res) => {
   let user = await User.findOne({ screen_name: req.params.screen_name })
   if (!user) return res.status(404).send({ 'msg': 'User Doesnt Exist' })
-  var favorited = await User.findOne({ _id: req.params.screen_name }, { favorites_novas_IDs: 1, _id: 0 })
+  var favorited = await User.findOne({ screen_name: req.params.screen_name }, { favorites_novas_IDs: 1, _id: 0 })
 
   const Length1 = favorited.length
   if (Length1 === 0) return res.status(200).send({ 'novasArray': [] })
