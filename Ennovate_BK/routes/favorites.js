@@ -51,12 +51,12 @@ router.post('/create', async (req, res) => {
     //   }
     //   }, { new: true }
     // )
-    io.emit('notification', (socket) => {
-      console.log(actionUser.screen_name + ' has liked your nove')
-      socket.emit('like', {
-        text: actionUser.screen_name + ' has liked your nove'
-      })
-    })
+    // io.emit('notification', (socket) => {
+    //   console.log(actionUser.screen_name + ' has liked your nove')
+    //   socket.emit('like', {
+    //     text: actionUser.screen_name + ' has liked your nove'
+    //   })
+    // })
     if (actionUser.screen_name === novaUser.screen_name) return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser })
     else return res.status(200).send({ msg: 'Succussfully Un-Liked', actionUser, novaUser })
   } else return res.status(404).send({ msg: 'User Not Valid' })
