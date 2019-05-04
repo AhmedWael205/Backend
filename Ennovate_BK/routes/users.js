@@ -98,9 +98,10 @@ router.get('/show', async (req, res) => {
         if (!token) return res.send({ 'user': user })
         else {
           const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+          if (user.screen_name === decoded.screen_name) return res.send({ 'user': user })
           let follow = await Following.findOne({ $and: [{ friendID: userID }, { sourceID: decoded._id }] })
-          if (follow) return res.send(user, 'following: true')
-          else return res.send(user, 'following: false')
+          if (follow) return res.send({ following: 'true', user })
+          else return res.send({ following: 'false', user })
         }
       } else {
         return res.status(404).send({ msg: 'UserNotFound' })
@@ -114,6 +115,7 @@ router.get('/show', async (req, res) => {
       if (!token) return res.send({ 'user': user })
       else {
         const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+        if (user.screen_name === decoded.screen_name) return res.send({ 'user': user })
         let follow = await Following.findOne({ $and: [{ friendID: user._id }, { sourceID: decoded._id }] })
         if (!follow) return res.send({ following: 'false', user })
         else return res.send({ following: 'true', user })
