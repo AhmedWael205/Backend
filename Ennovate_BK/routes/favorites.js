@@ -93,19 +93,30 @@ router.post('/destroy', async (req, res) => {
 
 // ------------------------------------------------------------------------------------------
 
-router.get('/list', async (req, res) => {
+router.get('/list/:user_id', async (req, res) => {
   let user = await User.findOne({ _id: req.params.user_id })
   if (!user) return res.status(404).send({ 'msg': 'User Doesnt Exist' })
-  var Favorited = await User.find({ _id: req.params.user_id }, { favorites_novas_IDs: 1, _id: 0 })
+  var favorited = await User.findOne({ _id: req.params.user_id }, { favorites_novas_IDs: 1, _id: 0 })
 
-  const Length1 = Favorited.length
-  if (Length1 === 0) return res.status(200).send({ 'novaFavorited: ': [] })
-  if (Length1 <= 20) return res.status(200).send({ 'novaFavorited: ': Favorited })
-  var novaFavorited = []
-  for (var i = Length1 - 21; i < Length1; i++) {
-    novaFavorited.push(Favorited[i])
+  const Length1 = favorited.length
+  if (Length1 === 0) return res.status(200).send({ 'novasArray': [] })
+
+  // if (Length1 <= 20) return res.status(200).send({ 'novaFavorited: ': Favorited })
+  // var novaFavorited = []
+  // for (var i = Length1 - 21; i < Length1; i++) {
+  //   novaFavorited.push(Favorited[i])
+  // }
+
+  var novasArray = []
+  for (var _id of favorited.favorites_novas_IDs) {
+    if (mongoose.Types.ObjectId.isValid(_id)) {
+      let nova = await Nova.findOne({ _id })
+      if (nova) {
+        novasArray.push(nova)
+      }
+    }
   }
-  return res.status(200).send({ novaFavorited })
+  return res.status(200).send({ novasArray })
 })
 
 // ------------------------------------------------------------------------------------------
