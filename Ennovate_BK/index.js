@@ -24,11 +24,15 @@ require('./startup/config')()
 require('./startup/validation')()
 
 const port = process.env.PORT || 8080
+
+// var io = require('socket.io')
+
 var server = app.listen(port, () =>
   winston.info(`Listening on port ${port}...`)
 )
 
-var io = require('socket.io').listen(server)
+// io.listen(server)
+var io = exports.io = require('socket.io')(server)
 
 io.on('connection', function (socket) {
   console.log('Socket established with id: ' + socket.id)
@@ -38,4 +42,3 @@ io.on('connection', function (socket) {
 })
 
 module.exports.server = server
-module.exports.io = io
