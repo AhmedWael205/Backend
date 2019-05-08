@@ -323,23 +323,24 @@ function validateNovaV2 (Nova) {
 // show nova
 
 router.get('/show/:novaID', async (req, res) => {
+  // checking token
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-
+  // checking user
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
 
   let novaID = req.params.novaID
-  // when we do the renova part if include_my_reNova is true include the original nova id
-
+  // check if nova id valid
   if (novaID) {
     if (mongoose.Types.ObjectId.isValid(novaID)) {
       let nova = await Nova.findOne({ _id: novaID })
       if (nova) {
+        // check if nova is favorited by the auth user
+        // if favorited change favorited in the nova to true
         nova.favorited = false
         var replyArray = []
-        // ashof if nova favorited by user wala la2
         if (nova.favorite_count !== 0) {
           for (let i = 0; i < nova.favorite_count; i++) {
             if (nova.favorited_by_IDs[i] === decoded._id) {
@@ -349,6 +350,10 @@ router.get('/show/:novaID', async (req, res) => {
           }
         }
         replyArray.push(nova)
+        // reply array will be what is sent in response it will
+        // have the first nova object the required nova
+        // the others in the array will be the nova's replies
+        // getting replies of the nova from replied_novas_IDs
         const lengthReply = nova.reply_count
         var replyIDarray = []
         if (lengthReply !== 0) {
@@ -358,7 +363,7 @@ router.get('/show/:novaID', async (req, res) => {
           for (let i = 0; i < lengthReply; i++) {
             let anova = await Nova.findOne({ _id: replyIDarray[i] })
             anova.favorited = false
-            // ashof if favorited by this user
+            // check if reply is favorited by auth user
             if (anova.favorite_count !== 0) {
               for (let i = 0; i < anova.favorite_count; i++) {
                 if (anova.favorited_by_IDs[i] === decoded._id) {
@@ -441,22 +446,24 @@ router.get('/v2/user_timeline', async (req, res) => {
 // renova post
 
 router.post('/renova', async (req, res) => {
+  // check token
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-
+  // check user
   let user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
-
+  // check novaID
   let novaid = req.body.nova_ID
   if (!novaid) return res.status(404).send({ msg: 'No nova id provided' })
-
+  // check nova
   let nova = await Nova.findOne({ _id: novaid })
   if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
 
   let novauser = await User.findOne({ _id: nova.user })
-
+  // a renova is still a nova but with renovaed = true
+  // and in_reply_to points to original Nova parameters (novaID,userID,user_screen_name)
   let nova1 = new Nova({
     text: nova.text,
     in_reply_to_status_id: new mongoose.Types.ObjectId(nova._id),
@@ -469,17 +476,17 @@ router.post('/renova', async (req, res) => {
   })
 
   await nova1.save()
-
-  await User.update(
-    { _id: decoded._id },
-    { $push: { novas_IDs: nova1._id }, $inc: { novas_count: 1 } },
-    { new: true }
+  // update auth user
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova1._id },
+      $inc: { novas_count: 1 } }, { new: true }
   )
-
-  await Nova.update(
-    { _id: nova._id },
-    { $inc: { renova_count: 1 }, $push: { renovaed_by_IDs: user._id } }
+  // update original nova
+  await Nova.update({ _id: nova._id },
+    { $inc: { renova_count: 1 },
+      '$push': { 'renovaed_by_IDs': user._id } }
   )
+  // getting the authenticating user and the original nova user to send in response
 
   user = await User.findOne({ _id: decoded._id })
   novauser = await User.findOne({ _id: nova.user })
@@ -504,43 +511,39 @@ router.post('/renova', async (req, res) => {
 // delete nova
 
 router.post('/destroy', async (req, res) => {
+  // check token
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-
+  // check user
   let user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
-
+  // check novaID and nova
   let novaid = req.body._id
+  if (!novaid) return res.status(404).send({ msg: 'No nova id provided' })
   let nova = await Nova.findOne({ _id: novaid })
   if (!nova) return res.status(404).send({ msg: 'The Nova with the given ID was not found.' })
 
-  // check 3ala el renovaed boolean law msh false maynfa3sh el request deh aslan
+  // check renovaed boolean if true then this is a bad request it is only valid for novas
   if (nova.renovaed) return res.status(401).send({ msg: 'bad request this is a renova not a nova' })
 
   let user2 = await User.findOne({ _id: nova.user })
+
+  // check if The user can delete this nova
   if (user._id.equals(user2._id)) {
-    // check if The user can delete this nova
     // if it was in reply to another nova
     // dec reply count in original nova
     // pull from inreplytonovaids
-
     if (nova.in_reply_to_status_id) {
-      await Nova.update(
-        { _id: nova.in_reply_to_status_id },
-        { $inc: { reply_count: -1 }, $pull: { replied_novas_IDs: novaid } }
-      )
+      await Nova.update({ _id: nova.in_reply_to_status_id },
+        { $inc: { reply_count: -1 },
+          '$pull': { 'replied_novas_IDs': novaid } })
     }
+
     // normal nova
-    // delete kol el in_reply_to_status_ids
-    // delete kol el renovas bta3etha
-    // nro7 l kol el users ely 3amlo reply/renova dec el count w kaman pull mn el array
 
-    // ngeeb kol el ids el awel
-    // for loop n3ady 3ala id id ndelete
-    // nro7 lel user n dec el nova count n pull mn el novaids n delete el nova mn el database
-
+    // deleting all replies to the nova
     const lengthReply = nova.reply_count
     if (lengthReply !== 0) {
       var inreplyarray = []
@@ -548,17 +551,15 @@ router.post('/destroy', async (req, res) => {
         inreplyarray.push(nova.replied_novas_IDs[i])
       }
       for (let i = 0; i < lengthReply; i++) {
-        await User.update(
-          { _id: inreplyarray[i].user },
-          {
-            $pull: { novas_IDs: inreplyarray[i]._id },
-            $inc: { novas_count: -1 }
-          }
+        // update the repling user
+        await User.update({ _id: inreplyarray[i].user },
+          { '$pull': { 'novas_IDs': inreplyarray[i]._id },
+            $inc: { novas_count: -1 } }
         )
         await Nova.deleteOne({ _id: inreplyarray[i]._id })
       }
     }
-
+    // deleting all its renovas
     const lengthRenova = nova.renova_count
     if (lengthRenova !== 0) {
       var renovaArray = []
@@ -566,22 +567,21 @@ router.post('/destroy', async (req, res) => {
         renovaArray.push(nova.renovaed_by_IDs[i])
       }
       for (let i = 0; i < lengthRenova; i++) {
-        await User.update(
-          { _id: renovaArray[i].user },
-          {
-            $pull: { novas_IDs: renovaArray[i]._id },
-            $inc: { novas_count: -1 }
-          }
+        // updating the renovar
+        await User.update({ _id: renovaArray[i].user },
+          { '$pull': { 'novas_IDs': renovaArray[i]._id },
+            $inc: { novas_count: -1 } }
         )
         await Nova.deleteOne({ _id: renovaArray[i]._id })
       }
     }
-    await User.update(
-      { _id: user._id },
-      { $pull: { novas_IDs: novaid }, $inc: { novas_count: -1 } }
-    )
+    // updating auth user
+    await User.update({ _id: user._id },
+      { '$pull': { 'novas_IDs': novaid },
+        $inc: { novas_count: -1 } })
+    // finally deleting the nova/reply
     await Nova.deleteOne({ _id: novaid })
-    user = await User.findOne({ _id: decoded._id })
+    // return in response the auth user
     return res.status(200).send(user)
   } else return res.status(404).send({ msg: 'No authentication to delete this nova' })
 })
@@ -590,21 +590,25 @@ router.post('/destroy', async (req, res) => {
 // unrenova
 
 router.post('/unrenova', async (req, res) => {
+  // check token
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
+
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
+  // check user
   let user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
+  // check novaID and nova
   let novaid = req.body._id
+  if (!novaid) return res.status(404).send({ msg: 'No nova id provided' })
   let nova = await Nova.findOne({ _id: novaid })
   if (!nova) return res.status(404).send({ msg: 'The reNova with the given ID was not found.' })
-  // check 3ala el renovaed boolean
+  // check renovaed boolean
   if (!nova.renovaed) return res.status(401).send({ msg: 'bad request this is not a renova' })
-
+  // check if user can delete this renova
   let user2 = await User.findOne({ _id: nova.user })
-  // console.log(user.screen_name == user2.screen_name)
-  if (user.screen_name === user2.screen_name) {
-    // console.log('LOL')
+  if (user._id.equals(user2._id)) {
+    // deleting all replies to this renova
     const lengthReply = nova.reply_count
     if (lengthReply !== 0) {
       var inreplyarray = []
@@ -612,71 +616,69 @@ router.post('/unrenova', async (req, res) => {
         inreplyarray.push(nova.replied_novas_IDs[i])
       }
       for (let i = 0; i < lengthReply; i++) {
-        await User.update(
-          { _id: inreplyarray[i].user },
-          {
-            $pull: { novas_IDs: inreplyarray[i]._id },
-            $inc: { novas_count: -1 }
-          }
+        await User.update({ _id: inreplyarray[i].user },
+          { '$pull': { 'novas_IDs': inreplyarray[i]._id },
+            $inc: { novas_count: -1 } }
         )
         await Nova.deleteOne({ _id: inreplyarray[i]._id })
       }
     }
-
-    const lengthRenova = nova.renova_count
+    /* const lengthRenova = nova.renova_count
     if (lengthRenova !== 0) {
       var renovaArray = []
       for (let i = 0; i < lengthRenova; i++) {
         renovaArray.push(nova.renovaed_by_IDs[i])
       }
       for (let i = 0; i < lengthRenova; i++) {
-        await User.update(
-          { _id: renovaArray[i].user },
-          {
-            $pull: { novas_IDs: renovaArray[i]._id },
-            $inc: { novas_count: -1 }
-          }
+        await User.update({ _id: renovaArray[i].user },
+          { '$pull': { 'novas_IDs': renovaArray[i]._id },
+            $inc: { novas_count: -1 } }
         )
         await Nova.deleteOne({ _id: renovaArray[i]._id })
       }
-    }
+    } */
 
-    await Nova.update(
-      { _id: nova.in_reply_to_status_id },
-      { $pull: { renovaed_by_IDs: novaid }, $inc: { renova_count: -1 } }
-    )
-
-    await User.update(
-      { _id: user._id },
-      { $pull: { novas_IDs: novaid }, $inc: { novas_count: -1 } }
-    )
+    // update the original nova (dec the renovaed count and pull the renova id from renovaed_by_IDs)
+    await Nova.update({ _id: nova.in_reply_to_status_id },
+      { '$pull': { 'renovaed_by_IDs': novaid },
+        $inc: { renova_count: -1 } })
+    // update auth user
+    await User.update({ _id: user._id },
+      { '$pull': { 'novas_IDs': novaid },
+        $inc: { novas_count: -1 } })
+    // delete nova
     await Nova.deleteOne({ _id: novaid })
+    // return auth user
     user = await User.findOne({ _id: decoded._id })
     return res.status(200).send(user)
-  } else {
-    res.status(404).send({ msg: 'Incorrect User' })
-  }
+  } else return res.status(404).send({ msg: 'No authentication to delete this renova' })
 })
 
 // ------------------------------------------------------------------------------------------
 // get renovars
 
 router.get('/renovars/:novaID', async (req, res) => {
+  // no need for a token
+  // check novaID
   let novaID = req.params.novaID
   if (novaID) {
+    // check nova
     let nova = await Nova.findOne({ _id: novaID })
     if (nova) {
+      // getting all renovas
       const lengthRenova = nova.renova_count
       if (lengthRenova !== 0) {
         var renovarsArray = []
         for (let i = 0; i < lengthRenova; i++) {
           renovarsArray.push(nova.renovaed_by_IDs[i])
         }
+        // getting all renovars with id of renova
         var renovars = []
         for (let i = 0; i < lengthRenova; i++) {
           let renovar = await User.findOne({ _id: renovarsArray[i] })
           renovars.push(renovar)
         }
+        // send in response user objects of all renovars of the nova
         return res.status(200).send(renovars)
       } else {
         return res.status(200).send({ msg: 'No renovars for this nova' })
@@ -689,42 +691,44 @@ router.get('/renovars/:novaID', async (req, res) => {
 })
 
 // ------------------------------------------------------------------------------------------
-// update nova v3
+// update nova
+// this is the used version
 
 router.post('/update', async (req, res) => {
+  // validate the request body
   const { error } = validateNovaV3(req.body)
   if (error) return res.status(400).send({ msg: error.details[0].message })
-
+  // check token
   const token = req.headers['token']
   if (!token) return res.status(401).send({ msg: 'No token provided.' })
 
   // var verifyOptions = { expiresIn: '1h' }
   // const decoded = jwt.verify(token, config.get('jwtPrivateKey'), verifyOptions)
   const decoded = jwt.verify(token, config.get('jwtPrivateKey'))
-
+  // check user
   const user = await User.findOne({ _id: decoded._id })
   if (!user) return res.status(404).send({ msg: 'The user with the given ID was not found.' })
-
+  // getting some of nova parameters from body
   const imgUrl = req.body.imgUrl || null
   const imgSize = req.body.imgSize || null
   const imgType = req.body.imgType || null
-
+  // check if it is a reply
   let inreplytostatusid = req.body.in_reply_to_status_id || null
   if (inreplytostatusid) {
     let inreplynova = await Nova.findOne({ _id: inreplytostatusid })
+    // checking that the nova to reply to exists
     if (inreplynova) {
       var inreplyuserid = inreplynova.user
       var inreplyscreenname = inreplynova.user_screen_name
     } else {
-      return res
-        .status(404)
-        .send({ msg: 'The Nova to reply to was not found' })
+      return res.status(404).send({ msg: 'The Nova to reply to was not found' })
     }
+  // if it was not a reply
   } else {
     inreplyuserid = null
     inreplyscreenname = null
   }
-  // user mentions
+  // checking user mentions
   if (req.body.user_mentions_count) {
     if (req.body.user_mentions_count !== 0) {
       if (req.body.user_mentions_screen_names) {
@@ -734,21 +738,15 @@ router.post('/update', async (req, res) => {
           mentionsArray.push(req.body.user_mentions_screen_names[i])
         }
         for (let i = 0; i < req.body.user_mentions_count; i++) {
-          let mentionuser = await User.findOne({
-            screen_name: mentionsArray[i]
-          })
+          let mentionuser = await User.findOne({ screen_name: mentionsArray[i] })
           if (mentionuser) {
             mentionsId.push(mentionuser)
           } else {
-            return res.status(404).send({
-              msg: 'The user ' + mentionsArray[i] + ' mentioned was not found'
-            })
+            return res.status(404).send({ msg: 'The user ' + mentionsArray[i] + ' mentioned was not found' })
           }
         }
       } else {
-        return res
-          .status(404)
-          .send({ msg: 'bad request the mentions screen names was not sent ' })
+        return res.status(404).send({ msg: 'bad request the mentions screen names was not sent ' })
       }
     } else {
       mentionsId = null
@@ -756,7 +754,7 @@ router.post('/update', async (req, res) => {
   } else {
     mentionsId = null
   }
-
+  // creating the new nova
   let nova = new Nova({
     text: req.body.text,
     in_reply_to_status_id: inreplytostatusid,
@@ -775,23 +773,26 @@ router.post('/update', async (req, res) => {
     }
   })
   await nova.save()
+  // if it was a reply update the replied_to nova
   if (inreplyuserid) {
-    await Nova.update(
-      { _id: inreplytostatusid },
-      { $push: { replied_novas_IDs: nova._id }, $inc: { reply_count: 1 } },
-      { new: true }
+    await Nova.update({ _id: inreplytostatusid },
+      { '$push': { 'replied_novas_IDs': nova._id },
+        $inc: { reply_count: 1 } }, { new: true }
     )
   }
-  await User.update(
-    { _id: decoded._id },
-    { $push: { novas_IDs: nova._id }, $inc: { novas_count: 1 } },
-    { new: true }
+  // update auth user
+  await User.update({ _id: decoded._id },
+    { '$push': { 'novas_IDs': nova._id },
+      $inc: { novas_count: 1 } }, { new: true }
   )
+  // send the new nova in the response
   return res.send(nova)
 })
 
 // ------------------------------------------------------------------------------------------
 // validate request body v3
+// this is the one used
+// to validate request body of update nova
 function validateNovaV3 (Nova) {
   const schema = {
     text: Joi.string()
@@ -811,5 +812,61 @@ function validateNovaV3 (Nova) {
 }
 
 // ------------------------------------------------------------------------------------------
+
+/*
+// ------------------------------------------------------------------------------------------
+// get renova
+// it won't be used so i commented it
+router.get('/renova/:id', async (req, res) => {
+  let novaID = req.params.novaID
+  if (novaID) {
+    let nova = await Nova.findOne({ _id: novaID })
+    if (nova) {
+      const lengthRenova = nova.renova_count
+      if (lengthRenova !== 0) {
+        var renovasArray = []
+        let renovas = await Nova.find({ in_reply_to_status_id: novaID}).sort({ _id: -1})
+        if (renovas.length) {
+          renovasArray = renovas
+          return res.status(200).send(renovasArray)
+        } else {
+          return res.status(200).send({ msg: 'This Nova was not renovaed'})
+        }
+      } else {
+        return res.status(200).send({ msg: 'This Nova was not renovaed'})
+      }
+    } else {
+      return res.status(404).send({ msg: 'Nova Not Found' })
+    }
+  }
+  return res.status(404).send({ msg: 'Nova id  not sent' })
+})
+ //------------------------------------------------------------------------------------------
+ //Lookup
+ // it won't be used so i commented it
+router.get('/lookup', async (req, res) => {
+  let novasID = req.body.nova_ID
+  if (!novasID) return res.status(404).send({ msg: 'No Novas Found' })
+  var novasArray = []
+  var unfoundNovas = 0
+  if (novasID) {
+    for (var _id of novasID) {
+      if (mongoose.Types.ObjectId.isValid(_id)) {
+        let nova = await Nova.findOne({ _id })
+        if (nova) {
+          novasArray.push(nova)
+        } else {
+          unfoundNovas = unfoundNovas + 1
+        }
+      } else {
+        unfoundNovas = unfoundNovas + 1
+      }
+    }
+  }
+  return res.status(200).send({
+    novasArray
+  })
+})
+*/
 
 module.exports = router
